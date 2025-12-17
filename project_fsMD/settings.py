@@ -4,13 +4,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-6n6pi6at(2(3+%c%#$2ee1u$#2rk2u+$bkqf=g937kzzy1#p%+'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
     "fullscopemddev.pythonanywhere.com",
     "fullscopemd.com",
     "www.fullscopemd.com",
 ]
+
 
 CACHES = {
     "default": {
