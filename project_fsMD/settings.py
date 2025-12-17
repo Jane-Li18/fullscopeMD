@@ -4,9 +4,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-6n6pi6at(2(3+%c%#$2ee1u$#2rk2u+$bkqf=g937kzzy1#p%+'
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["FullScopeMDDev.pythonanywhere.com", "fullscopemd.com", "www.fullscopemd.com"]
+ALLOWED_HOSTS = [
+    "fullscopemddev.pythonanywhere.com",
+    "fullscopemd.com",
+    "www.fullscopemd.com",
+]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
