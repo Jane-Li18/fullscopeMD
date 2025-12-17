@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("img").forEach(img => {
+    // Skip if explicitly set already
+    if (img.hasAttribute("loading")) return;
+
+    // Skip above-the-fold or critical images if you mark them
+    if (img.classList.contains("no-lazy")) {
+      img.loading = "eager";
+      return;
+    }
+
+    // Default: lazy load everything else
+    img.loading = "lazy";
+    img.decoding = "async";
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
   const scrollTopBtn = document.getElementById("scrollTopBtn");
   if (scrollTopBtn) {
     const SHOW_OFFSET = 200;

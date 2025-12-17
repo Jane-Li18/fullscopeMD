@@ -3,21 +3,56 @@ from django.db.models import Count, Q
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.conf import settings
+from django.core.cache import cache
+from django.views.decorators.cache import cache_page, never_cache
+
 from .models import Category, Product
 from .cart import Cart
 
 
+# =========================
+# CACHE HELPERS
+# =========================
+
+# TTLs (tune as you like)
+TTL_NAV = 60 * 60          # 1 hour
+TTL_LIST = 5 * 60          # 5 minutes
+TTL_DETAIL = 10 * 60       # 10 minutes
+
+def _site_cache_version() -> int:
+    # Increment this to invalidate everything at once (see signals below)
+    return cache.get_or_set("site_cache_v", 1, None)
+
+def _ck(prefix: str, *parts) -> str:
+    v = _site_cache_version()
+    return f"{v}:{prefix}:" + ":".join(str(p) for p in parts)
+
+
 def get_nav_programs():
-    return Category.objects.filter(is_active=True).order_by("sort_order", "name")
+    key = _ck("nav_programs")
+    data = cache.get(key)
+    if data is None:
+        data = list(Category.objects.filter(is_active=True).order_by("sort_order", "name"))
+        cache.set(key, data, TTL_NAV)
+    return data
+
 
 def get_core_program_categories():
-    return (
-        Category.objects.filter(is_active=True)
-        .annotate(product_count=Count("products", filter=Q(products__is_active=True)))
-        .order_by("sort_order", "name")
-    )
+    key = _ck("core_categories")
+    data = cache.get(key)
+    if data is None:
+        data = list(
+            Category.objects.filter(is_active=True)
+            .annotate(product_count=Count("products", filter=Q(products__is_active=True)))
+            .order_by("sort_order", "name")
+        )
+        cache.set(key, data, TTL_LIST)
+    return data
 
 
+# =========================
+# PAGES
+# =========================
 
 def base(request):
     return render(request, "base.html", {"nav_programs": get_nav_programs()})
@@ -27,11 +62,15 @@ def index(request):
     nav_programs = get_nav_programs()
     categories = get_core_program_categories()
 
-    products = (
-        Product.objects.filter(is_active=True, category__is_active=True)
-        .select_related("category")
-        .order_by("name")
-    )
+    key = _ck("index_products")
+    products = cache.get(key)
+    if products is None:
+        products = list(
+            Product.objects.filter(is_active=True, category__is_active=True)
+            .select_related("category")
+            .order_by("name")
+        )
+        cache.set(key, products, TTL_LIST)
 
     return render(
         request,
@@ -40,72 +79,81 @@ def index(request):
     )
 
 
+@cache_page(60 * 30)  # these are static pages - safe to cache
 def contact(request):
     return render(request, "navbar/contact.html", {"nav_programs": get_nav_programs()})
 
 
+@cache_page(60 * 30)
 def about(request):
     return render(request, "components/about.html", {"nav_programs": get_nav_programs()})
 
 
+@cache_page(60 * 30)
 def faq(request):
     return render(request, "navbar/faq.html", {"nav_programs": get_nav_programs()})
 
 
+@cache_page(60 * 30)
 def blog(request):
     return render(request, "navbar/blog.html", {"nav_programs": get_nav_programs()})
 
 
+@cache_page(60 * 60)
 def terms_conditions(request):
-    return render(
-        request, "legal_compliance/terms_conditions.html", {"nav_programs": get_nav_programs()}
-    )
+    return render(request, "legal_compliance/terms_conditions.html", {"nav_programs": get_nav_programs()})
 
 
+@cache_page(60 * 60)
 def privacy_policy(request):
-    return render(
-        request, "legal_compliance/privacy_policy.html", {"nav_programs": get_nav_programs()}
-    )
+    return render(request, "legal_compliance/privacy_policy.html", {"nav_programs": get_nav_programs()})
 
 
+@cache_page(60 * 60)
 def refund_policy(request):
-    return render(
-        request, "legal_compliance/refund_policy.html", {"nav_programs": get_nav_programs()}
-    )
+    return render(request, "legal_compliance/refund_policy.html", {"nav_programs": get_nav_programs()})
 
 
+@cache_page(60 * 60)
 def telehealth_consent(request):
-    return render(
-        request, "legal_compliance/telehealth_consent.html", {"nav_programs": get_nav_programs()}
-    )
+    return render(request, "legal_compliance/telehealth_consent.html", {"nav_programs": get_nav_programs()})
 
 
+@cache_page(60 * 60)
 def hipaa_notice(request):
     return render(request, "legal_compliance/hipaa_notice.html", {"nav_programs": get_nav_programs()})
 
 
+@cache_page(60 * 60)
 def medical_disclaimer(request):
-    return render(
-        request, "legal_compliance/medical_disclaimer.html", {"nav_programs": get_nav_programs()}
-    )
+    return render(request, "legal_compliance/medical_disclaimer.html", {"nav_programs": get_nav_programs()})
 
 
+@cache_page(60 * 60)
 def accessibility_statement(request):
-    return render(
-        request, "legal_compliance/accessibility_statement.html", {"nav_programs": get_nav_programs()}
-    )
+    return render(request, "legal_compliance/accessibility_statement.html", {"nav_programs": get_nav_programs()})
 
 
 def program_detail(request, slug):
     nav_programs = get_nav_programs()
-    category = get_object_or_404(Category, slug=slug, is_active=True)
 
-    products = (
-        category.products.filter(is_active=True)
-        .select_related("category")
-        .prefetch_related("images")
-        .order_by("name")
-    )
+    # cache category fetch by slug
+    cat_key = _ck("category", slug)
+    category = cache.get(cat_key)
+    if category is None:
+        category = get_object_or_404(Category, slug=slug, is_active=True)
+        cache.set(cat_key, category, TTL_DETAIL)
+
+    prod_key = _ck("category_products", slug)
+    products = cache.get(prod_key)
+    if products is None:
+        products = list(
+            category.products.filter(is_active=True)
+            .select_related("category")
+            .prefetch_related("images")
+            .order_by("name")
+        )
+        cache.set(prod_key, products, TTL_LIST)
 
     return render(
         request,
@@ -117,18 +165,26 @@ def program_detail(request, slug):
 def product_detail(request, slug):
     nav_programs = get_nav_programs()
 
-    product = get_object_or_404(
-        Product.objects.select_related("category").prefetch_related("images"),
-        slug=slug,
-        is_active=True,
-        category__is_active=True,
-    )
+    key = _ck("product_detail", slug)
+    cached = cache.get(key)
+    if cached is None:
+        product = get_object_or_404(
+            Product.objects.select_related("category").prefetch_related("images"),
+            slug=slug,
+            is_active=True,
+            category__is_active=True,
+        )
 
-    related_products = (
-        Product.objects.filter(is_active=True, category=product.category, category__is_active=True)
-        .exclude(id=product.id)
-        .order_by("name")[:12]
-    )
+        related_products = list(
+            Product.objects.filter(is_active=True, category=product.category, category__is_active=True)
+            .exclude(id=product.id)
+            .order_by("name")[:12]
+        )
+
+        cached = (product, related_products)
+        cache.set(key, cached, TTL_DETAIL)
+
+    product, related_products = cached
 
     return render(
         request,
@@ -138,25 +194,19 @@ def product_detail(request, slug):
 
 
 # =========================
-# CART (session-based)
+# CART (never cache)
 # =========================
 
 def _clamp_qty_to_stock(product: Product, qty: int) -> int:
     qty = max(1, int(qty))
-    # If your Product has quantity (stock), clamp
     if hasattr(product, "quantity") and product.quantity is not None:
         stock = max(0, int(product.quantity))
-        # if stock is 0, still keep qty at 1 for UI consistency, but you may want to reject
         if stock > 0:
             qty = min(qty, stock)
     return qty
 
 
 def _cart_payload(cart: Cart):
-    """
-    Standard JSON payload for side cart + badge.
-    Includes stock and telemedicine flags for the UI.
-    """
     items = []
     for i in cart.items():
         p = i["product"]
@@ -178,65 +228,57 @@ def _cart_payload(cart: Cart):
             }
         )
 
-    return {
-        "ok": True,
-        "items": items,
-        "total_qty": cart.total_qty(),
-        "total_price": str(cart.total_price()),
-    }
+    return {"ok": True, "items": items, "total_qty": cart.total_qty(), "total_price": str(cart.total_price())}
 
 
+@never_cache
 @require_POST
 def cart_add(request):
     product_id = int(request.POST.get("product_id"))
     qty = int(request.POST.get("qty", 1))
-
     product = get_object_or_404(Product, id=product_id)
 
-    # Stock guard
     if hasattr(product, "quantity") and product.quantity is not None and int(product.quantity) <= 0:
         return JsonResponse({"ok": False, "error": "Out of stock"}, status=400)
 
     qty = _clamp_qty_to_stock(product, qty)
-
     cart = Cart(request)
     cart.add(product_id=product.id, qty=qty, replace=False)
-
-    # Return full payload so sidebar can refresh immediately
     return JsonResponse(_cart_payload(cart))
 
 
+@never_cache
 @require_POST
 def cart_update(request):
     product_id = int(request.POST.get("product_id"))
     qty = int(request.POST.get("qty", 1))
-
     product = get_object_or_404(Product, id=product_id)
 
     if hasattr(product, "quantity") and product.quantity is not None and int(product.quantity) <= 0:
         return JsonResponse({"ok": False, "error": "Out of stock"}, status=400)
 
     qty = _clamp_qty_to_stock(product, qty)
-
     cart = Cart(request)
     cart.set(product_id=product.id, qty=qty)
     return JsonResponse(_cart_payload(cart))
 
 
+@never_cache
 @require_POST
 def cart_remove(request):
     product_id = int(request.POST.get("product_id"))
-
     cart = Cart(request)
     cart.remove(product_id=product_id)
     return JsonResponse(_cart_payload(cart))
 
 
+@never_cache
 def cart_summary(request):
     cart = Cart(request)
     return JsonResponse(_cart_payload(cart))
 
 
+@never_cache
 def cart_page(request):
     cart = Cart(request)
     return render(request, "shop/cart_page.html", {

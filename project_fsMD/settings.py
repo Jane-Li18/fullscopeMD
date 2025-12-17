@@ -12,6 +12,14 @@ ALLOWED_HOSTS = [
     "www.fullscopemd.com",
 ]
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "/home/FullScopeMDDev/.django_cache",
+        "TIMEOUT": 300,  # default 5 minutes
+        "OPTIONS": {"MAX_ENTRIES": 2000},
+    }
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -21,6 +29,7 @@ INSTALLED_APPS = [
        'django.contrib.messages',
        'django.contrib.staticfiles',
        'django.contrib.humanize',
+       'app_fsMD.apps.AppFsmdConfig',
        'app_fsMD',
 ]
 
