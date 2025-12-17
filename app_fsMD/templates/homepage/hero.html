@@ -1,0 +1,45 @@
+{% load static %}
+
+<section class="hero-section d-flex align-items-end min-vh-100">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            
+            <!-- Text side -->
+            <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
+                <div class="mb-3 fade-in-left fade-in delay-1 fade-blocked">
+                    <h3>
+                        <img src="{% static 'images/favicon.ico' %}"
+                             alt="FullScopeMD icon"
+                             class="logo-icon">
+                            <span class="navbar-brand-title brand-title d-none d-sm-inline">
+                                <span class="text-primary-accent">Full</span><span class="text-secondary-accent">Scope</span><span class="text-tertiary-accent">MD</span>
+                            </span>
+                    </h3>
+                </div>
+
+                <h1 class="mb-3 fade-in-left fade-in delay-2 fade-blocked">
+                    Professional Medical Care Made Clear, Safe, and Accessible
+                </h1>
+
+                <p class="mb-4 fade-in-left fade-in delay-4 fade-blocked">
+                    Access high-quality telemedicine with licensed U.S. providers, personalized treatment,
+                    and nationwide delivery at pricing designed to stay accessible.
+                </p>
+
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start fade-in-left fade-in delay-5 fade-blocked">
+                    <a href="#" class="btn btn-primary">Appointment</a>
+                    <a href="#" class="btn btn-outline-primary">Learn More +</a>
+                </div>
+            </div>
+
+            <!-- Image side -->
+            <div class="col-lg-5 text-center fade-in-right fade-in delay-2 fade-blocked">
+                <img 
+                    src="{% static 'images/hero3.png' %}" 
+                    alt="Doctor Image" 
+                    class="img-fluid hero-image mx-lg-auto">
+            </div>
+
+        </div>
+    </div>
+</section>

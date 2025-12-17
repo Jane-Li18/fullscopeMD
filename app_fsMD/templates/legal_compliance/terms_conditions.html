@@ -1,0 +1,310 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Terms & Conditions{% endblock %}
+
+{% block content %}
+
+<section id="top" class="terms-section py-5">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
+        <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
+          <i class="fa-solid fa-file-contract icon-solid icon-sm"></i>
+          <small class="mb-0 text-white">Terms &amp; Conditions</small>
+        </span>
+
+        <h1 class="mt-3 mb-2">TERMS &amp; CONDITIONS</h1>
+        <p class="mb-0">Last Updated: December 5, 2025</p>
+      </div>
+    </div>
+
+    <!-- Soft wrapper (NO scroll-animate so it won’t stay invisible) -->
+    <div class="fade-in-up fade-in delay-2 fade-blocked">
+      <div class="row g-4 justify-content-center">
+        <div class="col-12 col-lg-10">
+          <div class="p-4 p-lg-5 bg-white rounded-4">
+
+            <!-- Quick note -->
+            <div class="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-start align-items-md-center fade-in-up fade-in delay-3 fade-blocked">
+              <div>
+                <h2 class="mb-1">Please read carefully</h2>
+                <p class="mb-0">
+                  These Terms govern your use of FullScopeMD websites and telehealth services.
+                </p>
+              </div>
+
+              <a href="{% url 'contact' %}" class="btn btn-outline-primary px-4">
+                Contact Support
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+              </a>
+            </div>
+
+            <div class="divider my-4"></div>
+
+            <!-- Terms body -->
+            <div class="d-grid gap-4">
+
+              <div id="terms-introduction" class="fade-in-up fade-in delay-4 fade-blocked">
+                <h3 class="mb-2">1. Introduction</h3>
+                <p>
+                  These Terms &amp; Conditions (“Terms”) govern your use of the websites, applications, platforms, and telehealth
+                  services provided by FullScopeMD (“Services”). The Services include virtual medical consultations, messaging,
+                  scheduling, patient support, and prescription coordination.
+                </p>
+                <p>
+                  References to “we,” “us,” and “our” mean FullScopeMD and its affiliated entities, contractors, and service providers.
+                  “You” and “your” refer to any individual using the Services or the parent/guardian of a minor patient.
+                </p>
+                <p class="mb-0">
+                  By accessing or using the Services, you agree to be bound by these Terms. If you do not agree, discontinue use
+                  immediately. We may update these Terms at any time and updates take effect immediately upon posting. Continued use
+                  means you accept the updated Terms.
+                </p>
+              </div>
+
+              <div id="terms-no-emergency" class="fade-in-up fade-in delay-5 fade-blocked">
+                <h3 class="mb-2">2. Nature of Services (No Emergency Care)</h3>
+                <p>
+                  FullScopeMD provides telehealth services delivered by licensed U.S. clinicians where medically appropriate. Services
+                  may include clinical evaluations, follow-up care, prescription management, and pharmacy coordination.
+                </p>
+                <p>
+                  The Services do not provide emergency or urgent medical care. Telehealth is not a replacement for in-person evaluation
+                  when required.
+                </p>
+
+                <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
+                  <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 align-items-start">
+                    <span class="icon-button shadow-sm-brand flex-shrink-0">
+                      <i class="fa-solid fa-triangle-exclamation icon-gradient icon-md"></i>
+                    </span>
+                    <div class="flex-grow-1">
+                      <div class="fw-semibold">Emergency Notice</div>
+                      <div class="text-body-sm">
+                        If you are experiencing a medical emergency, call 911 or go to the nearest emergency room.
+                        Do not use the Services for emergencies.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="mt-3 mb-0">
+                  All diagnostic, treatment, and prescription decisions are made solely by licensed clinicians using their independent
+                  professional judgment.
+                </p>
+              </div>
+
+              <div id="terms-eligibility" class="fade-in-up fade-in delay-6 fade-blocked">
+                <h3 class="mb-2">3. Eligibility</h3>
+                <p class="mb-2">To use the Services, you confirm that:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start">
+                    <i class="fa-solid fa-circle-check text-primary-accent mt-1"></i>
+                    <span class="text-body-sm">You are at least 18 years old, or a parent/legal guardian accessing care for a minor.</span>
+                  </li>
+                  <li class="d-flex gap-2 align-items-start">
+                    <i class="fa-solid fa-circle-check text-primary-accent mt-1"></i>
+                    <span class="text-body-sm">You are located in a U.S. state where FullScopeMD and the treating clinician are authorized to operate.</span>
+                  </li>
+                  <li class="d-flex gap-2 align-items-start">
+                    <i class="fa-solid fa-circle-check text-primary-accent mt-1"></i>
+                    <span class="text-body-sm">You will provide accurate, current, and complete information (identity, location, medical history, payment).</span>
+                  </li>
+                  <li class="d-flex gap-2 align-items-start">
+                    <i class="fa-solid fa-circle-check text-primary-accent mt-1"></i>
+                    <span class="text-body-sm">You will use the Services only for yourself or a dependent you are legally authorized to consent for.</span>
+                  </li>
+                </ul>
+                <p class="mt-3 mb-0">We may restrict or terminate access if eligibility requirements are not met.</p>
+              </div>
+
+              <div id="terms-telehealth-consent" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">4. Telehealth Consent (Summary)</h3>
+                <p class="mb-2">By using the Services, you consent to receive care through telehealth, which may include:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Video or audio visits</li>
+                  <li class="text-body-sm">Asynchronous messaging</li>
+                  <li class="text-body-sm">Photo or document uploads</li>
+                  <li class="text-body-sm">Electronic review of medical history, test results, or symptoms</li>
+                  <li class="text-body-sm">Remote assessments conducted by licensed clinicians</li>
+                </ul>
+                <p class="mt-3 mb-0">
+                  Telehealth benefits may include convenience and faster access. Risks may include technical failures, incomplete
+                  information, delays, or rare privacy vulnerabilities. You may withdraw consent at any time, understanding this may
+                  limit your ability to receive Services. A full Telehealth Consent is provided separately and incorporated into these Terms.
+                </p>
+              </div>
+
+              <div id="terms-prescriptions" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">5. Clinical Relationship and Prescriptions</h3>
+                <p class="mb-2">
+                  Telehealth services are provided by independently licensed clinicians. A clinician–patient relationship may be established
+                  when a clinician accepts you as a patient and provides care.
+                </p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Telehealth may not be appropriate for all conditions.</li>
+                  <li class="text-body-sm">No diagnosis, treatment, or prescription is guaranteed.</li>
+                  <li class="text-body-sm">Prescriptions are issued only when medically appropriate and legal.</li>
+                  <li class="text-body-sm">Prescriptions may be routed to third-party pharmacies.</li>
+                  <li class="text-body-sm">You may request an alternate pharmacy when permitted by law and clinician judgment.</li>
+                </ul>
+              </div>
+
+              <div id="terms-use" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">6. Use of the Services</h3>
+                <p class="mb-2">You agree not to:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Provide false or misleading information.</li>
+                  <li class="text-body-sm">Misrepresent your identity or location.</li>
+                  <li class="text-body-sm">Interfere with system security, networks, or functionality.</li>
+                  <li class="text-body-sm">Attempt unauthorized access to accounts or data.</li>
+                  <li class="text-body-sm">Use the Services in any illegal or abusive manner.</li>
+                </ul>
+                <p class="mt-3 mb-0">We may suspend or terminate access for fraudulent, unsafe, or prohibited use.</p>
+              </div>
+
+              <div id="terms-accounts" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">7. Accounts, Security, and Communications</h3>
+                <div class="d-grid gap-3">
+                  <div>
+                    <div class="fw-semibold">A. Account Responsibility</div>
+                    <p class="mb-0">You may be required to create an account and password. You are responsible for maintaining account confidentiality and for all activity under your account.</p>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">B. Required Healthcare and Service Communications</div>
+                    <p class="mb-2">By using the Services, you consent to receive essential healthcare-related and operational communications via:</p>
+                    <ul class="mb-0 d-grid gap-2">
+                      <li class="text-body-sm">Email</li>
+                      <li class="text-body-sm">SMS/text messages</li>
+                      <li class="text-body-sm">Phone calls or voicemail</li>
+                      <li class="text-body-sm">In-app or web-based messages</li>
+                    </ul>
+                    <p class="mt-2 mb-0 text-body-sm">
+                      These communications include appointment reminders, clinical instructions, pharmacy updates, billing notices, password resets,
+                      identity verification, and other messages necessary for treatment, payment, or healthcare operations.
+                      These communications cannot be opted out of except by discontinuing the Services.
+                    </p>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">C. Optional Marketing Communications (Email and SMS)</div>
+                    <p class="mb-2">Marketing communications require explicit consent. You may opt out at any time by:</p>
+                    <ul class="mb-0 d-grid gap-2">
+                      <li class="text-body-sm">Clicking “unsubscribe” in marketing emails.</li>
+                      <li class="text-body-sm">Replying STOP to marketing SMS messages.</li>
+                    </ul>
+                    <p class="mt-2 mb-0 text-body-sm">Opting out of marketing messages does not affect healthcare-related or essential communications.</p>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">D. SMS Compliance Disclosure</div>
+                    <p class="mb-0 text-body-sm">Message and data rates may apply. Reply STOP to opt out of marketing SMS. Reply HELP for assistance. Carrier delays or failures are not our responsibility.</p>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">E. Email Compliance Disclosure</div>
+                    <p class="mb-0 text-body-sm">Marketing emails will include an unsubscribe link, a valid sender domain, and our physical mailing address, in compliance with CAN-SPAM requirements.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div id="terms-billing" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">8. Fees, Billing, and Auto-Renewals</h3>
+                <p class="mb-0">
+                  Prices for consultations, medications, memberships, and programs will be displayed before purchase. By submitting payment information,
+                  you authorize FullScopeMD and its payment processors to charge applicable fees. If you enroll in a subscription, membership, or auto-refill
+                  program, you authorize recurring charges until you cancel. Taxes may apply. Refunds are governed by our Refund Policy, which is incorporated into these Terms.
+                </p>
+              </div>
+
+              <div id="terms-privacy" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">9. Privacy and HIPAA</h3>
+                <p class="mb-0">
+                  We comply with applicable privacy and security laws, including HIPAA. Our collection, use, and disclosure of personal information, including PHI,
+                  are described in our Privacy Policy and HIPAA Notice of Privacy Practices. PHI is used and disclosed only for treatment, payment, healthcare operations, and other permitted purposes.
+                </p>
+              </div>
+
+              <div id="terms-ip" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">10. Intellectual Property</h3>
+                <p class="mb-0">
+                  All content, trademarks, logos, design, text, graphics, and software available through the Services are owned by FullScopeMD or its licensors.
+                  You receive a limited, non-exclusive, non-transferable license to access and use the Services for personal, non-commercial purposes only.
+                  You may not reproduce, distribute, modify, or create derivative works without written permission.
+                </p>
+              </div>
+
+              <div id="terms-disclaimers" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">11. Disclaimers</h3>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">The Services are provided “as is” and “as available.”</li>
+                  <li class="text-body-sm">We do not guarantee uninterrupted or error-free service.</li>
+                  <li class="text-body-sm">Telehealth may not be appropriate for every medical condition.</li>
+                  <li class="text-body-sm">Educational content is provided for general information only and not as medical advice.</li>
+                </ul>
+                <p class="mt-2 mb-0 text-body-sm">Always seek emergency or in-person medical care when appropriate.</p>
+              </div>
+
+              <div id="terms-liability" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">12. Limitation of Liability</h3>
+                <p class="mb-0">
+                  To the maximum extent allowed by law, FullScopeMD and its affiliates, officers, employees, and contractors are not liable for any indirect,
+                  incidental, consequential, special, or punitive damages. Our total liability for any claim is limited to the greater of:
+                  (a) the amount you paid for the Service at issue during the 3 months prior to the claim, or (b) $100.
+                </p>
+              </div>
+
+              <div id="terms-indemnification" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">13. Indemnification</h3>
+                <p class="mb-0">
+                  You agree to indemnify and hold harmless FullScopeMD and its affiliates, officers, directors, employees, and agents from any claims, damages,
+                  losses, or expenses arising from your use of the Services, your violation of these Terms, or your violation of another person’s rights.
+                </p>
+              </div>
+
+              <div id="terms-law" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">14. Governing Law and Dispute Resolution</h3>
+                <p class="mb-0">
+                  These Terms are governed by the laws of the State of Wyoming, without regard to conflict-of-law principles. Any dispute, claim, or controversy
+                  will be resolved through binding arbitration conducted in accordance with the rules of the AAA. The arbitration will take place in Wyoming unless otherwise required by law.
+                  You waive any right to a jury trial or to participate in a class action.
+                </p>
+              </div>
+
+              <div id="terms-contact" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">15. Contact Information</h3>
+
+                <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
+                  <div class="d-grid gap-2">
+                    <div class="fw-semibold">FullScopeMD – Legal &amp; Compliance</div>
+                    <div class="text-body-sm">
+                      Email:
+                      <a class="hover-underline-accent text-break" href="mailto:support@fullscopemd.com">support@fullscopemd.com</a>
+                    </div>
+                    <div class="text-body-sm">Phone: <span class="text-secondary-text">[XXX-XXX-XXXX]</span></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="divider my-4"></div>
+
+            <div class="d-flex flex-column flex-sm-row gap-2 justify-content-between align-items-start align-items-sm-center">
+              <small class="text-caption-sm mb-0">© {% now "Y" %} FullScopeMD. All rights reserved.</small>
+              <a class="text-body-sm hover-underline-accent" href="#top">Back to top</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock content %}

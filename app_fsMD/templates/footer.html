@@ -1,0 +1,111 @@
+{% load static %}
+
+<section class="footer-section">
+    <div class="container py-5">
+
+        <div class="row gy-4">
+            <!-- Brand + Appointment + Newsletter -->
+            <div class="col-12 col-lg-4">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="{% static 'images/favicon.ico' %}"
+                         alt="FullScopeMD icon"
+                         class="logo-icon me-2">
+                    <span class="brand-title">
+                        <span class="text-primary-accent">Full</span><span class="text-secondary-accent">Scope</span><span class="text-tertiary-accent">MD</span>
+                    </span>
+                </div>
+
+                <p class="mb-3">
+                    Evidence-based telemedicine with licensed U.S. providers, focused on clarity,
+                    safety, and accessible ongoing care.
+                </p>
+
+                <div class="d-flex flex-column flex-sm-row gap-2 mb-3">
+                    <a href="{% url 'contact' %}#appointment" class="btn btn-primary">Appointment</a>
+                </div>
+
+                <div class="footer-newsletter">
+                    <p class="mb-2 text-small">
+                        Newsletter / Updates Signup
+                    </p>
+                    <form action="#" method="post" class="footer-newsletter-form">
+                        <div class="d-flex flex-column flex-sm-row gap-2">
+                            <input type="email"
+                                   class="footer-newsletter-input"
+                                   placeholder="Enter your email">
+                            <button type="submit"
+                                    class="btn btn-outline-primary footer-newsletter-btn">
+                                Subscribe
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Our Programs -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <h3 class="footer-heading mb-3">Our Programs</h3>
+
+                <ul class="footer-list mb-0">
+                {% for program in nav_programs %}
+                    <li>
+                    <a href="{% url 'program_detail' program.slug %}" class="footer-link">
+                        {{ program.name }}
+                    </a>
+                    </li>
+                {% empty %}
+                    <li><span class="footer-link disabled">No programs yet</span></li>
+                {% endfor %}
+                </ul>
+
+            </div>
+
+            <!-- Useful Links -->
+            <div class="col-6 col-md-4 col-lg-2">
+                <h3 class="footer-heading mb-3">Useful Links</h3>
+                <ul class="footer-list mb-0">
+                    <li><a href="{% url 'about' %}" class="footer-link">About Us</a></li>
+                    <li><a href="#providers" class="footer-link">Our Clinical Team</a></li>
+                    <li><a href="#careers" class="footer-link">Careers</a></li>
+                    <li><a href="#affiliates" class="footer-link">Affiliates &amp; Partners</a></li>
+                </ul>
+            </div>
+
+            <!-- Legal Links -->
+            <div class="col-12 col-md-4 col-lg-3">
+                <h3 class="footer-heading mb-3">Legal Links</h3>
+                <ul class="footer-list mb-0">
+                    <li><a href="{% url 'terms_conditions' %}" class="footer-link">Terms &amp; Conditions</a></li>
+                    <li><a href="{% url 'privacy_policy' %}" class="footer-link">Privacy Policy</a></li>
+                    <li><a href="{% url 'refund_policy' %}" class="footer-link">Refund Policy</a></li>
+                    <li><a href="{% url 'telehealth_consent' %}" class="footer-link">Telehealth Consent</a></li>
+                    <li><a href="{% url 'hipaa_notice' %}" class="footer-link">HIPAA Notice of Privacy Practices</a></li>
+                    <li><a href="{% url 'medical_disclaimer' %}" class="footer-link">Medical Disclaimer</a></li>
+                    <li><a href="{% url 'accessibility_statement' %}" class="footer-link">Accessibility Statement</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sub-footer -->
+        <div class="footer-bottom mt-4 pt-3">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
+                <p class="mb-0 text-small">
+                    &copy; {% now "Y" %} FullScopeMD. All rights reserved.
+                </p>
+                <p class="mb-0 text-small">
+                    Telemedicine services provided by licensed U.S. clinicians.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% comment %} <style>
+    .footer-link.disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  pointer-events:none;
+  text-decoration:none;
+}
+
+</style> {% endcomment %}

@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Telehealth Informed Consent{% endblock %}
+
+{% block content %}
+
+<section id="top" class="telehealth-consent-section py-5">
+  <div class="container">
+
+    <!-- Header (same branding as Terms/Privacy/Refund) -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
+        <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
+          <i class="fa-solid fa-notes-medical icon-solid icon-sm"></i>
+          <small class="mb-0 text-white">Telehealth Informed Consent</small>
+        </span>
+
+        <h1 class="mt-3 mb-2">TELEHEALTH INFORMED CONSENT</h1>
+        <p class="mb-0">Last Updated: December 5, 2025</p>
+      </div>
+    </div>
+
+    <!-- Wrapper (same as Terms: white card only) -->
+    <div class="fade-in-up fade-in delay-2 fade-blocked">
+      <div class="row g-4 justify-content-center">
+        <div class="col-12 col-lg-10">
+          <div class="p-4 p-lg-5 bg-white rounded-4">
+
+            <!-- Quick note -->
+            <div class="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-start align-items-md-center fade-in-up fade-in delay-3 fade-blocked">
+              <div>
+                <h2 class="mb-1">Please read carefully</h2>
+                <p class="mb-0">
+                  This consent explains how telehealth works, its benefits and risks, and your agreement to receive care through telehealth.
+                </p>
+              </div>
+
+              <a href="{% url 'contact' %}" class="btn btn-outline-primary px-4">
+                Contact Support
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+              </a>
+            </div>
+
+            <div class="divider my-4"></div>
+
+            <!-- Consent body -->
+            <div class="d-grid gap-4">
+
+              <div class="fade-in-up fade-in delay-4 fade-blocked">
+                <h3 class="mb-2">1. Purpose of This Consent</h3>
+                <p class="mb-0">
+                  This Telehealth Informed Consent explains how telehealth works, outlines its benefits and risks, and documents your
+                  agreement to receive healthcare services through telehealth provided by or through FullScopeMD (“FullScopeMD,” “we,” “us,” or “our”).
+                  By proceeding with telehealth services, you acknowledge that you have read, understood, and agree to the information below.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-5 fade-blocked">
+                <h3 class="mb-2">2. What Is Telehealth?</h3>
+                <p class="mb-2">
+                  “Telehealth” (or “telemedicine”) includes the delivery of healthcare services using electronic communications and technologies instead of in-person visits.
+                  Telehealth may involve:
+                </p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Live audio and/or video communication</li>
+                  <li class="text-body-sm">Secure messaging or chat</li>
+                  <li class="text-body-sm">Reviewing information you submit electronically (asynchronous telehealth)</li>
+                  <li class="text-body-sm">Uploading medical records, photos, forms, or lab results</li>
+                  <li class="text-body-sm">Remote monitoring or digital tools, where applicable</li>
+                </ul>
+                <p class="mt-3 mb-0">
+                  Telehealth services may include evaluation, diagnosis, treatment recommendations, prescriptions when appropriate, follow-up care, and general medical guidance.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-6 fade-blocked">
+                <h3 class="mb-2">3. Providers and Licensing</h3>
+                <p class="mb-2">
+                  Telehealth services are provided by independently licensed healthcare professionals (physicians, nurse practitioners, physician assistants, or other qualified clinicians).
+                  You understand that:
+                </p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Clinicians must be licensed in the U.S. state where you are physically located during the telehealth encounter.</li>
+                  <li class="text-body-sm">You must accurately report your physical location at the time of the visit.</li>
+                  <li class="text-body-sm">You may be referred for in-person evaluation if clinically necessary.</li>
+                </ul>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">4. Potential Benefits of Telehealth</h3>
+                <p class="mb-2">Potential benefits may include:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">More convenient access to licensed clinicians</li>
+                  <li class="text-body-sm">Reduced travel and waiting time</li>
+                  <li class="text-body-sm">Faster follow-up and ongoing communication</li>
+                  <li class="text-body-sm">Ability to share records electronically</li>
+                </ul>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">5. Potential Risks and Limitations of Telehealth</h3>
+                <p class="mb-2">Telehealth also has potential risks, including:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Technical failures (poor connection, audio/video issues, software malfunction)</li>
+                  <li class="text-body-sm">Possible delays or incomplete information if your device or connection is limited</li>
+                  <li class="text-body-sm">Rare but possible unauthorized access to electronic data</li>
+                  <li class="text-body-sm">Telehealth may not be appropriate for all medical conditions</li>
+                  <li class="text-body-sm">A clinician may determine that in-person care is necessary</li>
+                </ul>
+                <p class="mt-3 mb-0">No specific result, diagnosis, or treatment outcome can be guaranteed.</p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">6. Telehealth Is Not for Emergencies</h3>
+
+                <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
+                  <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 align-items-start">
+                    <span class="icon-button shadow-sm-brand flex-shrink-0">
+                      <i class="fa-solid fa-triangle-exclamation icon-gradient icon-md"></i>
+                    </span>
+                    <div class="flex-grow-1">
+                      <div class="fw-semibold">Emergency Notice</div>
+                      <div class="text-body-sm mb-0">
+                        Telehealth is not appropriate for medical emergencies. If you are experiencing a medical emergency, or believe your condition may be life-threatening,
+                        call 911 or go to the nearest emergency room immediately.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">7. Privacy, Security, and Confidentiality</h3>
+                <p class="mb-2">
+                  FullScopeMD uses industry-standard safeguards to protect your information. Telehealth may involve the electronic transmission of medical information,
+                  which may include Protected Health Information (“PHI”) governed by HIPAA. You understand that:
+                </p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Your health information will be protected and used in accordance with our Privacy Policy and our HIPAA Notice of Privacy Practices.</li>
+                  <li class="text-body-sm">Electronic communication systems may have security vulnerabilities despite reasonable safeguards.</li>
+                  <li class="text-body-sm">You should use a private location and secure internet connection when participating in telehealth services.</li>
+                </ul>
+                <p class="mt-3 mb-0 text-body-sm">
+                  FullScopeMD does not record video or audio telehealth sessions without your consent, unless required by law. You agree not to record sessions unless you have been granted
+                  written permission from FullScopeMD or your clinician.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">8. Use and Disclosure of Information</h3>
+                <p class="mb-2">Your information may be used or disclosed for:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Treatment (care, diagnosis, prescriptions, coordination with pharmacies or labs)</li>
+                  <li class="text-body-sm">Payment (billing, processing transactions, financial records)</li>
+                  <li class="text-body-sm">Healthcare operations (quality review, training, customer support, compliance)</li>
+                  <li class="text-body-sm">Other purposes permitted by law and described in the Privacy Policy and HIPAA Notice of Privacy Practices</li>
+                </ul>
+                <p class="mt-3 mb-0">
+                  FullScopeMD may share information with pharmacies, laboratories, clinicians, and technology vendors who support the Services. Vendors handling PHI are required
+                  to comply with privacy and security obligations.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">9. Your Responsibilities</h3>
+                <p class="mb-2">As a telehealth patient, you agree to:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Provide accurate and complete information about your health</li>
+                  <li class="text-body-sm">Share your true physical location during the telehealth visit</li>
+                  <li class="text-body-sm">Participate from a private, safe environment</li>
+                  <li class="text-body-sm">Use devices and internet connections you believe to be secure</li>
+                  <li class="text-body-sm">Follow treatment instructions provided or discuss concerns with your clinician</li>
+                  <li class="text-body-sm">Inform your clinician of any changes to your condition</li>
+                </ul>
+                <p class="mt-3 mb-0">Failing to provide accurate information may affect the quality of your care.</p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">10. No Guarantee of Results</h3>
+                <p class="mb-2">You understand and agree that:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Telehealth does not guarantee specific outcomes or improvements.</li>
+                  <li class="text-body-sm">Medication response varies significantly between individuals.</li>
+                  <li class="text-body-sm">Lifestyle, adherence, medical history, and biological factors influence results.</li>
+                  <li class="text-body-sm">FullScopeMD makes no promises regarding weight loss, wellness outcomes, or medical improvement.</li>
+                </ul>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">11. Financial Responsibility</h3>
+                <p class="mb-2">You acknowledge that:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">You are responsible for all fees associated with telehealth services and prescribed medications, in accordance with the FullScopeMD Terms &amp; Conditions and Refund Policy.</li>
+                  <li class="text-body-sm">Some services may not be covered by insurance or FullScopeMD may not submit claims to insurance.</li>
+                  <li class="text-body-sm">You are responsible for confirming insurance coverage, if applicable.</li>
+                </ul>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">12. Right to Withdraw Consent</h3>
+                <p class="mb-0">
+                  You have the right to withdraw consent for telehealth at any time. Withdrawal will not affect care already provided; however, it may limit your ability
+                  to continue receiving services from FullScopeMD if telehealth is required for your program.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">13. Acknowledgment and Agreement</h3>
+                <p class="mb-2">By scheduling, initiating, or participating in a telehealth visit, you confirm that:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">You have read and understand this Telehealth Informed Consent.</li>
+                  <li class="text-body-sm">You have had an opportunity to ask questions and have them answered.</li>
+                  <li class="text-body-sm">You consent to receive healthcare services via telehealth for yourself (and/or for your minor or dependent, if applicable).</li>
+                  <li class="text-body-sm">You understand that you may withdraw consent at any time by notifying us, which may impact your ability to receive certain services.</li>
+                  <li class="text-body-sm">If you do not agree to this Telehealth Informed Consent, you should not use our telehealth services.</li>
+                </ul>
+                <p class="mt-3 mb-0">
+                  By clicking “I Agree,” checking the consent box, scheduling a visit, or participating in a telehealth encounter, you provide your valid and binding
+                  electronic consent to receive telehealth services from FullScopeMD.
+                </p>
+              </div>
+
+            </div>
+
+            <div class="divider my-4"></div>
+
+            <div class="d-flex flex-column flex-sm-row gap-2 justify-content-between align-items-start align-items-sm-center">
+              <small class="text-caption-sm mb-0">© {% now "Y" %} FullScopeMD. All rights reserved.</small>
+              <a class="text-body-sm hover-underline-accent" href="#top">Back to top</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock content %}

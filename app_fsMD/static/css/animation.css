@@ -1,0 +1,102 @@
+/* Blocks animation until loader is done */
+.fade-blocked {
+    animation-play-state: paused !important;
+    opacity: 0 !important;
+}
+
+/* Base fade-in animation */
+.fade-in {
+    opacity: 0;
+    transform: translate(0, 0);
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+    animation-play-state: running;
+}
+
+/* Fade OUT downward (for hiding elements nicely) */
+.fade-out-down {
+    opacity: 1;
+    transform: translateY(0);
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    animation-name: fadeOutDown;
+}
+
+@keyframes fadeOutDown {
+    to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+
+
+/* Directions */
+.fade-in-left {
+    transform: translateX(-30px);
+    animation-name: fadeInLeft;
+}
+
+.fade-in-right {
+    transform: translateX(30px);
+    animation-name: fadeInRight;
+}
+
+.fade-in-up {
+    transform: translateY(30px);
+    animation-name: fadeInUp;
+}
+
+.fade-in-down {
+    transform: translateY(-30px);
+    animation-name: fadeInDown;
+}
+
+/* Scroll: pause until observed */
+.scroll-animate {
+    animation-play-state: paused !important;
+}
+
+/* When allowed to play (on scroll) */
+.fade-play {
+    animation-play-state: running !important;
+}
+
+
+/* Keyframes */
+@keyframes fadeInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.delay-1 { animation-delay: 0.4s; }
+.delay-2 { animation-delay: 0.7s; }
+.delay-3 { animation-delay: 1s; }
+.delay-4 { animation-delay: 1.3s; }
+.delay-5 { animation-delay: 1.6s; }
+.delay-6 { animation-delay: 1.9s; }
+.delay-7 { animation-delay: 2s; }

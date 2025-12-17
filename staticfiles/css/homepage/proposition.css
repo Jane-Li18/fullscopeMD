@@ -1,0 +1,215 @@
+.proposition-section{
+  background: var(--secondary-bg);
+  overflow-x: hidden;
+  overflow-y: clip; /* modern browsers */
+}
+
+/* TITLES */
+.proposition-title{
+  color: var(--primary-text);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 3.2vw, 3.2rem);
+  line-height: 1.05;
+}
+
+.proposition-subtitle{
+  color: var(--secondary-text);
+  max-width: 52ch;
+}
+
+/* LIST */
+.proposition-list .prop-li{
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  padding: .35rem 0;
+  color: var(--primary-text);
+  font-weight: 600;
+}
+
+.proposition-list .prop-li i{
+  color: var(--primary-accent);
+  font-size: 1.05rem;
+  margin-top: .15rem;
+}
+
+/* BUTTON ICON */
+.prop-btn-icon{
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: var(--primary-bg);
+  color: var(--primary-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CONTACT */
+.proposition-contact .prop-phone-icon{
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-accent);
+  background: color-mix(in srgb, var(--primary-accent) 12%, transparent);
+  border: 1px solid var(--secondary-border);
+}
+
+.prop-contact-label{
+  font-size: var(--font-size-caption);
+  color: var(--secondary-text);
+}
+
+.prop-contact-number{
+  font-weight: 800;
+  color: var(--primary-text);
+  text-decoration: none;
+}
+
+/* IMPORTANT: your right side is a BOOTSTRAP .row, not grid */
+.proposition-media{
+  align-items: stretch; /* ensures equal-height columns */
+}
+
+/* Make each .col stretch its card */
+.proposition-media > .col{
+  display: flex;
+}
+
+/* CARD */
+.prop-card{
+  width: 100%;
+  background: var(--primary-bg);
+  border: 1px solid var(--secondary-border);
+  box-shadow: var(--shadow-elevated);
+  border-radius: calc(var(--radius-lg) * 2.2);
+  overflow: hidden; /* CARD controls corner rounding */
+  position: relative;
+  min-width: 0;
+}
+
+/* Media wrapper defines height reliably */
+.prop-card-img-wrap{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  min-height: clamp(260px, 38vw, 420px);
+}
+
+@media (min-width: 992px){
+  .prop-card-img-wrap{
+    min-height: clamp(320px, 30vw, 460px);
+  }
+}
+
+/* Image should NOT have its own radius (prevents mismatch corners) */
+.prop-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+/* RATING OVERLAY (overrides your bootstrap padding utilities safely) */
+.prop-card .prop-rating{
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+
+  padding: .85rem .95rem !important; /* override py/px utilities */
+  border-radius: calc(var(--radius-lg) * 1.7);
+  border: 1px solid var(--secondary-border);
+  background: color-mix(in srgb, var(--primary-bg) 84%, transparent);
+  box-shadow: var(--shadow-elevated);
+  backdrop-filter: blur(10px);
+  min-width: 0;
+}
+
+.prop-rating-bottom{ bottom: 12px; }
+.prop-rating-top{ top: 12px; }
+
+/* ICONS */
+.prop-google{
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background: var(--primary-bg);
+  border: 1px solid var(--secondary-border);
+  flex: 0 0 auto;
+}
+
+.prop-google-icon{
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.prop-video{
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background: var(--primary-bg);
+  border: 1px solid var(--secondary-border);
+  color: var(--primary-accent);
+  flex: 0 0 auto;
+}
+
+/* STARS/TEXT */
+.prop-rating-meta{ min-width: 0; }
+
+.prop-stars{
+  color: var(--primary-accent);
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.prop-score{
+  color: var(--primary-text);
+  margin-left: .25rem;
+}
+
+.prop-ratings-sub{
+  color: var(--secondary-text);
+  font-weight: 600;
+  font-size: var(--font-size-body-sm);
+}
+
+/* SMALL SCREENS */
+@media (max-width: 576px){
+  .prop-card .prop-rating{
+    left: 10px;
+    right: 10px;
+    padding: .75rem .8rem !important;
+    border-radius: calc(var(--radius-lg) * 1.5);
+  }
+
+  .prop-google,
+  .prop-video{
+    width: 40px;
+    height: 40px;
+  }
+
+  .prop-google-icon{
+    width: 22px;
+    height: 22px;
+  }
+}

@@ -1,0 +1,457 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}FAQs{% endblock %}
+
+{% block content %}
+
+<section id="top" class="faq-page-section py-5">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
+        <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
+          <i class="fa-solid fa-circle-question icon-solid icon-sm"></i>
+          <small class="mb-0 text-white">Frequently Asked Questions</small>
+        </span>
+
+        <h1 class="mt-3 mb-2">FAQ</h1>
+        <p class="mb-0">
+          Detailed answers about care, programs, billing, shipping, privacy, and policies—so you always know what to expect.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main card -->
+    <div class="fade-in-up fade-in delay-2 fade-blocked">
+      <div class="row g-4 justify-content-center">
+        <div class="col-12 col-lg-10">
+          <div class="p-4 p-lg-5 bg-white rounded-4">
+
+            <!-- Intro row -->
+            <div class="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-start align-items-md-center fade-in-up fade-in delay-3 fade-blocked">
+              <div>
+                <h2 class="mb-1">Find the answer, then take the next step</h2>
+                <p class="mb-0">
+                  If you still have questions after reading, our support team can help point you in the right direction.
+                </p>
+              </div>
+
+              <a href="{% url 'contact' %}" class="btn btn-outline-primary px-4">
+                Contact Support
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+              </a>
+            </div>
+
+            <div class="divider my-4"></div>
+
+            <!-- Helpful links row -->
+            <div class="d-flex flex-wrap gap-2 align-items-center fade-in-up fade-in delay-4 fade-blocked">
+              <small class="text-caption-sm me-2">Quick links:</small>
+              <a class="text-body-sm hover-underline-accent" href="{% url 'terms_conditions' %}">Terms</a>
+              <span class="text-body-sm">•</span>
+              <a class="text-body-sm hover-underline-accent" href="{% url 'privacy_policy' %}">Privacy Policy</a>
+              <span class="text-body-sm">•</span>
+              <a class="text-body-sm hover-underline-accent" href="{% url 'refund_policy' %}">Refund Policy</a>
+              <span class="text-body-sm">•</span>
+              <a class="text-body-sm hover-underline-accent" href="{% url 'telehealth_consent' %}">Telehealth Consent</a>
+              <span class="text-body-sm">•</span>
+              <a class="text-body-sm hover-underline-accent" href="{% url 'hipaa_notice' %}">HIPAA Notice</a>
+            </div>
+
+            <div class="divider my-4"></div>
+
+            <!-- Accordion (extra padding + spacing via utilities) -->
+            <div class="accordion accordion-flush" id="faqAccordion">
+
+              <!-- 1 -->
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingOne">
+                  <button class="accordion-button px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseOne"
+                          aria-expanded="true"
+                          aria-controls="faqCollapseOne">
+                    Am I eligible to become a patient?
+                  </button>
+                </h3>
+                <div id="faqCollapseOne"
+                     class="accordion-collapse collapse show"
+                     aria-labelledby="faqHeadingOne"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-2">
+                      Eligibility is determined by where you are physically located, your medical history, and whether telehealth is clinically appropriate for your needs.
+                      We also consider safety factors—like current medications, prior diagnoses, and any symptoms that may require in-person evaluation.
+                    </p>
+                    <p class="mb-2">
+                      The process usually looks like this: you complete an intake form, confirm your location, and provide health information as accurately as possible.
+                      A U.S.-licensed clinician then reviews your details to decide whether FullScopeMD can safely care for you through telehealth.
+                    </p>
+                    <p class="mb-0">
+                      If telehealth is not the right fit, we’ll tell you why and may recommend next steps (like an in-person visit, labs, or a different care setting).
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2 -->
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingTwo">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseTwo"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseTwo">
+                    Who provides my care? Are they licensed?
+                  </button>
+                </h3>
+                <div id="faqCollapseTwo"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingTwo"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-2">
+                      Your care is provided by independently licensed U.S. clinicians (such as physicians, nurse practitioners, and physician assistants),
+                      authorized to provide care in the state where you are located at the time of your visit.
+                    </p>
+                    <p class="mb-2">
+                      FullScopeMD supports the experience (intake, scheduling, messaging, and pharmacy coordination), while the clinician makes medical decisions
+                      using independent professional judgment.
+                    </p>
+                    <p class="mb-0">
+                      Every treatment recommendation, prescription, and dose adjustment is evaluated for medical appropriateness, legal compliance, and patient safety.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3 -->
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingThree">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseThree"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseThree">
+                    How does telehealth work with FullScopeMD?
+                  </button>
+                </h3>
+                <div id="faqCollapseThree"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingThree"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-2">
+                      Telehealth lets you receive care without traveling to a clinic. Depending on your situation, your care may include a video or audio visit,
+                      secure messaging, and review of information you submit (history, symptoms, photos, documents, or lab results).
+                    </p>
+                    <p class="mb-2">
+                      After evaluation, your clinician may recommend a plan, request more information, or advise in-person evaluation if telehealth is not appropriate.
+                    </p>
+                    <p class="mb-0">
+                      For details on telehealth benefits/risks and your responsibilities, read our
+                      <a class="hover-underline-accent" href="{% url 'telehealth_consent' %}">Telehealth Informed Consent</a>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4 -->
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingFour">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseFour"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseFour">
+                    What programs and services do you offer?
+                  </button>
+                </h3>
+                <div id="faqCollapseFour"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingFour"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-2">
+                      FullScopeMD supports multiple care paths, including weight management (such as GLP-1 programs where clinically appropriate), peptide therapy,
+                      skin health, hair-loss support, sick-visit style care, and everyday medical support.
+                    </p>
+                    <p class="mb-0">
+                      Not every option is right for every patient. Your clinician will recommend a plan that makes sense clinically—sometimes including labs or an in-person
+                      evaluation before starting or continuing treatment.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5 -->
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingFive">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseFive"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseFive">
+                    Do you accept insurance? How much will this cost?
+                  </button>
+                </h3>
+                <div id="faqCollapseFive"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingFive"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-2">
+                      FullScopeMD typically operates on a clear cash-pay model so you know costs up front. Pricing (consultations, programs, and medication if applicable)
+                      is shown before purchase whenever possible.
+                    </p>
+                    <p class="mb-0">
+                      Some services may not be covered by insurance and we may not submit claims. If you plan to use insurance, confirm coverage with your insurer first.
+                      Many patients use eligible FSA/HSA funds when available.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6 -->
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingSix">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseSix"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseSix">
+                    When is a consultation or service non-refundable?
+                  </button>
+                </h3>
+                <div id="faqCollapseSix"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingSix"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-2">
+                      Clinical services are generally non-refundable once rendered—meaning a licensed clinician has reviewed your intake, initiated a consultation,
+                      provided medical assessment, or made treatment decisions.
+                    </p>
+                    <p class="mb-0">
+                      The full conditions are listed in our
+                      <a class="hover-underline-accent" href="{% url 'refund_policy' %}">Refund Policy</a>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 7 -->
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingSeven">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseSeven"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseSeven">
+                    Where do medications come from? Are pharmacies licensed?
+                  </button>
+                </h3>
+                <div id="faqCollapseSeven"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingSeven"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-2">
+                      When medication is prescribed, it is prepared and shipped by fully licensed U.S. pharmacies. Proper preparation, handling, and shipping standards
+                      are part of patient safety.
+                    </p>
+                    <p class="mb-0">
+                      Refund eligibility may change once a prescription is issued or fulfillment begins—see the
+                      <a class="hover-underline-accent" href="{% url 'refund_policy' %}">Refund Policy</a>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 8 -->
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingEight">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseEight"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseEight">
+                    What happens after I submit a message or intake form?
+                  </button>
+                </h3>
+                <div id="faqCollapseEight"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingEight"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-2">
+                      After you submit information, it’s routed to the appropriate step: support triage, scheduling, or clinician review (depending on the form).
+                      If more information is needed, we may request clarification to keep care safe and accurate.
+                    </p>
+                    <p class="mb-0">
+                      For general questions, start on our
+                      <a class="hover-underline-accent" href="{% url 'contact' %}">Contact page</a>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 9 -->
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingNine">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseNine"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseNine">
+                    Is my information private and HIPAA-protected?
+                  </button>
+                </h3>
+                <div id="faqCollapseNine"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingNine"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-2">
+                      When FullScopeMD provides clinical services, certain data may qualify as Protected Health Information (PHI) under HIPAA. PHI is handled under
+                      HIPAA-aligned rules for permitted uses, disclosures, and safeguards.
+                    </p>
+                    <p class="mb-0">
+                      Learn more in our
+                      <a class="hover-underline-accent" href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                      and
+                      <a class="hover-underline-accent" href="{% url 'hipaa_notice' %}">HIPAA Notice of Privacy Practices</a>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 10 -->
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingTen">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseTen"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseTen">
+                    How do marketing emails/SMS work? Can I opt out?
+                  </button>
+                </h3>
+                <div id="faqCollapseTen"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingTen"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-2">
+                      Essential healthcare and operational messages (like appointment reminders, pharmacy updates, and security notices) may be required to use the Services.
+                      Marketing messages are optional and require explicit opt-in.
+                    </p>
+                    <p class="mb-0">
+                      You can opt out of marketing emails using the unsubscribe link, and opt out of marketing SMS by replying STOP.
+                      For more information, see our <a class="hover-underline-accent" href="{% url 'terms_conditions' %}">Terms &amp; Conditions</a>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 11 -->
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingEleven">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseEleven"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseEleven">
+                    What if I need urgent or emergency care?
+                  </button>
+                </h3>
+                <div id="faqCollapseEleven"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingEleven"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
+                      <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 align-items-start">
+                        <span class="icon-button shadow-sm-brand flex-shrink-0">
+                          <i class="fa-solid fa-triangle-exclamation icon-gradient icon-md"></i>
+                        </span>
+                        <div class="flex-grow-1">
+                          <div class="fw-semibold">Emergency Notice</div>
+                          <div class="text-body-sm mb-0">
+                            FullScopeMD does not provide emergency or urgent medical care.
+                            If you believe you are experiencing a medical emergency, call 911 or go to the nearest emergency room immediately.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0">
+                      For non-emergency questions or follow-ups related to your plan, contact support or schedule follow-up care when appropriate.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 12 -->
+              <div class="accordion-item rounded-4 overflow-hidden mb-0 border">
+                <h3 class="accordion-header" id="faqHeadingTwelve">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseTwelve"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseTwelve">
+                    Where can I read your official policies?
+                  </button>
+                </h3>
+                <div id="faqCollapseTwelve"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingTwelve"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-2">You can read our policies here:</p>
+                    <ul class="mb-0 d-grid gap-2">
+                      <li class="text-body-sm">
+                        <a class="hover-underline-accent" href="{% url 'terms_conditions' %}">Terms &amp; Conditions</a>
+                      </li>
+                      <li class="text-body-sm">
+                        <a class="hover-underline-accent" href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                      </li>
+                      <li class="text-body-sm">
+                        <a class="hover-underline-accent" href="{% url 'refund_policy' %}">Refund Policy</a>
+                      </li>
+                      <li class="text-body-sm">
+                        <a class="hover-underline-accent" href="{% url 'telehealth_consent' %}">Telehealth Consent</a>
+                      </li>
+                      <li class="text-body-sm">
+                        <a class="hover-underline-accent" href="{% url 'hipaa_notice' %}">HIPAA Notice of Privacy Practices</a>
+                      </li>
+                      <li class="text-body-sm">
+                        <a class="hover-underline-accent" href="{% url 'medical_disclaimer' %}">Medical Disclaimer</a>
+                      </li>
+                      <li class="text-body-sm">
+                        <a class="hover-underline-accent" href="{% url 'accessibility_statement' %}">Accessibility Statement</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="divider my-4"></div>
+
+            <div class="d-flex flex-column flex-sm-row gap-2 justify-content-between align-items-start align-items-sm-center">
+              <small class="text-caption-sm mb-0">© {% now "Y" %} FullScopeMD. All rights reserved.</small>
+              <a class="text-body-sm hover-underline-accent" href="#top">Back to top</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock content %}

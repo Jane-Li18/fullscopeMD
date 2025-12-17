@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Accessibility Statement{% endblock %}
+
+{% block content %}
+
+<section id="top" class="accessibility-section py-5">
+  <div class="container">
+
+    <!-- Header (same branding pattern) -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
+        <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
+          <i class="fa-solid fa-universal-access icon-solid icon-sm"></i>
+          <small class="mb-0 text-white">Accessibility Statement</small>
+        </span>
+
+        <h1 class="mt-3 mb-2">ACCESSIBILITY STATEMENT</h1>
+        <p class="mb-0">Last Updated: December 5, 2025</p>
+      </div>
+    </div>
+
+    <!-- Wrapper (same as Terms: white card only) -->
+    <div class="fade-in-up fade-in delay-2 fade-blocked">
+      <div class="row g-4 justify-content-center">
+        <div class="col-12 col-lg-10">
+          <div class="p-4 p-lg-5 bg-white rounded-4">
+
+            <!-- Quick note -->
+            <div class="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-start align-items-md-center fade-in-up fade-in delay-3 fade-blocked">
+              <div>
+                <h2 class="mb-1">Our goal</h2>
+                <p class="mb-0">
+                  We’re committed to making FullScopeMD accessible and usable for everyone, including people with disabilities.
+                </p>
+              </div>
+
+              <a href="{% url 'contact' %}" class="btn btn-outline-primary px-4">
+                Contact Support
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+              </a>
+            </div>
+
+            <div class="divider my-4"></div>
+
+            <!-- Body -->
+            <div class="d-grid gap-4">
+
+              <div class="fade-in-up fade-in delay-4 fade-blocked">
+                <p class="mb-0">
+                  FullScopeMD is committed to ensuring that our website, digital services, and telehealth platform are accessible and usable for all individuals,
+                  including people with disabilities. We strive to comply with applicable accessibility standards and to provide an inclusive and user-friendly
+                  experience for every patient.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-5 fade-blocked">
+                <h3 class="mb-2">1. Our Commitment</h3>
+                <p class="mb-0">
+                  We aim to follow the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards, which outline requirements for improving accessibility
+                  for people with visual, auditory, cognitive, and motor disabilities.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-6 fade-blocked">
+                <h3 class="mb-2">2. Ongoing Improvements</h3>
+                <p class="mb-2">Accessibility is an ongoing effort. FullScopeMD regularly reviews and updates our digital properties to improve:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Navigation and readability</li>
+                  <li class="text-body-sm">Color contrast and font clarity</li>
+                  <li class="text-body-sm">Compatibility with screen readers and assistive technologies</li>
+                  <li class="text-body-sm">Keyboard and voice-navigation support</li>
+                  <li class="text-body-sm">Mobile and tablet accessibility</li>
+                </ul>
+                <p class="mt-3 mb-0">
+                  We may also work with third-party vendors to help ensure accessibility compliance across all web components.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">3. Third-Party Content</h3>
+                <p class="mb-0">
+                  Some parts of our website or platform may include content from third parties (such as payment processors, telehealth systems, or pharmacy portals).
+                  While we cannot control third-party accessibility standards, we encourage them to provide accessible solutions and continually evaluate alternatives
+                  if accessibility barriers are identified.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">4. If You Need Assistance</h3>
+                <p class="mb-3">
+                  If you experience difficulty accessing any part of our website or services, or if you need information in a different format, please contact us:
+                </p>
+
+                <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
+                  <div class="d-grid gap-2">
+                    <div class="fw-semibold">FullScopeMD – Accessibility Support</div>
+                    <div class="text-body-sm">
+                      Email:
+                      <a class="hover-underline-accent text-break" href="mailto:support@fullscopemd.com">support@fullscopemd.com</a>
+                    </div>
+                    <div class="text-body-sm">Phone: <span class="text-secondary-text">[XXX-XXX-XXXX]</span></div>
+
+                    <div class="divider my-3"></div>
+
+                    <div class="fw-semibold">Please include:</div>
+                    <ul class="mb-0 d-grid gap-2">
+                      <li class="text-body-sm">The page, feature, or content you were trying to access</li>
+                      <li class="text-body-sm">The type of issue you encountered</li>
+                      <li class="text-body-sm">Any assistive technology you were using (if applicable)</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <p class="mt-3 mb-0">
+                  We will do our best to respond promptly and provide reasonable accommodations.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">5. Feedback Welcome</h3>
+                <p class="mb-0">
+                  We value your feedback. If you have suggestions for improving accessibility or usability, please let us know at any time.
+                  By using the FullScopeMD website and digital services, you acknowledge that accessibility improvements are ongoing and that we are committed to
+                  providing the best possible experience for all users.
+                </p>
+              </div>
+
+            </div>
+
+            <div class="divider my-4"></div>
+
+            <div class="d-flex flex-column flex-sm-row gap-2 justify-content-between align-items-start align-items-sm-center">
+              <small class="text-caption-sm mb-0">© {% now "Y" %} FullScopeMD. All rights reserved.</small>
+              <a class="text-body-sm hover-underline-accent" href="#top">Back to top</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock content %}

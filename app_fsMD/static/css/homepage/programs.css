@@ -1,0 +1,289 @@
+.feature-programs-section {
+    background-color: var(--primary-bg);
+}
+
+/* each item behaves like a book: bar + hidden panel */
+.program-item {
+    display: flex;
+    align-items: stretch;
+    border-radius: 1.5rem;
+    background-color: var(--primary-bg);
+    box-shadow: var(--shadow-elevated);
+    border: 1px solid var(--secondary-bg);
+    overflow: hidden;
+    flex: 0 0 60px; /* collapsed width */
+    transition:
+        flex-basis 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+/* active (opened) one grows wider */
+.program-item.active {
+    flex-basis: 520px; /* adjust as needed */
+    box-shadow: var(--shadow-elevated);
+    border-color: var(--tertiary-accent);
+}
+
+/* left side: vertical bar */
+.program-bar {
+    position: relative;
+    width: 90px;
+    border: none;
+    padding: 1rem 0.5rem;
+    background-color: var(--primary-accent);
+    color: var(--tertiary-text);
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-image: var(--program-img);
+    background-size: cover;
+    background-position: center;
+    isolation: isolate;
+}
+
+/* bluish overlay using brand accents */
+.program-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        -150deg,
+        var(--secondary-accent),
+        var(--secondary-accent),
+        var(--primary-accent),
+        var(--secondary-accent)
+    );
+    opacity: 0.70;
+    z-index: 0;
+}
+
+/* label in bar (vertical text) */
+.program-bar-label {
+    position: relative;
+    z-index: 1;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
+/* number at bottom */
+.program-bar-index {
+    position: absolute;
+    z-index: 1;
+    bottom: 0.75rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: 700;
+    opacity: 0.25;
+}
+
+/* circular icon at top */
+.program-bar-icon {
+    position: absolute;
+    z-index: 1;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: var(--primary-bg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    display: none; /* toggle via JS if you want */
+}
+
+.program-bar-icon i {
+    color: var(--primary-accent);
+}
+
+/* right side: sliding panel */
+.program-panel {
+    flex: 1 1 auto;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+        max-width 0.35s ease,
+        opacity 0.25s ease;
+}
+
+/* when item is active, reveal panel */
+.program-item.active .program-panel {
+    max-width: 1000px; /* big enough upper bound */
+    opacity: 1;
+}
+
+/* inner layout of panel (desktop: fixed height) */
+.program-panel-inner {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    height: 500px;
+    align-items: stretch;
+}
+
+/* left image column: fixed width + full height */
+.program-panel-image {
+    flex: 0 0 180px;
+    height: 100%;
+}
+
+/* make image cover that area consistently */
+.program-panel-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* also covered by .object-fit-cover */
+}
+
+/* right side body: flex column so CTA can sit at bottom */
+.program-panel-body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.program-panel-tag {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--secondary-text);
+}
+
+/* bullets */
+.program-panel-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.program-panel-list li {
+    position: relative;
+    padding-left: 1.1rem;
+    margin-bottom: 0.25rem;
+    color: var(--secondary-text);
+    font-size: smaller;
+}
+
+.program-panel-list li::before {
+    content: "";
+    position: absolute;
+    left: 0.2rem;
+    top: 0.55rem;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    background-color: var(--tertiary-accent);
+}
+
+/* CTA area (inside body, at bottom) */
+.program-panel-cta {
+    width: 100%;
+}
+
+/* buttons stacked vertically + full-width */
+.program-panel-cta .btn {
+    width: 100%;
+    justify-content: center;
+}
+
+/* responsive: stack & vertical accordion on tablets/phones */
+@media (max-width: 992px) {
+    .feature-programs-section {
+        min-height: auto;
+    }
+
+    .program-row {
+        flex-direction: column;
+        flex-wrap: nowrap !important;
+        align-items: stretch;
+        gap: 0.75rem;
+        overflow-x: visible;
+    }
+
+    .program-item,
+    .program-item.active {
+        flex-basis: auto;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .program-bar {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        justify-content: flex-start;
+    }
+
+    .program-bar-label {
+        writing-mode: horizontal-tb;
+        text-align: left;
+        letter-spacing: 0.02em;
+        margin-left: 2.4rem; /* space for icon */
+    }
+
+    .program-bar-icon {
+        top: 0.5rem;
+        left: 0.75rem;
+        transform: translateX(0);
+    }
+
+    .program-bar-index {
+        bottom: 0.4rem;
+        right: 0.75rem;
+        left: auto;
+        text-align: right;
+    }
+
+    .program-panel {
+        max-width: none;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition:
+            max-height 0.35s ease,
+            opacity 0.25s ease;
+    }
+
+    .program-item.active .program-panel {
+        max-height: 1000px;
+        opacity: 1;
+    }
+
+    .program-panel-inner {
+        flex-direction: column;
+        padding: 0.75rem 0.9rem 0.9rem;
+        gap: 0.5rem;
+        height: auto;
+        min-height: 0;
+    }
+
+    .program-panel-image {
+        display: none;
+        height: auto;
+    }
+
+    .program-panel-body h3 {
+        margin-bottom: 0.35rem;
+    }
+
+    .program-panel-body p {
+        margin-bottom: 0.5rem;
+    }
+
+    .program-panel-list {
+        margin-bottom: 0.5rem;
+    }
+
+    .program-panel-cta .btn {
+        padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
+        font-size: calc(var(--font-size-body-sm) * 0.9);
+    }
+}

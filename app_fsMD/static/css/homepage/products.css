@@ -1,0 +1,202 @@
+/* ============================
+   Featured Clinical Products
+   ============================ */
+
+.products-section {
+    background-color: var(--primary-bg);
+}
+
+/* Filter pill row */
+.product-filters {
+
+}
+
+.product-filter-btn {
+    border: 1px solid var(--secondary-border);
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    padding: 0.4rem 1.3rem;
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-body-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+        background-color var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.product-filter-btn:hover {
+    border-color: var(--primary-accent);
+    box-shadow: var(--shadow-elevated);
+    transform: translateY(-2px);
+}
+
+.product-filter-btn.active {
+    background-color: var(--primary-accent);
+    color: var(--tertiary-text);
+    border-color: var(--primary-accent);
+    box-shadow: var(--shadow-elevated);
+}
+
+/* ============================
+   Card layout
+   ============================ */
+
+.product-card-wrapper {
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+/* make sure hidden cards are actually gone */
+.product-card-wrapper.d-none {
+    display: none !important;
+}
+
+.product-card {
+    background-color: var(--primary-bg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--secondary-border);
+    box-shadow: var(--shadow-elevated);
+    padding: 1.1rem 1.2rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* image block */
+.product-media {
+    background-color: var(--secondary-bg);
+    border-radius: var(--radius-md);
+    padding: 1.3rem 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 190px;
+    overflow: hidden;
+}
+
+.product-img {
+    max-width: 100%;
+    max-height: 170px;
+    display: block;
+    object-fit: contain; /* also covered by .object-fit-contain globally */
+}
+
+/* text block */
+.product-body {
+    text-align: left;
+}
+
+/* product name (link) */
+.product-title {
+    font-size: var(--font-size-body-sm);
+    font-weight: 700;
+    margin: 0;
+}
+
+.product-title a {
+    color: var(--primary-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.product-title a:hover {
+    color: var(--primary-accent);
+}
+
+/* category UNDER name */
+.product-category {
+    font-size: var(--font-size-caption);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--secondary-text);
+}
+
+/* price + cart row */
+.product-footer {
+    margin-top: 0.25rem;
+}
+
+.product-pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+}
+
+.product-price {
+    color: var(--primary-accent);
+    font-weight: 700;
+    font-size: var(--font-size-body-sm);
+}
+
+.product-price-old {
+    font-size: var(--font-size-caption);
+    color: var(--secondary-text);
+    opacity: 0.6;
+    text-decoration: line-through;
+}
+
+/* add-to-cart button */
+.product-cart-btn {
+    border-radius: var(--radius-pill);
+    font-size: calc(var(--font-size-body-sm) * 0.9);
+    padding-inline: 0.9rem;
+    padding-block: 0.35rem;
+}
+
+/* ============================
+   Filter animations
+   ============================ */
+
+/* pop-in when shown */
+.product-card-animate {
+    animation: productCardPop 0.32s ease-out both;
+}
+
+@keyframes productCardPop {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* fade-out when hidden */
+.product-card-hide {
+    animation: productCardFadeOut 0.22s ease-in forwards;
+}
+
+@keyframes productCardFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(8px) scale(0.97);
+    }
+}
+
+/* ============================
+   Mobile tweaks
+   ============================ */
+
+@media (max-width: 576px) {
+    .product-card {
+        padding: 1rem;
+        border-radius: var(--radius-md);
+    }
+
+    .product-media {
+        min-height: 160px;
+        padding: 1rem;
+    }
+
+    .product-title {
+        font-size: var(--font-size-body-sm);
+    }
+}

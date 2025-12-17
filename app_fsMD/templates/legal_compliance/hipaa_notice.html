@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}HIPAA Notice of Privacy Practices{% endblock %}
+
+{% block content %}
+
+<section id="top" class="hipaa-npp-section py-5">
+  <div class="container">
+
+    <!-- Header (same branding pattern) -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
+        <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
+          <i class="fa-solid fa-shield-heart icon-solid icon-sm"></i>
+          <small class="mb-0 text-white">HIPAA Notice</small>
+        </span>
+
+        <h1 class="mt-3 mb-2">HIPAA NOTICE OF PRIVACY PRACTICES</h1>
+        <p class="mb-0">Last Updated: December 5, 2025</p>
+      </div>
+    </div>
+
+    <!-- Wrapper (same as Terms: white card only) -->
+    <div class="fade-in-up fade-in delay-2 fade-blocked">
+      <div class="row g-4 justify-content-center">
+        <div class="col-12 col-lg-10">
+          <div class="p-4 p-lg-5 bg-white rounded-4">
+
+            <!-- Big notice -->
+            <div class="p-3 p-md-4 bg-muted border-brand rounded-4 fade-in-up fade-in delay-3 fade-blocked">
+              <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 align-items-start">
+                <span class="icon-button shadow-sm-brand flex-shrink-0">
+                  <i class="fa-solid fa-triangle-exclamation icon-gradient icon-md"></i>
+                </span>
+                <div class="flex-grow-1">
+                  <div class="fw-semibold text-uppercase">
+                    This notice describes how medical information about you may be used and disclosed and how you can get access to this information.
+                  </div>
+                  <div class="text-body-sm mb-0">Please review it carefully.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="divider my-4"></div>
+
+            <!-- Body -->
+            <div class="d-grid gap-4">
+
+              <div class="fade-in-up fade-in delay-4 fade-blocked">
+                <h3 class="mb-2">1. Our Responsibilities</h3>
+                <p class="mb-2">FullScopeMD (“we,” “us,” “our”) is required by law to:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Maintain the privacy and security of your Protected Health Information (“PHI”).</li>
+                  <li class="text-body-sm">Provide you with this Notice of our legal duties and privacy practices.</li>
+                  <li class="text-body-sm">Notify you if a breach occurs that may compromise the privacy or security of your PHI.</li>
+                  <li class="text-body-sm">Follow the practices described in this Notice unless we update it in writing.</li>
+                </ul>
+                <p class="mt-3 mb-0">
+                  Your PHI includes information that identifies you and relates to your past, present, or future health, treatment, or payment for services.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-5 fade-blocked">
+                <h3 class="mb-2">2. How We May Use and Disclose Your PHI</h3>
+                <p class="mb-3">
+                  We may use or disclose your PHI in the following ways without obtaining your written permission:
+                </p>
+
+                <div class="d-grid gap-3">
+                  <div>
+                    <div class="fw-semibold">A. Treatment</div>
+                    <p class="mb-2">
+                      We may use and share PHI with physicians, nurse practitioners, physician assistants, pharmacists, labs, and other healthcare professionals involved in your care.
+                    </p>
+                    <div class="text-body-sm fw-semibold mb-1">Examples:</div>
+                    <ul class="mb-0 d-grid gap-2">
+                      <li class="text-body-sm">Reviewing your medical history</li>
+                      <li class="text-body-sm">Conducting telehealth evaluations</li>
+                      <li class="text-body-sm">Sending prescriptions to pharmacies</li>
+                      <li class="text-body-sm">Ordering labs and reviewing results</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">B. Payment</div>
+                    <p class="mb-2">We may use and disclose PHI to obtain payment for services.</p>
+                    <div class="text-body-sm fw-semibold mb-1">Examples:</div>
+                    <ul class="mb-0 d-grid gap-2">
+                      <li class="text-body-sm">Processing payments</li>
+                      <li class="text-body-sm">Determining coverage</li>
+                      <li class="text-body-sm">Sending billing statements</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">C. Healthcare Operations</div>
+                    <p class="mb-2">We may use PHI to manage our business and improve the quality of care.</p>
+                    <div class="text-body-sm fw-semibold mb-1">Examples:</div>
+                    <ul class="mb-0 d-grid gap-2">
+                      <li class="text-body-sm">Quality assessments</li>
+                      <li class="text-body-sm">Staff training</li>
+                      <li class="text-body-sm">Customer service</li>
+                      <li class="text-body-sm">Security and fraud prevention</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">D. Business Associates</div>
+                    <p class="mb-0">
+                      We may share PHI with vendors who help us provide services (e.g., telehealth platforms, cloud hosting, pharmacies, labs).
+                      All business associates are required to protect your PHI through Business Associate Agreements (BAAs).
+                    </p>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">E. Required or Permitted by Law</div>
+                    <p class="mb-2">We may share your PHI when required by federal, state, or local law, including:</p>
+                    <ul class="mb-0 d-grid gap-2">
+                      <li class="text-body-sm">Public health reporting</li>
+                      <li class="text-body-sm">Abuse, neglect, or domestic violence reporting</li>
+                      <li class="text-body-sm">Court orders or subpoenas</li>
+                      <li class="text-body-sm">Law enforcement requests</li>
+                      <li class="text-body-sm">Health oversight agencies</li>
+                      <li class="text-body-sm">Workers’ compensation claims</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">F. To Prevent Serious Threats</div>
+                    <p class="mb-0">
+                      We may use or disclose PHI to prevent or reduce a serious, immediate threat to health or safety.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="fade-in-up fade-in delay-6 fade-blocked">
+                <h3 class="mb-2">3. Uses and Disclosures That Require Your Written Authorization</h3>
+                <p class="mb-2">We must obtain your written authorization before using or disclosing your PHI for:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Marketing communications not otherwise permitted by HIPAA</li>
+                  <li class="text-body-sm">Sale of PHI</li>
+                  <li class="text-body-sm">Most psychotherapy notes</li>
+                  <li class="text-body-sm">Any other use or disclosure not described in this Notice</li>
+                </ul>
+                <p class="mt-3 mb-0">
+                  You may revoke authorization at any time in writing, except to the extent PHI has already been used or disclosed.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">4. Your Rights Regarding Your PHI</h3>
+
+                <div class="d-grid gap-3">
+                  <div>
+                    <div class="fw-semibold">A. Right to Access</div>
+                    <p class="mb-0">You may request to view or obtain a copy of your medical records. We will provide records in paper or electronic format as allowed by law.</p>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">B. Right to Amend</div>
+                    <p class="mb-2">You may request corrections to your PHI if it is incorrect or incomplete. We may deny a request if:</p>
+                    <ul class="mb-0 d-grid gap-2">
+                      <li class="text-body-sm">We did not create the information</li>
+                      <li class="text-body-sm">It is accurate as-is</li>
+                      <li class="text-body-sm">Certain other legal exceptions apply</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">C. Right to Request Restrictions</div>
+                    <p class="mb-2">You may request restrictions on how we use or disclose your PHI. We are not required to agree to most restrictions, except when:</p>
+                    <ul class="mb-0 d-grid gap-2">
+                      <li class="text-body-sm">You pay for a service completely out of pocket AND</li>
+                      <li class="text-body-sm">You request that we not disclose that information to your health plan</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">D. Right to Request Confidential Communications</div>
+                    <p class="mb-0">You may request that we contact you in a specific way (e.g., email only, or at a different phone number).</p>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">E. Right to an Accounting of Disclosures</div>
+                    <p class="mb-2">
+                      You have the right to request a list of times we shared your PHI for six years prior to your request, excluding:
+                    </p>
+                    <ul class="mb-0 d-grid gap-2">
+                      <li class="text-body-sm">Treatment</li>
+                      <li class="text-body-sm">Payment</li>
+                      <li class="text-body-sm">Healthcare operations</li>
+                      <li class="text-body-sm">Disclosures you authorized</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">F. Right to a Paper Copy of This Notice</div>
+                    <p class="mb-0">You may request a paper copy of this Notice at any time, even if you have agreed to receive it electronically.</p>
+                  </div>
+
+                  <div>
+                    <div class="fw-semibold">G. Right to Be Notified of a Breach</div>
+                    <p class="mb-0">You have the right to receive written notification if a breach of your PHI occurs.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">5. Telehealth-Specific Privacy Practices</h3>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Electronic transmission of PHI may occur through secure video, chat, photo uploads, or online forms.</li>
+                  <li class="text-body-sm">We use encryption and HIPAA-compliant systems to protect PHI.</li>
+                  <li class="text-body-sm">We do not record telehealth sessions unless required by law or explicitly authorized by you.</li>
+                </ul>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">6. How We Protect Your Information</h3>
+                <p class="mb-2">We use a combination of administrative, technical, and physical safeguards, including:</p>
+                <ul class="mb-0 d-grid gap-2">
+                  <li class="text-body-sm">Encryption of PHI in transit and at rest</li>
+                  <li class="text-body-sm">Multi-factor authentication</li>
+                  <li class="text-body-sm">Access controls and audit logs</li>
+                  <li class="text-body-sm">Secure servers and HIPAA-compliant platforms</li>
+                  <li class="text-body-sm">Regular risk assessments</li>
+                </ul>
+                <p class="mt-3 mb-0 text-body-sm">
+                  Although we use reasonable safeguards, no system can guarantee 100% security.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">7. Changes to This Notice</h3>
+                <p class="mb-0">
+                  We may update this Notice at any time. Updated versions will be posted on our website with a new “Last Updated” date.
+                  Your continued use of our services means you accept the updated Notice.
+                </p>
+              </div>
+
+              <div class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">8. Questions or Complaints</h3>
+
+                <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
+                  <div class="d-grid gap-2">
+                    <div class="fw-semibold">FullScopeMD – Privacy &amp; Compliance</div>
+                    <div class="text-body-sm">
+                      Email:
+                      <a class="hover-underline-accent text-break" href="mailto:support@fullscopemd.com">support@fullscopemd.com</a>
+                    </div>
+                    <div class="text-body-sm">Phone: <span class="text-secondary-text">[XXX-XXX-XXXX]</span></div>
+                  </div>
+
+                  <div class="divider my-4"></div>
+
+                  <div class="d-grid gap-1">
+                    <div class="fw-semibold">You may also file a complaint with:</div>
+                    <div class="text-body-sm">U.S. Department of Health &amp; Human Services (HHS), Office for Civil Rights (OCR)</div>
+                    <div class="text-body-sm">
+                      Website:
+                      <a class="hover-underline-accent text-break" href="https://www.hhs.gov/ocr/privacy" target="_blank" rel="noopener">
+                        https://www.hhs.gov/ocr/privacy
+                      </a>
+                    </div>
+                    <div class="text-body-sm">Phone: 1-800-368-1019</div>
+                    <div class="text-body-sm">We will not retaliate against you for filing a complaint.</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="divider my-4"></div>
+
+            <div class="d-flex flex-column flex-sm-row gap-2 justify-content-between align-items-start align-items-sm-center">
+              <small class="text-caption-sm mb-0">© {% now "Y" %} FullScopeMD. All rights reserved.</small>
+              <a class="text-body-sm hover-underline-accent" href="#top">Back to top</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock content %}

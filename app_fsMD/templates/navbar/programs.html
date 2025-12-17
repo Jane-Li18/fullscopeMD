@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+  <div class="container py-2 py-lg-4">
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-10">
+        <div class="p-4 p-lg-5 bg-white rounded-4 shadow-sm-brand border-brand fade-in-up fade-in delay-1 fade-blocked">
+          <div class="d-flex flex-column flex-md-row align-items-start gap-3 gap-lg-4">
+
+            <div class="flex-shrink-0">
+              <div class="rounded-4 d-inline-flex align-items-center justify-content-center bg-muted border-brand"
+                   style="width:56px;height:56px;">
+                <i class="fa-solid fa-layer-group fs-4 text-primary-accent"></i>
+              </div>
+            </div>
+
+            <div class="flex-grow-1">
+              <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                <span class="badge rounded-pill bg-primary-accent">Program • FullScopeMD</span>
+                <span class="badge rounded-pill bg-muted border-brand text-primary-accent">Telemedicine</span>
+              </div>
+
+              <h1 class="mb-2">{{ category.name }}</h1>
+
+              {% if category.short_description %}
+                <p class="mb-0 text-body-sm">{{ category.short_description|linebreaksbr }}</p>
+              {% else %}
+                <p class="mb-0 text-body-sm">Program overview coming soon.</p>
+              {% endif %}
+
+              <div class="d-flex flex-wrap gap-2 mt-3">
+                <a href="#appointment" class="btn btn-primary btn-sm">
+                  Appointment <i class="fa-solid fa-arrow-right ms-2 icon-solid"></i>
+                </a>
+                <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-sm">Contact Us</a>
+                <a href="{% url 'blog' %}" class="btn btn-outline-primary btn-sm">Blog</a>
+                <a href="{% url 'privacy_policy' %}" class="btn btn-outline-primary btn-sm">Privacy Policy</a>
+                <a href="{% url 'telehealth_consent' %}" class="btn btn-outline-primary btn-sm">Telehealth Consent</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 g-md-4">
+
+      {% for p in products %}
+        <div class="col-12 col-sm-6 col-lg-3 fade-in-up fade-in fade-blocked scroll-animate {% cycle 'delay-1' 'delay-2' 'delay-3' 'delay-4' 'delay-5' 'delay-6' 'delay-7' %}">
+          <article class="program-product-card h-100 bg-white rounded-4 shadow-sm-brand border-brand hover-lift overflow-hidden">
+
+            <div class="p-3 pb-0">
+              <div class="product-thumb mx-auto">
+                <img
+                  src="{{ p.main_image.url }}"
+                  alt="{{ p.name }}"
+                  class="product-thumb-img"
+                  loading="lazy"
+                >
+              </div>
+            </div>
+
+            <div class="p-3 p-md-4">
+              <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
+                <span class="badge rounded-pill bg-muted border-brand text-primary-accent">{{ p.category.name }}</span>
+                {% if p.requires_prescription %}
+                  <span class="badge rounded-pill bg-muted border-brand text-secondary-accent">Prescription</span>
+                {% endif %}
+              </div>
+
+              <h3 class="program-product-title mb-2">{{ p.name }}</h3>
+
+              {% if p.short_details %}
+                <div class="text-body-sm mb-3">
+                  <p class="mb-0">
+                    <span class="js-desc-short">
+                      {{ p.short_details|striptags|truncatechars:50 }}
+                    </span>
+                    {% if p.short_details|striptags|length > 50 %}
+                      <span class="js-desc-ellipsis"></span>
+                      <button type="button"
+                              class="truncate-toggle js-desc-more"
+                              aria-expanded="false">
+                        See more…
+                      </button>
+                    {% else %}
+                      <span class="js-desc-ellipsis d-none"></span>
+                      <button type="button"
+                              class="truncate-toggle js-desc-more d-none"
+                              aria-expanded="false">
+                        See more…
+                      </button>
+                    {% endif %}
+                  </p>
+
+                  <div class="desc-expand-wrap js-desc-wrap" style="height:0; overflow:hidden;">
+                    <div class="desc-expand-inner">
+                      <p class="mb-0 js-desc-full">{{ p.short_details|linebreaksbr }}</p>
+                      <button type="button"
+                              class="truncate-toggle truncate-toggle--bottom js-desc-hide d-none">
+                        Hide
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              {% else %}
+                <p class="text-body-sm mb-3">No details available.</p>
+              {% endif %}
+
+              <div class="d-flex align-items-center justify-content-between mt-3 pt-2 border-top">
+                <div class="fw-semibold">${{ p.final_price|floatformat:2 }}</div>
+                {% if p.quantity > 0 %}
+                  <span class="text-caption-sm text-primary-accent">In stock</span>
+                {% else %}
+                  <span class="text-caption-sm">Out of stock</span>
+                {% endif %}
+              </div>
+
+              <div class="d-grid mt-3">
+                <a href="{% url 'product_detail' p.slug %}" class="btn btn-outline-primary btn-sm">
+                  View details <i class="fa-solid fa-arrow-right ms-2"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      {% empty %}
+        <div class="col-12">
+          <div class="bg-white rounded-4 p-4 p-lg-5 text-center shadow-sm-brand border-brand">
+            <h3 class="mb-2" style="font-size: var(--font-size-h3);">No products available at the moment.</h3>
+            <p class="mb-0 text-body-sm">Please check back soon for new options and updates.</p>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+
+    {% if category.long_description %}
+      <div class="row justify-content-center mt-5">
+        <div class="col-12 col-lg-10">
+          <div class="p-4 p-lg-5 bg-muted rounded-4 border-brand shadow-sm-brand fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i class="fa-solid fa-shield-heart text-primary-accent"></i>
+              <h2 class="mb-0" style="font-size: var(--font-size-h3);">Clinical overview</h2>
+            </div>
+            <div class="text-body-sm">{{ category.long_description|linebreaksbr }}</div>
+
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <a href="#appointment" class="btn btn-primary btn-sm">Appointment</a>
+              <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-sm">Contact Us</a>
+              <a href="{% url 'terms_conditions' %}" class="btn btn-outline-primary btn-sm">Terms</a>
+              <a href="{% url 'privacy_policy' %}" class="btn btn-outline-primary btn-sm">Privacy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock content %}
