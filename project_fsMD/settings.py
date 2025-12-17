@@ -30,7 +30,6 @@ INSTALLED_APPS = [
        'django.contrib.staticfiles',
        'django.contrib.humanize',
        'app_fsMD.apps.AppFsmdConfig',
-       'app_fsMD',
 ]
 
 MIDDLEWARE = [
