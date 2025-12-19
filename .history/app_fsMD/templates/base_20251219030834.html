@@ -1,0 +1,155 @@
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FullScopeMD | {% block title %}{% endblock title %}</title>
+
+  <link rel="icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/favicon.ico' %}">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Owl Carousel 2 CSS (keep in <head>) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+  <!-- Your global CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/animation.css' %}">
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/homepage/hero.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homepage/intro.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homepage/marquee.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homepage/marquee2.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homepage/programs.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homepage/result.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homepage/products.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homepage/faq.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homepage/proposition.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homepage/feedback.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homepage/blog.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homepage/appointment.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components/blog.css' %}">
+  <link rel="stylesheet" href="{% static 'css/navbar/programs.css' %}">
+  <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+  {# ✅ allow pages to add page-specific CSS/meta if needed #}
+  {% block extra_head %}{% endblock extra_head %}
+</head>
+
+<body>
+  <form id="csrf-form" style="display:none;">
+    {% csrf_token %}
+  </form>
+
+  {% include "components/loader.html" %}
+  {% include "navbar/navbar.html" %}
+
+  {% block sidebar %}
+    {% include "navbar/navsidebar.html" %}
+  {% endblock sidebar %}
+
+  <!-- Scroll To Top Button -->
+  <button id="scrollTopBtn"
+          class="btn btn-primary scroll-top-btn d-flex align-items-center justify-content-center"
+          type="button"
+          aria-label="Scroll to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <main class="mt-5">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Secure Cart Offcanvas -->
+  <!-- Secure Cart Offcanvas (outside <main>) -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <div class="d-flex align-items-center gap-2">
+        <span class="icon-button bg-primary-accent">
+          <i class="fa-solid fa-lock icon-sm"></i>
+        </span>
+        <div>
+          <h5 class="mb-0" id="cartOffcanvasLabel">Secure Cart</h5>
+          <div class="text-caption-sm text-muted">Review items before checkout.</div>
+        </div>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body d-flex flex-column">
+      <!-- Telemedicine note -->
+      <div class="rounded-4 border bg-muted p-3 mb-3">
+        <div class="d-flex gap-2 align-items-start">
+          <i class="fa-solid fa-circle-info text-primary-accent mt-1"></i>
+          <div class="text-body-sm">
+            Items marked
+            <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis">Prescription</span>
+            require clinician review and may require consent.
+            <a href="{% url 'telehealth_consent' %}" class="ms-1">View Consent</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cart items -->
+      <div id="cartContent" class="d-grid gap-3 flex-grow-1">
+        <div class="cart-empty-state">
+          <div class="icon-button icon-button--gradient-border mx-auto mb-2" style="width:54px;height:54px;">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+          <div class="fw-semibold">Your cart is empty</div>
+          <div class="text-body-sm text-muted">Add an item to get started.</div>
+        </div>
+      </div>
+
+      <!-- Totals + actions -->
+      <div class="border-top pt-3 mt-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="fw-semibold">Total</div>
+          <div class="fw-semibold">$<span id="cartTotal">0.00</span></div>
+        </div>
+
+        <a href="{% url 'cart_page' %}" class="btn btn-primary w-100 mt-3">
+          <i class="fa-solid fa-shield-heart me-2"></i>Proceed to Checkout
+        </a>
+
+        <div class="text-caption-sm text-muted mt-2">
+          Prices and availability are confirmed at checkout.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include "footer.html" %}
+
+  <div id="cartRoutes"
+       data-cart-summary-url="{% url 'cart_summary' %}"
+       data-cart-add-url="{% url 'cart_add' %}"
+       data-cart-update-url="{% url 'cart_update' %}"
+       data-cart-remove-url="{% url 'cart_remove' %}"
+       hidden></div>
+
+  <!-- ✅ Scripts: jQuery → Owl → Bootstrap → your script → page scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+          crossorigin="anonymous"></script>
+
+  <script src="{% static 'js/script.js' %}"></script>
+
+  {# ✅ THIS was missing — your all_programs.html init script never ran #}
+  {% block extra_scripts %}{% endblock extra_scripts %}
+</body>
+</html>

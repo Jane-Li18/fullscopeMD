@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+  <div class="container py-2 py-lg-4">
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-12">
+        <div class="p-4 p-lg-5 bg-white fade-in-up fade-in delay-1 fade-blocked">
+          <div class="d-flex flex-column flex-md-row align-items-start gap-3 gap-lg-4">
+
+            <div class="flex-shrink-0">
+              <div class="rounded-4 d-inline-flex align-items-center justify-content-center bg-muted border-brand"
+                   style="width:56px;height:56px;">
+                <i class="fa-solid fa-layer-group fs-4 text-primary-accent"></i>
+              </div>
+            </div>
+
+            <div class="flex-grow-1">
+              <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                <span class="badge rounded-pill bg-primary-accent">
+                  {% if category.kind == "service" %}
+                    Service
+                  {% else %}
+                    Program
+                  {% endif %}
+                  • FullScopeMD
+                </span>
+                <span class="badge rounded-pill bg-muted border-brand text-primary-accent">Telemedicine</span>
+              </div>
+
+              <h1 class="mb-2">{{ category.name }}</h1>
+
+              {% if category.short_description %}
+                <p class="mb-0 text-body-sm">{{ category.short_description|linebreaksbr }}</p>
+              {% else %}
+                <p class="mb-0 text-body-sm">Program overview coming soon.</p>
+              {% endif %}
+
+              <div class="d-flex flex-wrap gap-2 mt-3">
+                <a href="#appointment" class="btn btn-primary btn-sm">
+                  Appointment <i class="fa-solid fa-arrow-right ms-2 icon-solid"></i>
+                </a>
+                <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-sm">Contact Us</a>
+                <a href="{% url 'blgs_updts' %}" class="btn btn-outline-primary btn-sm">Blog</a>
+                <a href="{% url 'privacy_policy' %}" class="btn btn-outline-primary btn-sm">Privacy Policy</a>
+                <a href="{% url 'telehealth_consent' %}" class="btn btn-outline-primary btn-sm">Telehealth Consent</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# ✅ ONLY products for this category are already in `products` from your view #}
+    {# ✅ Hide filter bar by passing categories=None #}
+    {% include "home/h_prdcts.html" with show_header=False categories=None products=products %}
+
+    {% if category.long_description %}
+      <div class="row justify-content-center mt-5">
+        <div class="col-12 col-lg-10">
+          <div class="p-4 p-lg-5 bg-muted rounded-4 border-brand shadow-sm-brand fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i class="fa-solid fa-shield-heart text-primary-accent"></i>
+              <h2 class="mb-0" style="font-size: var(--font-size-h3);">Clinical overview</h2>
+            </div>
+
+            <div class="text-body-sm">{{ category.long_description|linebreaksbr }}</div>
+
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <a href="#appointment" class="btn btn-primary btn-sm">Appointment</a>
+              <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-sm">Contact Us</a>
+              <a href="{% url 'terms_conditions' %}" class="btn btn-outline-primary btn-sm">Terms</a>
+              <a href="{% url 'privacy_policy' %}" class="btn btn-outline-primary btn-sm">Privacy</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock content %}

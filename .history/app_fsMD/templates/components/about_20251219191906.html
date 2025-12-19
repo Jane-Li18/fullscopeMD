@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+
+<section class="about-section d-flex align-items-center min-vh-100">
+  <div class="container py-5">
+
+    <!-- Header -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+        <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
+          <i class="fa-solid fa-shield-heart icon-solid icon-sm"></i>
+          <small class="mb-0 text-white">Comprehensive Online Care Designed Around You</small>
+        </span>
+
+        <h1 class="mt-3 mb-2">About FullScopeMD</h1>
+        <p class="mb-0">
+          FullScopeMD was created with a simple belief: everyone deserves medical care that feels supportive, trustworthy,
+          and within reach.
+        </p>
+      </div>
+    </div>
+
+    <!-- Soft wrapper (bg-muted only on this surface) -->
+    <div class="p-3 p-lg-4 bg-muted rounded-4 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+      <div class="row g-4 align-items-stretch">
+        <!-- Main copy -->
+        <div class="col-12 col-lg-7 fade-in-left fade-in delay-3 fade-blocked scroll-animate">
+          <div class="h-100 p-4 p-lg-5 bg-white rounded-4">
+            <h2 class="mb-2">Supportive care, from the very first step.</h2>
+            <p class="mb-3">
+              We bring together licensed U.S. providers, personalized treatment, and thoughtful follow-through so every patient
+              feels cared for from the very first step.
+            </p>
+            <p class="mb-3">
+              Our programs cover weight loss, peptides, skin health, hair loss, sick-visit care, and everyday medical support—
+              all delivered through a seamless telehealth experience designed for comfort and clarity.
+            </p>
+            <p class="mb-4">
+              Every medication is prepared and shipped by fully licensed pharmacies in the United States, giving you the confidence
+              that your treatment is safe, authentic, and held to the highest clinical standards.
+            </p>
+
+            <!-- CTA -->
+            <a href="{% url 'index' %}#appointment" class="btn btn-primary px-4">
+              Get Started
+              <i class="fa-solid fa-arrow-right ms-2 icon-solid"></i>
+            </a>
+            {# If you have a dedicated appointment page route, swap to: href="{% url 'appointment' %}" #}
+          </div>
+        </div>
+
+        <!-- Highlights -->
+        <div class="col-12 col-lg-5 fade-in-right fade-in delay-3 fade-blocked scroll-animate">
+          <div class="h-100 p-4 p-lg-5 bg-white rounded-4">
+            <h3 class="mb-3">What you can expect</h3>
+
+            <ul class="mb-0 d-grid gap-3">
+              <li class="d-flex gap-3 align-items-start hover-lift fade-in-up fade-in delay-4 fade-blocked scroll-animate">
+                <span class="icon-button shadow-sm-brand flex-shrink-0">
+                  <i class="fa-solid fa-user-doctor icon-gradient icon-md"></i>
+                </span>
+                <div>
+                  <div class="fw-semibold">Licensed U.S. Providers</div>
+                  <div class="text-body-sm">Care guided by qualified clinicians.</div>
+                </div>
+              </li>
+
+              <li class="d-flex gap-3 align-items-start hover-lift fade-in-up fade-in delay-5 fade-blocked scroll-animate">
+                <span class="icon-button shadow-sm-brand flex-shrink-0">
+                  <i class="fa-solid fa-clipboard-check icon-gradient icon-md"></i>
+                </span>
+                <div>
+                  <div class="fw-semibold">Personalized Treatment</div>
+                  <div class="text-body-sm">Plans tailored to your goals and needs.</div>
+                </div>
+              </li>
+
+              <li class="d-flex gap-3 align-items-start hover-lift fade-in-up fade-in delay-6 fade-blocked scroll-animate">
+                <span class="icon-button shadow-sm-brand flex-shrink-0">
+                  <i class="fa-solid fa-pills icon-gradient icon-md"></i>
+                </span>
+                <div>
+                  <div class="fw-semibold">Licensed U.S. Pharmacies</div>
+                  <div class="text-body-sm">Prepared and shipped to the highest standards.</div>
+                </div>
+              </li>
+
+              <li class="d-flex gap-3 align-items-start hover-lift fade-in-up fade-in delay-7 fade-blocked scroll-animate">
+                <span class="icon-button shadow-sm-brand flex-shrink-0">
+                  <i class="fa-solid fa-laptop-medical icon-gradient icon-md"></i>
+                </span>
+                <div>
+                  <div class="fw-semibold">Seamless Telehealth</div>
+                  <div class="text-body-sm">Comfortable, clear, and easy to follow.</div>
+                </div>
+              </li>
+            </ul>
+
+            <div class="divider my-4"></div>
+
+            <small class="text-caption-sm">
+              Programs include weight loss, peptides, skin health, hair loss, sick visits, and everyday support.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{# Reuse only what’s needed (swap marquee1/marquee2 if you prefer) #}
+{% include "components/mrq1.html" %}
+{% include "home/h_why_chs.html" %}
+{% include "components/mrq2.html" %}
+
+{% endblock content %}

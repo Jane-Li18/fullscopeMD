@@ -1,0 +1,141 @@
+{% load static %}
+
+<section class="h-prdcts-section d-flex align-items-center min-vh-50">
+  <div class="container py-5">
+
+  {% if show_header|default:True %}
+    <div class="row mb-2 mb-lg-5">
+      <div class="col-12 text-center fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+        <h2 class="mb-2">Featured Clinical Products</h2>
+        <p class="mb-0">
+          Clinically selected products designed to support your treatment plan,
+          enhance results, and elevate your daily care routine.
+        </p>
+      </div>
+    </div>
+  {% endif %}
+
+    {% if categories %}
+      <div class="row mb-4">
+        <div class="col-12 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+          <div class="d-flex justify-content-start justify-content-sm-center">
+            <div class="product-filters d-flex flex-nowrap flex-sm-wrap gap-2 gap-sm-3 overflow-auto w-100 w-sm-auto px-2 py-1">
+              <button type="button" class="product-filter-btn active text-nowrap" data-filter="all">All</button>
+              {% for cat in categories %}
+                <button type="button"
+                        class="product-filter-btn text-nowrap {% if cat.product_count == 0 %}disabled{% endif %}"
+                        data-filter="{{ cat.slug }}"
+                        {% if cat.product_count == 0 %}disabled{% endif %}>
+                  {{ cat.name }}
+                </button>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="row g-3 g-md-4 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+      {% for p in products %}
+        <div class="col-12 col-sm-6 col-lg-3 product-card-wrapper" data-category="{{ p.category.slug }}">
+          <article class="product-card h-100" data-product-id="{{ p.slug }}">
+            <div class="product-media">
+              <img src="{{ p.main_image.url }}" alt="{{ p.name }}" class="product-img">
+            </div>
+
+            <div class="d-flex flex-column flex-grow-1 p-3">
+              <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+                <span class="product-pill">{{ p.category.name }}</span>
+                <span class="product-pill product-pill--muted">{{ p.category.get_kind_display }}</span>
+              </div>
+
+              <h3 class="product-title mb-0">
+                <a href="/product-details/{{ p.slug }}/" target="_blank" rel="noopener">
+                  <span class="title-marquee" data-title-marquee>
+                    <span class="title-marquee-track">
+                      <span class="title-marquee-item">{{ p.name }}</span>
+                      <span class="title-marquee-item title-marquee-item-dup" aria-hidden="true">{{ p.name }}</span>
+                    </span>
+                  </span>
+                </a>
+              </h3>
+
+              {% if p.short_details %}
+                <div class="product-desc mt-2">
+                  <div class="product-desc-clamp" data-desc-clamp>
+                    {{ p.short_details }}
+                  </div>
+
+                  <div class="collapse mt-1" id="desc-{{ p.id }}">
+                    <div class="pt-1" data-desc-full>
+                      {{ p.short_details }}
+                    </div>
+                  </div>
+
+                  <button class="product-desc-toggle mt-1"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#desc-{{ p.id }}"
+                          aria-expanded="false"
+                          aria-controls="desc-{{ p.id }}"
+                          data-desc-toggle>
+                    <span data-desc-toggle-label>See more…</span>
+                  </button>
+                </div>
+              {% endif %}
+
+              <div class="product-divider my-3"></div>
+
+              <div class="mt-auto">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <span class="product-price">${{ p.final_price|floatformat:2 }}</span>
+                  {% if p.quantity|default:0|add:0 > 0 %}
+                    <span class="stock-status stock-in">In stock</span>
+                  {% else %}
+                    <span class="stock-status stock-out">Out of stock</span>
+                  {% endif %}
+                </div>
+
+                <div class="d-grid gap-2">
+                  <button type="button"
+                          class="btn btn-primary btn-sm js-add-to-cart"
+                          {% if p.quantity == 0 %}disabled{% endif %}
+                          data-product="{{ p.id }}"
+                          data-cart-add-url="{% url 'cart_add' %}"
+                          data-cart-summary-url="{% url 'cart_summary' %}">
+                    <i class="fa-solid fa-cart-plus me-2"></i>Add to cart
+                  </button>
+
+                  <a href="/product-details/{{ p.slug }}/"
+                     target="_blank"
+                     rel="noopener"
+                     class="btn btn-outline-primary btn-sm">
+                    <i class="fa-solid fa-eye me-2"></i>See details <i class="fa-solid fa-arrow-right ms-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      {% empty %}
+        <div class="col-12">
+          <div class="d-flex justify-content-center align-items-center text-center py-5">
+            <div class="fade-in-up fade-in">
+              <h4 class="mb-2">No Products Available</h4>
+              <p class="mb-0 opacity-75">Please check back soon.</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="row mt-3 mt-md-4">
+      <div class="col-12 text-center">
+        <button type="button" class="btn btn-outline-primary btn-sm px-4 products-toggle-btn d-none">
+          <span class="products-toggle-label">See more products</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,422 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}All Programs{% endblock %}
+
+{% block extra_head %}
+<style>
+  /* No peeking outside the slider viewport */
+  .fsmd-slider-shell .owl-stage-outer{
+    overflow: hidden;
+    padding: 10px 8px; /* gives room for center scale without overflow */
+  }
+
+  /* Equal-height items */
+  .fsmd-carousel .owl-item{ display:flex; }
+  .fsmd-carousel .fsmd-slide{ display:flex; height:100%; }
+  .fsmd-carousel .fsmd-slide-wrap{
+    width:100%;
+    margin:0 auto;
+    height:100%;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+    transform-origin:center center;
+  }
+
+  /* Fixed card size */
+  .fsmd-carousel .fsmd-cat-card{
+    width:100%;
+    height:100%;
+    min-height:460px;
+  }
+
+  .fsmd-carousel .fsmd-card-body{ display:flex; flex-direction:column; height:100%; }
+  .fsmd-carousel .fsmd-card-cta{ margin-top:auto; }
+
+  .fsmd-carousel .fsmd-card-desc{
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  /* Keep cards from getting huge when <=3 total */
+  .fsmd-carousel .fsmd-slide-wrap{ max-width:560px; }
+  @media (min-width:768px){ .fsmd-carousel .fsmd-slide-wrap{ max-width:420px; } }
+  @media (min-width:992px){ .fsmd-carousel .fsmd-slide-wrap{ max-width:360px; } }
+
+  /* LG+: middle slightly bigger */
+  @media (min-width:992px){
+    .fsmd-carousel .owl-item.active.center .fsmd-slide-wrap{
+      transform: scale(1.03);
+      z-index:2;
+    }
+    .fsmd-carousel .owl-item.active:not(.center) .fsmd-slide-wrap{
+      transform: scale(.985);
+      opacity:.98;
+    }
+  }
+
+  /* Single item on LG+: smaller and centered (your earlier requirement) */
+  @media (min-width:992px){
+    .fsmd-carousel.fsmd-owl-single .owl-stage{
+      display:flex;
+      justify-content:center;
+    }
+    .fsmd-carousel.fsmd-owl-single .owl-item{ width:auto !important; }
+    .fsmd-carousel.fsmd-owl-single .fsmd-slide-wrap{ max-width:360px; }
+  }
+</style>
+{% endblock extra_head %}
+
+
+{% block content %}
+<section class="py-5">
+  <div class="container py-2 py-lg-4">
+
+    <!-- Header -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-10">
+        <div class="p-4 p-lg-5 bg-white rounded-4 shadow-sm-brand border-brand fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+          <div class="d-flex flex-column flex-md-row align-items-start gap-3 gap-lg-4">
+
+            <div class="flex-shrink-0">
+              <div class="rounded-4 d-inline-flex align-items-center justify-content-center bg-muted border-brand"
+                   style="width:56px;height:56px;">
+                <i class="fa-solid fa-stethoscope fs-4 text-primary-accent"></i>
+              </div>
+            </div>
+
+            <div class="flex-grow-1">
+              <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                <span class="badge rounded-pill bg-primary-accent">Programs &amp; Services • FullScopeMD</span>
+                <span class="badge rounded-pill bg-muted border-brand text-primary-accent">Clinician-led</span>
+                <span class="badge rounded-pill bg-muted border-brand text-primary-accent">Telemedicine</span>
+              </div>
+
+              <h1 class="mb-2">All Programs &amp; Services</h1>
+              <p class="mb-0 text-body-sm">
+                Browse our full catalog of telemedicine programs and services, and explore clinical products that support your care plan.
+              </p>
+
+              <div class="d-flex flex-wrap gap-2 mt-3">
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
+                  Appointment <i class="fa-solid fa-arrow-right ms-2 icon-solid"></i>
+                </a>
+                <a href="{% url 'telehealth_consent' %}" class="btn btn-outline-primary btn-sm">Telehealth Consent</a>
+                <a href="{% url 'privacy_policy' %}" class="btn btn-outline-primary btn-sm">Privacy Policy</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRAMS -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-12 col-lg-10">
+
+        <div class="d-flex align-items-center justify-content-between flex-nowrap gap-2 mb-2 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+          <h2 class="mb-0" style="font-size: var(--font-size-h3);">
+            <i class="fa-solid fa-layer-group text-primary-accent me-2"></i>
+            Programs
+          </h2>
+
+          <div class="d-flex gap-2 flex-shrink-0 d-lg-none">
+            <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn"
+                    type="button" data-slider="programs" data-dir="prev" aria-label="Previous program">
+              <i class="fa-solid fa-chevron-left icon-solid"></i>
+            </button>
+            <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn"
+                    type="button" data-slider="programs" data-dir="next" aria-label="Next program">
+              <i class="fa-solid fa-chevron-right icon-solid"></i>
+            </button>
+          </div>
+        </div>
+
+        {% if program_slides %}
+          <div class="row align-items-center gx-3 gx-lg-5 flex-lg-nowrap fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+            <div class="col-auto d-none d-lg-flex align-items-center">
+              <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn"
+                      type="button" data-slider="programs" data-dir="prev" aria-label="Previous program">
+                <i class="fa-solid fa-chevron-left icon-solid"></i>
+              </button>
+            </div>
+
+            <div class="col">
+              <div class="fsmd-slider-shell px-1 px-lg-2">
+                <div id="programsCarousel" class="fsmd-carousel owl-carousel">
+                  {% for slide in program_slides %}
+                    {% for c in slide %}
+                      <div class="fsmd-slide">
+                        <div class="fsmd-slide-wrap h-100">
+                          <article class="fsmd-cat-card bg-white rounded-4 shadow-sm-brand border-brand overflow-hidden h-100 d-flex flex-column hover-lift">
+
+                            {% if c.image %}
+                              <div class="ratio ratio-16x9 bg-muted">
+                                <img src="{{ c.image.url }}" alt="{{ c.name }}"
+                                     class="w-100 h-100 object-fit-cover" loading="lazy">
+                              </div>
+                            {% else %}
+                              <div class="ratio ratio-16x9 bg-muted d-flex align-items-center justify-content-center">
+                                <div class="icon-button icon-button--gradient-border" style="width:64px;height:64px;">
+                                  <i class="fa-solid fa-layer-group"></i>
+                                </div>
+                              </div>
+                            {% endif %}
+
+                            <div class="p-3 p-md-4 fsmd-card-body">
+                              <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="badge rounded-pill bg-muted border-brand text-primary-accent">
+                                  {{ c.get_kind_display }}
+                                </span>
+                                <span class="text-caption-sm text-muted">
+                                  <i class="fa-solid fa-shield-heart text-primary-accent me-1"></i>Telemedicine
+                                </span>
+                              </div>
+
+                              <h3 class="mb-2" style="font-size: var(--font-size-h3);">{{ c.name }}</h3>
+
+                              {% if c.short_description %}
+                                <p class="mb-3 text-body-sm fsmd-card-desc">{{ c.short_description|striptags }}</p>
+                              {% else %}
+                                <p class="mb-3 text-body-sm fsmd-card-desc">Program overview coming soon.</p>
+                              {% endif %}
+
+                              <div class="d-grid gap-2 fsmd-card-cta">
+                                <a href="{% url 'program_detail' c.slug %}" class="btn btn-outline-primary btn-sm">
+                                  Explore <i class="fa-solid fa-arrow-right ms-2"></i>
+                                </a>
+                                <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
+                                  Book Appointment <i class="fa-solid fa-calendar-check ms-2 icon-solid"></i>
+                                </a>
+                              </div>
+                            </div>
+
+                          </article>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-auto d-none d-lg-flex align-items-center">
+              <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn"
+                      type="button" data-slider="programs" data-dir="next" aria-label="Next program">
+                <i class="fa-solid fa-chevron-right icon-solid"></i>
+              </button>
+            </div>
+          </div>
+        {% else %}
+          <div class="bg-white rounded-4 border-brand shadow-sm-brand p-4 text-center fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+            <h3 class="mb-2" style="font-size: var(--font-size-h3);">No programs available right now.</h3>
+            <p class="mb-0 text-body-sm">Please check back soon for updates.</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-12 col-lg-10">
+
+        <div class="d-flex align-items-center justify-content-between flex-nowrap gap-2 mb-2 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+          <h2 class="mb-0" style="font-size: var(--font-size-h3);">
+            <i class="fa-solid fa-briefcase-medical text-primary-accent me-2"></i>
+            Services
+          </h2>
+
+          <div class="d-flex gap-2 flex-shrink-0 d-lg-none">
+            <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn"
+                    type="button" data-slider="services" data-dir="prev" aria-label="Previous service">
+              <i class="fa-solid fa-chevron-left icon-solid"></i>
+            </button>
+            <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn"
+                    type="button" data-slider="services" data-dir="next" aria-label="Next service">
+              <i class="fa-solid fa-chevron-right icon-solid"></i>
+            </button>
+          </div>
+        </div>
+
+        {% if services %}
+          <div class="row align-items-center gx-3 gx-lg-5 flex-lg-nowrap fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+            <div class="col-auto d-none d-lg-flex align-items-center">
+              <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn"
+                      type="button" data-slider="services" data-dir="prev" aria-label="Previous service">
+                <i class="fa-solid fa-chevron-left icon-solid"></i>
+              </button>
+            </div>
+
+            <div class="col">
+              <div class="fsmd-slider-shell px-1 px-lg-2">
+                <div id="servicesCarousel" class="fsmd-carousel owl-carousel">
+                  {% for c in services %}
+                    <div class="fsmd-slide">
+                      <div class="fsmd-slide-wrap h-100">
+                        <article class="fsmd-cat-card bg-white rounded-4 shadow-sm-brand border-brand overflow-hidden h-100 d-flex flex-column hover-lift">
+
+                          {% if c.image %}
+                            <div class="ratio ratio-16x9 bg-muted">
+                              <img src="{{ c.image.url }}" alt="{{ c.name }}"
+                                   class="w-100 h-100 object-fit-cover" loading="lazy">
+                            </div>
+                          {% else %}
+                            <div class="ratio ratio-16x9 bg-muted d-flex align-items-center justify-content-center">
+                              <div class="icon-button icon-button--gradient-border" style="width:64px;height:64px;">
+                                <i class="fa-solid fa-briefcase-medical"></i>
+                              </div>
+                            </div>
+                          {% endif %}
+
+                          <div class="p-3 p-md-4 fsmd-card-body">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                              <span class="badge rounded-pill bg-muted border-brand text-primary-accent">
+                                {{ c.get_kind_display }}
+                              </span>
+                              <span class="text-caption-sm text-muted">
+                                <i class="fa-solid fa-shield-heart text-primary-accent me-1"></i>Telemedicine
+                              </span>
+                            </div>
+
+                            <h3 class="mb-2" style="font-size: var(--font-size-h3);">{{ c.name }}</h3>
+
+                            {% if c.short_description %}
+                              <p class="mb-3 text-body-sm fsmd-card-desc">{{ c.short_description|striptags }}</p>
+                            {% else %}
+                              <p class="mb-3 text-body-sm fsmd-card-desc">Service overview coming soon.</p>
+                            {% endif %}
+
+                            <div class="d-grid gap-2 fsmd-card-cta">
+                              <a href="{% url 'program_detail' c.slug %}" class="btn btn-outline-primary btn-sm">
+                                Learn More <i class="fa-solid fa-arrow-right ms-2"></i>
+                              </a>
+                              <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
+                                Contact / Schedule <i class="fa-solid fa-arrow-right ms-2 icon-solid"></i>
+                              </a>
+                            </div>
+                          </div>
+
+                        </article>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-auto d-none d-lg-flex align-items-center">
+              <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn"
+                      type="button" data-slider="services" data-dir="next" aria-label="Next service">
+                <i class="fa-solid fa-chevron-right icon-solid"></i>
+              </button>
+            </div>
+          </div>
+        {% else %}
+          <div class="bg-white rounded-4 border-brand shadow-sm-brand p-4 text-center fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+            <h3 class="mb-2" style="font-size: var(--font-size-h3);">No services listed yet.</h3>
+            <p class="mb-0 text-body-sm">We’ll add more service options soon.</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- FEATURED PRODUCTS -->
+    <div class="mt-5 fade-in-up fade-in delay-4 fade-blocked scroll-animate">
+      {% include "homepage/products.html" %}
+    </div>
+
+  </div>
+</section>
+{% endblock content %}
+
+{% block extra_scripts %}
+<script>
+(function ($) {
+  function initFsmdOwl(carouselId, key) {
+    var $el = $("#" + carouselId);
+    if (!$el.length) return;
+
+    var $arrows = $('[data-slider="' + key + '"][data-dir]');
+    var baseCount = $el.children(".fsmd-slide").length;
+
+    function setArrowsEnabled(enabled) {
+      $arrows.each(function () {
+        this.disabled = !enabled;
+        this.setAttribute("aria-disabled", (!enabled).toString());
+      });
+    }
+
+    if (baseCount <= 1) {
+      $el.addClass("fsmd-owl-single");
+      setArrowsEnabled(false);
+
+      $el.owlCarousel({
+        items: 1,
+        center: true,
+        loop: false,
+        rewind: false,
+        margin: 16,
+        dots: false,
+        nav: false,
+        mouseDrag: false,
+        touchDrag: false,
+        pullDrag: false
+      });
+      return;
+    }
+
+    // Infinite behavior:
+    // - true "loop" only when > 3
+    // - otherwise "rewind" gives wrap-around without peeking
+    var canLoopLg = baseCount > 3;
+
+    $el.owlCarousel({
+      margin: 16,
+      dots: false,
+      nav: false,
+      slideBy: 1,
+      smartSpeed: 450,
+      dragEndSpeed: 450,
+
+      responsive: {
+        0: {
+          items: 1,
+          center: false,
+          loop: baseCount > 1,
+          rewind: true
+        },
+        768: {
+          items: 2,
+          center: false,
+          loop: baseCount > 2,
+          rewind: true
+        },
+        992: {
+          items: 3,          // ✅ ALWAYS 3 on large screens
+          center: true,       // ✅ centered, middle becomes "center"
+          loop: canLoopLg,    // ✅ infinite when > 3
+          rewind: !canLoopLg  // ✅ wrap-around when <= 3
+        }
+      },
+
+      onInitialized: function () { setArrowsEnabled(baseCount > 1); },
+      onResized: function () { setArrowsEnabled(baseCount > 1); }
+    });
+
+    // Keep your arrows (no change)
+    $arrows.on("click", function () {
+      if (this.disabled) return;
+      var dir = $(this).data("dir");
+      $el.trigger(dir === "next" ? "next.owl.carousel" : "prev.owl.carousel", [450]);
+    });
+  }
+
+  $(function () {
+    initFsmdOwl("programsCarousel", "programs");
+    initFsmdOwl("servicesCarousel", "services");
+  });
+})(jQuery);
+</script>
+{% endblock extra_scripts %}

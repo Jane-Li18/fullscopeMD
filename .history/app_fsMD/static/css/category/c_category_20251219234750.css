@@ -1,0 +1,159 @@
+.fsmd-slider-shell{position:relative}.fsmd-slider-shell .owl-stage-outer{overflow:hidden!important;padding:20px 0}.fsmd-carousel .owl-stage{display:flex!important}.fsmd-carousel .owl-item{float:none!important;display:flex!important}.fsmd-carousel .fsmd-slide{display:flex;height:100%;width:100%}.fsmd-carousel .fsmd-slide-wrap{width:100%;height:100%;transition:transform var(--transition-fast),opacity var(--transition-fast);transform-origin:center center}.fsmd-carousel .fsmd-cat-card{width:100%;min-height:460px}.fsmd-carousel .fsmd-card-body{display:flex;flex-direction:column;height:100%}.fsmd-carousel .fsmd-card-cta{margin-top:auto}.fsmd-carousel .fsmd-card-desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}@media (min-width:992px){.fsmd-carousel .owl-item.active.center .fsmd-slide-wrap{transform:scale(1.035);z-index:2}.fsmd-carousel .owl-item.active:not(.center) .fsmd-slide-wrap{transform:scale(.985);opacity:.98}}@media (min-width:992px){.fsmd-carousel.fsmd-owl-single .owl-stage{justify-content:center}.fsmd-carousel.fsmd-owl-single .owl-item{width:auto!important}.fsmd-carousel.fsmd-owl-single .fsmd-slide-wrap{max-width:360px}}.product-mini-thumb{width:64px;height:64px;object-fit:cover;display:block}.product-thumb-btn{cursor:pointer}.qty-stepper{max-width:190px}.qty-stepper .form-control{width:74px;min-width:64px}.qty-stepper input[type=number]::-webkit-outer-spin-button,.qty-stepper input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.qty-stepper input[type=number]{-moz-appearance:textfield}
+
+.h-prdcts-section{background-color:var(--primary-bg)}
+.product-filters{-webkit-overflow-scrolling:touch}
+
+.product-filter-btn{
+  border:1px solid var(--secondary-border);
+  background-color:var(--primary-bg);
+  color:var(--primary-text);
+  border-radius:var(--radius-pill);
+  padding:.5rem 1.05rem;
+  font-weight:600;
+  font-size:var(--font-size-body-sm);
+  transition:transform var(--transition-fast),box-shadow var(--transition-fast),border-color var(--transition-fast),background-color var(--transition-fast),color var(--transition-fast);
+  white-space:nowrap
+}
+.product-filter-btn:hover{
+  border-color:rgba(var(--primary-accent-rgb),.55);
+  background-color:var(--hover-tint);
+  transform:translateY(-1px);
+  box-shadow:var(--shadow-elevated);
+  color:var(--primary-accent)
+}
+.product-filter-btn:focus-visible{
+  box-shadow:var(--focus-ring),var(--shadow-elevated);
+  border-color:rgba(var(--primary-accent-rgb),.65)
+}
+.product-filter-btn.active{
+  border-color:rgba(var(--primary-accent-rgb),.65);
+  background-color:var(--hover-tint);
+  color:var(--primary-accent);
+  box-shadow:var(--focus-ring)
+}
+
+.product-card{
+  background-color:var(--primary-bg);
+  border:1px solid var(--secondary-border);
+  border-radius:var(--radius-lg);
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+  transition:transform var(--transition-fast),box-shadow var(--transition-fast),border-color var(--transition-fast),background-color var(--transition-fast);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column
+}
+.product-card:hover,
+.product-card:focus-within{
+  transform:translateY(-3px);
+  border-color:rgba(var(--primary-accent-rgb),.55);
+  box-shadow:var(--shadow-elevated)
+}
+
+.product-media{
+  background-color:var(--secondary-bg);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+.product-img{
+  width:100%;
+  height:112px;
+  object-fit:contain;
+  display:block;
+  transition:transform var(--transition-normal)
+}
+@media (min-width:992px){
+  .product-img{height:120px}
+}
+.product-card:hover .product-img,
+.product-card:focus-within .product-img{transform:scale(1.01)}
+
+.product-pill{
+  display:inline-flex;
+  align-items:center;
+  padding:.28rem .65rem;
+  border-radius:var(--radius-pill);
+  border:1px solid var(--secondary-border);
+  background-color:var(--secondary-bg);
+  color:var(--primary-accent);
+  font-size:var(--font-size-caption);
+  line-height:1;
+  white-space:nowrap;
+  max-width:100%
+}
+.product-pill--muted{color:var(--secondary-text);background-color:var(--secondary-bg)}
+
+.product-title{
+  font-size:calc(var(--font-size-body) * 1.06);
+  line-height:1.25;
+  margin:0;
+  font-weight:800
+}
+.product-title a{color:var(--primary-text);display:block}
+.product-card:hover .product-title a,
+.product-card:focus-within .product-title a{color:var(--primary-accent)}
+
+.title-marquee{
+  display:block;
+  max-width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  position:relative
+}
+.title-marquee-track{
+  display:inline-flex;
+  gap:2rem;
+  align-items:baseline;
+  will-change:transform
+}
+.title-marquee-item{display:inline-block;white-space:nowrap}
+.title-marquee-item-dup{display:none}
+.title-marquee.is-marquee .title-marquee-item-dup{display:inline-block}
+.title-marquee.is-marquee .title-marquee-track{animation:prdcts-marquee 14s linear infinite}
+@keyframes prdcts-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){
+  .title-marquee.is-marquee .title-marquee-track{animation:none}
+  .product-card,.product-img{transition:none}
+}
+
+.product-desc{
+  font-size:var(--font-size-body-sm);
+  color:var(--secondary-text)
+}
+.product-desc-clamp{
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden
+}
+.product-desc-toggle{
+  display:inline-flex;
+  gap:.4rem;
+  align-items:center;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--primary-accent);
+  font-weight:700;
+  text-decoration:none
+}
+.product-desc-toggle:hover{color:var(--secondary-accent)}
+
+.product-divider{
+  height:1px;
+  background-color:var(--secondary-border);
+  width:100%
+}
+
+.product-price{
+  font-weight:900;
+  color:var(--primary-text);
+  letter-spacing:.01em
+}
+.product-card:hover .product-price,
+.product-card:focus-within .product-price{color:var(--primary-accent)}
+
+.stock-status{font-size:var(--font-size-caption)}
+.stock-in{color:var(--primary-accent)}
+.stock-out{color:rgba(220,53,69,.85)}

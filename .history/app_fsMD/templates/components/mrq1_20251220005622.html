@@ -1,0 +1,15 @@
+{# components/mrq1.html #}
+<section class="marquee-section bg-accent-gradient-animated d-flex align-items-center min-vh-50 mb-5">
+  <div class="marquee marquee--ltr marquee--hover-pause w-100 py-3">
+    <div class="marquee-track">
+
+      {# Expect `marquee_categories` to be prebuilt in the view (already filtered to is_active=True) #}
+      {% if marquee_categories %}
+        {% for category in marquee_categories %}
+          <span class="marquee-item text-body-xl">{{ category.name }}</span>
+        {% endfor %}
+      {% endif %}
+
+    </div>
+  </div>
+</section>

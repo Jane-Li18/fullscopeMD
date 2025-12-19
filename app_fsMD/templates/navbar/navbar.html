@@ -49,7 +49,7 @@
             <ul class="dropdown-menu">
               {% for c in nav_programs %}
                 <li>
-                  <a class="dropdown-item {% if active_slug == c.slug %}active{% endif %}" href="{% url 'program_detail' c.slug %}">
+                  <a class="dropdown-item {% if active_slug == c.slug %}active{% endif %}" href="{% url 'prgrm_dtls' c.slug %}">
                     {{ c.name }}
                   </a>
                 </li>
@@ -59,11 +59,11 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
+          <a class="nav-link" href="{% url 'faqs' %}">FAQ</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+          <a class="nav-link" href="{% url 'blgs_updts' %}">Blog</a>
         </li>
       </ul>
 
@@ -119,7 +119,7 @@
             <ul class="list-unstyled ps-3">
               {% for c in nav_programs %}
                 <li>
-                  <a class="nav-link py-1 {% if active_slug == c.slug %}active{% endif %}" href="{% url 'program_detail' c.slug %}">
+                  <a class="nav-link py-1 {% if active_slug == c.slug %}active{% endif %}" href="{% url 'prgrm_dtls' c.slug %}">
                     {{ c.name }}
                   </a>
                 </li>
@@ -130,11 +130,11 @@
       </div>
 
       <div class="accordion-item border-0">
-        <a class="nav-link px-2 py-2" href="{% url 'faq' %}">FAQ</a>
+        <a class="nav-link px-2 py-2" href="{% url 'faqs' %}">FAQ</a>
       </div>
 
       <div class="accordion-item border-0">
-        <a class="nav-link px-2 py-2" href="{% url 'blog' %}">Blog</a>
+        <a class="nav-link px-2 py-2" href="{% url 'blgs_updts' %}">Blog</a>
       </div>
 
     </div>

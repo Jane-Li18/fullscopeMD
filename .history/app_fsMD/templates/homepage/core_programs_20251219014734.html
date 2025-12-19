@@ -1,0 +1,122 @@
+{% load static %}
+
+<section class="feature-programs-section d-flex align-items-center min-vh-100">
+  <div class="container py-5">
+
+    <!-- Heading -->
+    <div class="row mb-4 mb-lg-5 fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+      <div class="col-12 text-center">
+        <h2 class="mb-3">Explore Our Core Programs</h2>
+        <p class="mb-0">
+          Evidence-based medical care designed around your health goals, delivered with clarity,
+          clinical expertise, and ongoing support.
+        </p>
+      </div>
+    </div>
+
+    <!-- Bars that slide open -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+
+        <div class="program-row d-flex flex-nowrap gap-3 justify-content-center">
+
+          {% if categories %}
+            {% for category in categories %}
+
+              <div class="program-item {% if forloop.first %}active{% endif %} fade-in-up fade-in fade-blocked scroll-animate"
+                   style="animation-delay: {{ forloop.counter|add:1 }}00ms;">
+
+                <button type="button"
+                        class="program-bar"
+                        {% if category.image %}
+                          style="--program-img: url('{{ category.image.url }}')"
+                        {% endif %}>
+                  <span class="program-bar-label text-body-sm">{{ category.name }}</span>
+
+                  <span class="program-bar-index text-caption-sm">
+                    {{ forloop.counter|stringformat:"02d" }}
+                  </span>
+
+                  <span class="program-bar-icon">
+                    <i class="fa-solid fa-eye"></i>
+                  </span>
+                </button>
+
+                <div class="program-panel">
+                  <div class="program-panel-inner accordion-anim {% if not category.image %}no-side-image{% endif %}">
+
+                    {% if category.image %}
+                      <div class="program-panel-image">
+                        <img src="{{ category.image.url }}"
+                             alt="{{ category.name }}"
+                             class="img-fluid w-100 h-100 object-fit-cover rounded-3">
+                      </div>
+                    {% endif %}
+
+                    <div class="program-panel-body d-flex flex-column">
+
+                      <!-- CONTENT BLOCK (top) -->
+                      <div class="mb-3">
+                        <span class="program-panel-tag d-block mb-1 text-small">
+                          {{ category.name }}
+                        </span>
+
+                        <h3 class="mb-2">{{ category.name }}</h3>
+
+                        {% if category.short_description %}
+                          <p class="mb-3">{{ category.short_description|linebreaksbr }}</p>
+                        {% else %}
+                          <p class="mb-3">
+                            Explore our {{ category.name }} program with provider-guided care and ongoing support.
+                          </p>
+                        {% endif %}
+                      </div>
+
+                      <!-- CTA BLOCK (always at bottom) -->
+                      <div class="program-panel-cta mt-auto pt-1 d-flex flex-column align-items-stretch gap-2">
+                        <a href="#contact-us"
+                           class="btn btn-primary btn-sm d-inline-flex align-items-center gap-2">
+                          Appointment
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="{% url 'program_detail' category.slug %}"
+                           class="btn btn-outline-primary btn-sm d-inline-flex align-items-center gap-2">
+                          Learn More
+                        </a>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            {% endfor %}
+          {% else %}
+            <div class="text-center text-muted py-4">
+              No programs available right now.
+            </div>
+          {% endif %}
+
+        </div>
+
+        <div class="text-center mt-3 fade-in fade-in-down delay-3 fade-blocked scroll-animate">
+          <a href="{% url 'all_programs' %}" class="btn btn-outline-primary px-4 mt-3">
+            View All Services
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{# OPTIONAL: move this into your main CSS file #}
+<style>
+  /* If your panel layout uses grid/columns, this prevents “empty image space” when no image exists */
+  .program-panel-inner.no-side-image {
+    grid-template-columns: 1fr !important;
+  }
+</style>

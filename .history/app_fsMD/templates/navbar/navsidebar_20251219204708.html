@@ -1,0 +1,252 @@
+{# templates/navbar/navsidebar.html #}
+{% load static %}
+
+<style>
+  /* Scoped styles so it won't affect other pages */
+  #fsmdSideRail{
+    position: fixed;
+    left: 1rem;
+    top: 250px; /* below your fixed navbar */
+    z-index: 1040;
+    width: 56px;
+    border-radius: 999px;
+    background: var(--primary-bg);
+    border: 1px solid var(--secondary-border);
+    box-shadow: var(--shadow-elevated);
+    padding: .5rem .35rem;
+    display: none;
+    gap: .5rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (min-width: 992px){
+    #fsmdSideRail{ display: flex; }
+  }
+
+  /* Small helper so staggered buttons animate nicely */
+  #fsmdSideRail .icon-button{ opacity: 0; } /* will be set visible by animation */
+
+  /* Thin scrollbar (scoped to this offcanvas sidebar only) */
+#fsmdSidebarPanel .offcanvas-body{
+  scrollbar-width: thin;                 /* Firefox */
+  scrollbar-color: var(--secondary-border) transparent;
+}
+
+/* Chrome / Edge / Safari */
+#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar{
+  width: 6px;
+}
+#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-track{
+  background: transparent;
+}
+#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-thumb{
+  background: var(--secondary-border);
+  border-radius: 999px;
+}
+#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-thumb:hover{
+  background: var(--primary-border, var(--secondary-border));
+}
+
+</style>
+
+{# Desktop: slim icon rail (does not push content) #}
+<div id="fsmdSideRail"
+     class="fade-in fade-in-left delay-2 fade-blocked"
+     aria-label="Quick sidebar">
+  <button class="icon-button shadow-brand fade-in fade-in-left delay-2 fade-blocked"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#fsmdSidebarPanel"
+          aria-controls="fsmdSidebarPanel"
+          aria-label="Open sidebar">
+    <i class="fa-solid fa-bars-staggered"></i>
+  </button>
+
+  <a class="icon-button fade-in fade-in-left delay-3 fade-blocked"
+     href="{{ facebook_url|default:'#' }}"
+     target="_blank" rel="noopener"
+     aria-label="Facebook">
+    <i class="fa-brands fa-facebook-f"></i>
+  </a>
+
+  <a class="icon-button fade-in fade-in-left delay-4 fade-blocked"
+     href="{{ instagram_url|default:'#' }}"
+     target="_blank" rel="noopener"
+     aria-label="Instagram">
+    <i class="fa-brands fa-instagram"></i>
+  </a>
+
+  <a class="icon-button fade-in fade-in-left delay-5 fade-blocked"
+     href="{{ tiktok_url|default:'#' }}"
+     target="_blank" rel="noopener"
+     aria-label="TikTok">
+    <i class="fa-brands fa-tiktok"></i>
+  </a>
+</div>
+
+{# Mobile: floating open button only #}
+<div class="position-fixed d-lg-none fade-in fade-in-up delay-2 fade-blocked"
+     style="left: 1rem; bottom: 1rem; z-index: 1045;">
+  <button class="icon-button shadow-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#fsmdSidebarPanel"
+          aria-controls="fsmdSidebarPanel"
+          aria-label="Open sidebar">
+    <i class="fa-solid fa-bars-staggered"></i>
+  </button>
+</div>
+
+{# Full sidebar panel (offcanvas overlay - does not affect layout) #}
+<aside class="offcanvas offcanvas-start offcanvas-fsmd"
+       tabindex="-1"
+       id="fsmdSidebarPanel"
+       aria-labelledby="fsmdSidebarPanelLabel"
+       style="--bs-offcanvas-width: 360px;">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title d-flex align-items-center brand-title fade-in fade-in-down delay-1 fade-blocked"
+        id="fsmdSidebarPanelLabel">
+      <img src="{% static 'images/favicon.ico' %}" alt="Full Scope MD logo" class="logo-icon-sm me-2">
+      <span class="text-primary-accent">Full</span>
+      <span class="text-secondary-accent">Scope</span>
+      <span class="text-tertiary-accent">MD</span>
+    </h5>
+
+    <button type="button"
+            class="btn-close fade-in fade-in-down delay-2 fade-blocked"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body d-flex flex-column gap-3">
+
+    <section class="bg-muted border-brand rounded-3 p-3 fade-in fade-in-up delay-2 fade-blocked">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <div class="text-small text-uppercase" style="letter-spacing:.08em;">Navigation Bar</div>
+        <span class="badge rounded-pill bg-accent-gradient-animated">Side Menu</span>
+      </div>
+
+      <ul class="mb-0">
+        <li class="fade-in fade-in-up delay-2 fade-blocked">
+          <a class="d-flex align-items-center gap-2 py-1"
+             href="{{ facebook_url|default:'#' }}"
+             target="_blank" rel="noopener">
+            <i class="fa-brands fa-facebook-f icon-sm icon-gradient"></i><span>Facebook</span>
+          </a>
+        </li>
+        <li class="fade-in fade-in-up delay-3 fade-blocked">
+          <a class="d-flex align-items-center gap-2 py-1"
+             href="{{ instagram_url|default:'#' }}"
+             target="_blank" rel="noopener">
+            <i class="fa-brands fa-instagram icon-sm icon-gradient"></i><span>Instagram</span>
+          </a>
+        </li>
+        <li class="mb-0 fade-in fade-in-up delay-4 fade-blocked">
+          <a class="d-flex align-items-center gap-2 py-1"
+             href="{{ tiktok_url|default:'#' }}"
+             target="_blank" rel="noopener">
+            <i class="fa-brands fa-tiktok icon-sm icon-gradient"></i><span>Tiktok</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="border-brand rounded-3 p-3 fade-in fade-in-up delay-3 fade-blocked">
+      <h6 class="mb-2">
+        <i class="fa-solid fa-shield-heart me-2 icon-gradient"></i>
+        Clinician-led Telemedicine
+      </h6>
+      <p class="mb-0 text-body-sm">
+        FullScopeMD is a modern, clinician led telemedicine platform providing accessible care across weight management,
+        hair loss, peptide therapy, wellness, and primary care support. Care is delivered safely, securely, and
+        conveniently online.
+      </p>
+    </section>
+
+    <section class="border-brand rounded-3 p-3 shadow-sm-brand fade-in fade-in-up delay-4 fade-blocked">
+      <h6 class="mb-2">
+        <i class="fa-solid fa-headset me-2 icon-gradient"></i>
+        Contact Us
+      </h6>
+
+      <div class="d-grid gap-2">
+        <a class="d-flex align-items-center gap-2 fade-in fade-in-up delay-2 fade-blocked"
+           href="mailto:{{ contact_email|default:'support@fullscopemd.com' }}">
+          <i class="fa-regular fa-envelope icon-sm"></i>
+          <span>{{ contact_email|default:"support@fullscopemd.com" }}</span>
+        </a>
+
+        <a class="d-flex align-items-center gap-2 fade-in fade-in-up delay-3 fade-blocked"
+           href="tel:{{ contact_phone|default:'+10000000000' }}">
+          <i class="fa-solid fa-phone icon-sm"></i>
+          <span>{{ contact_phone_display|default:"+1 (000) 000-0000" }}</span>
+        </a>
+      </div>
+
+      <hr class="my-3">
+
+      {# Newsletter: button under textbox #}
+      <form class="d-grid gap-2 fade-in fade-in-up delay-4 fade-blocked"
+            method="post"
+            action="{{ ghl_newsletter_action|default:'#' }}">
+        {% csrf_token %}
+
+        <label class="form-label mb-0" for="sidebarNewsletterEmail">
+          Newsletter <span class="text-small">(enter email then submit)</span>
+        </label>
+
+        <div class="input-group">
+          <span class="input-group-text" aria-hidden="true">
+            <i class="fa-regular fa-paper-plane"></i>
+          </span>
+          <input id="sidebarNewsletterEmail"
+                 name="email"
+                 type="email"
+                 class="form-control"
+                 placeholder="you@email.com"
+                 autocomplete="email"
+                 required>
+        </div>
+
+        <button class="btn btn-primary w-100" type="submit">Submit</button>
+
+        <div class="form-text">
+          We’ll only send clinically relevant updates and service announcements.
+        </div>
+      </form>
+    </section>
+
+    <section class="mt-auto border-brand rounded-3 p-3 fade-in fade-in-up delay-5 fade-blocked">
+      <h6 class="mb-2">
+        <i class="fa-solid fa-share-nodes me-2 icon-gradient"></i>
+        Follow Us
+      </h6>
+
+      <div class="d-flex align-items-center gap-2">
+        <a class="icon-button fade-in fade-in-up delay-2 fade-blocked"
+           href="{{ facebook_url|default:'#' }}"
+           target="_blank" rel="noopener"
+           aria-label="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a class="icon-button fade-in fade-in-up delay-3 fade-blocked"
+           href="{{ instagram_url|default:'#' }}"
+           target="_blank" rel="noopener"
+           aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a class="icon-button fade-in fade-in-up delay-4 fade-blocked"
+           href="{{ tiktok_url|default:'#' }}"
+           target="_blank" rel="noopener"
+           aria-label="TikTok">
+          <i class="fa-brands fa-tiktok"></i>
+        </a>
+      </div>
+
+      <small class="d-block mt-3 text-caption-sm fade-in fade-in-up delay-5 fade-blocked">
+        © {% now "Y" %} FullScopeMD. All rights reserved.
+      </small>
+    </section>
+
+  </div>
+</aside>

@@ -1,0 +1,71 @@
+<style>
+  /* Strict: no peeking outside */
+  .fsmd-slider-shell { position: relative; }
+  .fsmd-slider-shell .owl-stage-outer{
+    overflow: hidden !important;
+    padding: 20px 0; 
+  }
+
+  /* Use flex stage for equal height (prevents uneven card heights) */
+  .fsmd-carousel .owl-stage{
+    display: flex !important;
+  }
+  .fsmd-carousel .owl-item{
+    float: none !important;
+    display: flex !important;
+  }
+  .fsmd-carousel .fsmd-slide{
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+  .fsmd-carousel .fsmd-slide-wrap{
+    width: 100%;
+    height: 100%;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+    transform-origin: center center;
+  }
+
+  /* Fixed, consistent card sizing */
+  .fsmd-carousel .fsmd-cat-card{
+    width: 100%;
+    min-height: 460px;
+  }
+
+  /* Consistent body + CTA */
+  .fsmd-carousel .fsmd-card-body{ display:flex; flex-direction:column; height:100%; }
+  .fsmd-carousel .fsmd-card-cta{ margin-top:auto; }
+
+  /* Clamp description */
+  .fsmd-carousel .fsmd-card-desc{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* LG+: center item slightly bigger (still clipped inside stage-outer) */
+  @media (min-width: 992px){
+    .fsmd-carousel .owl-item.active.center .fsmd-slide-wrap{
+      transform: scale(1.035);
+      z-index: 2;
+    }
+    .fsmd-carousel .owl-item.active:not(.center) .fsmd-slide-wrap{
+      transform: scale(0.985);
+      opacity: .98;
+    }
+  }
+
+  /* 1 item on LG+: keep smaller and centered */
+  @media (min-width: 992px){
+    .fsmd-carousel.fsmd-owl-single .owl-stage{
+      justify-content: center;
+    }
+    .fsmd-carousel.fsmd-owl-single .owl-item{
+      width: auto !important;
+    }
+    .fsmd-carousel.fsmd-owl-single .fsmd-slide-wrap{
+      max-width: 360px;
+    }
+  }
+</style>

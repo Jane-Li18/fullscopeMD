@@ -1,0 +1,301 @@
+{% load static %}
+
+<style>
+  .h-prdcts-section { background-color: var(--primary-bg); }
+
+  .product-filters {
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .product-filter-btn{
+    border:1px solid var(--secondary-border);
+    background-color:var(--primary-bg);
+    color:var(--primary-text);
+    border-radius:var(--radius-pill);
+    padding:.5rem 1.05rem;
+    font-weight:600;
+    font-size:var(--font-size-body-sm);
+    transition:transform var(--transition-fast),box-shadow var(--transition-fast),border-color var(--transition-fast),background-color var(--transition-fast),color var(--transition-fast);
+    white-space:nowrap;
+  }
+  .product-filter-btn:hover{
+    border-color:rgba(var(--primary-accent-rgb),.55);
+    background-color:var(--hover-tint);
+    transform:translateY(-1px);
+    box-shadow:var(--shadow-elevated);
+    color:var(--primary-accent);
+  }
+  .product-filter-btn:focus-visible{
+    box-shadow:var(--focus-ring),var(--shadow-elevated);
+    border-color:rgba(var(--primary-accent-rgb),.65);
+  }
+  .product-filter-btn.active{
+    border-color:rgba(var(--primary-accent-rgb),.65);
+    background-color:var(--hover-tint);
+    color:var(--primary-accent);
+    box-shadow:var(--focus-ring);
+  }
+
+  .product-card{
+    background-color:var(--primary-bg);
+    border:1px solid var(--secondary-border);
+    border-radius:var(--radius-lg);
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+    transition:transform var(--transition-fast),box-shadow var(--transition-fast),border-color var(--transition-fast),background-color var(--transition-fast);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  .product-card:hover,
+  .product-card:focus-within{
+    transform:translateY(-4px);
+    border-color:rgba(var(--primary-accent-rgb),.55);
+    box-shadow:var(--shadow-elevated);
+    background-color:var(--primary-bg);
+  }
+
+  .product-media{
+    position:relative;
+    background-color:var(--secondary-bg);
+    overflow:hidden;
+    aspect-ratio: 4 / 3;
+  }
+  .product-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform var(--transition-normal);
+  }
+  .product-card:hover .product-img,
+  .product-card:focus-within .product-img{
+    transform:scale(1.03);
+  }
+
+  .product-body{
+    padding:1rem 1rem .9rem;
+    display:flex;
+    flex-direction:column;
+    flex:1 1 auto;
+    min-height:0;
+  }
+
+  .product-title{
+    font-size:calc(var(--font-size-h3) * .9);
+    margin:0;
+    line-height:1.25;
+  }
+
+  .title-marquee{
+    position:relative;
+    overflow:hidden;
+    white-space:nowrap;
+  }
+  .title-marquee-track{
+    display:inline-flex;
+    gap:2.25rem;
+    align-items:baseline;
+    transform:translateX(0);
+  }
+  .title-marquee-item{
+    display:inline-block;
+    white-space:nowrap;
+  }
+  .title-marquee-item-dup{ display:none; }
+
+  .title-marquee.is-marquee{
+    -webkit-mask-image:linear-gradient(90deg,transparent, #000 10%, #000 90%, transparent);
+    mask-image:linear-gradient(90deg,transparent, #000 10%, #000 90%, transparent);
+  }
+  .title-marquee.is-marquee .title-marquee-item-dup{ display:inline-block; }
+  .title-marquee.is-marquee .title-marquee-track{
+    animation:prdcts-marquee 12s linear infinite;
+    animation-play-state:paused;
+  }
+  .product-card:hover .title-marquee.is-marquee .title-marquee-track,
+  .product-card:focus-within .title-marquee.is-marquee .title-marquee-track{
+    animation-play-state:running;
+  }
+
+  @keyframes prdcts-marquee{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .title-marquee.is-marquee .title-marquee-track{ animation:none; }
+    .product-card{ transition:none; }
+    .product-img{ transition:none; }
+  }
+
+  .product-title a{
+    color:var(--primary-text);
+    font-weight:700;
+  }
+  .product-card:hover .product-title a,
+  .product-card:focus-within .product-title a{
+    color:var(--primary-accent);
+  }
+
+  .product-category{
+    font-size:var(--font-size-caption);
+    color:var(--secondary-text);
+  }
+
+  .product-footer{
+    margin-top:auto;
+    padding-top:.9rem;
+    border-top:1px solid var(--secondary-border);
+  }
+
+  .product-price{
+    font-weight:800;
+    color:var(--primary-text);
+    letter-spacing:.01em;
+  }
+  .product-card:hover .product-price,
+  .product-card:focus-within .product-price{
+    color:var(--primary-accent);
+  }
+
+  .product-actions .btn{
+    padding:.5rem 1rem;
+    font-size:var(--font-size-body-sm);
+  }
+</style>
+
+<section class="h-prdcts-section d-flex align-items-center min-vh-50">
+  <div class="container py-5">
+
+    <div class="row mb-2 mb-lg-5">
+      <div class="col-12 text-center fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+        <h2 class="mb-2">Featured Clinical Products</h2>
+        <p class="mb-0">
+          Clinically selected products designed to support your treatment plan,
+          enhance results, and elevate your daily care routine.
+        </p>
+      </div>
+    </div>
+
+    {% if categories %}
+      <div class="row mb-4">
+        <div class="col-12 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+          <div class="d-flex justify-content-start justify-content-sm-center">
+            <div class="product-filters d-flex flex-nowrap flex-sm-wrap gap-2 gap-sm-3 overflow-auto w-100 w-sm-auto px-2 py-1">
+              <button type="button" class="product-filter-btn active text-nowrap" data-filter="all">
+                All
+              </button>
+
+              {% for cat in categories %}
+                <button type="button"
+                        class="product-filter-btn text-nowrap {% if cat.product_count == 0 %}disabled{% endif %}"
+                        data-filter="{{ cat.slug }}"
+                        {% if cat.product_count == 0 %}disabled{% endif %}>
+                  {{ cat.name }}
+                </button>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="row g-3 g-md-4 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+      {% for p in products %}
+        <div class="col-12 col-sm-6 col-lg-3 product-card-wrapper" data-category="{{ p.category.slug }}">
+          <article class="product-card h-100" data-product-id="{{ p.slug }}" tabindex="0">
+            <div class="product-media">
+              <img src="{{ p.main_image.url }}" alt="{{ p.name }}" class="product-img">
+            </div>
+
+            <div class="product-body">
+              <h3 class="product-title mb-2">
+                <a href="/product-details/{{ p.slug }}/" target="_blank" rel="noopener" class="d-block">
+                  <span class="title-marquee" data-title-marquee>
+                    <span class="title-marquee-track">
+                      <span class="title-marquee-item">{{ p.name }}</span>
+                      <span class="title-marquee-item title-marquee-item-dup" aria-hidden="true">{{ p.name }}</span>
+                    </span>
+                  </span>
+                </a>
+              </h3>
+
+              <div class="product-category mb-3">{{ p.category.name }}</div>
+
+              <div class="product-footer">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <span class="text-small">Price</span>
+                  <span class="product-price">${{ p.final_price|floatformat:2 }}</span>
+                </div>
+
+                <div class="product-actions d-grid gap-2 d-sm-flex">
+                  <a href="/product-details/{{ p.slug }}/"
+                     target="_blank"
+                     rel="noopener"
+                     class="btn btn-outline-primary btn-sm flex-sm-fill">
+                    See details
+                  </a>
+
+                  <button type="button"
+                          class="btn btn-primary btn-sm js-add-to-cart flex-sm-fill"
+                          {% if p.quantity == 0 %}disabled{% endif %}
+                          data-product="{{ p.id }}"
+                          data-cart-add-url="{% url 'cart_add' %}"
+                          data-cart-summary-url="{% url 'cart_summary' %}">
+                    <i class="fa-solid fa-cart-plus me-2"></i>Add to cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      {% empty %}
+        <div class="col-12">
+          <div class="d-flex justify-content-center align-items-center text-center py-5">
+            <div class="fade-in-up fade-in">
+              <h4 class="mb-2">No Products Available</h4>
+              <p class="mb-0 opacity-75">Please check back soon.</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="row mt-3 mt-md-4">
+      <div class="col-12 text-center">
+        <button type="button" class="btn btn-outline-primary btn-sm px-4 products-toggle-btn d-none">
+          <span class="products-toggle-label">See more products</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  (function () {
+    const applyMarquee = () => {
+      document.querySelectorAll("[data-title-marquee]").forEach(el => {
+        const track = el.querySelector(".title-marquee-track");
+        const first = el.querySelector(".title-marquee-item");
+        if (!track || !first) return;
+        el.classList.remove("is-marquee");
+        const needs = first.scrollWidth > el.clientWidth + 2;
+        if (needs) el.classList.add("is-marquee");
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", applyMarquee);
+    } else {
+      applyMarquee();
+    }
+
+    let t;
+    window.addEventListener("resize", () => {
+      clearTimeout(t);
+      t = setTimeout(applyMarquee, 120);
+    });
+  })();
+</script>

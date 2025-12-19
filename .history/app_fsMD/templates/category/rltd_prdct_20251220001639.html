@@ -1,0 +1,52 @@
+    {% if related_products %}
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="d-flex align-items-center justify-content-between mb-3 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+            <h2 class="h4 mb-0">Related in {{ product.category.name }}</h2>
+            <div class="d-flex gap-2">
+              <button class="btn btn-outline-primary btn-sm" type="button" data-bs-target="#relatedCarousel" data-bs-slide="prev">
+                <i class="fa-solid fa-arrow-left"></i>
+              </button>
+              <button class="btn btn-outline-primary btn-sm" type="button" data-bs-target="#relatedCarousel" data-bs-slide="next">
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="relatedCarousel" class="carousel slide fade-in-up fade-in delay-4 fade-blocked scroll-animate" data-bs-ride="false">
+            <div class="carousel-inner">
+
+              {% for rp in related_products %}
+                {% if forloop.first or forloop.counter0|divisibleby:4 %}
+                  <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="row g-3">
+                {% endif %}
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                  <article class="bg-white border rounded-4 shadow-sm h-100 overflow-hidden hover-lift">
+                    <div class="ratio ratio-1x1 bg-muted">
+                      <img src="{{ rp.main_image.url }}" alt="{{ rp.name }}" class="w-100 h-100 object-fit-cover" loading="lazy">
+                    </div>
+                    <div class="p-3">
+                      <div class="fw-semibold mb-1">{{ rp.name }}</div>
+                      <div class="text-caption-sm mb-2">{{ rp.category.name }}</div>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="fw-semibold">${{ rp.final_price }}</div>
+                        <a href="{% url 'prdct_dtls' rp.slug %}" class="text-body-sm">View</a>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                {% if forloop.last or forloop.counter|divisibleby:4 %}
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    {% endif %}

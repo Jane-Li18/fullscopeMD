@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container py-2 py-lg-4">
+
+    <!-- Header -->
+    <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-2 mb-4">
+      <div class="fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+        <h1 class="h3 mb-1">Secure Cart</h1>
+        <div class="text-body-sm text-muted mb-0">
+          Review your items before checkout. Prescription items require clinician review.
+        </div>
+      </div>
+
+      <div class="fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+        <a href="{% url 'index' %}" class="btn btn-outline-primary btn-sm">
+          <i class="fa-solid fa-arrow-left me-2"></i>Continue shopping
+        </a>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- LEFT: Items -->
+      <div class="col-12 col-lg-8">
+
+        <!-- Telemedicine note -->
+        <div class="rounded-4 border bg-muted p-3 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+          <div class="d-flex gap-2 align-items-start">
+            <span class="icon-button bg-primary-accent" style="width:42px;height:40px;">
+              <i class="fa-solid fa-shield-heart"></i>
+            </span>
+            <div class="text-body-sm">
+              Items marked
+              <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis">Prescription</span>
+              may require consent and clinician approval before fulfillment.
+              <a href="{% url 'telehealth_consent' %}" class="ms-1"><br>View Telehealth Consent</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider my-4"></div>
+
+        {% if cart_items %}
+          <div class="d-grid gap-3">
+            {% for item in cart_items %}
+              <article class="bg-white border rounded-4 shadow-sm p-3 p-md-4 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+                <div class="d-flex gap-3 gap-md-4 align-items-start">
+
+                  <!-- Image -->
+                  <div class="ratio ratio-1x1 rounded-4 overflow-hidden bg-muted border flex-shrink-0"
+                       style="width:84px; max-width:84px;">
+                    <img src="{{ item.product.main_image.url }}"
+                         alt="{{ item.product.name }}"
+                         class="w-100 h-100 object-fit-cover"
+                         loading="lazy">
+                  </div>
+
+                  <!-- Details -->
+                  <div class="flex-grow-1">
+                    <div class="d-flex flex-column flex-md-row align-items-md-start justify-content-between gap-3">
+                      <div>
+                        <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+                          <div class="fw-semibold">{{ item.product.name }}</div>
+
+                          {% if item.product.requires_prescription %}
+                            <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis">Prescription</span>
+                          {% endif %}
+                          {% if item.product.requires_consultation %}
+                            <span class="badge rounded-pill bg-info-subtle text-info-emphasis">Consultation</span>
+                          {% endif %}
+                        </div>
+
+                        <div class="text-caption-sm text-muted mb-2">
+                          {{ item.product.category.name }} • ${{ item.unit_price }} each
+                        </div>
+
+                        {% if item.product.short_details %}
+                          <div class="text-body-sm text-muted">
+                            {{ item.product.short_details|truncatechars:130 }}
+                          </div>
+                        {% endif %}
+                      </div>
+
+                      <!-- Price -->
+                      <div class="text-md-end">
+                        <div class="text-caption-sm text-muted">Line total</div>
+                        <div class="h5 mb-0">${{ item.line_total }}</div>
+                      </div>
+                    </div>
+
+                    <!-- Qty row -->
+                    <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2 mt-3 pt-3 border-top">
+                      <div class="text-body-sm text-muted">
+                        Quantity: <span class="fw-semibold text-body-sm">{{ item.qty }}</span>
+                      </div>
+
+                      <!-- Note: If you want +/- + remove here too, we can wire it to cart_update/cart_remove later -->
+                      <div class="text-caption-sm text-muted">
+                        Adjust quantities from the side cart, or implement controls on this page next.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+
+        {% else %}
+          <div class="bg-white border rounded-4 shadow-sm p-4 p-md-5 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+            <div class="cart-empty-state">
+              <div class="icon-button icon-button--gradient-border mb-2" style="width:56px;height:56px;">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+              <div class="fw-semibold">Your cart is empty</div>
+              <div class="text-body-sm text-muted mb-3">Browse programs and add products when you’re ready.</div>
+
+              <a href="{% url 'index' %}" class="btn btn-primary">
+                <i class="fa-solid fa-bag-shopping me-2"></i>Browse products
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- RIGHT: Summary -->
+      <div class="col-12 col-lg-4">
+        <div class="position-sticky" style="top: 96px;">
+          <aside class="bg-white border rounded-4 shadow-sm p-4 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div class="fw-semibold">Order Summary</div>
+              <span class="badge rounded-pill bg-light text-muted border">Secure</span>
+            </div>
+
+            <div class="text-caption-sm text-muted mb-3">
+              Totals may change based on clinician review, inventory, and applicable discounts.
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center py-2">
+              <div class="text-body-sm text-muted">Subtotal</div>
+              <div class="fw-semibold">$ {{ cart_total|floatformat:2|intcomma }}</div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center py-2 border-top">
+              <div class="text-body-sm text-muted">Estimated total</div>
+              <div class="h5 mb-0">$ {{ cart_total|floatformat:2|intcomma }}</div>
+            </div>
+
+            {% if cart_items %}
+              <!-- ✅ Required checkbox directly above the button -->
+              <div class="mt-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="legalConsent">
+                  <label class="form-check-label text-caption-sm text-muted" for="legalConsent">
+                    I confirm that I am 18 years or older and have read and agreed to the
+                    <a href="{% url 'terms_conditions' %}" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a>,
+                    <a href="{% url 'privacy_policy' %}" target="_blank" rel="noopener noreferrer">Privacy Policy</a>,
+                    <a href="{% url 'telehealth_consent' %}" target="_blank" rel="noopener noreferrer">Telehealth Informed Consent</a>,
+                    <a href="{% url 'hipaa_notice' %}" target="_blank" rel="noopener noreferrer">HIPAA Notice of Privacy Practices</a>,
+                    <a href="{% url 'medical_disclaimer' %}" target="_blank" rel="noopener noreferrer">Medical Disclaimer</a>,
+                    <a href="{% url 'refund_policy' %}" target="_blank" rel="noopener noreferrer">Refund Policy</a>, and
+                    <a href="{% url 'accessibility_statement' %}" target="_blank" rel="noopener noreferrer">Accessibility Statement</a>.
+                    I understand that all services and medications are subject to review and approval by a licensed healthcare provider,
+                    and that payment authorization does not guarantee prescription approval.
+                  </label>
+                </div>
+              </div>
+
+              <!-- ✅ Same button styling; disabled until checked -->
+              <a href="#"
+                 id="checkoutBtn"
+                 class="btn btn-primary w-100 mt-3 disabled"
+                 aria-disabled="true"
+                 tabindex="-1">
+                <i class="fa-solid fa-shield-heart me-2"></i>Proceed to Checkout
+              </a>
+
+              <div class="text-caption-sm text-muted mt-2">
+                By continuing, you confirm you understand telehealth and prescription requirements.
+              </div>
+            {% else %}
+              <a href="{% url 'index' %}" class="btn btn-primary w-100 mt-3">
+                <i class="fa-solid fa-bag-shopping me-2"></i>Browse products
+              </a>
+            {% endif %}
+
+            <div class="divider my-3"></div>
+
+            <div class="d-flex gap-2 align-items-start">
+              <i class="fa-solid fa-lock text-primary-accent mt-1"></i>
+              <div class="text-body-sm text-muted">
+                Your information is handled securely. Prescription items are reviewed by licensed providers.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% if cart_items %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const consent = document.getElementById("legalConsent");
+    const btn = document.getElementById("checkoutBtn");
+
+    if (!consent || !btn) return;
+
+    function sync() {
+      const ok = consent.checked;
+      btn.classList.toggle("disabled", !ok);
+      btn.setAttribute("aria-disabled", String(!ok));
+      btn.setAttribute("tabindex", ok ? "0" : "-1");
+    }
+
+    consent.addEventListener("change", sync);
+
+    btn.addEventListener("click", function (e) {
+      // Block if not checked
+      if (btn.classList.contains("disabled")) {
+        e.preventDefault();
+        return;
+      }
+
+      // ✅ Placeholder for now (since GHL isn't set yet)
+      e.preventDefault();
+      alert("Checkout is not configured yet. Next step: we’ll add your GHL checkout embed URL and route this button to it.");
+    });
+
+    sync();
+  });
+</script>
+{% endif %}
+{% endblock %}

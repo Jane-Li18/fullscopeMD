@@ -1,0 +1,115 @@
+/* ===== Marquee: Component Styles ===== */
+
+.marquee {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    font-size: var(--font-size-body-sm);
+}
+
+/* Track that moves */
+.marquee-track {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    will-change: transform;
+
+    gap: 2rem; /* equal space around dot */
+    transform: translateX(-50%);
+    animation: marquee-ltr var(--marquee-duration, 28s) linear infinite;
+}
+
+/* Items inherit font size automatically */
+.marquee-item {
+    font-weight: 500;
+    color: var(--tertiary-text);
+}
+
+/* Perfectly centered dot separator */
+.marquee-item:not(:last-child)::after {
+    content: "•";
+    margin-left: 2rem;   /* match gap so dot is centered */
+    margin-right: 0;
+    opacity: 0.75;
+}
+
+/* Pause on hover */
+.marquee--hover-pause:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+/* Left-to-right variant */
+.marquee--ltr .marquee-track {
+    animation-name: marquee-ltr;
+}
+
+/* Animation (starts from middle) */
+@keyframes marquee-ltr {
+    0%   { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+/* Optional RTL version for future use */
+/*
+@keyframes marquee-rtl {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+*/
+
+
+/* ===== Marquee2: outlined words + CSS sparkle separators ===== */
+
+.marquee-section2{
+  --marquee-duration: 75s; /* slower */
+}
+
+/* remove marquee1 bullet separators inside marquee2 */
+.marquee-section2 .marquee-item:not(:last-child)::after{
+  content: none !important;
+}
+
+/* spacing */
+.marquee-section2 .marquee2-track{
+  gap: clamp(1.5rem, 2.5vw, 3rem);
+}
+
+/* NOT too large (but still bold like screenshot) */
+.marquee-section2 .marquee2-word{
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  font-size: clamp(2.25rem, 4.6vw, 4.75rem);
+  padding: .02em 0;
+}
+
+/* outlined navy */
+.marquee-section2 .marquee2-outline{
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: clamp(1.5px, 0.18vw, 2.5px) var(--primary-accent);
+}
+
+/* filled orange highlight */
+.marquee-section2 .marquee2-fill{
+  color: var(--secondary-accent);
+  -webkit-text-stroke: 0;
+}
+
+/* CSS sparkle between items */
+.marquee-section2 .marquee2-word:not(:last-child)::after{
+  content: "✦";
+  display: inline-block;
+  margin-left: clamp(1.25rem, 2.2vw, 2.75rem);
+  color: var(--primary-accent);
+  font-size: 0.78em;
+  transform: translateY(-0.06em);
+  -webkit-text-stroke: 0;
+  -webkit-text-fill-color: currentColor;
+}
+
+/* remove sparkle after each 6th item (end of each group) */
+.marquee-section2 .marquee2-word:nth-child(6n)::after{
+  content: "";
+  margin-left: 0;
+}

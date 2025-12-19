@@ -1,0 +1,116 @@
+{# h_prdcts.html #}
+{% load static %}
+
+<section class="h-prdcts-section d-flex align-items-center min-vh-50">
+  <div class="container py-5">
+
+    <div class="row mb-2 mb-lg-5">
+      <div class="col-12 text-center fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+        <h2 class="mb-2">Featured Clinical Products</h2>
+        <p class="mb-0">
+          Clinically selected products designed to support your treatment plan,
+          enhance results, and elevate your daily care routine.
+        </p>
+      </div>
+    </div>
+
+    {% if categories %}
+      <div class="row mb-4">
+        <div class="col-12 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+          <div class="d-flex justify-content-start justify-content-sm-center">
+            <div class="product-filters d-flex flex-nowrap flex-sm-wrap gap-2 gap-sm-3 overflow-auto w-100 w-sm-auto px-2 py-1">
+              <button type="button" class="product-filter-btn active text-nowrap" data-filter="all">All</button>
+
+              {% for cat in categories %}
+                <button type="button"
+                        class="product-filter-btn text-nowrap {% if cat.product_count == 0 %}disabled{% endif %}"
+                        data-filter="{{ cat.slug }}"
+                        {% if cat.product_count == 0 %}disabled{% endif %}>
+                  {{ cat.name }}
+                </button>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="row g-3 g-md-4 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+      {% for p in products %}
+        <div class="col-12 col-sm-6 col-lg-3 product-card-wrapper" data-category="{{ p.category.slug }}">
+          <article class="product-card h-100 d-flex flex-column" data-product-id="{{ p.slug }}">
+            <a class="product-media" href="/product-details/{{ p.slug }}/" target="_blank" rel="noopener" aria-label="See details for {{ p.name }}">
+              <img src="{{ p.main_image.url }}" alt="{{ p.name }}" class="product-img">
+              <span class="product-price-badge">${{ p.final_price|floatformat:2 }}</span>
+              {% if p.quantity == 0 %}
+                <span class="product-stock-badge">Out of stock</span>
+              {% endif %}
+            </a>
+
+            <div class="product-body mt-3 d-flex flex-column flex-grow-1">
+              <div class="product-meta">
+                <h3 class="product-title mb-1">
+                  <a class="product-title-link" href="/product-details/{{ p.slug }}/" target="_blank" rel="noopener">
+                    <span class="marquee-text">{{ p.name }}</span>
+                  </a>
+                </h3>
+
+                <div class="product-category mb-2">{{ p.category.name }}</div>
+              </div>
+
+              <div class="product-pricing mb-3">
+                <span class="product-price">${{ p.final_price|floatformat:2 }}</span>
+              </div>
+
+              <div class="product-actions mt-auto d-grid d-sm-flex gap-2">
+                <a class="btn btn-outline-primary btn-sm w-100 flex-sm-fill"
+                   href="/product-details/{{ p.slug }}/"
+                   target="_blank"
+                   rel="noopener">
+                  <i class="fa-solid fa-circle-info me-2"></i>See details
+                </a>
+
+                <button type="button"
+                        class="btn btn-primary btn-sm w-100 flex-sm-fill js-add-to-cart"
+                        {% if p.quantity == 0 %}disabled{% endif %}
+                        data-product="{{ p.id }}"
+                        data-cart-add-url="{% url 'cart_add' %}"
+                        data-cart-summary-url="{% url 'cart_summary' %}">
+                  <i class="fa-solid fa-cart-plus me-2"></i>Add to cart
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      {% empty %}
+        <div class="col-12">
+          <div class="d-flex justify-content-center align-items-center text-center py-5">
+            <div class="fade-in-up fade-in">
+              <h4 class="mb-2">No Products Available</h4>
+              <p class="mb-0 opacity-75">Please check back soon.</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="row mt-3 mt-md-4">
+      <div class="col-12 text-center">
+        <button type="button" class="btn btn-outline-primary btn-sm px-4 products-toggle-btn d-none">
+          <span class="products-toggle-label">See more products</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  document.querySelectorAll(".product-title-link").forEach(a=>{
+    const t=a.querySelector(".marquee-text");if(!t)return;
+    const d=t.scrollWidth-a.clientWidth;
+    if(d>8){a.classList.add("is-marquee");a.style.setProperty("--marquee-distance",`${d}px`);a.style.setProperty("--marquee-duration",`${Math.min(18,Math.max(10,d/28)).toFixed(2)}s`);}
+  });
+});
+</script>

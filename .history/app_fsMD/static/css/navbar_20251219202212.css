@@ -1,0 +1,207 @@
+/* =====================================
+   NAVBAR
+   ===================================== */
+
+.navbar-fsmd {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    box-shadow: var(--shadow-elevated);
+    border-bottom: 1px solid var(--secondary-bg);
+    height: 100px;
+}
+
+/* Logo uses global logo-icon helpers if you want */
+.navbar-fsmd .icon-logo {
+    width: 28px;
+    height: 28px;
+}
+
+/* Brand title – you can also add .brand-title from global */
+.navbar-brand-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+/* Brand color segments (you can also use .text-* utilities globally) */
+.brand-full  { color: var(--primary-accent); }
+.brand-scope { color: var(--secondary-accent); }
+.brand-md    { color: var(--tertiary-accent); }
+
+.navbar-fsmd .navbar-nav {
+    gap: 0.75rem;
+}
+
+/* Base nav link style */
+.navbar-fsmd .nav-link {
+    color: var(--primary-text);
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding-inline: 0.25rem;
+    position: relative;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+/* Hover / focus color */
+.navbar-fsmd .nav-link:hover,
+.navbar-fsmd .nav-link:focus {
+    color: var(--primary-accent);
+}
+
+/* Active link color */
+.navbar-fsmd .nav-link.active {
+    color: var(--primary-accent);
+}
+
+.navbar-fsmd .nav-link:hover::after,
+.navbar-fsmd .nav-link:focus::after,
+.navbar-fsmd .nav-link.active::after {
+    transform: scaleX(1);
+}
+
+/* Transparent state at top */
+.navbar-fsmd.transparent {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+    color: var(--primary-text);
+}
+
+/* =====================================
+   NAVBAR TOGGLER
+   ===================================== */
+
+.navbar-toggler,
+.navbar-toggler:focus {
+    padding: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
+/* =====================================
+   OFFCANVAS (MOBILE NAV)
+   ===================================== */
+
+.offcanvas-fsmd {
+    background-color: var(--primary-bg);
+}
+
+.offcanvas-fsmd .offcanvas-header {
+    border-bottom: 1px solid var(--secondary-bg);
+}
+
+.offcanvas-fsmd .offcanvas-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.offcanvas-fsmd .nav-link {
+    color: var(--primary-text);
+    font-weight: 500;
+    padding-block: 0.45rem;
+    transition: color var(--transition-fast);
+}
+
+.offcanvas-fsmd .nav-link:hover {
+    color: var(--primary-accent);
+}
+
+.offcanvas-fsmd .icon-logo {
+    width: 22px;
+    height: 22px;
+}
+
+.offcanvas-fsmd .offcanvas-body {
+    overflow-y: auto;
+}
+
+/* =====================================
+   ACCORDION IN MOBILE NAV
+   ===================================== */
+
+.accordion-button {
+    font-size: 1rem;
+    color: var(--primary-text);
+    background-color: var(--primary-bg);
+    box-shadow: none;
+    padding-left: 0;
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--primary-accent);
+    background-color: rgba(26, 107, 228, 0.06);
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+
+/* Cart badge positioning */
+.cart-btn{position:relative}
+.cart-badge{
+  position:absolute;
+  top:-6px;
+  right:-6px;
+  min-width:20px;
+  height:20px;
+  padding:0 6px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  line-height:1;
+  color:var(--tertiary-text);
+  box-shadow:var(--shadow-elevated);
+  transform-origin:center;
+}
+
+/* Hide badge when 0 */
+.cart-badge.is-hidden{display:none}
+
+/* Animated gradient border for cart button */
+.icon-button--gradient-border{
+  border:1px solid transparent;
+  background:
+    linear-gradient(var(--primary-bg),var(--primary-bg)) padding-box,
+    linear-gradient(90deg,var(--tertiary-accent),var(--primary-accent),var(--secondary-accent),var(--tertiary-accent)) border-box;
+  background-size:auto,300% 300%;
+  animation:gradient-move 12s linear infinite;
+}
+
+/* Badge pop attention */
+@keyframes badge-pop{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.35)}
+  65%{transform:scale(.95)}
+  100%{transform:scale(1)}
+}
+.cart-badge.pop{animation:badge-pop .55s ease}
+
+
+.program-product-card{border-radius:var(--radius-lg);overflow:hidden;background:var(--primary-bg);border:1px solid var(--secondary-border);box-shadow:var(--shadow-elevated);transition:transform var(--transition-fast),box-shadow var(--transition-fast)}
+.program-product-card:hover{transform:translateY(-2px)}
+@media (prefers-reduced-motion:reduce){.program-product-card,.program-product-card:hover{transition:none;transform:none}}
+
+.product-thumb{aspect-ratio:1/1;width:100%;max-width:112px;min-width:104px;border-radius:var(--radius-lg);overflow:hidden;background:var(--secondary-bg);border:1px solid var(--secondary-border)}
+.product-thumb-img{width:100%;height:100%;display:block;object-fit:contain;object-position:center}
+@supports not (aspect-ratio:1/1){
+  .product-thumb{position:relative;height:0;padding-top:100%}
+  .product-thumb-img{position:absolute;inset:0}
+}
+
+.program-product-title{font-size:var(--font-size-h3);font-weight:600;line-height:1.25;color:var(--primary-text);margin:0}
+
+.truncate-toggle{appearance:none;-webkit-appearance:none;border:0!important;background:transparent!important;box-shadow:none!important;padding:0!important;margin:0!important;display:inline;font:inherit;line-height:inherit;color:var(--primary-accent);text-decoration:none;cursor:pointer;transition:color var(--transition-fast),opacity var(--transition-fast)}
+.truncate-toggle:hover{color:var(--secondary-accent);text-decoration:underline;text-underline-offset:2px;opacity:.95}
+.truncate-toggle:focus-visible{outline:2px solid var(--primary-accent);outline-offset:2px;border-radius:var(--radius-sm)}
+.truncate-toggle--bottom{display:inline-block;margin-top:.6rem}
+
+.desc-expand-wrap{height:0;overflow:hidden;transition:height var(--transition-normal)}
+@media (prefers-reduced-motion:reduce){.desc-expand-wrap{transition:none!important}}
+.desc-expand-inner{padding-top:.35rem}
+.desc-expand-inner p{white-space:pre-line;color:var(--secondary-text);margin:0}
+
+.desc-expand-wrap{
+  transition: height .45s ease;
+}
