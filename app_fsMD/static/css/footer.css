@@ -1,69 +1,38 @@
-/* ============================
-   Footer
-   ============================ */
-
 .footer-section {
-    background-color: var(--secondary-bg);
-    border-top: 1px solid var(--secondary-border);
-    color: var(--secondary-text);
+  background-color: var(--secondary-bg);
+  border-top: 1px solid var(--secondary-border);
 }
 
-/* Heading style inside footer (slightly smaller than regular h3) */
 .footer-heading {
-    font-size: var(--font-size-body);
-    font-weight: 600;
-    color: var(--primary-text);
+  font-size: var(--font-size-body);
+  font-weight: 600;
 }
 
-/* Lists */
 .footer-list {
-    list-style: none;
-    padding-left: 0;
+  margin-bottom: 0;
 }
 
 .footer-list li + li {
-    margin-top: 0.25rem;
+  margin-top: 0.25rem;
 }
 
-/* Links */
 .footer-link {
-    font-size: var(--font-size-body-sm);
-    color: var(--secondary-text);
-    text-decoration: none;
-    transition: color var(--transition-fast);
+  font-size: var(--font-size-body-sm);
+  color: var(--secondary-text);
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
 .footer-link:hover {
-    color: var(--primary-accent);
+  color: var(--primary-accent);
 }
 
-/* Newsletter */
-.footer-newsletter-input {
-    flex: 1 1 auto;
-    min-width: 0;
-    border-radius: var(--radius-pill);
-    border: 1px solid var(--secondary-border);
-    background-color: var(--primary-bg);
-    padding: 0.45rem 0.85rem;
-    font-size: var(--font-size-body-sm);
-    color: var(--primary-text);
-    outline: none;
-}
-
-.footer-newsletter-input::placeholder {
-    color: rgba(110, 123, 133, 0.7);
-}
-
-.footer-newsletter-input:focus {
-    border-color: var(--primary-accent);
-}
-
-/* Make the newsletter button snug with input */
-.footer-newsletter-btn {
-    white-space: nowrap;
-}
-
-/* Bottom strip */
 .footer-bottom {
-    border-top: 1px solid var(--secondary-border);
+  border-top: 1px solid var(--secondary-border);
+}
+
+.footer-contact-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
 }

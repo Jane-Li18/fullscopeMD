@@ -1,119 +1,137 @@
-{% extends "base.html" %}
+{% extends "page_base.html" %}
 {% load static %}
 
 {% block title %}Telehealth Informed Consent{% endblock %}
+{% block page_title %}Telehealth Informed Consent{% endblock %}
+{% block page_breadcrumb %}Telehealth Informed Consent{% endblock %}
 
-{% block content %}
+{% block page_style %}
+background-image:
+  linear-gradient(120deg, rgba(0,0,0,.6), rgba(0,0,0,.4)),
+  url('{% static "images/bg_page.png" %}');
+{% endblock %}
 
-<section id="top" class="telehealth-consent-section py-5">
+{% block page_content %}
+
+<section id="top" class="py-3 py-lg-4">
   <div class="container">
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 col-lg-11 col-xl-10">
 
-    <!-- Header (same branding as Terms/Privacy/Refund) -->
-    <div class="row justify-content-center mb-4">
-      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
-        <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
-          <i class="fa-solid fa-notes-medical icon-solid icon-sm"></i>
-          <small class="mb-0 text-white">Telehealth Informed Consent</small>
-        </span>
+        <div class="row justify-content-center mb-4">
+          <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
+            <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
+              <i class="fa-solid fa-notes-medical icon-solid icon-sm"></i>
+              <small class="mb-0 text-white">Telehealth Informed Consent</small>
+            </span>
 
-        <h1 class="mt-3 mb-2">TELEHEALTH INFORMED CONSENT</h1>
-        <p class="mb-0">Last Updated: December 5, 2025</p>
-      </div>
-    </div>
+            <p class="mt-3 mb-2 text-caption-sm text-muted">Last Updated: December 5, 2025</p>
 
-    <!-- Wrapper (same as Terms: white card only) -->
-    <div class="fade-in-up fade-in delay-2 fade-blocked">
-      <div class="row g-4 justify-content-center">
-        <div class="col-12 col-lg-10">
-          <div class="p-4 p-lg-5 bg-white rounded-4">
+            <p class="mb-0 text-body-sm text-muted mx-auto" style="max-width: 72ch;">
+              This consent explains how telehealth works, outlines benefits and risks, and documents your agreement to receive care through telehealth.
+            </p>
+          </div>
+        </div>
 
-            <!-- Quick note -->
-            <div class="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-start align-items-md-center fade-in-up fade-in delay-3 fade-blocked">
-              <div>
-                <h2 class="mb-1">Please read carefully</h2>
-                <p class="mb-0">
-                  This consent explains how telehealth works, its benefits and risks, and your agreement to receive care through telehealth.
-                </p>
+        <div class="divider my-4"></div>
+
+        <div class="row g-4 fade-in-up fade-in delay-1 fade-blocked">
+          <div class="col-12 col-lg-4">
+            <div class="position-sticky" style="top: 96px;">
+              <div class="bg-muted rounded-4 border p-3">
+                <div class="fw-semibold mb-2">On this page</div>
+                <nav class="d-grid gap-1 small">
+                  <a class="text-body-sm hover-underline-accent" href="#tele-1">1. Purpose of This Consent</a>
+                  <a class="text-body-sm hover-underline-accent" href="#tele-2">2. What Is Telehealth?</a>
+                  <a class="text-body-sm hover-underline-accent" href="#tele-3">3. Providers and Licensing</a>
+                  <a class="text-body-sm hover-underline-accent" href="#tele-4">4. Benefits</a>
+                  <a class="text-body-sm hover-underline-accent" href="#tele-5">5. Risks and Limitations</a>
+                  <a class="text-body-sm hover-underline-accent" href="#tele-6">6. Not for Emergencies</a>
+                  <a class="text-body-sm hover-underline-accent" href="#tele-7">7. Privacy and Security</a>
+                  <a class="text-body-sm hover-underline-accent" href="#tele-8">8. Use and Disclosure</a>
+                  <a class="text-body-sm hover-underline-accent" href="#tele-9">9. Your Responsibilities</a>
+                  <a class="text-body-sm hover-underline-accent" href="#tele-10">10. No Guarantee of Results</a>
+                  <a class="text-body-sm hover-underline-accent" href="#tele-11">11. Financial Responsibility</a>
+                  <a class="text-body-sm hover-underline-accent" href="#tele-12">12. Right to Withdraw</a>
+                  <a class="text-body-sm hover-underline-accent" href="#tele-13">13. Acknowledgment</a>
+                </nav>
               </div>
 
-              <a href="{% url 'contact' %}" class="btn btn-outline-primary px-4">
-                Contact Support
-                <i class="fa-solid fa-arrow-right ms-2"></i>
-              </a>
+              <div class="mt-3 d-grid gap-2">
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
+                  Contact Us
+                  <i class="fa-solid fa-arrow-right ms-2"></i>
+                </a>
+              </div>
             </div>
+          </div>
 
-            <div class="divider my-4"></div>
-
-            <!-- Consent body -->
+          <div class="col-12 col-lg-8 fade-in-up fade-in delay-1 fade-blocked">
             <div class="d-grid gap-4">
 
-              <div class="fade-in-up fade-in delay-4 fade-blocked">
+              <div id="tele-1" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">1. Purpose of This Consent</h3>
                 <p class="mb-0">
-                  This Telehealth Informed Consent explains how telehealth works, outlines its benefits and risks, and documents your
-                  agreement to receive healthcare services through telehealth provided by or through FullScopeMD (“FullScopeMD,” “we,” “us,” or “our”).
+                  This Telehealth Informed Consent explains how telehealth works, outlines its benefits and risks, and documents your agreement to receive healthcare services through telehealth provided by or through FullScopeMD (“FullScopeMD,” “we,” “us,” or “our”).
                   By proceeding with telehealth services, you acknowledge that you have read, understood, and agree to the information below.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-5 fade-blocked">
+              <div id="tele-2" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">2. What Is Telehealth?</h3>
                 <p class="mb-2">
-                  “Telehealth” (or “telemedicine”) includes the delivery of healthcare services using electronic communications and technologies instead of in-person visits.
-                  Telehealth may involve:
+                  “Telehealth” (or “telemedicine”) includes the delivery of healthcare services using electronic communications and technologies instead of in-person visits. Telehealth may involve:
                 </p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Live audio and/or video communication</li>
-                  <li class="text-body-sm">Secure messaging or chat</li>
-                  <li class="text-body-sm">Reviewing information you submit electronically (asynchronous telehealth)</li>
-                  <li class="text-body-sm">Uploading medical records, photos, forms, or lab results</li>
-                  <li class="text-body-sm">Remote monitoring or digital tools, where applicable</li>
+                <ul class="list-unstyled mb-3 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Live audio and/or video communication</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Secure messaging or chat</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Reviewing information you submit electronically (asynchronous telehealth)</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Uploading medical records, photos, forms, or lab results</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Remote monitoring or digital tools, where applicable</span></li>
                 </ul>
-                <p class="mt-3 mb-0">
+                <p class="mb-0">
                   Telehealth services may include evaluation, diagnosis, treatment recommendations, prescriptions when appropriate, follow-up care, and general medical guidance.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-6 fade-blocked">
+              <div id="tele-3" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">3. Providers and Licensing</h3>
                 <p class="mb-2">
-                  Telehealth services are provided by independently licensed healthcare professionals (physicians, nurse practitioners, physician assistants, or other qualified clinicians).
-                  You understand that:
+                  Telehealth services are provided by independently licensed healthcare professionals (physicians, nurse practitioners, physician assistants, or other qualified clinicians). You understand that:
                 </p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Clinicians must be licensed in the U.S. state where you are physically located during the telehealth encounter.</li>
-                  <li class="text-body-sm">You must accurately report your physical location at the time of the visit.</li>
-                  <li class="text-body-sm">You may be referred for in-person evaluation if clinically necessary.</li>
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Clinicians must be licensed in the U.S. state where you are physically located during the telehealth encounter.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">You must accurately report your physical location at the time of the visit.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">You may be referred for in-person evaluation if clinically necessary.</span></li>
                 </ul>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="tele-4" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">4. Potential Benefits of Telehealth</h3>
                 <p class="mb-2">Potential benefits may include:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">More convenient access to licensed clinicians</li>
-                  <li class="text-body-sm">Reduced travel and waiting time</li>
-                  <li class="text-body-sm">Faster follow-up and ongoing communication</li>
-                  <li class="text-body-sm">Ability to share records electronically</li>
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">More convenient access to licensed clinicians</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Reduced travel and waiting time</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Faster follow-up and ongoing communication</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Ability to share records electronically</span></li>
                 </ul>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="tele-5" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">5. Potential Risks and Limitations of Telehealth</h3>
                 <p class="mb-2">Telehealth also has potential risks, including:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Technical failures (poor connection, audio/video issues, software malfunction)</li>
-                  <li class="text-body-sm">Possible delays or incomplete information if your device or connection is limited</li>
-                  <li class="text-body-sm">Rare but possible unauthorized access to electronic data</li>
-                  <li class="text-body-sm">Telehealth may not be appropriate for all medical conditions</li>
-                  <li class="text-body-sm">A clinician may determine that in-person care is necessary</li>
+                <ul class="list-unstyled mb-3 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Technical failures (poor connection, audio/video issues, software malfunction)</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Possible delays or incomplete information if your device or connection is limited</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Rare but possible unauthorized access to electronic data</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Telehealth may not be appropriate for all medical conditions</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">A clinician may determine that in-person care is necessary</span></li>
                 </ul>
-                <p class="mt-3 mb-0">No specific result, diagnosis, or treatment outcome can be guaranteed.</p>
+                <p class="mb-0">No specific result, diagnosis, or treatment outcome can be guaranteed.</p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="tele-6" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">6. Telehealth Is Not for Emergencies</h3>
-
                 <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
                   <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 align-items-start">
                     <span class="icon-button shadow-sm-brand flex-shrink-0">
@@ -130,94 +148,89 @@
                 </div>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="tele-7" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">7. Privacy, Security, and Confidentiality</h3>
                 <p class="mb-2">
-                  FullScopeMD uses industry-standard safeguards to protect your information. Telehealth may involve the electronic transmission of medical information,
-                  which may include Protected Health Information (“PHI”) governed by HIPAA. You understand that:
+                  FullScopeMD uses industry-standard safeguards to protect your information. Telehealth may involve the electronic transmission of medical information, which may include Protected Health Information (“PHI”) governed by HIPAA. You understand that:
                 </p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Your health information will be protected and used in accordance with our Privacy Policy and our HIPAA Notice of Privacy Practices.</li>
-                  <li class="text-body-sm">Electronic communication systems may have security vulnerabilities despite reasonable safeguards.</li>
-                  <li class="text-body-sm">You should use a private location and secure internet connection when participating in telehealth services.</li>
+                <ul class="list-unstyled mb-3 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Your health information will be protected and used in accordance with our Privacy Policy and our HIPAA Notice of Privacy Practices.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Electronic communication systems may have security vulnerabilities despite reasonable safeguards.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">You should use a private location and secure internet connection when participating in telehealth services.</span></li>
                 </ul>
-                <p class="mt-3 mb-0 text-body-sm">
-                  FullScopeMD does not record video or audio telehealth sessions without your consent, unless required by law. You agree not to record sessions unless you have been granted
-                  written permission from FullScopeMD or your clinician.
+                <p class="mb-0 text-body-sm">
+                  FullScopeMD does not record video or audio telehealth sessions without your consent, unless required by law. You agree not to record sessions unless you have been granted written permission from FullScopeMD or your clinician.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="tele-8" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">8. Use and Disclosure of Information</h3>
                 <p class="mb-2">Your information may be used or disclosed for:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Treatment (care, diagnosis, prescriptions, coordination with pharmacies or labs)</li>
-                  <li class="text-body-sm">Payment (billing, processing transactions, financial records)</li>
-                  <li class="text-body-sm">Healthcare operations (quality review, training, customer support, compliance)</li>
-                  <li class="text-body-sm">Other purposes permitted by law and described in the Privacy Policy and HIPAA Notice of Privacy Practices</li>
+                <ul class="list-unstyled mb-3 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Treatment (care, diagnosis, prescriptions, coordination with pharmacies or labs)</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Payment (billing, processing transactions, financial records)</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Healthcare operations (quality review, training, customer support, compliance)</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Other purposes permitted by law and described in the Privacy Policy and HIPAA Notice of Privacy Practices</span></li>
                 </ul>
-                <p class="mt-3 mb-0">
-                  FullScopeMD may share information with pharmacies, laboratories, clinicians, and technology vendors who support the Services. Vendors handling PHI are required
-                  to comply with privacy and security obligations.
+                <p class="mb-0">
+                  FullScopeMD may share information with pharmacies, laboratories, clinicians, and technology vendors who support the Services. Vendors handling PHI are required to comply with privacy and security obligations.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="tele-9" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">9. Your Responsibilities</h3>
                 <p class="mb-2">As a telehealth patient, you agree to:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Provide accurate and complete information about your health</li>
-                  <li class="text-body-sm">Share your true physical location during the telehealth visit</li>
-                  <li class="text-body-sm">Participate from a private, safe environment</li>
-                  <li class="text-body-sm">Use devices and internet connections you believe to be secure</li>
-                  <li class="text-body-sm">Follow treatment instructions provided or discuss concerns with your clinician</li>
-                  <li class="text-body-sm">Inform your clinician of any changes to your condition</li>
+                <ul class="list-unstyled mb-3 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Provide accurate and complete information about your health</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Share your true physical location during the telehealth visit</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Participate from a private, safe environment</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Use devices and internet connections you believe to be secure</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Follow the treatment instructions provided or discuss concerns with your clinician</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Inform your clinician of any changes to your condition</span></li>
                 </ul>
-                <p class="mt-3 mb-0">Failing to provide accurate information may affect the quality of your care.</p>
+                <p class="mb-0">Failing to provide accurate information may affect the quality of your care.</p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="tele-10" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">10. No Guarantee of Results</h3>
                 <p class="mb-2">You understand and agree that:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Telehealth does not guarantee specific outcomes or improvements.</li>
-                  <li class="text-body-sm">Medication response varies significantly between individuals.</li>
-                  <li class="text-body-sm">Lifestyle, adherence, medical history, and biological factors influence results.</li>
-                  <li class="text-body-sm">FullScopeMD makes no promises regarding weight loss, wellness outcomes, or medical improvement.</li>
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Telehealth does not guarantee specific outcomes or improvements.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Medication response varies significantly between individuals.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Lifestyle, adherence, medical history, and biological factors influence results.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">FullScopeMD makes no promises regarding weight loss, wellness outcomes, or medical improvement.</span></li>
                 </ul>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="tele-11" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">11. Financial Responsibility</h3>
                 <p class="mb-2">You acknowledge that:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">You are responsible for all fees associated with telehealth services and prescribed medications, in accordance with the FullScopeMD Terms &amp; Conditions and Refund Policy.</li>
-                  <li class="text-body-sm">Some services may not be covered by insurance or FullScopeMD may not submit claims to insurance.</li>
-                  <li class="text-body-sm">You are responsible for confirming insurance coverage, if applicable.</li>
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">You are responsible for all fees associated with telehealth services and prescribed medications, in accordance with the FullScopeMD Terms &amp; Conditions and Refund Policy.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Some services may not be covered by insurance or FullScopeMD may not submit claims to insurance.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">You are responsible for confirming insurance coverage, if applicable.</span></li>
                 </ul>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="tele-12" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">12. Right to Withdraw Consent</h3>
                 <p class="mb-0">
-                  You have the right to withdraw consent for telehealth at any time. Withdrawal will not affect care already provided; however, it may limit your ability
-                  to continue receiving services from FullScopeMD if telehealth is required for your program.
+                  You have the right to withdraw consent for telehealth at any time. Withdrawal will not affect care already provided; however, it may limit your ability to continue receiving services from FullScopeMD if telehealth is required for your program.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="tele-13" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">13. Acknowledgment and Agreement</h3>
                 <p class="mb-2">By scheduling, initiating, or participating in a telehealth visit, you confirm that:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">You have read and understand this Telehealth Informed Consent.</li>
-                  <li class="text-body-sm">You have had an opportunity to ask questions and have them answered.</li>
-                  <li class="text-body-sm">You consent to receive healthcare services via telehealth for yourself (and/or for your minor or dependent, if applicable).</li>
-                  <li class="text-body-sm">You understand that you may withdraw consent at any time by notifying us, which may impact your ability to receive certain services.</li>
-                  <li class="text-body-sm">If you do not agree to this Telehealth Informed Consent, you should not use our telehealth services.</li>
+                <ul class="list-unstyled mb-3 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">You have read and understand this Telehealth Informed Consent.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">You have had an opportunity to ask questions and have them answered.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">You consent to receive healthcare services via telehealth for yourself (and/or for your minor or dependent, if applicable).</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">You understand that you may withdraw consent at any time by notifying us, which may impact your ability to receive certain services.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">If you do not agree to this Telehealth Informed Consent, you should not use our telehealth services.</span></li>
                 </ul>
-                <p class="mt-3 mb-0">
-                  By clicking “I Agree,” checking the consent box, scheduling a visit, or participating in a telehealth encounter, you provide your valid and binding
-                  electronic consent to receive telehealth services from FullScopeMD.
+                <p class="mb-0">
+                  By clicking “I Agree,” checking the consent box, scheduling a visit, or participating in a telehealth encounter, you provide your valid and binding electronic consent to receive telehealth services from FullScopeMD.
                 </p>
               </div>
 
@@ -227,15 +240,13 @@
 
             <div class="d-flex flex-column flex-sm-row gap-2 justify-content-between align-items-start align-items-sm-center">
               <small class="text-caption-sm mb-0">© {% now "Y" %} FullScopeMD. All rights reserved.</small>
-              <a class="text-body-sm hover-underline-accent" href="#top">Back to top</a>
             </div>
-
           </div>
         </div>
+
       </div>
     </div>
-
   </div>
 </section>
 
-{% endblock content %}
+{% endblock page_content %}

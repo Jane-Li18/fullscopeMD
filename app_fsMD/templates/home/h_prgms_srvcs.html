@@ -1,12 +1,10 @@
 {% load static %}
 
-<section class="feature-programs-section d-flex align-items-center min-vh-100">
-  <div class="container py-5">
-
-    <!-- Heading -->
+<section class="feature-programs-section d-flex align-items-center py-4 py-lg-5">
+  <div class="container">
     <div class="row mb-4 mb-lg-5 fade-in-up fade-in delay-1 fade-blocked scroll-animate">
       <div class="col-12 text-center">
-        <h2 class="mb-3">Explore Our Core Programs</h2>
+        <h1 class="mb-3">Explore Our Core Programs</h1>
         <p class="mb-0">
           Evidence-based medical care designed around your health goals, delivered with clarity,
           clinical expertise, and ongoing support.
@@ -14,29 +12,21 @@
       </div>
     </div>
 
-    <!-- Bars that slide open -->
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10">
-
         <div class="program-row d-flex flex-nowrap gap-3 justify-content-center">
-
           {% if categories %}
             {% for category in categories %}
-
-              <div class="program-item {% if forloop.first %}active{% endif %} fade-in-up fade-in fade-blocked scroll-animate"
-                   style="animation-delay: {{ forloop.counter|add:1 }}00ms;">
-
+              <div class="program-item {% if forloop.first %}active{% endif %} fade-in-up fade-in fade-blocked scroll-animate">
                 <button type="button"
                         class="program-bar"
                         {% if category.image %}
                           style="--program-img: url('{{ category.image.url }}')"
                         {% endif %}>
                   <span class="program-bar-label text-body-sm">{{ category.name }}</span>
-
                   <span class="program-bar-index text-caption-sm">
                     {{ forloop.counter|stringformat:"02d" }}
                   </span>
-
                   <span class="program-bar-icon">
                     <i class="fa-solid fa-eye"></i>
                   </span>
@@ -44,7 +34,6 @@
 
                 <div class="program-panel">
                   <div class="program-panel-inner accordion-anim {% if not category.image %}no-side-image{% endif %}">
-
                     {% if category.image %}
                       <div class="program-panel-image">
                         <img src="{{ category.image.url }}"
@@ -54,25 +43,32 @@
                     {% endif %}
 
                     <div class="program-panel-body d-flex flex-column">
+                      <div class="flex-grow-1 d-flex flex-column justify-content-center overflow-auto">
+                        <div class="mb-3">
+                          <h3 class="mb-2">{{ category.name }}</h3>
 
-                      <!-- CONTENT BLOCK (top) -->
-                      <div class="mb-3">
-                        <span class="program-panel-tag d-block mb-1 text-small">
-                          {{ category.name }}
-                        </span>
+                          {% if category.tagline %}
+                            <p class="text-muted mb-2">{{ category.tagline }}</p>
+                          {% endif %}
 
-                        <h3 class="mb-2">{{ category.name }}</h3>
+                          {% if category.short_description %}
+                            <p class="mb-3">{{ category.short_description|linebreaksbr }}</p>
+                          {% else %}
+                            <p class="mb-3">
+                              Explore our {{ category.name }} program with provider-guided care and ongoing support.
+                            </p>
+                          {% endif %}
 
-                        {% if category.short_description %}
-                          <p class="mb-3">{{ category.short_description|linebreaksbr }}</p>
-                        {% else %}
-                          <p class="mb-3">
-                            Explore our {{ category.name }} program with provider-guided care and ongoing support.
-                          </p>
-                        {% endif %}
+                          {% if category.bullets.all %}
+                            <ul class="program-bullets mb-3">
+                              {% for b in category.bullets.all %}
+                                <li>{{ b.text }}</li>
+                              {% endfor %}
+                            </ul>
+                          {% endif %}
+                        </div>
                       </div>
 
-                      <!-- CTA BLOCK (always at bottom) -->
                       <div class="program-panel-cta mt-auto pt-1 d-flex flex-column align-items-stretch gap-2">
                         <a href="#contact-us"
                            class="btn btn-primary btn-sm d-inline-flex align-items-center gap-2">
@@ -85,20 +81,16 @@
                           Learn More
                         </a>
                       </div>
-
                     </div>
                   </div>
                 </div>
-
               </div>
-
             {% endfor %}
           {% else %}
             <div class="text-center text-muted py-4">
               No programs available right now.
             </div>
           {% endif %}
-
         </div>
 
         <div class="text-center mt-3 fade-in fade-in-down delay-3 fade-blocked scroll-animate">
@@ -106,12 +98,11 @@
             View All Services
           </a>
         </div>
-
       </div>
     </div>
-
   </div>
 </section>
+
 
 {# OPTIONAL: move this into your main CSS file #}
 <style>

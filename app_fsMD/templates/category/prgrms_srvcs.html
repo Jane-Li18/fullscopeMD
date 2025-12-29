@@ -1,17 +1,25 @@
-{% extends "base.html" %}
+{% extends "page_base.html" %}
 {% load static %}
 
 {% block title %}All Programs & Services{% endblock %}
+{% block page_title %}All Programs & Services{% endblock %}
+{% block page_breadcrumb %}All Programs & Services{% endblock %}
 
+{% block page_style %}
+background-image:
+  linear-gradient(120deg, rgba(0,0,0,.6), rgba(0,0,0,.4)),
+  url('{% static "images/bg_page.png" %}');
+{% endblock %}
 
-{% block content %}
+{% block page_content %}
+
 <section class="py-5">
   <div class="container py-2 py-lg-4">
 
-    <!-- Header -->
+    <!-- Header card (your original content) -->
     <div class="row justify-content-center mb-4">
       <div class="col-12 col-lg-10">
-        <div class="p-4 p-lg-5 bg-white rounded-4 shadow-sm-brand border-brand fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+        <div class="p-4 p-lg-5 bg-white fade-in-up fade-in delay-1 fade-blocked scroll-animate">
           <div class="d-flex flex-column flex-md-row align-items-start gap-3 gap-lg-4">
 
             <div class="flex-shrink-0">
@@ -28,18 +36,10 @@
                 <span class="badge rounded-pill bg-muted border-brand text-primary-accent">Telemedicine</span>
               </div>
 
-              <h1 class="mb-2">All Programs &amp; Services</h1>
+              <h2 class="mb-2" style="font-size: var(--font-size-h2);">All Programs &amp; Services</h2>
               <p class="mb-0 text-body-sm">
                 Browse our full catalog of telemedicine programs and services, and explore clinical products that support your care plan.
               </p>
-
-              <div class="d-flex flex-wrap gap-2 mt-3">
-                <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
-                  Appointment <i class="fa-solid fa-arrow-right ms-2 icon-solid"></i>
-                </a>
-                <a href="{% url 'telehealth_consent' %}" class="btn btn-outline-primary btn-sm">Telehealth Consent</a>
-                <a href="{% url 'privacy_policy' %}" class="btn btn-outline-primary btn-sm">Privacy Policy</a>
-              </div>
             </div>
 
           </div>
@@ -69,88 +69,88 @@
           </div>
         </div>
 
-{% if program_slides %}
-  <div class="position-relative px-0 px-lg-5 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+        {% if program_slides %}
+          <div class="position-relative px-0 px-lg-5 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
 
-    {# desktop arrows (overlay, do NOT affect centering) #}
-    <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn d-none d-lg-inline-flex
-                   position-absolute top-50 start-0 translate-middle-y"
-            type="button"
-            data-slider="programs"
-            data-dir="prev"
-            aria-label="Previous program">
-      <i class="fa-solid fa-chevron-left icon-solid"></i>
-    </button>
+            {# desktop arrows (overlay, do NOT affect centering) #}
+            <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn d-none d-lg-inline-flex
+                           position-absolute top-50 start-0 translate-middle-y"
+                    type="button"
+                    data-slider="programs"
+                    data-dir="prev"
+                    aria-label="Previous program">
+              <i class="fa-solid fa-chevron-left icon-solid"></i>
+            </button>
 
-    <div class="fsmd-slider-shell w-100 mx-auto">
-      <div id="programsCarousel" class="fsmd-carousel owl-carousel w-100">
-        {% for slide in program_slides %}
-          {% for c in slide %}
-            <div class="fsmd-slide h-100">
-              <div class="fsmd-slide-wrap h-100 w-100 mx-auto">
-                <article class="fsmd-cat-card bg-white rounded-4 border-brand overflow-hidden hover-lift
-                               h-100 d-flex flex-column">
+            <div class="fsmd-slider-shell w-100 mx-auto">
+              <div id="programsCarousel" class="fsmd-carousel owl-carousel w-100">
+                {% for slide in program_slides %}
+                  {% for c in slide %}
+                    <div class="fsmd-slide h-100">
+                      <div class="fsmd-slide-wrap h-100 w-100 mx-auto">
+                        <article class="fsmd-cat-card bg-white rounded-4 border-brand overflow-hidden hover-lift
+                                       h-100 d-flex flex-column">
 
-                  {% if c.image %}
-                    <div class="ratio ratio-16x9 bg-muted">
-                      <img src="{{ c.image.url }}" alt="{{ c.name }}"
-                           class="w-100 h-100 object-fit-cover" loading="lazy">
-                    </div>
-                  {% else %}
-                    <div class="ratio ratio-16x9 bg-muted d-flex align-items-center justify-content-center">
-                      <div class="icon-button icon-button--gradient-border" style="width:64px;height:64px;">
-                        <i class="fa-solid fa-layer-group"></i>
+                          {% if c.image %}
+                            <div class="ratio ratio-16x9 bg-muted">
+                              <img src="{{ c.image.url }}" alt="{{ c.name }}"
+                                   class="w-100 h-100 object-fit-cover" loading="lazy">
+                            </div>
+                          {% else %}
+                            <div class="ratio ratio-16x9 bg-muted d-flex align-items-center justify-content-center">
+                              <div class="icon-button icon-button--gradient-border" style="width:64px;height:64px;">
+                                <i class="fa-solid fa-layer-group"></i>
+                              </div>
+                            </div>
+                          {% endif %}
+
+                          <div class="p-3 p-md-4 fsmd-card-body d-flex flex-column h-100">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                              <span class="badge rounded-pill bg-muted border-brand text-primary-accent">
+                                {{ c.get_kind_display }}
+                              </span>
+                              <span class="text-caption-sm text-muted">
+                                <i class="fa-solid fa-shield-heart text-primary-accent me-1"></i>Telemedicine
+                              </span>
+                            </div>
+
+                            <h3 class="mb-2" style="font-size: var(--font-size-h3);">{{ c.name }}</h3>
+
+                            {% if c.short_description %}
+                              <p class="mb-3 text-body-sm fsmd-card-desc">{{ c.short_description|striptags }}</p>
+                            {% else %}
+                              <p class="mb-3 text-body-sm fsmd-card-desc">Program overview coming soon.</p>
+                            {% endif %}
+
+                            <div class="d-grid gap-2 fsmd-card-cta mt-auto">
+                              <a href="{% url 'prgrm_dtls' c.slug %}" class="btn btn-outline-primary btn-sm">
+                                Explore <i class="fa-solid fa-arrow-right ms-2"></i>
+                              </a>
+                              <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
+                                Book Appointment <i class="fa-solid fa-calendar-check ms-2 icon-solid"></i>
+                              </a>
+                            </div>
+                          </div>
+
+                        </article>
                       </div>
                     </div>
-                  {% endif %}
-
-                  <div class="p-3 p-md-4 fsmd-card-body d-flex flex-column h-100">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
-                      <span class="badge rounded-pill bg-muted border-brand text-primary-accent">
-                        {{ c.get_kind_display }}
-                      </span>
-                      <span class="text-caption-sm text-muted">
-                        <i class="fa-solid fa-shield-heart text-primary-accent me-1"></i>Telemedicine
-                      </span>
-                    </div>
-
-                    <h3 class="mb-2" style="font-size: var(--font-size-h3);">{{ c.name }}</h3>
-
-                    {% if c.short_description %}
-                      <p class="mb-3 text-body-sm fsmd-card-desc">{{ c.short_description|striptags }}</p>
-                    {% else %}
-                      <p class="mb-3 text-body-sm fsmd-card-desc">Program overview coming soon.</p>
-                    {% endif %}
-
-                    <div class="d-grid gap-2 fsmd-card-cta mt-auto">
-                      <a href="{% url 'prgrm_dtls' c.slug %}" class="btn btn-outline-primary btn-sm">
-                        Explore <i class="fa-solid fa-arrow-right ms-2"></i>
-                      </a>
-                      <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
-                        Book Appointment <i class="fa-solid fa-calendar-check ms-2 icon-solid"></i>
-                      </a>
-                    </div>
-                  </div>
-
-                </article>
+                  {% endfor %}
+                {% endfor %}
               </div>
             </div>
-          {% endfor %}
-        {% endfor %}
-      </div>
-    </div>
 
-    <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn d-none d-lg-inline-flex
-                   position-absolute top-50 end-0 translate-middle-y"
-            type="button"
-            data-slider="programs"
-            data-dir="next"
-            aria-label="Next program">
-      <i class="fa-solid fa-chevron-right icon-solid"></i>
-    </button>
+            <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn d-none d-lg-inline-flex
+                           position-absolute top-50 end-0 translate-middle-y"
+                    type="button"
+                    data-slider="programs"
+                    data-dir="next"
+                    aria-label="Next program">
+              <i class="fa-solid fa-chevron-right icon-solid"></i>
+            </button>
 
-  </div>
-{% else %}
+          </div>
+        {% else %}
           <div class="bg-white rounded-4 border-brand shadow-sm-brand p-4 text-center fade-in-up fade-in delay-3 fade-blocked scroll-animate">
             <h3 class="mb-2" style="font-size: var(--font-size-h3);">No programs available right now.</h3>
             <p class="mb-0 text-body-sm">Please check back soon for updates.</p>
@@ -181,85 +181,85 @@
           </div>
         </div>
 
-{% if services %}
-  <div class="position-relative px-0 px-lg-5 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+        {% if services %}
+          <div class="position-relative px-0 px-lg-5 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
 
-    <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn d-none d-lg-inline-flex
-                   position-absolute top-50 start-0 translate-middle-y"
-            type="button"
-            data-slider="services"
-            data-dir="prev"
-            aria-label="Previous service">
-      <i class="fa-solid fa-chevron-left icon-solid"></i>
-    </button>
+            <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn d-none d-lg-inline-flex
+                           position-absolute top-50 start-0 translate-middle-y"
+                    type="button"
+                    data-slider="services"
+                    data-dir="prev"
+                    aria-label="Previous service">
+              <i class="fa-solid fa-chevron-left icon-solid"></i>
+            </button>
 
-    <div class="fsmd-slider-shell w-100 mx-auto">
-      <div id="servicesCarousel" class="fsmd-carousel owl-carousel w-100">
-        {% for c in services %}
-          <div class="fsmd-slide h-100">
-            <div class="fsmd-slide-wrap h-100 w-100 mx-auto">
-              <article class="fsmd-cat-card bg-white rounded-4 border-brand overflow-hidden hover-lift
-                             h-100 d-flex flex-column">
+            <div class="fsmd-slider-shell w-100 mx-auto">
+              <div id="servicesCarousel" class="fsmd-carousel owl-carousel w-100">
+                {% for c in services %}
+                  <div class="fsmd-slide h-100">
+                    <div class="fsmd-slide-wrap h-100 w-100 mx-auto">
+                      <article class="fsmd-cat-card bg-white rounded-4 border-brand overflow-hidden hover-lift
+                                     h-100 d-flex flex-column">
 
-                {% if c.image %}
-                  <div class="ratio ratio-16x9 bg-muted">
-                    <img src="{{ c.image.url }}" alt="{{ c.name }}"
-                         class="w-100 h-100 object-fit-cover" loading="lazy">
-                  </div>
-                {% else %}
-                  <div class="ratio ratio-16x9 bg-muted d-flex align-items-center justify-content-center">
-                    <div class="icon-button icon-button--gradient-border" style="width:64px;height:64px;">
-                      <i class="fa-solid fa-briefcase-medical"></i>
+                        {% if c.image %}
+                          <div class="ratio ratio-16x9 bg-muted">
+                            <img src="{{ c.image.url }}" alt="{{ c.name }}"
+                                 class="w-100 h-100 object-fit-cover" loading="lazy">
+                          </div>
+                        {% else %}
+                          <div class="ratio ratio-16x9 bg-muted d-flex align-items-center justify-content-center">
+                            <div class="icon-button icon-button--gradient-border" style="width:64px;height:64px;">
+                              <i class="fa-solid fa-briefcase-medical"></i>
+                            </div>
+                          </div>
+                        {% endif %}
+
+                        <div class="p-3 p-md-4 fsmd-card-body d-flex flex-column h-100">
+                          <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge rounded-pill bg-muted border-brand text-primary-accent">
+                              {{ c.get_kind_display }}
+                            </span>
+                            <span class="text-caption-sm text-muted">
+                              <i class="fa-solid fa-shield-heart text-primary-accent me-1"></i>Telemedicine
+                            </span>
+                          </div>
+
+                          <h3 class="mb-2" style="font-size: var(--font-size-h3);">{{ c.name }}</h3>
+
+                          {% if c.short_description %}
+                            <p class="mb-3 text-body-sm fsmd-card-desc">{{ c.short_description|striptags }}</p>
+                          {% else %}
+                            <p class="mb-3 text-body-sm fsmd-card-desc">Service overview coming soon.</p>
+                          {% endif %}
+
+                          <div class="d-grid gap-2 fsmd-card-cta mt-auto">
+                            <a href="{% url 'prgrm_dtls' c.slug %}" class="btn btn-outline-primary btn-sm">
+                              Learn More <i class="fa-solid fa-arrow-right ms-2"></i>
+                            </a>
+                            <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
+                              Contact / Schedule <i class="fa-solid fa-arrow-right ms-2 icon-solid"></i>
+                            </a>
+                          </div>
+                        </div>
+
+                      </article>
                     </div>
                   </div>
-                {% endif %}
-
-                <div class="p-3 p-md-4 fsmd-card-body d-flex flex-column h-100">
-                  <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="badge rounded-pill bg-muted border-brand text-primary-accent">
-                      {{ c.get_kind_display }}
-                    </span>
-                    <span class="text-caption-sm text-muted">
-                      <i class="fa-solid fa-shield-heart text-primary-accent me-1"></i>Telemedicine
-                    </span>
-                  </div>
-
-                  <h3 class="mb-2" style="font-size: var(--font-size-h3);">{{ c.name }}</h3>
-
-                  {% if c.short_description %}
-                    <p class="mb-3 text-body-sm fsmd-card-desc">{{ c.short_description|striptags }}</p>
-                  {% else %}
-                    <p class="mb-3 text-body-sm fsmd-card-desc">Service overview coming soon.</p>
-                  {% endif %}
-
-                  <div class="d-grid gap-2 fsmd-card-cta mt-auto">
-                    <a href="{% url 'prgrm_dtls' c.slug %}" class="btn btn-outline-primary btn-sm">
-                      Learn More <i class="fa-solid fa-arrow-right ms-2"></i>
-                    </a>
-                    <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
-                      Contact / Schedule <i class="fa-solid fa-arrow-right ms-2 icon-solid"></i>
-                    </a>
-                  </div>
-                </div>
-
-              </article>
+                {% endfor %}
+              </div>
             </div>
+
+            <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn d-none d-lg-inline-flex
+                           position-absolute top-50 end-0 translate-middle-y"
+                    type="button"
+                    data-slider="services"
+                    data-dir="next"
+                    aria-label="Next service">
+              <i class="fa-solid fa-chevron-right icon-solid"></i>
+            </button>
+
           </div>
-        {% endfor %}
-      </div>
-    </div>
-
-    <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn d-none d-lg-inline-flex
-                   position-absolute top-50 end-0 translate-middle-y"
-            type="button"
-            data-slider="services"
-            data-dir="next"
-            aria-label="Next service">
-      <i class="fa-solid fa-chevron-right icon-solid"></i>
-    </button>
-
-  </div>
-{% else %}
+        {% else %}
           <div class="bg-white rounded-4 border-brand shadow-sm-brand p-4 text-center fade-in-up fade-in delay-3 fade-blocked scroll-animate">
             <h3 class="mb-2" style="font-size: var(--font-size-h3);">No services listed yet.</h3>
             <p class="mb-0 text-body-sm">We’ll add more service options soon.</p>
@@ -274,7 +274,8 @@
 
   </div>
 </section>
-{% endblock content %}
+
+{% endblock page_content %}
 
 {% block extra_scripts %}
   <script>
@@ -336,8 +337,8 @@
 
         $el.owlCarousel({
           margin: 16,
-          stagePadding: 0,   // ✅ prevents peeking
-          autoWidth: false,  // ✅ prevents peeking / wrong widths
+          stagePadding: 0,
+          autoWidth: false,
           dots: false,
           nav: false,
           slideBy: 1,
@@ -358,10 +359,10 @@
               rewind: true
             },
             992: {
-              items: 3,        // ✅ ALWAYS 3 on large screens
-              center: true,    // ✅ centered (middle gets .center)
-              loop: loopLg,    // ✅ true infinite when >3
-              rewind: !loopLg  // ✅ wrap-around when <=3
+              items: 3,
+              center: true,
+              loop: loopLg,
+              rewind: !loopLg
             }
           },
 

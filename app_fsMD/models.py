@@ -1,8 +1,8 @@
-from decimal import Decimal
-
-from django.core.validators import MinValueValidator
 from django.db import models
+from decimal import Decimal
+from django.core.validators import MinValueValidator
 from django.utils.text import slugify
+from django.utils import timezone 
 
 
 def category_image_upload_to(instance, filename: str) -> str:
@@ -31,21 +31,19 @@ class Category(models.Model):
     name = models.CharField(max_length=120, unique=True)
     slug = models.SlugField(max_length=140, unique=True, blank=True)
 
-    kind = models.CharField(   # ✅ REQUIRED
+    kind = models.CharField(
         max_length=10,
         choices=Kind.choices,
-        default=Kind.PROGRAM,  # existing rows become "Program" automatically
+        default=Kind.PROGRAM,
     )
+
+    # ✅ mini-description (one-liner)
+    tagline = models.CharField(max_length=160, blank=True)
 
     short_description = models.TextField(blank=True)
     long_description = models.TextField(blank=True)
 
-    image = models.ImageField(
-        upload_to=category_image_upload_to,
-        blank=True,
-        null=True,
-    )
-
+    image = models.ImageField(upload_to=category_image_upload_to, blank=True, null=True)
     sort_order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
@@ -59,6 +57,23 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CategoryBullet(models.Model):
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name="bullets",
+    )
+    text = models.CharField(max_length=220)
+    sort_order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+
+    def __str__(self):
+        return f"{self.category.name} • {self.text[:40]}"
 
 
 class Product(models.Model):
@@ -166,3 +181,132 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f"{self.product.name} - Image #{self.id}"
+
+class Feedback(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    # ✅ New: link to Product (optional)
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="feedbacks",
+    )
+    testimonial = models.TextField()
+    image = models.ImageField(upload_to='feedback_images/')
+    star_rating = models.PositiveIntegerField(default=5)
+    is_active = models.BooleanField(default=True)
+
+    # ✅ New fields:
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+    class Meta:
+        verbose_name = "Feedback"
+        verbose_name_plural = "Feedbacks"
+
+def blog_image_upload_to(instance, filename: str) -> str:
+    safe_slug = instance.slug or slugify(instance.title)
+    return f"blog/{safe_slug}/{filename}"
+
+
+class BlogPost(models.Model):
+    class Topic(models.TextChoices):
+        WEIGHT = "weight", "Weight Management"
+        PEPTIDES = "peptides", "Peptide Therapy"
+        SKIN = "skin", "Skin Treatments"
+        HAIR = "hair", "Hair Health"
+        WELLNESS = "wellness", "Wellness Therapy"
+        PRIMARY = "primary", "Primary Care"
+
+    title = models.CharField(max_length=220)
+    slug = models.SlugField(max_length=240, unique=True, blank=True)
+
+    topic = models.CharField(
+        max_length=20,
+        choices=Topic.choices,
+        default=Topic.WEIGHT,
+    )
+
+    # Chip / badge label (shown in cards)
+    badge_label = models.CharField(max_length=80, blank=True)
+
+    # Short teaser for cards + previews
+    excerpt = models.TextField(
+        help_text="Short teaser used on homepage and blog listing."
+    )
+
+    # Full article content (for a future detail page)
+    body = models.TextField(
+        help_text="Full blog content (HTML or Markdown)."
+    )
+
+    main_image = models.ImageField(
+        upload_to=blog_image_upload_to,
+        help_text="Main hero image for this blog.",
+    )
+
+    read_time_label = models.CharField(
+        max_length=40,
+        default="4–6 min read",
+        help_text="E.g. '4 min read', '6–8 min read'",
+    )
+
+    published_at = models.DateField(default=timezone.now)
+
+    # Optional bullets for the feature panel on blogs page
+    bullet_1 = models.CharField(max_length=200, blank=True)
+    bullet_2 = models.CharField(max_length=200, blank=True)
+    bullet_3 = models.CharField(max_length=200, blank=True)
+
+    # Where it appears
+    is_featured_home = models.BooleanField(
+        default=False,
+        help_text="Show in the home 'Latest Health Blogs' section.",
+    )
+    is_featured_page = models.BooleanField(
+        default=False,
+        help_text="Use as the main feature card on the Blogs & Updates page.",
+    )
+
+    # Control visibility
+    is_active = models.BooleanField(
+        default=True,
+        help_text="Uncheck to hide this post everywhere.",
+    )
+
+    sort_order = models.PositiveIntegerField(
+        default=0,
+        help_text="Manual ordering (lower = higher priority).",
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["sort_order", "-published_at", "-id"]
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        if not self.badge_label:
+            self.badge_label = self.get_topic_display()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+
+class NewsletterSubscription(models.Model):
+    email = models.EmailField(unique=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    unsubscribed_at = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return self.email

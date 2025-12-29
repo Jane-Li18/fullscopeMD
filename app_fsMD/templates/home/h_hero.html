@@ -1,45 +1,91 @@
 {% load static %}
 
-<section class="hero-section d-flex align-items-end min-vh-100">
-    <div class="container">
-        <div class="row align-items-center justify-content-center">
-            
-            <!-- Text side -->
-            <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
-                <div class="mb-3 fade-in-left fade-in delay-1 fade-blocked">
-                    <h3>
-                        <img src="{% static 'images/favicon.ico' %}"
-                             alt="FullScopeMD icon"
-                             class="logo-icon">
-                            <span class="navbar-brand-title brand-title d-none d-sm-inline">
-                                <span class="text-primary-accent">Full</span><span class="text-secondary-accent">Scope</span><span class="text-tertiary-accent">MD</span>
-                            </span>
-                    </h3>
-                </div>
-
-                <h1 class="mb-3 fade-in-left fade-in delay-2 fade-blocked">
-                    Professional Medical Care Made Clear, Safe, and Accessible
-                </h1>
-
-                <p class="mb-4 fade-in-left fade-in delay-4 fade-blocked">
-                    Access high-quality telemedicine with licensed U.S. providers, personalized treatment,
-                    and nationwide delivery at pricing designed to stay accessible.
-                </p>
-
-                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start fade-in-left fade-in delay-5 fade-blocked">
-                    <a href="#" class="btn btn-primary">Appointment</a>
-                    <a href="#" class="btn btn-outline-primary">Learn More +</a>
-                </div>
+<section class="hero-section hero-banner style-1 pt-3">
+  <div class="container">
+    <div class="inner-wrapper">
+      <div class="row align-items-start">
+        <div class="col-md-6 min-w-0">
+          <div class="hero-content min-w-0">
+            <div class="mb-1 fade-in-left fade-in delay-1 fade-blocked">
+              <h3 class="mb-0 d-flex align-items-center gap-2">
+                <img src="{% static 'images/favicon.ico' %}" alt="FullScopeMD icon" class="logo-icon">
+                <span class="navbar-brand-title brand-title">
+                  <span class="text-primary-accent">Full<span class="text-secondary-accent">Scope</span><span class="text-tertiary-accent">MD</span></span>
+                </span>
+              </h3>
             </div>
 
-            <!-- Image side -->
-            <div class="col-lg-5 text-center fade-in-right fade-in delay-2 fade-blocked">
-                <img 
-                    src="{% static 'images/hero3.png' %}" 
-                    alt="Doctor Image" 
-                    class="img-fluid hero-image mx-lg-auto">
+            <h1 class="title wow fadeInUp mb-1 fade-in-left fade-in delay-2 fade-blocked" data-wow-delay="0.2s" data-wow-duration="0.8s">
+              Professional Medical Care Made Clear, Safe, and Accessible
+            </h1>
+
+            <div class="content-bx style-2 secondary wow fadeInUp fade-in-left fade-in delay-4 fade-blocked" data-wow-delay="0.4s" data-wow-duration="0.8s">
+              Access high-quality telemedicine with licensed U.S. providers, personalized treatment, and nationwide delivery at pricing designed to stay accessible.
+            </div>
+            {% include "components/trust_bar.html" %}
+            <div class="d-flex flex-column gap-3 wow fadeInUp fade-in-left fade-in delay-5 fade-blocked mb-1" data-wow-delay="0.6s" data-wow-duration="0.8s">
+              <div class="d-flex flex-column flex-sm-row gap-3">
+                <a href="#" class="btn btn-primary">Appointment</a>
+                <a href="{% url 'prgrms_srvcs' %}" class="btn btn-outline-primary">Learn More +</a>
+              </div>
             </div>
 
+          </div>
         </div>
+
+        <div class="col-md-6 min-w-0 wow fadeInRight fade-in-right fade-in delay-1 fade-blocked" data-wow-delay="0.8s" data-wow-duration="0.8s">
+          <div class="hero-thumbnail position-relative" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)">
+            <img class="thumbnail hero-image" src="{% static 'images/home/hero.png' %}" alt="Doctor Image">
+
+            <div class="item5" data-bottom-top="transform: translateY(-30px)" data-top-bottom="transform: translateY(30px)">
+              <a class="popup-youtube" href="https://www.youtube.com/watch?v=o8OgzQdA70c">
+                <div class="word-rotate-box">
+                  <span class="text__char" style="--char-rotate:0deg;">M</span>
+                  <span class="text__char" style="--char-rotate:15deg;">o</span>
+                  <span class="text__char" style="--char-rotate:30deg;">r</span>
+                  <span class="text__char" style="--char-rotate:45deg;">e</span>
+                  <span class="text__char" style="--char-rotate:60deg;">&nbsp;</span>
+                  <span class="text__char" style="--char-rotate:75deg;">C</span>
+                  <span class="text__char" style="--char-rotate:90deg;">o</span>
+                  <span class="text__char" style="--char-rotate:105deg;">l</span>
+                  <span class="text__char" style="--char-rotate:120deg;">l</span>
+                  <span class="text__char" style="--char-rotate:135deg;">e</span>
+                  <span class="text__char" style="--char-rotate:150deg;">c</span>
+                  <span class="text__char" style="--char-rotate:165deg;">t</span>
+                  <span class="text__char" style="--char-rotate:180deg;">i</span>
+                  <span class="text__char" style="--char-rotate:195deg;">o</span>
+                  <span class="text__char" style="--char-rotate:210deg;">n</span>
+                  <span class="text__char" style="--char-rotate:225deg;">&nbsp;</span>
+                  <span class="text__char" style="--char-rotate:240deg;">E</span>
+                  <span class="text__char" style="--char-rotate:255deg;">x</span>
+                  <span class="text__char" style="--char-rotate:270deg;">p</span>
+                  <span class="text__char" style="--char-rotate:285deg;">l</span>
+                  <span class="text__char" style="--char-rotate:300deg;">o</span>
+                  <span class="text__char" style="--char-rotate:315deg;">r</span>
+                  <span class="text__char" style="--char-rotate:330deg;">e</span>
+                  <div class="center-icon"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </a>
+            </div>
+
+            {% include "components/stars.html" %}
+          </div>
+        </div>
+      </div>
+
+      <div class="item1">
+        <div class="widget-rating1 fade-in-left fade-in delay-2 fade-blocked">
+          <ul class="star-list">
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star"></i></li>
+          </ul>
+          <span class="rating me-1">(4.8)</span>
+          <span class="text">12k+ ratings on Google</span>
+        </div>
+      </div>
     </div>
+  </div>
 </section>

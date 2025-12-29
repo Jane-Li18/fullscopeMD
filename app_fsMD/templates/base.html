@@ -29,7 +29,6 @@
     <link rel="stylesheet" href="{% static 'css/home/h_home.css' %}">
     <link rel="stylesheet" href="{% static 'css/category/c_category.css' %}">
     <link rel="stylesheet" href="{% static 'css/components/mrqs.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/appointment.css' %}">
 
     {% block extra_head %}{% endblock extra_head %}
   </head>
@@ -53,7 +52,7 @@
       <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
     </button>
 
-    <main class="mt-5">
+    <main class="site-main pb-lg-6">
       {% block content %}{% endblock %}
     </main>
 
@@ -136,6 +135,7 @@
             crossorigin="anonymous"></script>
 
     <script src="{% static 'js/script.js' %}"></script>
+
 
     {% block extra_scripts %}{% endblock extra_scripts %}
   </body>

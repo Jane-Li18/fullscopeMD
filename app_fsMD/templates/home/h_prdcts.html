@@ -1,14 +1,14 @@
 {% load static %}
 
 {% if embed is not True %}
-<section class="h-prdcts-section d-flex align-items-center min-vh-50">
-  <div class="container py-5">
+<section class="h-prdcts-section">
+  <div class="container py-4 py-lg-5">
 {% endif %}
 
     {% if show_header is not False %}
       <div class="row mb-2 mb-lg-5">
         <div class="col-12 text-center fade-in-up fade-in delay-1 fade-blocked scroll-animate">
-          <h2 class="mb-2">Featured Clinical Products</h2>
+          <h1 class="mb-2">Featured Clinical Medication</h1>
           <p class="mb-0">
             Clinically selected products designed to support your treatment plan,
             enhance results, and elevate your daily care routine.
@@ -48,7 +48,7 @@
             <div class="d-flex flex-column flex-grow-1 p-3">
               <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
                 <span class="product-pill">{{ p.category.name }}</span>
-                <span class="product-pill product-pill--muted">{{ p.category.get_kind_display }}</span>
+                {% comment %} <span class="product-pill product-pill--muted">{{ p.category.get_kind_display }}</span> {% endcomment %}
               </div>
 
               <h3 class="product-title mb-0">
@@ -62,7 +62,7 @@
                 </a>
               </h3>
 
-              {% if p.short_details %}
+              {% comment %} {% if p.short_details %}
                 <div class="product-desc mt-2">
                   <div class="product-desc-clamp" data-desc-clamp>
                     {{ p.short_details }}
@@ -84,7 +84,7 @@
                     <span data-desc-toggle-label>See more…</span>
                   </button>
                 </div>
-              {% endif %}
+              {% endif %} {% endcomment %}
 
               <div class="product-divider my-3"></div>
 

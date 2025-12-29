@@ -1,85 +1,99 @@
 {% load static %}
-<section class="result-section d-flex align-items-center min-vh-50">
-    <div class="container py-5">
-        <!-- Heading -->
-        <div class="row mb-4">
-            <div class="col-12 text-center">
-                <h2 class="mb-2 fade-in-up fade-in delay-1 fade-blocked scroll-animate">
-                    Treatment Results Gallery
-                </h2>
-                <p class="mb-0 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
-                    Real, visible changes from our evidence-based care.
-                </p>
-            </div>
+
+<section class="result-section d-flex align-items-center min-vh-50 position-relative overflow-hidden">
+  {% include "components/stars.html" %}
+
+  <div class="container py-5 position-relative">
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+        <h1 class="mb-2 fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+          Treatment Results Gallery
+        </h1>
+        <p class="mb-0 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+          Before-and-after examples from real treatment plans. Results vary by individual, timeline, and consistency.
+        </p>
+        <div class="text-caption-sm text-muted mt-2 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+          Drag the slider to compare • Photos are for educational purposes and do not guarantee similar outcomes.
         </div>
-
-        <!-- Cards -->
-        <div class="row g-4">
-
-            <!-- CARD 01: Weight Loss -->
-            <div class="col-12 col-lg-6 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
-                <div class="result-card shadow-md-brand border-brand rounded-4 p-3 p-sm-4 h-100">
-                    <h3 class="mb-3">Weight Loss</h3>
-
-                    <div class="result-slider" data-initial="50">
-                        <!-- AFTER (base image) -->
-                        <div class="result-slider-img result-slider-after">
-                            <img src="{% static 'images/result/result2.jpg' %}" alt="Weight loss after">
-                        </div>
-
-                        <!-- BEFORE (clipped overlay) -->
-                        <div class="result-slider-img result-slider-before">
-                            <img src="{% static 'images/result/result1.jpg' %}" alt="Weight loss before">
-                        </div>
-
-                        <!-- Middle divider line -->
-                        <div class="result-slider-divider"></div>
-
-                        <!-- Labels -->
-                        <div class="result-label result-label-before">Before</div>
-                        <div class="result-label result-label-after">After</div>
-
-                        <!-- Handle (drag this) -->
-                        <div class="result-slider-handle">
-                            <i class="fa-solid fa-chevron-left"></i>
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CARD 02: Hair-Loss Care -->
-            <div class="col-12 col-lg-6 fade-in-up fade-in delay-4 fade-blocked scroll-animate">
-                <div class="result-card shadow-md-brand border-brand rounded-4 p-3 p-sm-4 h-100">
-                    <h3 class="mb-3">Hair-Loss Care</h3>
-
-                    <div class="result-slider" data-initial="50">
-                        <!-- AFTER (base image) -->
-                        <div class="result-slider-img result-slider-after">
-                            <img src="{% static 'images/result/result4.jpg' %}" alt="Hair-Loss after">
-                        </div>
-
-                        <!-- BEFORE (clipped overlay) -->
-                        <div class="result-slider-img result-slider-before">
-                            <img src="{% static 'images/result/result3.jpg' %}" alt="Hair-Loss before">
-                        </div>
-
-                        <!-- Middle divider line -->
-                        <div class="result-slider-divider"></div>
-
-                        <!-- Labels -->
-                        <div class="result-label result-label-before">Before</div>
-                        <div class="result-label result-label-after">After</div>
-
-                        <!-- Handle (drag this) -->
-                        <div class="result-slider-handle">
-                            <i class="fa-solid fa-chevron-left"></i>
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+      </div>
     </div>
+
+    <div class="row g-4">
+      <div class="col-12 col-lg-6 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+        <div class="result-card shadow-md-brand border-brand rounded-4 p-3 p-sm-4 h-100">
+          <div class="d-flex align-items-start justify-content-between gap-3 mb-2">
+            <h3 class="mb-0">Weight Loss</h3>
+            <span class="badge rounded-pill bg-light text-muted border">Lifestyle + Medical Support</span>
+          </div>
+
+          <p class="text-body-sm text-muted mb-3">
+            Structured care combining clinician guidance, nutrition strategy, and follow-up to support steady, sustainable progress.
+          </p>
+
+          <div class="result-slider" data-initial="50" role="group" aria-label="Weight loss before and after slider">
+            <div class="result-slider-img result-slider-after">
+              <img src="{% static 'images/home/after1.jpg' %}" alt="Weight loss after">
+            </div>
+            <div class="result-slider-img result-slider-before">
+              <img src="{% static 'images/home/before1.jpg' %}" alt="Weight loss before">
+            </div>
+
+            <div class="result-slider-divider"></div>
+
+            <div class="result-label result-label-before">Before</div>
+            <div class="result-label result-label-after">After</div>
+
+            <div class="result-slider-handle" aria-hidden="true">
+              <i class="fa-solid fa-chevron-left"></i>
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2 mt-3">
+            <span class="badge rounded-pill bg-primary-subtle text-primary-emphasis">Clinician-reviewed plan</span>
+            <span class="badge rounded-pill bg-success-subtle text-success-emphasis">Ongoing check-ins</span>
+            <span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis">Progress tracking</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6 fade-in-up fade-in delay-4 fade-blocked scroll-animate">
+        <div class="result-card shadow-md-brand border-brand rounded-4 p-3 p-sm-4 h-100">
+          <div class="d-flex align-items-start justify-content-between gap-3 mb-2">
+            <h3 class="mb-0">Hair-Loss Care</h3>
+            <span class="badge rounded-pill bg-light text-muted border">Consistency Matters</span>
+          </div>
+
+          <p class="text-body-sm text-muted mb-3">
+            Evidence-based hair restoration support designed to improve shedding control and density over time with regular use.
+          </p>
+
+          <div class="result-slider" data-initial="50" role="group" aria-label="Hair-loss care before and after slider">
+            <div class="result-slider-img result-slider-after">
+              <img src="{% static 'images/home/after2.jpg' %}" alt="Hair-loss after">
+            </div>
+            <div class="result-slider-img result-slider-before">
+              <img src="{% static 'images/home/before2.jpg' %}" alt="Hair-loss before">
+            </div>
+
+            <div class="result-slider-divider"></div>
+
+            <div class="result-label result-label-before">Before</div>
+            <div class="result-label result-label-after">After</div>
+
+            <div class="result-slider-handle" aria-hidden="true">
+              <i class="fa-solid fa-chevron-left"></i>
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2 mt-3">
+            <span class="badge rounded-pill bg-primary-subtle text-primary-emphasis">Clinician guidance</span>
+            <span class="badge rounded-pill bg-info-subtle text-info-emphasis">Routine-based care</span>
+            <span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis">Follow-up support</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

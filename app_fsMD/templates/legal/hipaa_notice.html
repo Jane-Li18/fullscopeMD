@@ -1,67 +1,121 @@
-{% extends "base.html" %}
+{% extends "page_base.html" %}
 {% load static %}
 
 {% block title %}HIPAA Notice of Privacy Practices{% endblock %}
+{% block page_title %}HIPAA Notice{% endblock %}
+{% block page_breadcrumb %}HIPAA Notice{% endblock %}
 
-{% block content %}
+{% block page_style %}
+background-image:
+  linear-gradient(120deg, rgba(0,0,0,.6), rgba(0,0,0,.4)),
+  url('{% static "images/bg_page.png" %}');
+{% endblock %}
 
-<section id="top" class="hipaa-npp-section py-5">
+{% block page_content %}
+
+<section id="top" class="py-3 py-lg-4">
   <div class="container">
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 col-lg-11 col-xl-10">
 
-    <!-- Header (same branding pattern) -->
-    <div class="row justify-content-center mb-4">
-      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
-        <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
-          <i class="fa-solid fa-shield-heart icon-solid icon-sm"></i>
-          <small class="mb-0 text-white">HIPAA Notice</small>
-        </span>
+        <!-- Header (same layout as Terms) -->
+        <div class="row justify-content-center mb-4">
+          <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
+            <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
+              <i class="fa-solid fa-shield-heart icon-solid icon-sm"></i>
+              <small class="mb-0 text-white">HIPAA Notice</small>
+            </span>
 
-        <h1 class="mt-3 mb-2">HIPAA NOTICE OF PRIVACY PRACTICES</h1>
-        <p class="mb-0">Last Updated: December 5, 2025</p>
-      </div>
-    </div>
+            <p class="mt-3 mb-2 text-caption-sm text-muted">Last Updated: December 5, 2025</p>
 
-    <!-- Wrapper (same as Terms: white card only) -->
-    <div class="fade-in-up fade-in delay-2 fade-blocked">
-      <div class="row g-4 justify-content-center">
-        <div class="col-12 col-lg-10">
-          <div class="p-4 p-lg-5 bg-white rounded-4">
+            <p class="mb-0 text-body-sm text-muted mx-auto" style="max-width: 72ch;">
+              This notice explains how medical information about you may be used and disclosed and how you can access it.
+            </p>
+          </div>
+        </div>
 
-            <!-- Big notice -->
-            <div class="p-3 p-md-4 bg-muted border-brand rounded-4 fade-in-up fade-in delay-3 fade-blocked">
-              <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 align-items-start">
-                <span class="icon-button shadow-sm-brand flex-shrink-0">
-                  <i class="fa-solid fa-triangle-exclamation icon-gradient icon-md"></i>
-                </span>
-                <div class="flex-grow-1">
-                  <div class="fw-semibold text-uppercase">
-                    This notice describes how medical information about you may be used and disclosed and how you can get access to this information.
-                  </div>
-                  <div class="text-body-sm mb-0">Please review it carefully.</div>
-                </div>
+        <div class="divider my-4"></div>
+
+        <div class="row g-4">
+          <!-- Sticky "On this page" -->
+          <div class="col-12 col-lg-4">
+            <div class="position-sticky" style="top: 96px;">
+              <div class="bg-muted rounded-4 border p-3 fade-in-up fade-in delay-1 fade-blocked">
+                <div class="fw-semibold mb-2">On this page</div>
+                <nav class="d-grid gap-1 small">
+                  <a class="text-body-sm hover-underline-accent" href="#hipaa-notice">Important notice</a>
+                  <a class="text-body-sm hover-underline-accent" href="#hipaa-1">1. Our Responsibilities</a>
+                  <a class="text-body-sm hover-underline-accent" href="#hipaa-2">2. Uses &amp; Disclosures</a>
+                  <a class="text-body-sm hover-underline-accent" href="#hipaa-3">3. Authorization Required</a>
+                  <a class="text-body-sm hover-underline-accent" href="#hipaa-4">4. Your Rights</a>
+                  <a class="text-body-sm hover-underline-accent" href="#hipaa-5">5. Telehealth Practices</a>
+                  <a class="text-body-sm hover-underline-accent" href="#hipaa-6">6. How We Protect Info</a>
+                  <a class="text-body-sm hover-underline-accent" href="#hipaa-7">7. Changes to Notice</a>
+                  <a class="text-body-sm hover-underline-accent" href="#hipaa-8">8. Questions or Complaints</a>
+                  <a class="text-body-sm hover-underline-accent" href="#contact-us">Contact Us</a>
+                </nav>
+              </div>
+
+              <div class="mt-3 d-grid gap-2 fade-in-up fade-in delay-2 fade-blocked">
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
+                  Contact Us
+                  <i class="fa-solid fa-arrow-right ms-2"></i>
+                </a>
               </div>
             </div>
+          </div>
 
-            <div class="divider my-4"></div>
-
-            <!-- Body -->
+          <!-- Content -->
+          <div class="col-12 col-lg-8">
             <div class="d-grid gap-4">
 
-              <div class="fade-in-up fade-in delay-4 fade-blocked">
+              <!-- Big notice -->
+              <div id="hipaa-notice" style="scroll-margin-top: 110px;" class="fade-in-up fade-in delay-1 fade-blocked">
+                <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
+                  <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 align-items-start">
+                    <span class="icon-button shadow-sm-brand flex-shrink-0">
+                      <i class="fa-solid fa-triangle-exclamation icon-gradient icon-md"></i>
+                    </span>
+                    <div class="flex-grow-1">
+                      <div class="fw-semibold text-uppercase">
+                        This notice describes how medical information about you may be used and disclosed and how you can get access to this information.
+                      </div>
+                      <div class="text-body-sm mb-0">Please review it carefully.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="hipaa-1" style="scroll-margin-top: 110px;" class="fade-in-up fade-in delay-2 fade-blocked">
                 <h3 class="mb-2">1. Our Responsibilities</h3>
                 <p class="mb-2">FullScopeMD (“we,” “us,” “our”) is required by law to:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Maintain the privacy and security of your Protected Health Information (“PHI”).</li>
-                  <li class="text-body-sm">Provide you with this Notice of our legal duties and privacy practices.</li>
-                  <li class="text-body-sm">Notify you if a breach occurs that may compromise the privacy or security of your PHI.</li>
-                  <li class="text-body-sm">Follow the practices described in this Notice unless we update it in writing.</li>
+
+                <!-- DOT bullets (restored) -->
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start">
+                    <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                    <span class="text-body-sm">Maintain the privacy and security of your Protected Health Information (“PHI”).</span>
+                  </li>
+                  <li class="d-flex gap-2 align-items-start">
+                    <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                    <span class="text-body-sm">Provide you with this Notice of our legal duties and privacy practices.</span>
+                  </li>
+                  <li class="d-flex gap-2 align-items-start">
+                    <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                    <span class="text-body-sm">Notify you if a breach occurs that may compromise the privacy or security of your PHI.</span>
+                  </li>
+                  <li class="d-flex gap-2 align-items-start">
+                    <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                    <span class="text-body-sm">Follow the practices described in this Notice unless we update it in writing.</span>
+                  </li>
                 </ul>
+
                 <p class="mt-3 mb-0">
                   Your PHI includes information that identifies you and relates to your past, present, or future health, treatment, or payment for services.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-5 fade-blocked">
+              <div id="hipaa-2" style="scroll-margin-top: 110px;" class="fade-in-up fade-in delay-3 fade-blocked">
                 <h3 class="mb-2">2. How We May Use and Disclose Your PHI</h3>
                 <p class="mb-3">
                   We may use or disclose your PHI in the following ways without obtaining your written permission:
@@ -74,11 +128,25 @@
                       We may use and share PHI with physicians, nurse practitioners, physician assistants, pharmacists, labs, and other healthcare professionals involved in your care.
                     </p>
                     <div class="text-body-sm fw-semibold mb-1">Examples:</div>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Reviewing your medical history</li>
-                      <li class="text-body-sm">Conducting telehealth evaluations</li>
-                      <li class="text-body-sm">Sending prescriptions to pharmacies</li>
-                      <li class="text-body-sm">Ordering labs and reviewing results</li>
+
+                    <!-- DOT bullets -->
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                        <span class="text-body-sm">Reviewing your medical history</span>
+                      </li>
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                        <span class="text-body-sm">Conducting telehealth evaluations</span>
+                      </li>
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                        <span class="text-body-sm">Sending prescriptions to pharmacies</span>
+                      </li>
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                        <span class="text-body-sm">Ordering labs and reviewing results</span>
+                      </li>
                     </ul>
                   </div>
 
@@ -86,10 +154,21 @@
                     <div class="fw-semibold">B. Payment</div>
                     <p class="mb-2">We may use and disclose PHI to obtain payment for services.</p>
                     <div class="text-body-sm fw-semibold mb-1">Examples:</div>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Processing payments</li>
-                      <li class="text-body-sm">Determining coverage</li>
-                      <li class="text-body-sm">Sending billing statements</li>
+
+                    <!-- DOT bullets -->
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                        <span class="text-body-sm">Processing payments</span>
+                      </li>
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                        <span class="text-body-sm">Determining coverage</span>
+                      </li>
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                        <span class="text-body-sm">Sending billing statements</span>
+                      </li>
                     </ul>
                   </div>
 
@@ -97,11 +176,25 @@
                     <div class="fw-semibold">C. Healthcare Operations</div>
                     <p class="mb-2">We may use PHI to manage our business and improve the quality of care.</p>
                     <div class="text-body-sm fw-semibold mb-1">Examples:</div>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Quality assessments</li>
-                      <li class="text-body-sm">Staff training</li>
-                      <li class="text-body-sm">Customer service</li>
-                      <li class="text-body-sm">Security and fraud prevention</li>
+
+                    <!-- DOT bullets -->
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                        <span class="text-body-sm">Quality assessments</span>
+                      </li>
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                        <span class="text-body-sm">Staff training</span>
+                      </li>
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                        <span class="text-body-sm">Customer service</span>
+                      </li>
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                        <span class="text-body-sm">Security and fraud prevention</span>
+                      </li>
                     </ul>
                   </div>
 
@@ -116,13 +209,15 @@
                   <div>
                     <div class="fw-semibold">E. Required or Permitted by Law</div>
                     <p class="mb-2">We may share your PHI when required by federal, state, or local law, including:</p>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Public health reporting</li>
-                      <li class="text-body-sm">Abuse, neglect, or domestic violence reporting</li>
-                      <li class="text-body-sm">Court orders or subpoenas</li>
-                      <li class="text-body-sm">Law enforcement requests</li>
-                      <li class="text-body-sm">Health oversight agencies</li>
-                      <li class="text-body-sm">Workers’ compensation claims</li>
+
+                    <!-- DOT bullets -->
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Public health reporting</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Abuse, neglect, or domestic violence reporting</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Court orders or subpoenas</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Law enforcement requests</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Health oversight agencies</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Workers’ compensation claims</span></li>
                     </ul>
                   </div>
 
@@ -135,21 +230,24 @@
                 </div>
               </div>
 
-              <div class="fade-in-up fade-in delay-6 fade-blocked">
+              <div id="hipaa-3" style="scroll-margin-top: 110px;" class="fade-in-up fade-in delay-4 fade-blocked">
                 <h3 class="mb-2">3. Uses and Disclosures That Require Your Written Authorization</h3>
                 <p class="mb-2">We must obtain your written authorization before using or disclosing your PHI for:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Marketing communications not otherwise permitted by HIPAA</li>
-                  <li class="text-body-sm">Sale of PHI</li>
-                  <li class="text-body-sm">Most psychotherapy notes</li>
-                  <li class="text-body-sm">Any other use or disclosure not described in this Notice</li>
+
+                <!-- DOT bullets -->
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Marketing communications not otherwise permitted by HIPAA</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Sale of PHI</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Most psychotherapy notes</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Any other use or disclosure not described in this Notice</span></li>
                 </ul>
+
                 <p class="mt-3 mb-0">
                   You may revoke authorization at any time in writing, except to the extent PHI has already been used or disclosed.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="hipaa-4" style="scroll-margin-top: 110px;" class="fade-in-up fade-in delay-5 fade-blocked">
                 <h3 class="mb-2">4. Your Rights Regarding Your PHI</h3>
 
                 <div class="d-grid gap-3">
@@ -161,19 +259,32 @@
                   <div>
                     <div class="fw-semibold">B. Right to Amend</div>
                     <p class="mb-2">You may request corrections to your PHI if it is incorrect or incomplete. We may deny a request if:</p>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">We did not create the information</li>
-                      <li class="text-body-sm">It is accurate as-is</li>
-                      <li class="text-body-sm">Certain other legal exceptions apply</li>
+
+                    <!-- CHECK bullets (kept for this “criteria” style) -->
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle-check text-primary-accent mt-1"></i>
+                        <span class="text-body-sm">We did not create the information</span>
+                      </li>
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle-check text-primary-accent mt-1"></i>
+                        <span class="text-body-sm">It is accurate as-is</span>
+                      </li>
+                      <li class="d-flex gap-2 align-items-start">
+                        <i class="fa-solid fa-circle-check text-primary-accent mt-1"></i>
+                        <span class="text-body-sm">Certain other legal exceptions apply</span>
+                      </li>
                     </ul>
                   </div>
 
                   <div>
                     <div class="fw-semibold">C. Right to Request Restrictions</div>
                     <p class="mb-2">You may request restrictions on how we use or disclose your PHI. We are not required to agree to most restrictions, except when:</p>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">You pay for a service completely out of pocket AND</li>
-                      <li class="text-body-sm">You request that we not disclose that information to your health plan</li>
+
+                    <!-- DOT bullets -->
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">You pay for a service completely out of pocket AND</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">You request that we not disclose that information to your health plan</span></li>
                     </ul>
                   </div>
 
@@ -184,14 +295,14 @@
 
                   <div>
                     <div class="fw-semibold">E. Right to an Accounting of Disclosures</div>
-                    <p class="mb-2">
-                      You have the right to request a list of times we shared your PHI for six years prior to your request, excluding:
-                    </p>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Treatment</li>
-                      <li class="text-body-sm">Payment</li>
-                      <li class="text-body-sm">Healthcare operations</li>
-                      <li class="text-body-sm">Disclosures you authorized</li>
+                    <p class="mb-2">You have the right to request a list of times we shared your PHI for six years prior to your request, excluding:</p>
+
+                    <!-- DOT bullets -->
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Treatment</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Payment</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Healthcare operations</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Disclosures you authorized</span></li>
                     </ul>
                   </div>
 
@@ -207,31 +318,36 @@
                 </div>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="hipaa-5" style="scroll-margin-top: 110px;" class="fade-in-up fade-in delay-6 fade-blocked">
                 <h3 class="mb-2">5. Telehealth-Specific Privacy Practices</h3>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Electronic transmission of PHI may occur through secure video, chat, photo uploads, or online forms.</li>
-                  <li class="text-body-sm">We use encryption and HIPAA-compliant systems to protect PHI.</li>
-                  <li class="text-body-sm">We do not record telehealth sessions unless required by law or explicitly authorized by you.</li>
+
+                <!-- DOT bullets -->
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Electronic transmission of PHI may occur through secure video, chat, photo uploads, or online forms.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">We use encryption and HIPAA-compliant systems to protect PHI.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">We do not record telehealth sessions unless required by law or explicitly authorized by you.</span></li>
                 </ul>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="hipaa-6" style="scroll-margin-top: 110px;" class="fade-in-up fade-in delay-7 fade-blocked">
                 <h3 class="mb-2">6. How We Protect Your Information</h3>
                 <p class="mb-2">We use a combination of administrative, technical, and physical safeguards, including:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Encryption of PHI in transit and at rest</li>
-                  <li class="text-body-sm">Multi-factor authentication</li>
-                  <li class="text-body-sm">Access controls and audit logs</li>
-                  <li class="text-body-sm">Secure servers and HIPAA-compliant platforms</li>
-                  <li class="text-body-sm">Regular risk assessments</li>
+
+                <!-- DOT bullets -->
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Encryption of PHI in transit and at rest</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Multi-factor authentication</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Access controls and audit logs</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Secure servers and HIPAA-compliant platforms</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Regular risk assessments</span></li>
                 </ul>
+
                 <p class="mt-3 mb-0 text-body-sm">
                   Although we use reasonable safeguards, no system can guarantee 100% security.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="hipaa-7" style="scroll-margin-top: 110px;" class="fade-in-up fade-in delay-7 fade-blocked">
                 <h3 class="mb-2">7. Changes to This Notice</h3>
                 <p class="mb-0">
                   We may update this Notice at any time. Updated versions will be posted on our website with a new “Last Updated” date.
@@ -239,7 +355,7 @@
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="hipaa-8" style="scroll-margin-top: 110px;" class="fade-in-up fade-in delay-7 fade-blocked">
                 <h3 class="mb-2">8. Questions or Complaints</h3>
 
                 <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
@@ -249,7 +365,10 @@
                       Email:
                       <a class="hover-underline-accent text-break" href="mailto:support@fullscopemd.com">support@fullscopemd.com</a>
                     </div>
-                    <div class="text-body-sm">Phone: <span class="text-secondary-text">[XXX-XXX-XXXX]</span></div>
+                    <div class="text-body-sm">
+                      Phone:
+                      <a class="hover-underline-accent" href="tel:+13072187845">+1 (307) 218-7845</a>
+                    </div>
                   </div>
 
                   <div class="divider my-4"></div>
@@ -269,21 +388,88 @@
                 </div>
               </div>
 
+              <!-- Contact Us (same cards) -->
+              <div id="contact-us" style="scroll-margin-top: 110px;" class="fade-in-up fade-in delay-7 fade-blocked">
+                <h3 class="mb-2">Contact Us</h3>
+
+                <div class="row g-3">
+                  <div class="col-12 col-md-6">
+                    <div class="p-3 bg-white border rounded-4 h-100">
+                      <div class="d-flex gap-3 align-items-start">
+                        <span class="icon-button shadow-sm-brand flex-shrink-0">
+                          <i class="fa-solid fa-location-dot icon-gradient icon-md"></i>
+                        </span>
+                        <div>
+                          <div class="fw-semibold">Address</div>
+                          <div class="text-body-sm text-muted mb-0">Sheridan, Wyoming</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="p-3 bg-white border rounded-4 h-100">
+                      <div class="d-flex gap-3 align-items-start">
+                        <span class="icon-button shadow-sm-brand flex-shrink-0">
+                          <i class="fa-solid fa-phone icon-gradient icon-md"></i>
+                        </span>
+                        <div>
+                          <div class="fw-semibold">Phone Number</div>
+                          <div class="text-body-sm mb-0">
+                            <a class="hover-underline-accent" href="tel:+13072187845">+1 (307) 218-7845</a>
+                          </div>
+                          <div class="text-caption-sm text-muted mb-0">Connected to GHL</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="p-3 bg-white border rounded-4 h-100">
+                      <div class="d-flex gap-3 align-items-start">
+                        <span class="icon-button shadow-sm-brand flex-shrink-0">
+                          <i class="fa-solid fa-envelope icon-gradient icon-md"></i>
+                        </span>
+                        <div>
+                          <div class="fw-semibold">Email</div>
+                          <div class="text-body-sm mb-0">
+                            <a class="hover-underline-accent text-break" href="mailto:support@fullscopemd.com">support@fullscopemd.com</a>
+                          </div>
+                          <div class="text-caption-sm text-muted mb-0">Connected to GHL</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <div class="p-3 bg-white border rounded-4 h-100">
+                      <div class="d-flex gap-3 align-items-start">
+                        <span class="icon-button shadow-sm-brand flex-shrink-0">
+                          <i class="fa-solid fa-clock icon-gradient icon-md"></i>
+                        </span>
+                        <div>
+                          <div class="fw-semibold">Business Hours</div>
+                          <div class="text-body-sm text-muted mb-0">Mon - Sun | 8:00 AM - 5:00 PM EST</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
             <div class="divider my-4"></div>
 
             <div class="d-flex flex-column flex-sm-row gap-2 justify-content-between align-items-start align-items-sm-center">
               <small class="text-caption-sm mb-0">© {% now "Y" %} FullScopeMD. All rights reserved.</small>
-              <a class="text-body-sm hover-underline-accent" href="#top">Back to top</a>
             </div>
-
           </div>
         </div>
+
       </div>
     </div>
-
   </div>
 </section>
 
-{% endblock content %}
+{% endblock page_content %}

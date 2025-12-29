@@ -5,8 +5,11 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.cache import never_cache
 from django.conf import settings
 from django.core.cache import cache
-
-from .models import Category, Product
+from django.utils import timezone
+from django.shortcuts import redirect
+from django.urls import reverse
+from django.db.models import Prefetch
+from .models import Category, Product, CategoryBullet, Feedback, BlogPost, NewsletterSubscription
 from .cart import Cart
 
 
@@ -43,6 +46,9 @@ def cache_get(key: str, ttl: int, builder):
 # DATA HELPERS
 # =========================
 
+def _active_category_bullets_qs():
+    return CategoryBullet.objects.filter(is_active=True).order_by("sort_order", "id")
+
 def get_nav_programs():
     key = _ck("nav_programs")
     return cache_get(
@@ -50,10 +56,10 @@ def get_nav_programs():
         TTL_NAV,
         lambda: list(
             Category.objects.filter(is_active=True)
+            .prefetch_related(Prefetch("bullets", queryset=_active_category_bullets_qs()))
             .order_by("sort_order", "name")
         ),
     )
-
 
 def get_core_program_categories():
     key = _ck("core_categories")
@@ -68,8 +74,8 @@ def get_core_program_categories():
     )
 
 
-def get_index_products():
-    key = _ck("index_products")
+def get_home_products():
+    key = _ck("home_products")
     return cache_get(
         key,
         TTL_LIST,
@@ -90,14 +96,35 @@ def base(request):
     return render(request, "base.html", {"nav_programs": get_nav_programs()})
 
 
-def index(request):
+def home(request):
+    feedbacks = (
+        Feedback.objects
+        .filter(is_active=True)
+        .select_related('product')
+        .order_by('-created_at')
+    )
+
+    # Home blogs: only active + marked for home
+    home_posts = (
+        BlogPost.objects
+        .filter(is_active=True, is_featured_home=True)
+        .order_by("sort_order", "-published_at")[:5]
+    )
+    featured_post = home_posts[0] if home_posts else None
+
     return render(
         request,
-        "index.html",
+        "home.html",
         {
-            "nav_programs": get_nav_programs(),          # remove if context processor already provides it
+            "feedbacks": feedbacks,
+            "star_range": range(1, 6),
+            "nav_programs": get_nav_programs(),
             "categories": get_core_program_categories(),
-            "products": get_index_products(),
+            "products": get_home_products(),
+
+            # ✅ for home/h_blg.html
+            "home_posts": home_posts,
+            "featured_post": featured_post,
         },
     )
 
@@ -107,7 +134,22 @@ def contact(request):
 
 
 def about(request):
-    return render(request, "components/about.html", {"nav_programs": get_nav_programs()})
+    feedbacks = (
+        Feedback.objects
+        .filter(is_active=True)
+        .select_related("product")
+        .order_by("-created_at")
+    )
+
+    return render(
+        request,
+        "navbar/n_about.html",
+        {
+            "nav_programs": get_nav_programs(),
+            "feedbacks": feedbacks,
+            "star_range": range(1, 6),
+        },
+    )
 
 
 def faqs(request):
@@ -115,8 +157,46 @@ def faqs(request):
 
 
 def blgs_updts(request):
-    return render(request, "navbar/n_blgs_updts.html", {"nav_programs": get_nav_programs()})
+    nav_programs = get_nav_programs()
 
+    topic = request.GET.get("topic", "all")  # optional filter
+    slug = request.GET.get("slug")          # from home section click-through
+
+    posts = BlogPost.objects.filter(is_active=True)
+
+    if topic != "all":
+        posts = posts.filter(topic=topic)
+
+    posts = posts.order_by("sort_order", "-published_at")
+
+    featured_post = None
+    if slug:
+        featured_post = BlogPost.objects.filter(slug=slug, is_active=True).first()
+
+    if not featured_post:
+        featured_post = posts.filter(is_featured_page=True).first() or posts.first()
+
+    return render(
+        request,
+        "navbar/n_blgs_updts.html",
+        {
+            "nav_programs": nav_programs,
+            "posts": posts,
+            "featured_post": featured_post,
+            "active_topic": topic,
+        },
+    )
+
+def newsletter_subscribe(request):
+    if request.method == "POST":
+        email = request.POST.get("email", "").strip().lower()
+        if email:
+            sub, created = NewsletterSubscription.objects.get_or_create(email=email)
+            if not created and not sub.is_active:
+                sub.is_active = True
+                sub.unsubscribed_at = None
+                sub.save()
+    return redirect(request.META.get("HTTP_REFERER", reverse("blgs_updts")))
 
 def terms_conditions(request):
     return render(request, "legal/terms_conditions.html", {"nav_programs": get_nav_programs()})
@@ -367,3 +447,5 @@ def prgrms_srvcs(request):
         "services": services,
         "active_categories": categories,
     })
+
+

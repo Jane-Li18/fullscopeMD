@@ -2,7 +2,22 @@
 {% load static %}
 
 <style>
-  #fsmdSideRail{position:fixed;left:1rem;top:250px;z-index:1040;width:56px;border-radius:var(--radius-pill);background:var(--primary-bg);border:1px solid var(--secondary-border);box-shadow:var(--shadow-elevated);padding:.5rem .35rem;display:none;gap:.5rem;flex-direction:column;align-items:center}@media (min-width:992px){#fsmdSideRail{display:flex}}#fsmdSideRail .icon-button{background:var(--primary-bg);border-color:var(--secondary-border)}#fsmdSideRail .icon-button:hover,#fsmdSideRail .icon-button:focus-visible{border-color:rgba(var(--primary-accent-rgb),.55);box-shadow:var(--shadow-elevated)}#fsmdSidebarPanel.offcanvas-fsmd{--bs-offcanvas-bg:var(--primary-bg);--bs-offcanvas-color:var(--primary-text);border-right:1px solid var(--secondary-border);box-shadow:var(--shadow-elevated)}#fsmdSidebarPanel .offcanvas-header{padding:1rem 1.25rem;border-bottom:1px solid var(--secondary-border)}#fsmdSidebarPanel .offcanvas-title{font-family:var(--font-family-base);font-weight:700;letter-spacing:.02em}#fsmdSidebarPanel .btn-close{opacity:.75}#fsmdSidebarPanel .btn-close:hover{opacity:1}#fsmdSidebarPanel .offcanvas-body{padding:1rem 1.25rem;background:var(--primary-bg);scrollbar-width:thin;scrollbar-color:rgba(var(--primary-accent-rgb),.65) transparent}#fsmdSidebarPanel .offcanvas-body section{border-radius:var(--radius-lg);border:1px solid var(--secondary-border);background:var(--primary-bg)}#fsmdSidebarPanel .offcanvas-body section.bg-muted{background:var(--secondary-bg)!important;border-color:var(--secondary-border)}#fsmdSidebarPanel .offcanvas-body a{color:var(--primary-text);text-decoration:none;border-radius:var(--radius-md);transition:background-color var(--transition-fast),color var(--transition-fast),transform var(--transition-fast)}#fsmdSidebarPanel .offcanvas-body a:hover{background:var(--hover-tint);color:var(--primary-accent);transform:translateX(2px)}#fsmdSidebarPanel .offcanvas-body a:focus-visible{outline:0;box-shadow:var(--focus-ring)}#fsmdSidebarPanel .icon-gradient{background:linear-gradient(-150deg,var(--tertiary-accent),var(--primary-accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600}#fsmdSidebarPanel .badge.bg-accent-gradient-animated{color:var(--tertiary-text)}#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar{width:6px}#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-track{background:transparent}#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--tertiary-accent),var(--primary-accent));border-radius:var(--radius-pill)}#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,var(--primary-accent),var(--secondary-accent))}
+  #fsmdSideRail{
+    position: fixed;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1040;
+    width: 56px;
+    border-radius: var(--radius-pill);
+    background: var(--primary-bg);
+    border: 1px solid var(--secondary-border);
+    box-shadow: var(--shadow-elevated);
+    padding: .5rem .35rem;
+    display: none;
+    gap: .5rem;
+    flex-direction: column;
+    align-items: center;}@media (min-width:992px){#fsmdSideRail{display:flex}}#fsmdSideRail .icon-button{background:var(--primary-bg);border-color:var(--secondary-border)}#fsmdSideRail .icon-button:hover,#fsmdSideRail .icon-button:focus-visible{border-color:rgba(var(--primary-accent-rgb),.55);box-shadow:var(--shadow-elevated)}#fsmdSidebarPanel.offcanvas-fsmd{--bs-offcanvas-bg:var(--primary-bg);--bs-offcanvas-color:var(--primary-text);border-right:1px solid var(--secondary-border);box-shadow:var(--shadow-elevated)}#fsmdSidebarPanel .offcanvas-header{padding:1rem 1.25rem;border-bottom:1px solid var(--secondary-border)}#fsmdSidebarPanel .offcanvas-title{font-family:var(--font-family-base);font-weight:700;letter-spacing:.02em}#fsmdSidebarPanel .btn-close{opacity:.75}#fsmdSidebarPanel .btn-close:hover{opacity:1}#fsmdSidebarPanel .offcanvas-body{padding:1rem 1.25rem;background:var(--primary-bg);scrollbar-width:thin;scrollbar-color:rgba(var(--primary-accent-rgb),.65) transparent}#fsmdSidebarPanel .offcanvas-body section{border-radius:var(--radius-lg);border:1px solid var(--secondary-border);background:var(--primary-bg)}#fsmdSidebarPanel .offcanvas-body section.bg-muted{background:var(--secondary-bg)!important;border-color:var(--secondary-border)}#fsmdSidebarPanel .offcanvas-body a{color:var(--primary-text);text-decoration:none;border-radius:var(--radius-md);transition:background-color var(--transition-fast),color var(--transition-fast),transform var(--transition-fast)}#fsmdSidebarPanel .offcanvas-body a:hover{background:var(--hover-tint);color:var(--primary-accent);transform:translateX(2px)}#fsmdSidebarPanel .offcanvas-body a:focus-visible{outline:0;box-shadow:var(--focus-ring)}#fsmdSidebarPanel .icon-gradient{background:linear-gradient(-150deg,var(--tertiary-accent),var(--primary-accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600}#fsmdSidebarPanel .badge.bg-accent-gradient-animated{color:var(--tertiary-text)}#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar{width:6px}#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-track{background:transparent}#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--tertiary-accent),var(--primary-accent));border-radius:var(--radius-pill)}#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,var(--primary-accent),var(--secondary-accent))}
 </style>
 
 {# Desktop: slim icon rail (does not push content) #}
@@ -22,7 +37,7 @@
      href="{{ facebook_url|default:'#' }}"
      target="_blank" rel="noopener"
      aria-label="Facebook">
-    <i class="fa-brands fa-facebook-f"></i>
+    <i class="fa-brands fa-facebook"></i>
   </a>
 
   <a class="icon-button fade-in fade-in-left delay-4 fade-blocked"
@@ -58,7 +73,7 @@
        tabindex="-1"
        id="fsmdSidebarPanel"
        aria-labelledby="fsmdSidebarPanelLabel"
-       style="--bs-offcanvas-width: 360px;">
+       style="--bs-offcanvas-width: 400px;">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title d-flex align-items-center brand-title fade-in fade-in-down delay-1 fade-blocked"
         id="fsmdSidebarPanelLabel">
@@ -87,7 +102,7 @@
           <a class="d-flex align-items-center gap-2 py-1"
              href="{{ facebook_url|default:'#' }}"
              target="_blank" rel="noopener">
-            <i class="fa-brands fa-facebook-f icon-sm icon-gradient"></i><span>Facebook</span>
+            <i class="fa-brands fa-facebook icon-sm icon-gradient"></i><span>Facebook</span>
           </a>
         </li>
         <li class="fade-in fade-in-up delay-3 fade-blocked">
@@ -133,9 +148,9 @@
         </a>
 
         <a class="d-flex align-items-center gap-2 fade-in fade-in-up delay-3 fade-blocked"
-           href="tel:{{ contact_phone|default:'+10000000000' }}">
+           href="tel:{{ contact_phone|default:'+1 (307) 218-7845' }}">
           <i class="fa-solid fa-phone icon-sm"></i>
-          <span>{{ contact_phone_display|default:"+1 (000) 000-0000" }}</span>
+          <span>{{ contact_phone_display|default:"+1 (307) 218-7845" }}</span>
         </a>
       </div>
 
@@ -159,7 +174,7 @@
                  name="email"
                  type="email"
                  class="form-control"
-                 placeholder="you@email.com"
+                 placeholder="johndoe@gmail.com"
                  autocomplete="email"
                  required>
         </div>
@@ -183,7 +198,7 @@
            href="{{ facebook_url|default:'#' }}"
            target="_blank" rel="noopener"
            aria-label="Facebook">
-          <i class="fa-brands fa-facebook-f"></i>
+          <i class="fa-brands fa-facebook"></i>
         </a>
         <a class="icon-button fade-in fade-in-up delay-3 fade-blocked"
            href="{{ instagram_url|default:'#' }}"

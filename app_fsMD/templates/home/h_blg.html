@@ -1,110 +1,101 @@
 {% load static %}
 
-<section class="blog-latest-section d-flex align-items-end min-vh-100">
-  <div class="container-fluid py-5 px-3 px-lg-3 px-xxl-4">
+<section class="blog-latest-section d-flex align-items-center">
+  <div class="container py-4 py-lg-5">
     <div class="blog-latest-shell">
 
-      <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
-        <div>
-          <h2 class="blog-latest-title">
-            Stay Informed With<br class="d-none d-md-block">
-            Our Latest Health Blogs
-          </h2>
+      <!-- HEADER aligned to same container as main image/list -->
+      <div class="row justify-content-center mb-3 mb-lg-4">
+        <div class="col-12 col-lg-10">
+          <div class="d-flex flex-wrap align-items-center gap-3">
 
+            <!-- Title + subtext -->
+            <div class="flex-grow-1 text-center text-lg-start">
+              <h1 class="mb-2">
+                Stay Informed With<br class="d-none d-md-block">
+                Our Latest Health Blogs
+              </h1>
+              <p class="text-body-sm mb-0">
+                Quick, practical reads to help you understand your options before you book a visit.
+              </p>
+            </div>
+
+            <!-- View All -->
+            <div class="d-flex flex-wrap justify-content-center justify-content-lg-start align-items-center gap-3 ms-lg-auto">
+              <a href="{% url 'blgs_updts' %}"
+                 class="btn btn-primary d-inline-flex align-items-center gap-2 px-4 text-body-sm"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                View All
+                <span class="icon-sm" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
         </div>
-
-        <a href="{% url 'blgs_updts' %}" class="blog-latest-viewall" target="_blank" rel="noopener noreferrer">
-          <span>View All</span>
-          <span class="blog-latest-viewall-chip" aria-hidden="true">→</span>
-        </a>
       </div>
 
-      <div class="row g-4 align-items-stretch">
+      <!-- CONTENT row -->
+      <div class="row g-4 align-items-stretch justify-content-center">
 
-        <div class="col-12 col-lg-5">
-          <a id="blogFeaturedLink" href="/blog/" class="blog-feature-visual h-100 d-block" target="_blank" rel="noopener noreferrer">
-            <img
-              id="blogFeaturedImg"
-              src="{% static 'images/blog/2025/blog1.jpg' %}"
-              alt="Featured blog"
-              class="w-100 h-100 object-fit-cover"
-              loading="lazy"
-            >
-          </a>
+        <!-- Featured visual: slightly thinner & centered -->
+        <div class="col-10 col-md-8 col-lg-4 d-flex justify-content-center">
+          {% if featured_post %}
+            <a id="blogFeaturedLink"
+               href="{% url 'blgs_updts' %}?slug={{ featured_post.slug }}"
+               class="blog-feature-visual d-block h-100 border-brand hover-lift"
+               target="_blank"
+               rel="noopener noreferrer">
+              <img
+                id="blogFeaturedImg"
+                src="{{ featured_post.main_image.url }}"
+                alt="{{ featured_post.title }}"
+                class="img-fluid"
+                loading="lazy"
+              >
+            </a>
+          {% else %}
+            <div class="blog-feature-visual d-flex align-items-center justify-content-center border-brand">
+              <p class="mb-0 text-body-sm text-center px-3">
+                Blog posts coming soon.
+              </p>
+            </div>
+          {% endif %}
         </div>
 
-        <div class="col-12 col-lg-7">
-          <div class="blog-posts-draglist d-flex flex-column gap-3" id="blogPostsDragList" data-drag-only="1">
+        <!-- Posts list: slightly narrower & centered with image -->
+        <div class="col-12 col-lg-6">
+          <div class="blog-posts-draglist blog-list-scroll d-flex flex-column gap-2"
+               id="blogPostsDragList" data-drag-only="1">
 
-            <a class="blog-post-row is-active"
-               href="/blog/glp-1-weight-loss-what-to-expect/"
-               target="_blank" rel="noopener noreferrer"
-               data-img="{% static 'images/blog/2025/blog1.jpg' %}">
-              <div class="blog-post-row-text">
-                <div class="blog-post-date">08 Jan 2025</div>
-                <div class="blog-post-title">GLP-1 Weight Loss: What to Expect in Your First Month</div>
-                <p class="blog-post-desc">It is a long established fact that a reader will be distracted by the readable content.</p>
-              </div>
-              <div class="blog-post-row-visual">
-                <img src="{% static 'images/blog/2025/blog1.jpg' %}" alt="GLP-1 Weight Loss" loading="lazy">
-              </div>
-            </a>
-
-            <a class="blog-post-row"
-               href="/blog/peptide-therapy-recovery-sleep/"
-               target="_blank" rel="noopener noreferrer"
-               data-img="{% static 'images/blog/2025/blog2.jpg' %}">
-              <div class="blog-post-row-text">
-                <div class="blog-post-date">22 Feb 2025</div>
-                <div class="blog-post-title">Peptide Therapy: Supporting Recovery, Energy, and Sleep</div>
-                <p class="blog-post-desc">It is a long established fact that a reader will be distracted by the readable content.</p>
-              </div>
-              <div class="blog-post-row-visual">
-                <img src="{% static 'images/blog/2025/blog2.jpg' %}" alt="Peptide Therapy" loading="lazy">
-              </div>
-            </a>
-
-            <a class="blog-post-row"
-               href="/blog/acne-care-routine-medical-grade/"
-               target="_blank" rel="noopener noreferrer"
-               data-img="{% static 'images/blog/2025/blog3.jpg' %}">
-              <div class="blog-post-row-text">
-                <div class="blog-post-date">14 Mar 2025</div>
-                <div class="blog-post-title">Acne Care That Works: Building a Medical-Grade Routine</div>
-                <p class="blog-post-desc">It is a long established fact that a reader will be distracted by the readable content.</p>
-              </div>
-              <div class="blog-post-row-visual">
-                <img src="{% static 'images/blog/2025/blog3.jpg' %}" alt="Acne care" loading="lazy">
-              </div>
-            </a>
-
-            <a class="blog-post-row"
-               href="/blog/hair-loss-options-topical-oral/"
-               target="_blank" rel="noopener noreferrer"
-               data-img="{% static 'images/blog/2025/blog4.jpg' %}">
-              <div class="blog-post-row-text">
-                <div class="blog-post-date">09 Apr 2025</div>
-                <div class="blog-post-title">Hair Loss Care: Topical vs Oral Options (and When to Use Each)</div>
-                <p class="blog-post-desc">It is a long established fact that a reader will be distracted by the readable content.</p>
-              </div>
-              <div class="blog-post-row-visual">
-                <img src="{% static 'images/blog/2025/blog4.jpg' %}" alt="Hair loss care" loading="lazy">
-              </div>
-            </a>
-
-            <a class="blog-post-row"
-               href="/blog/wellness-therapy-b12-nad/"
-               target="_blank" rel="noopener noreferrer"
-               data-img="{% static 'images/blog/2025/blog5.jpg' %}">
-              <div class="blog-post-row-text">
-                <div class="blog-post-date">18 May 2025</div>
-                <div class="blog-post-title">Wellness Therapy: B12, NAD+, and What They’re Actually For</div>
-                <p class="blog-post-desc">It is a long established fact that a reader will be distracted by the readable content.</p>
-              </div>
-              <div class="blog-post-row-visual">
-                <img src="{% static 'images/blog/2025/blog5.jpg' %}" alt="Wellness therapy" loading="lazy">
-              </div>
-            </a>
+            {% for post in home_posts %}
+              <a class="blog-post-row {% if forloop.first %}is-active{% endif %}"
+                 href="{% url 'blgs_updts' %}?slug={{ post.slug }}"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 data-img="{{ post.main_image.url }}">
+                <div class="blog-post-row-text">
+                  <div class="blog-post-date text-caption-sm mb-1">
+                    {{ post.published_at|date:"d M Y" }}
+                  </div>
+                  <div class="blog-post-title text-body-lg mb-1">
+                    {{ post.title }}
+                  </div>
+                  <p class="blog-post-desc text-body-sm mb-1">
+                    {{ post.excerpt }}
+                  </p>
+                  <p class="blog-post-subtext text-caption-sm mb-0">
+                    {{ post.badge_label }} · {{ post.read_time_label }}
+                  </p>
+                </div>
+                <div class="blog-post-row-visual ms-2 ms-md-3">
+                  <img src="{{ post.main_image.url }}" alt="{{ post.title }}" loading="lazy">
+                </div>
+              </a>
+            {% empty %}
+              <p class="text-body-sm mb-0">
+                No blog posts are published yet.
+              </p>
+            {% endfor %}
 
           </div>
         </div>

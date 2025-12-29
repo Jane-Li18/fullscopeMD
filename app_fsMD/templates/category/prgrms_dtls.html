@@ -1,9 +1,17 @@
-{% extends "base.html" %}
+{% extends "page_base.html" %}
 {% load static %}
 
 {% block title %}{{ category.name }}{% endblock %}
+{% block page_title %}{{ category.name }}{% endblock %}
+{% block page_breadcrumb %}{{ category.name }}{% endblock %}
 
-{% block content %}
+{% block page_style %}
+background-image:
+  linear-gradient(120deg, rgba(0,0,0,.6), rgba(0,0,0,.4)),
+  url('{% static "images/bg_page.png" %}');
+{% endblock %}
+
+{% block page_content %}
 
 <section class="py-5">
   <div class="container py-2 py-lg-4">
@@ -28,7 +36,7 @@
                 <span class="badge rounded-pill bg-muted border-brand text-primary-accent">Telemedicine</span>
               </div>
 
-              <h1 class="mb-2">{{ category.name }}</h1>
+              <h2 class="mb-2" style="font-size: var(--font-size-h2);">{{ category.name }}</h2>
 
               {% if category.short_description %}
                 <p class="mb-0 text-body-sm">{{ category.short_description|linebreaksbr }}</p>
@@ -58,8 +66,6 @@
       </div>
     </div>
 
-    {# ✅ ONLY products for this category are already in `products` from your view #}
-    {# ✅ Hide filter bar by passing categories=None #}
     {% include "home/h_prdcts.html" with show_header=False categories=None products=products %}
 
     {% if category.long_description %}
@@ -89,4 +95,4 @@
   </div>
 </section>
 
-{% endblock content %}
+{% endblock page_content %}

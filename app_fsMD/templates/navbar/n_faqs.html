@@ -1,36 +1,36 @@
-{% extends "base.html" %}
+{% extends "page_base.html" %}
 {% load static %}
 
 {% block title %}FAQs{% endblock %}
+{% block page_title %}Frequently Asked Questions{% endblock %}
+{% block page_breadcrumb %}FAQs{% endblock %}
 
-{% block content %}
+{% block page_style %}
+background-image:
+  linear-gradient(120deg, rgba(0,0,0,.6), rgba(0,0,0,.4)),
+  url('{% static "images/bg_page.png" %}');
+{% endblock %}
 
-<section id="top" class="faq-page-section py-5">
+{% block page_content %}
+
+<section id="top" class="faq-page-section py-2 py-lg-4">
   <div class="container">
 
-    <!-- Header -->
     <div class="row justify-content-center mb-4">
-      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
+      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked scroll-animate">
         <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
           <i class="fa-solid fa-circle-question icon-solid icon-sm"></i>
           <small class="mb-0 text-white">Frequently Asked Questions</small>
         </span>
-
-        <h1 class="mt-3 mb-2">FAQ</h1>
-        <p class="mb-0">
-          Detailed answers about care, programs, billing, shipping, privacy, and policies—so you always know what to expect.
-        </p>
       </div>
     </div>
 
-    <!-- Main card -->
-    <div class="fade-in-up fade-in delay-2 fade-blocked">
+    <div class="fade-in-up fade-in delay-2 fade-blocked scroll-animate">
       <div class="row g-4 justify-content-center">
         <div class="col-12 col-lg-10">
-          <div class="p-4 p-lg-5 bg-white rounded-4">
+          <div class="bg-white rounded-4">
 
-            <!-- Intro row -->
-            <div class="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-start align-items-md-center fade-in-up fade-in delay-3 fade-blocked">
+            <div class="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-start align-items-md-center fade-in-up fade-in delay-3 fade-blocked scroll-animate">
               <div>
                 <h2 class="mb-1">Find the answer, then take the next step</h2>
                 <p class="mb-0">
@@ -46,26 +46,8 @@
 
             <div class="divider my-4"></div>
 
-            <!-- Helpful links row -->
-            <div class="d-flex flex-wrap gap-2 align-items-center fade-in-up fade-in delay-4 fade-blocked">
-              <small class="text-caption-sm me-2">Quick links:</small>
-              <a class="text-body-sm hover-underline-accent" href="{% url 'terms_conditions' %}">Terms</a>
-              <span class="text-body-sm">•</span>
-              <a class="text-body-sm hover-underline-accent" href="{% url 'privacy_policy' %}">Privacy Policy</a>
-              <span class="text-body-sm">•</span>
-              <a class="text-body-sm hover-underline-accent" href="{% url 'refund_policy' %}">Refund Policy</a>
-              <span class="text-body-sm">•</span>
-              <a class="text-body-sm hover-underline-accent" href="{% url 'telehealth_consent' %}">Telehealth Consent</a>
-              <span class="text-body-sm">•</span>
-              <a class="text-body-sm hover-underline-accent" href="{% url 'hipaa_notice' %}">HIPAA Notice</a>
-            </div>
-
-            <div class="divider my-4"></div>
-
-            <!-- Accordion (extra padding + spacing via utilities) -->
             <div class="accordion accordion-flush" id="faqAccordion">
 
-              <!-- 1 -->
               <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                 <h3 class="accordion-header" id="faqHeadingOne">
                   <button class="accordion-button px-3 px-md-4 py-3 fw-semibold" type="button"
@@ -73,7 +55,7 @@
                           data-bs-target="#faqCollapseOne"
                           aria-expanded="true"
                           aria-controls="faqCollapseOne">
-                    Am I eligible to become a patient?
+                    What is FullScopeMD?
                   </button>
                 </h3>
                 <div id="faqCollapseOne"
@@ -81,22 +63,13 @@
                      aria-labelledby="faqHeadingOne"
                      data-bs-parent="#faqAccordion">
                   <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
-                    <p class="mb-2">
-                      Eligibility is determined by where you are physically located, your medical history, and whether telehealth is clinically appropriate for your needs.
-                      We also consider safety factors—like current medications, prior diagnoses, and any symptoms that may require in-person evaluation.
-                    </p>
-                    <p class="mb-2">
-                      The process usually looks like this: you complete an intake form, confirm your location, and provide health information as accurately as possible.
-                      A U.S.-licensed clinician then reviews your details to decide whether FullScopeMD can safely care for you through telehealth.
-                    </p>
                     <p class="mb-0">
-                      If telehealth is not the right fit, we’ll tell you why and may recommend next steps (like an in-person visit, labs, or a different care setting).
+                      FullScopeMD is a clinician-led telemedicine platform that allows patients to receive medical care online. We provide services in weight management, hair loss, peptide therapy, wellness therapy, skin treatments, and primary care support. All care is reviewed and directed by licensed healthcare providers.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <!-- 2 -->
               <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                 <h3 class="accordion-header" id="faqHeadingTwo">
                   <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
@@ -104,7 +77,7 @@
                           data-bs-target="#faqCollapseTwo"
                           aria-expanded="false"
                           aria-controls="faqCollapseTwo">
-                    Who provides my care? Are they licensed?
+                    How does FullScopeMD work?
                   </button>
                 </h3>
                 <div id="faqCollapseTwo"
@@ -112,22 +85,13 @@
                      aria-labelledby="faqHeadingTwo"
                      data-bs-parent="#faqAccordion">
                   <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
-                    <p class="mb-2">
-                      Your care is provided by independently licensed U.S. clinicians (such as physicians, nurse practitioners, and physician assistants),
-                      authorized to provide care in the state where you are located at the time of your visit.
-                    </p>
-                    <p class="mb-2">
-                      FullScopeMD supports the experience (intake, scheduling, messaging, and pharmacy coordination), while the clinician makes medical decisions
-                      using independent professional judgment.
-                    </p>
                     <p class="mb-0">
-                      Every treatment recommendation, prescription, and dose adjustment is evaluated for medical appropriateness, legal compliance, and patient safety.
+                      You select a service and complete a secure online intake form that includes your medical history and health goals. A licensed healthcare provider reviews your information to determine whether treatment is appropriate. If approved, a prescription is issued and sent to a licensed U.S. pharmacy. Medications are shipped directly to you, and ongoing support is available through our care team.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <!-- 3 -->
               <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                 <h3 class="accordion-header" id="faqHeadingThree">
                   <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
@@ -135,7 +99,7 @@
                           data-bs-target="#faqCollapseThree"
                           aria-expanded="false"
                           aria-controls="faqCollapseThree">
-                    How does telehealth work with FullScopeMD?
+                    Are the providers licensed?
                   </button>
                 </h3>
                 <div id="faqCollapseThree"
@@ -143,22 +107,13 @@
                      aria-labelledby="faqHeadingThree"
                      data-bs-parent="#faqAccordion">
                   <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
-                    <p class="mb-2">
-                      Telehealth lets you receive care without traveling to a clinic. Depending on your situation, your care may include a video or audio visit,
-                      secure messaging, and review of information you submit (history, symptoms, photos, documents, or lab results).
-                    </p>
-                    <p class="mb-2">
-                      After evaluation, your clinician may recommend a plan, request more information, or advise in-person evaluation if telehealth is not appropriate.
-                    </p>
                     <p class="mb-0">
-                      For details on telehealth benefits/risks and your responsibilities, read our
-                      <a class="hover-underline-accent" href="{% url 'telehealth_consent' %}">Telehealth Informed Consent</a>.
+                      Yes. All medical evaluations, prescriptions, and treatment decisions are made by licensed healthcare providers in accordance with state regulations. AI tools and care coordinators assist with navigation and support but do not make medical decisions.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <!-- 4 -->
               <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                 <h3 class="accordion-header" id="faqHeadingFour">
                   <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
@@ -166,7 +121,7 @@
                           data-bs-target="#faqCollapseFour"
                           aria-expanded="false"
                           aria-controls="faqCollapseFour">
-                    What programs and services do you offer?
+                    Do you serve all U.S. states?
                   </button>
                 </h3>
                 <div id="faqCollapseFour"
@@ -174,19 +129,13 @@
                      aria-labelledby="faqHeadingFour"
                      data-bs-parent="#faqAccordion">
                   <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
-                    <p class="mb-2">
-                      FullScopeMD supports multiple care paths, including weight management (such as GLP-1 programs where clinically appropriate), peptide therapy,
-                      skin health, hair-loss support, sick-visit style care, and everyday medical support.
-                    </p>
                     <p class="mb-0">
-                      Not every option is right for every patient. Your clinician will recommend a plan that makes sense clinically—sometimes including labs or an in-person
-                      evaluation before starting or continuing treatment.
+                      FullScopeMD serves patients nationwide. Service availability depends on provider licensure and state-specific regulations. If a service is unavailable in your state, you will be notified during the intake process.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <!-- 5 -->
               <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                 <h3 class="accordion-header" id="faqHeadingFive">
                   <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
@@ -194,7 +143,7 @@
                           data-bs-target="#faqCollapseFive"
                           aria-expanded="false"
                           aria-controls="faqCollapseFive">
-                    Do you accept insurance? How much will this cost?
+                    Is prescription approval guaranteed?
                   </button>
                 </h3>
                 <div id="faqCollapseFive"
@@ -202,19 +151,13 @@
                      aria-labelledby="faqHeadingFive"
                      data-bs-parent="#faqAccordion">
                   <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
-                    <p class="mb-2">
-                      FullScopeMD typically operates on a clear cash-pay model so you know costs up front. Pricing (consultations, programs, and medication if applicable)
-                      is shown before purchase whenever possible.
-                    </p>
                     <p class="mb-0">
-                      Some services may not be covered by insurance and we may not submit claims. If you plan to use insurance, confirm coverage with your insurer first.
-                      Many patients use eligible FSA/HSA funds when available.
+                      No. Prescription approval is not guaranteed. A licensed provider must review your intake and determine that treatment is medically appropriate and safe for you.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <!-- 6 -->
               <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                 <h3 class="accordion-header" id="faqHeadingSix">
                   <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
@@ -222,7 +165,7 @@
                           data-bs-target="#faqCollapseSix"
                           aria-expanded="false"
                           aria-controls="faqCollapseSix">
-                    When is a consultation or service non-refundable?
+                    How long does it take to receive my medication?
                   </button>
                 </h3>
                 <div id="faqCollapseSix"
@@ -230,19 +173,13 @@
                      aria-labelledby="faqHeadingSix"
                      data-bs-parent="#faqAccordion">
                   <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
-                    <p class="mb-2">
-                      Clinical services are generally non-refundable once rendered—meaning a licensed clinician has reviewed your intake, initiated a consultation,
-                      provided medical assessment, or made treatment decisions.
-                    </p>
                     <p class="mb-0">
-                      The full conditions are listed in our
-                      <a class="hover-underline-accent" href="{% url 'refund_policy' %}">Refund Policy</a>.
+                      If approved, prescriptions are typically processed and shipped within three to five business days. Shipping times may vary based on pharmacy processing and delivery location. Tracking information is provided once your order ships.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <!-- 7 -->
               <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                 <h3 class="accordion-header" id="faqHeadingSeven">
                   <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
@@ -250,7 +187,7 @@
                           data-bs-target="#faqCollapseSeven"
                           aria-expanded="false"
                           aria-controls="faqCollapseSeven">
-                    Where do medications come from? Are pharmacies licensed?
+                    How does payment work?
                   </button>
                 </h3>
                 <div id="faqCollapseSeven"
@@ -258,19 +195,13 @@
                      aria-labelledby="faqHeadingSeven"
                      data-bs-parent="#faqAccordion">
                   <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
-                    <p class="mb-2">
-                      When medication is prescribed, it is prepared and shipped by fully licensed U.S. pharmacies. Proper preparation, handling, and shipping standards
-                      are part of patient safety.
-                    </p>
                     <p class="mb-0">
-                      Refund eligibility may change once a prescription is issued or fulfillment begins—see the
-                      <a class="hover-underline-accent" href="{% url 'refund_policy' %}">Refund Policy</a>.
+                      Payment is collected at checkout. A licensed provider then reviews your intake to determine whether treatment is appropriate. If approved, your order is processed. If not approved, you receive a full refund.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <!-- 8 -->
               <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                 <h3 class="accordion-header" id="faqHeadingEight">
                   <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
@@ -278,7 +209,7 @@
                           data-bs-target="#faqCollapseEight"
                           aria-expanded="false"
                           aria-controls="faqCollapseEight">
-                    What happens after I submit a message or intake form?
+                    What payment methods are accepted?
                   </button>
                 </h3>
                 <div id="faqCollapseEight"
@@ -286,19 +217,13 @@
                      aria-labelledby="faqHeadingEight"
                      data-bs-parent="#faqAccordion">
                   <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
-                    <p class="mb-2">
-                      After you submit information, it’s routed to the appropriate step: support triage, scheduling, or clinician review (depending on the form).
-                      If more information is needed, we may request clarification to keep care safe and accurate.
-                    </p>
                     <p class="mb-0">
-                      For general questions, start on our
-                      <a class="hover-underline-accent" href="{% url 'contact' %}">Contact page</a>.
+                      FullScopeMD accepts major credit and debit cards. All payment information is processed securely using encrypted systems.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <!-- 9 -->
               <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                 <h3 class="accordion-header" id="faqHeadingNine">
                   <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
@@ -306,7 +231,7 @@
                           data-bs-target="#faqCollapseNine"
                           aria-expanded="false"
                           aria-controls="faqCollapseNine">
-                    Is my information private and HIPAA-protected?
+                    Do you accept insurance?
                   </button>
                 </h3>
                 <div id="faqCollapseNine"
@@ -314,21 +239,13 @@
                      aria-labelledby="faqHeadingNine"
                      data-bs-parent="#faqAccordion">
                   <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
-                    <p class="mb-2">
-                      When FullScopeMD provides clinical services, certain data may qualify as Protected Health Information (PHI) under HIPAA. PHI is handled under
-                      HIPAA-aligned rules for permitted uses, disclosures, and safeguards.
-                    </p>
                     <p class="mb-0">
-                      Learn more in our
-                      <a class="hover-underline-accent" href="{% url 'privacy_policy' %}">Privacy Policy</a>
-                      and
-                      <a class="hover-underline-accent" href="{% url 'hipaa_notice' %}">HIPAA Notice of Privacy Practices</a>.
+                      FullScopeMD does not accept insurance. All services are offered on a self-pay basis with transparent pricing shown before checkout.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <!-- 10 -->
               <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                 <h3 class="accordion-header" id="faqHeadingTen">
                   <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
@@ -336,7 +253,7 @@
                           data-bs-target="#faqCollapseTen"
                           aria-expanded="false"
                           aria-controls="faqCollapseTen">
-                    How do marketing emails/SMS work? Can I opt out?
+                    Is my personal and payment information secure?
                   </button>
                 </h3>
                 <div id="faqCollapseTen"
@@ -344,19 +261,13 @@
                      aria-labelledby="faqHeadingTen"
                      data-bs-parent="#faqAccordion">
                   <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
-                    <p class="mb-2">
-                      Essential healthcare and operational messages (like appointment reminders, pharmacy updates, and security notices) may be required to use the Services.
-                      Marketing messages are optional and require explicit opt-in.
-                    </p>
                     <p class="mb-0">
-                      You can opt out of marketing emails using the unsubscribe link, and opt out of marketing SMS by replying STOP.
-                      For more information, see our <a class="hover-underline-accent" href="{% url 'terms_conditions' %}">Terms &amp; Conditions</a>.
+                      Yes. FullScopeMD uses HIPAA-compliant and PCI-compliant systems to protect your medical and payment information. All data is encrypted and handled securely.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <!-- 11 -->
               <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                 <h3 class="accordion-header" id="faqHeadingEleven">
                   <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
@@ -364,12 +275,34 @@
                           data-bs-target="#faqCollapseEleven"
                           aria-expanded="false"
                           aria-controls="faqCollapseEleven">
-                    What if I need urgent or emergency care?
+                    Can I speak with a real person?
                   </button>
                 </h3>
                 <div id="faqCollapseEleven"
                      class="accordion-collapse collapse"
                      aria-labelledby="faqHeadingEleven"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-0">
+                      Yes. Live care coordinators are available to assist with questions about services, payments, order status, and next steps. AI-assisted support is also available for general guidance.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingTwelve">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseTwelve"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseTwelve">
+                    Does FullScopeMD provide emergency care?
+                  </button>
+                </h3>
+                <div id="faqCollapseTwelve"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingTwelve"
                      data-bs-parent="#faqAccordion">
                   <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
                     <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
@@ -380,59 +313,55 @@
                         <div class="flex-grow-1">
                           <div class="fw-semibold">Emergency Notice</div>
                           <div class="text-body-sm mb-0">
-                            FullScopeMD does not provide emergency or urgent medical care.
-                            If you believe you are experiencing a medical emergency, call 911 or go to the nearest emergency room immediately.
+                            FullScopeMD does not provide emergency services. If you are experiencing a medical emergency, call 911 or go to the nearest emergency room.
                           </div>
                         </div>
                       </div>
                     </div>
-                    <p class="mt-3 mb-0">
-                      For non-emergency questions or follow-ups related to your plan, contact support or schedule follow-up care when appropriate.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
+                <h3 class="accordion-header" id="faqHeadingThirteen">
+                  <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCollapseThirteen"
+                          aria-expanded="false"
+                          aria-controls="faqCollapseThirteen">
+                    Can I cancel or request a refund?
+                  </button>
+                </h3>
+                <div id="faqCollapseThirteen"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="faqHeadingThirteen"
+                     data-bs-parent="#faqAccordion">
+                  <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
+                    <p class="mb-0">
+                      Refund eligibility depends on order status. Once payment has been collected following approval and processing has begun, refunds may be limited. Please review our <a class="hover-underline-accent" href="{% url 'refund_policy' %}">Refund Policy</a> for full details.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <!-- 12 -->
               <div class="accordion-item rounded-4 overflow-hidden mb-0 border">
-                <h3 class="accordion-header" id="faqHeadingTwelve">
+                <h3 class="accordion-header" id="faqHeadingFourteen">
                   <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
                           data-bs-toggle="collapse"
-                          data-bs-target="#faqCollapseTwelve"
+                          data-bs-target="#faqCollapseFourteen"
                           aria-expanded="false"
-                          aria-controls="faqCollapseTwelve">
-                    Where can I read your official policies?
+                          aria-controls="faqCollapseFourteen">
+                    How do I get started?
                   </button>
                 </h3>
-                <div id="faqCollapseTwelve"
+                <div id="faqCollapseFourteen"
                      class="accordion-collapse collapse"
-                     aria-labelledby="faqHeadingTwelve"
+                     aria-labelledby="faqHeadingFourteen"
                      data-bs-parent="#faqAccordion">
                   <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
-                    <p class="mb-2">You can read our policies here:</p>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">
-                        <a class="hover-underline-accent" href="{% url 'terms_conditions' %}">Terms &amp; Conditions</a>
-                      </li>
-                      <li class="text-body-sm">
-                        <a class="hover-underline-accent" href="{% url 'privacy_policy' %}">Privacy Policy</a>
-                      </li>
-                      <li class="text-body-sm">
-                        <a class="hover-underline-accent" href="{% url 'refund_policy' %}">Refund Policy</a>
-                      </li>
-                      <li class="text-body-sm">
-                        <a class="hover-underline-accent" href="{% url 'telehealth_consent' %}">Telehealth Consent</a>
-                      </li>
-                      <li class="text-body-sm">
-                        <a class="hover-underline-accent" href="{% url 'hipaa_notice' %}">HIPAA Notice of Privacy Practices</a>
-                      </li>
-                      <li class="text-body-sm">
-                        <a class="hover-underline-accent" href="{% url 'medical_disclaimer' %}">Medical Disclaimer</a>
-                      </li>
-                      <li class="text-body-sm">
-                        <a class="hover-underline-accent" href="{% url 'accessibility_statement' %}">Accessibility Statement</a>
-                      </li>
-                    </ul>
+                    <p class="mb-0">
+                      Select a service, complete the secure intake form, and submit your information for provider review. You will be guided through each step and notified of your approval status.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -454,4 +383,5 @@
   </div>
 </section>
 
-{% endblock content %}
+{% include "home/h_appointment.html" %}
+{% endblock page_content %}

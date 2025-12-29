@@ -58,14 +58,12 @@
 }
 .product-img{
   width:100%;
-  height:112px;
+  height: 100%;
   object-fit:contain;
   display:block;
   transition:transform var(--transition-normal)
 }
-@media (min-width:992px){
-  .product-img{height:120px}
-}
+
 .product-card:hover .product-img,
 .product-card:focus-within .product-img{transform:scale(1.01)}
 

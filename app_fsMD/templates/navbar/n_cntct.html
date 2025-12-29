@@ -1,44 +1,49 @@
-{% extends "base.html" %}
+{% extends "page_base.html" %}
 {% load static %}
 
 {% block title %}Contact Us{% endblock %}
+{% block page_title %}Contact Us for a Supportive Telehealth Experience{% endblock %}
+{% block page_breadcrumb %}Contact Us{% endblock %}
 
-{% block content %}
+{% block page_style %}
+background-image:
+  linear-gradient(120deg, rgba(0,0,0,.6), rgba(0,0,0,.4)),
+  url('{% static "images/bg_page.png" %}');
+{% endblock %}
 
-<section class="contact-section d-flex align-items-center min-vh-100">
-  <div class="container py-5">
+{% block page_content %}
 
-    <!-- Header -->
+<section class="bg-muted py-5">
+  <div class="container py-4">
+
     <div class="row justify-content-center mb-4">
-      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 scroll-animate">
         <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
           <i class="fa-solid fa-comments icon-solid icon-sm"></i>
           <small class="mb-0 text-white">Supportive care team • Seamless telehealth experience</small>
         </span>
 
-        <h1 class="mt-3 mb-2">Contact Us for a Supportive and Seamless Telehealth Experience</h1>
+        <h2 class="mt-3 mb-2">We’re here to help</h2>
         <p class="mb-0">
           Have a question about your plan, onboarding, or next steps? Send a message and we’ll get back to you as soon as possible.
         </p>
       </div>
     </div>
 
-    <!-- Soft background wrapper (NOT the whole page) -->
-    <div class="p-3 p-lg-4 bg-muted rounded-4 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+    <div class="p-3 p-lg-4 bg-muted rounded-4 fade-in-up fade-in delay-2 scroll-animate">
       <div class="row g-4 justify-content-center align-items-stretch">
-        <!-- Info panel -->
-        <div class="col-12 col-lg-5 fade-in-left fade-in delay-3 fade-blocked scroll-animate">
+
+        <div class="col-12 col-lg-5 fade-in-left fade-in delay-3 scroll-animate">
           <div class="h-100 p-4 p-lg-5 bg-white rounded-4">
             <h2 class="mb-2">FullScopeMD Support</h2>
             <p class="mb-0">
-              Prefer email? Reach out anytime and we’ll respond during business hours.
+              Prefer email or a quick call? Reach out anytime and we’ll respond during business hours.
             </p>
 
             <div class="divider my-4"></div>
 
             <ul class="mb-0 d-grid gap-3">
-              <!-- Address -->
-              <li class="d-flex gap-3 align-items-start hover-lift fade-in-up fade-in delay-4 fade-blocked scroll-animate">
+              <li class="d-flex gap-3 align-items-start hover-lift fade-in-up fade-in delay-4 scroll-animate">
                 <span class="icon-button shadow-sm-brand flex-shrink-0">
                   <i class="fa-solid fa-location-dot icon-gradient icon-md"></i>
                 </span>
@@ -48,19 +53,22 @@
                 </div>
               </li>
 
-              <!-- Phone -->
-              <li class="d-flex gap-3 align-items-start disabled fade-in-up fade-in delay-5 fade-blocked scroll-animate">
+              <li class="d-flex gap-3 align-items-start hover-lift fade-in-up fade-in delay-5 scroll-animate">
                 <span class="icon-button shadow-sm-brand flex-shrink-0">
                   <i class="fa-solid fa-phone icon-gradient icon-md"></i>
                 </span>
                 <div class="flex-grow-1">
                   <div class="fw-semibold">Phone Number</div>
-                  <div class="text-body-sm">Pending</div>
+                  <a
+                    href="tel:+13072187845"
+                    class="text-body-sm hover-underline-accent d-inline-block"
+                  >
+                    +1 (307) 218-7845
+                  </a>
                 </div>
               </li>
 
-              <!-- Email (fixed for small screens) -->
-              <li class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 align-items-start hover-lift fade-in-up fade-in delay-6 fade-blocked scroll-animate">
+              <li class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 align-items-start hover-lift fade-in-up fade-in delay-6 scroll-animate">
                 <span class="icon-button shadow-sm-brand flex-shrink-0">
                   <i class="fa-solid fa-envelope icon-gradient icon-md"></i>
                 </span>
@@ -75,16 +83,14 @@
                 </div>
               </li>
 
-              <!-- Business Hours (fixed for small screens) -->
-              <li class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 align-items-start hover-lift fade-in-up fade-in delay-7 fade-blocked scroll-animate">
+              <li class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 align-items-start hover-lift fade-in-up fade-in delay-7 scroll-animate">
                 <span class="icon-button shadow-sm-brand flex-shrink-0">
                   <i class="fa-regular fa-clock icon-gradient icon-md"></i>
                 </span>
                 <div class="flex-grow-1 w-100">
-                  <div class="fw-semibold">Business Hours (EST)</div>
-                  <div class="text-body-sm lh-sm">
-                    <span class="d-block">Mon–Fri 8:00 AM–5:00 PM</span>
-                    <span class="d-block">Sat–Sun 8:00 AM–1:00 PM</span>
+                  <div class="fw-semibold">Business Hours</div>
+                  <div class="text-body-sm">
+                    Mon – Sun | 8:00 AM – 5:00 PM EST
                   </div>
                 </div>
               </li>
@@ -92,20 +98,19 @@
 
             <div class="divider my-4"></div>
 
-            <small class="text-caption-sm">
-              If this is an emergency, call your local emergency number immediately.
+            <small class="text-caption-sm d-block">
+              If this is a medical emergency, call your local emergency number or go to the nearest emergency room immediately.
             </small>
           </div>
         </div>
 
-        <!-- Form panel -->
-        <div class="col-12 col-lg-7 fade-in-right fade-in delay-3 fade-blocked scroll-animate">
+        <div class="col-12 col-lg-7 fade-in-right fade-in delay-3 scroll-animate">
           <div class="h-100 p-4 p-lg-5 bg-white rounded-4">
             <h2 class="mb-1">Get in Touch</h2>
             <p class="mb-4">Fill out the form and we’ll follow up as soon as possible.</p>
 
-            <form action="https://YOUR-GHL-ENDPOINT" method="POST" class="row g-3">
-              <div class="col-12 col-md-6 fade-in-up fade-in delay-4 fade-blocked scroll-animate">
+            <form id="contactForm" action="https://YOUR-GHL-ENDPOINT" method="POST" class="row g-3">
+              <div class="col-12 col-md-6 fade-in-up fade-in delay-4 scroll-animate">
                 <label for="contactName" class="form-label text-body-sm mb-1">Name</label>
                 <input
                   id="contactName"
@@ -117,7 +122,7 @@
                 />
               </div>
 
-              <div class="col-12 col-md-6 fade-in-up fade-in delay-4 fade-blocked scroll-animate">
+              <div class="col-12 col-md-6 fade-in-up fade-in delay-4 scroll-animate">
                 <label for="contactEmail" class="form-label text-body-sm mb-1">Email</label>
                 <input
                   id="contactEmail"
@@ -129,7 +134,7 @@
                 />
               </div>
 
-              <div class="col-12 fade-in-up fade-in delay-5 fade-blocked scroll-animate">
+              <div class="col-12 fade-in-up fade-in delay-5 scroll-animate">
                 <label for="contactPhone" class="form-label text-body-sm mb-1">Phone</label>
                 <input
                   id="contactPhone"
@@ -137,10 +142,15 @@
                   type="tel"
                   class="form-control border-brand bg-muted py-2"
                   placeholder="(Optional)"
+                  inputmode="numeric"
+                  autocomplete="tel"
+                  pattern="[0-9]*"
+                  maxlength="15"
+                  title="Numbers only"
                 />
               </div>
 
-              <div class="col-12 fade-in-up fade-in delay-6 fade-blocked scroll-animate">
+              <div class="col-12 fade-in-up fade-in delay-6 scroll-animate">
                 <label for="contactMessage" class="form-label text-body-sm mb-1">Write Message</label>
                 <textarea
                   id="contactMessage"
@@ -152,26 +162,76 @@
                 ></textarea>
               </div>
 
-              <div class="col-12 fade-in-up fade-in delay-7 fade-blocked scroll-animate">
-                <div class="d-grid d-sm-flex gap-3 align-items-center mt-2">
-                  <button type="submit" class="btn btn-primary flex-grow-1 flex-sm-grow-0 px-4">
+              <div class="col-12 fade-in-up fade-in delay-7 scroll-animate">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="contactConsent"
+                    name="consent"
+                    required
+                  >
+                  <label class="form-check-label text-caption-sm" for="contactConsent">
+                    I understand this form is for general inquiries only, is not for medical emergencies,
+                    and I consent to be contacted regarding my message.
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-12 fade-in-up fade-in delay-7 scroll-animate">
+                <div class="d-grid gap-2 mt-2">
+                  <button
+                    id="contactSubmit"
+                    type="submit"
+                    class="btn btn-primary px-4"
+                    disabled
+                  >
                     <i class="fa-solid fa-paper-plane me-2 icon-solid"></i>
                     Send Message
                   </button>
 
-                  <small class="text-caption-sm mb-0">
-                    By submitting, you agree to be contacted regarding your request.
+                  <small class="text-caption-sm mb-0 text-center">
+                    This form sends your details securely to our team through our telehealth platform.
                   </small>
                 </div>
               </div>
             </form>
 
+            <script>
+              function syncSubmitState() {
+                const consent = document.getElementById('contactConsent');
+                const submitBtn = document.getElementById('contactSubmit');
+
+                submitBtn.disabled = !(consent && consent.checked);
+                submitBtn.setAttribute('aria-disabled', submitBtn.disabled ? 'true' : 'false');
+              }
+
+              document.addEventListener('DOMContentLoaded', function () {
+                const phone = document.getElementById('contactPhone');
+                const consent = document.getElementById('contactConsent');
+
+                // initial state
+                syncSubmitState();
+
+                // checkbox enables submit
+                consent.addEventListener('change', syncSubmitState);
+
+                // Numbers-only phone (strips non-digits on type/paste)
+                phone.addEventListener('input', function () {
+                  const cleaned = phone.value.replace(/\D+/g, '');
+                  if (phone.value !== cleaned) phone.value = cleaned;
+                });
+              });
+            </script>
+
           </div>
         </div>
+
       </div>
     </div>
 
   </div>
 </section>
 
-{% endblock content %}
+{% include "components/mrq2.html" %}
+{% endblock page_content %}

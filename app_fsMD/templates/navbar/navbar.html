@@ -1,32 +1,30 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg navbar-fsmd transparent fixed-top fade-in-down fade-in delay-1 fade-blocked">
+<nav id="siteNavbar"
+     class="navbar navbar-expand-lg navbar-fsmd transparent sticky-top fade-in-down fade-in delay-1 fade-blocked">
   <div class="container align-items-center">
-    <a class="navbar-brand d-flex align-items-center p-2" href="{% url 'index' %}">
+
+    <a class="navbar-brand d-flex align-items-center p-2" href="{% url 'home' %}">
       <img src="{% static 'images/favicon.ico' %}" alt="Full Scope MD logo" class="logo-icon me-2">
-      <span class="navbar-brand-title brand-title d-none d-sm-inline">
-        <span class="text-primary-accent">Full</span><span class="text-secondary-accent">Scope</span><span class="text-tertiary-accent">MD</span>
+      <span class="navbar-brand-title brand-title">
+        <span class="text-primary-accent">Full<span class="text-secondary-accent">Scope</span><span class="text-tertiary-accent">MD</span></span>
       </span>
     </a>
 
-    <div class="d-flex align-items-center d-lg-none">
-      <a class="icon-button me-2" href="{% url 'contact' %}" aria-label="Contact Us">
-        <i class="fa-solid fa-phone"></i>
-      </a>
-<button class="icon-button icon-button--gradient-border cart-btn me-2"
-        type="button"
-        aria-label="Cart"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#cartOffcanvas">
-  <i class="fa-solid fa-cart-shopping"></i>
+    <div class="d-flex align-items-center ms-auto gap-2 d-lg-none navbar-mobile-actions">
+      <button class="icon-button icon-button--gradient-border cart-btn d-none d-sm-inline-flex"
+              type="button"
+              aria-label="Cart"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#cartOffcanvas">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-badge badge rounded-pill bg-accent-gradient-animated is-hidden"
+              aria-live="polite"
+              aria-atomic="true">0</span>
+      </button>
 
-  <span class="cart-badge badge rounded-pill bg-accent-gradient-animated is-hidden"
-        aria-live="polite"
-        aria-atomic="true">0</span>
-</button>
-
-
-      <button class="navbar-toggler icon-button" type="button"
+      <button class="navbar-toggler icon-button"
+              type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#fsmdNav"
               aria-controls="fsmdNav"
@@ -38,18 +36,19 @@
     <div class="collapse navbar-collapse d-none d-lg-flex" id="mainNavbar">
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'index' %}">Home</a>
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
         </li>
 
         <li class="nav-item dropdown">
           {% with active_slug=category.slug|default:'' %}
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Programs &amp; Services
+              Services
             </a>
             <ul class="dropdown-menu">
               {% for c in nav_programs %}
                 <li>
-                  <a class="dropdown-item {% if active_slug == c.slug %}active{% endif %}" href="{% url 'prgrm_dtls' c.slug %}">
+                  <a class="dropdown-item {% if active_slug == c.slug %}active{% endif %}"
+                     href="{% url 'prgrm_dtls' c.slug %}">
                     {{ c.name }}
                   </a>
                 </li>
@@ -68,58 +67,82 @@
       </ul>
 
       <div class="d-flex align-items-center gap-2">
-        <a class="icon-button me-2" href="{% url 'contact' %}" aria-label="Contact Us">
+        <a href="tel:+13072187845"
+           class="nav-link d-none d-xl-inline-flex align-items-center me-2 px-0 text-nowrap">
+          <span class="fw-semibold small">+1 (307) 218-7845</span>
+        </a>
+
+        <a class="icon-button me-1" href="{% url 'contact' %}" aria-label="Contact Us">
           <i class="fa-solid fa-phone"></i>
         </a>
-<button class="icon-button icon-button--gradient-border cart-btn me-2"
-        type="button"
-        aria-label="Cart"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#cartOffcanvas">
-  <i class="fa-solid fa-cart-shopping"></i>
 
-  <span class="cart-badge badge rounded-pill bg-accent-gradient-animated is-hidden"
-        aria-live="polite"
-        aria-atomic="true">0</span>
-</button>
+        <button class="icon-button icon-button--gradient-border cart-btn me-2"
+                type="button"
+                aria-label="Cart"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#cartOffcanvas">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge badge rounded-pill bg-accent-gradient-animated is-hidden"
+                aria-live="polite"
+                aria-atomic="true">0</span>
+        </button>
 
-
-        <a href="#" class="btn btn-primary px-4">Appointment</a>
+        <a href="#" class="btn btn-primary px-3 px-xl-4 text-nowrap">Appointment</a>
       </div>
     </div>
+
   </div>
 </nav>
 
-<div class="offcanvas offcanvas-end offcanvas-fsmd" tabindex="-1" id="fsmdNav" aria-labelledby="fsmdNavLabel">
+
+{# offcanvas mobile nav stays the same below #}
+
+
+{# MOBILE OFFCANVAS NAV #}
+<div class="offcanvas offcanvas-end offcanvas-fsmd"
+     tabindex="-1"
+     id="fsmdNav"
+     aria-labelledby="fsmdNavLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title d-flex align-items-center brand-title" id="fsmdNavLabel">
-      <img src="{% static 'images/favicon.ico' %}" alt="Full Scope MD logo" class="logo-icon-sm me-2">
+    <h5 class="offcanvas-title d-flex align-items-center brand-title"
+        id="fsmdNavLabel">
+      <img src="{% static 'images/favicon.ico' %}"
+           alt="Full Scope MD logo"
+           class="logo-icon-sm me-2">
       <span class="text-primary-accent">Full</span>
       <span class="text-secondary-accent">Scope</span>
       <span class="text-tertiary-accent">MD</span>
     </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <button type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
   </div>
 
   <div class="offcanvas-body d-flex flex-column justify-content-between">
     <div class="accordion" id="mobileNavAccordion">
 
       <div class="accordion-item border-0">
-        <a class="nav-link px-2 py-2" href="{% url 'index' %}">Home</a>
+        <a class="nav-link px-2 py-2" href="{% url 'home' %}">Home</a>
       </div>
 
       <div class="accordion-item border-0">
         {% with active_slug=category.slug|default:'' %}
           <button class="accordion-button collapsed px-2 py-2"
-                  type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapsePrograms" aria-expanded="false">
-            Programs &amp; Services
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapsePrograms"
+                  aria-expanded="false">
+            Services
           </button>
-          <div id="collapsePrograms" class="accordion-collapse collapse" data-bs-parent="#mobileNavAccordion">
+          <div id="collapsePrograms"
+               class="accordion-collapse collapse"
+               data-bs-parent="#mobileNavAccordion">
             <ul class="list-unstyled ps-3">
               {% for c in nav_programs %}
                 <li>
-                  <a class="nav-link py-1 {% if active_slug == c.slug %}active{% endif %}" href="{% url 'prgrm_dtls' c.slug %}">
+                  <a class="nav-link py-1 {% if active_slug == c.slug %}active{% endif %}"
+                     href="{% url 'prgrm_dtls' c.slug %}">
                     {{ c.name }}
                   </a>
                 </li>
@@ -141,23 +164,24 @@
 
     <div class="mt-3">
       <div class="d-flex justify-content-center gap-2 mb-3">
-        <a class="icon-button me-2" href="{% url 'contact' %}" aria-label="Contact Us">
+        <a class="icon-button me-2"
+           href="tel:+13072187845"
+           aria-label="Call us">
           <i class="fa-solid fa-phone"></i>
         </a>
-<button class="icon-button icon-button--gradient-border cart-btn me-2"
-        type="button"
-        aria-label="Cart"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#cartOffcanvas">
-  <i class="fa-solid fa-cart-shopping"></i>
 
-  <span class="cart-badge badge rounded-pill bg-accent-gradient-animated is-hidden"
-        aria-live="polite"
-        aria-atomic="true">0</span>
-</button>
-
-
+        <button class="icon-button icon-button--gradient-border cart-btn me-2"
+                type="button"
+                aria-label="Cart"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#cartOffcanvas">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge badge rounded-pill bg-accent-gradient-animated is-hidden"
+                aria-live="polite"
+                aria-atomic="true">0</span>
+        </button>
       </div>
+
       <a href="#" class="btn btn-primary w-100">Appointment</a>
     </div>
   </div>

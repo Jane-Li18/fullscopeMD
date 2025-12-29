@@ -36,7 +36,7 @@ document.addEventListener("scroll", () => {
   const navbar = document.querySelector(".navbar-fsmd");
   if (!navbar) return;
 
-  if (window.scrollY > 20) navbar.classList.remove("transparent");
+  if (window.scrollY > 1) navbar.classList.remove("transparent");
   else navbar.classList.add("transparent");
 });
 
@@ -103,52 +103,6 @@ window.addEventListener("load", () => {
   }, 1500);
 });
 
-/* Programs Accordion */
-document.addEventListener("DOMContentLoaded", () => {
-  const items = document.querySelectorAll(".program-item");
-  if (!items.length) return;
-
-  items.forEach((item) => {
-    const bar = item.querySelector(".program-bar");
-    const panelInner = item.querySelector(".accordion-anim");
-    if (!bar || !panelInner) return;
-
-    bar.addEventListener("click", () => {
-      const isActive = item.classList.contains("active");
-      const isVertical = window.matchMedia("(max-width: 992px)").matches;
-      const enterDirectionClass = isVertical ? "fade-in-down" : "fade-in-left";
-
-      items.forEach((i) => {
-        if (i.classList.contains("active")) {
-          const inner = i.querySelector(".accordion-anim");
-          if (inner) {
-            inner.classList.remove("fade-in", "fade-in-up", "fade-in-down", "fade-in-left", "fade-in-right");
-            inner.classList.add("fade-out");
-          }
-        }
-      });
-
-      setTimeout(() => {
-        items.forEach((i) => {
-          i.classList.remove("active");
-          const inner = i.querySelector(".accordion-anim");
-          if (inner) {
-            inner.classList.remove("fade-in", "fade-in-up", "fade-in-down", "fade-in-left", "fade-in-right", "fade-out");
-            inner.style.animationDelay = "0s";
-          }
-        });
-
-        if (!isActive) {
-          item.classList.add("active");
-          panelInner.style.animationDelay = "0.35s";
-          panelInner.classList.remove("fade-in", "fade-in-up", "fade-in-down", "fade-in-left", "fade-in-right", "fade-out");
-          void panelInner.offsetWidth;
-          panelInner.classList.add("fade-in", enterDirectionClass);
-        }
-      }, 250);
-    });
-  });
-});
 
 /* Result Slider */
 document.addEventListener("DOMContentLoaded", () => {
@@ -220,6 +174,211 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("touchend", endDrag);
     document.addEventListener("touchcancel", endDrag);
   });
+});
+
+/* Programs Accordion (mobile swipe native + desktop mouse drag + click open) */
+document.addEventListener("DOMContentLoaded", () => {
+  const row = document.querySelector(".program-row");
+  const items = Array.from(document.querySelectorAll(".program-item"));
+  if (!row || !items.length) return;
+
+  row.dataset.dragged = "0";
+
+  const isMobile = () => window.matchMedia("(max-width: 992px)").matches;
+
+  const updateFit = () => {
+    if (isMobile()) {
+      row.classList.remove("is-fit");
+      return;
+    }
+    row.classList.toggle("is-fit", row.scrollWidth <= row.clientWidth + 1);
+  };
+
+  const centerActiveItem = (item) => {
+    const rowRect = row.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+
+    const currentScroll = row.scrollLeft;
+    const itemCenter = itemRect.left + itemRect.width / 2;
+    const rowCenter = rowRect.left + rowRect.width / 2;
+    const delta = itemCenter - rowCenter;
+    const targetScroll = currentScroll + delta;
+
+    row.scrollTo({
+      left: targetScroll,
+      behavior: "smooth"
+    });
+  };
+
+  // Center the active item vertically (for mobile)
+  const centerVerticalItem = (item) => {
+    const rowRect = row.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+
+    const rowHeight = rowRect.height;
+    const itemHeight = itemRect.height;
+
+    const currentScroll = row.scrollTop;
+    const itemCenter = itemRect.top + itemHeight / 2;
+    const rowCenter = rowRect.top + rowHeight / 2;
+    const delta = itemCenter - rowCenter;
+    const targetScroll = currentScroll + delta;
+
+    row.scrollTo({
+      top: targetScroll,
+      behavior: "smooth"
+    });
+  };
+
+  // Wait for transition (flex-basis change) to finish before scrolling
+  const waitForTransition = (el, property, callback) => {
+    let done = false;
+
+    const handler = (e) => {
+      if (e.target === el && (!property || e.propertyName === property)) {
+        done = true;
+        el.removeEventListener("transitionend", handler);
+        callback();
+      }
+    };
+
+    el.addEventListener("transitionend", handler);
+
+    setTimeout(() => {
+      if (!done) {
+        el.removeEventListener("transitionend", handler);
+        callback();
+      }
+    }, 450); // slightly > your .35s CSS transition
+  };
+
+  const openItem = (item, scroll = true) => {
+    items.forEach(i => i.classList.remove("active"));
+    item.classList.add("active");
+
+    requestAnimationFrame(() => {
+      updateFit();
+
+      if (!isMobile() && scroll) {
+        // Temporarily disable smooth scroll behavior during the expansion
+        row.style.scrollBehavior = "auto"; // Disable smooth scroll
+
+        // Wait for flex-basis transition to finish, THEN center the item
+        waitForTransition(item, "flex-basis", () => {
+          // For mobile, center the item vertically
+          if (isMobile()) {
+            centerVerticalItem(item); // Scroll vertically to the center
+          } else {
+            centerActiveItem(item); // Scroll horizontally to the center
+          }
+
+          // Re-enable smooth scrolling after the scroll action
+          setTimeout(() => {
+            row.style.scrollBehavior = "smooth"; // Re-enable smooth scroll
+          }, 400); // Match this time with your transition duration
+        });
+      }
+    });
+  };
+
+  row.addEventListener("click", (e) => {
+    if (row.dataset.dragged === "1") return;
+
+    const bar = e.target.closest(".program-bar");
+    if (!bar) return;
+
+    const item = bar.closest(".program-item");
+    if (!item) return;
+
+    if (item.classList.contains("active")) {
+      if (!isMobile()) {
+        centerActiveItem(item);
+      }
+      return;
+    }
+
+    openItem(item, true);
+  });
+
+  const DRAG_THRESHOLD = 6;
+  let down = false;
+  let startX = 0;
+  let startLeft = 0;
+  let dragged = false;
+
+  const canDragDesktop = () =>
+    window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
+    row.scrollWidth > row.clientWidth + 1;
+
+  const onMove = (e) => {
+    if (!down) return;
+
+    const dx = e.clientX - startX;
+
+    if (!dragged && Math.abs(dx) > DRAG_THRESHOLD) {
+      dragged = true;
+      row.classList.add("is-dragging");
+      row.classList.add("no-snap"); // Disable snapping during drag
+      document.body.style.userSelect = "none";
+    }
+
+    if (dragged) {
+      e.preventDefault();
+      row.scrollLeft = startLeft - dx;
+    }
+  };
+
+  const onUp = () => {
+    if (!down) return;
+    down = false;
+
+    window.removeEventListener("mousemove", onMove);
+    window.removeEventListener("mouseup", onUp);
+
+    document.body.style.userSelect = "";
+    row.classList.remove("is-dragging");
+    row.classList.remove("no-snap"); // Re-enable snapping after drag
+
+    if (dragged) {
+      row.dataset.dragged = "1";
+      setTimeout(() => (row.dataset.dragged = "0"), 150);
+    }
+
+    dragged = false;
+  };
+
+  row.addEventListener("mousedown", (e) => {
+    if (!canDragDesktop()) return;
+    if (e.button !== 0) return; // left mouse only
+
+    if (e.target.closest(".program-panel")) return;
+
+    down = true;
+    dragged = false;
+    startX = e.clientX;
+    startLeft = row.scrollLeft;
+
+    window.addEventListener("mousemove", onMove, { passive: false });
+    window.addEventListener("mouseup", onUp, { passive: true });
+  });
+
+  row.addEventListener("dragstart", (e) => e.preventDefault());
+
+  openItem(document.querySelector(".program-item.active") || items[0], false);
+  updateFit();
+
+  const ro = new ResizeObserver(() => {
+    updateFit();
+  });
+  ro.observe(row);
+
+  window.addEventListener(
+    "resize",
+    () => {
+      updateFit();
+    },
+    { passive: true }
+  );
 });
 
 /* Product Filters */
@@ -306,146 +465,49 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!carouselEl || typeof bootstrap === "undefined") return;
 
   const carousel = bootstrap.Carousel.getOrCreateInstance(carouselEl, {
-    ride: false,
+    ride: "carousel",
+    interval: 6000,
     touch: true,
-    interval: false,
     wrap: true
   });
 
-  const thumbsWrap = document.querySelector(".feedback-thumbs");
-  if (!thumbsWrap) return;
-
-  if (!thumbsWrap.dataset.duped) {
-    const originals = Array.from(thumbsWrap.querySelectorAll(".feedback-thumb"));
-    originals.forEach((btn) => {
-      const clone = btn.cloneNode(true);
-      clone.dataset.clone = "1";
-      thumbsWrap.appendChild(clone);
-    });
-    thumbsWrap.dataset.duped = "1";
-  }
-
-  const getAllThumbs = () => Array.from(document.querySelectorAll(".feedback-thumb"));
-
-  const setActiveThumb = (idx) => {
-    const allThumbs = getAllThumbs();
-    allThumbs.forEach((t) => t.classList.remove("is-active"));
-
-    const matches = allThumbs.filter((t) => Number(t.getAttribute("data-bs-slide-to")) === idx);
-    matches.forEach((t) => t.classList.add("is-active"));
-
-    const primary = matches.find((t) => !t.dataset.clone) || matches[0];
-    primary?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-  };
-
-  getAllThumbs().forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const i = Number(btn.getAttribute("data-bs-slide-to"));
-      setActiveThumb(i);
-    });
-  });
-
-  carouselEl.addEventListener("slid.bs.carousel", (e) => {
-    setActiveThumb(e.to);
-  });
-
-  let startX = 0,
-    startY = 0,
-    down = false;
-  const threshold = 40,
-    restraint = 60;
+  let isDown = false;
+  let startX = 0;
+  let startY = 0;
+  const threshold = 40;   // minimum horizontal movement
+  const restraint = 80;   // ignore if too diagonal
 
   carouselEl.addEventListener("pointerdown", (e) => {
-    down = true;
+    isDown = true;
     startX = e.clientX;
     startY = e.clientY;
   });
 
   carouselEl.addEventListener("pointerup", (e) => {
-    if (!down) return;
-    down = false;
+    if (!isDown) return;
+    isDown = false;
 
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
 
     if (Math.abs(dx) >= threshold && Math.abs(dy) <= restraint) {
-      if (dx < 0) carousel.next();
-      else carousel.prev();
+      if (dx < 0) {
+        carousel.next();
+      } else {
+        carousel.prev();
+      }
     }
+  });
+
+  carouselEl.addEventListener("pointerleave", () => {
+    isDown = false;
   });
 
   carouselEl.addEventListener("pointercancel", () => {
-    down = false;
-  });
-  carouselEl.addEventListener("pointerleave", () => {
-    down = false;
-  });
-
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReduced) return;
-
-  thumbsWrap.classList.add("is-auto");
-
-  let loopPoint = 0;
-  const computeLoopPoint = () => {
-    loopPoint = thumbsWrap.scrollWidth / 2;
-  };
-
-  computeLoopPoint();
-  window.addEventListener("resize", computeLoopPoint);
-
-  const speedPxPerSec = 22;
-  let paused = false;
-  let lastTime = 0;
-
-  const tick = (t) => {
-    if (!lastTime) lastTime = t;
-    const dt = (t - lastTime) / 1000;
-    lastTime = t;
-
-    if (!paused) {
-      if (loopPoint <= 0) computeLoopPoint();
-
-      thumbsWrap.scrollLeft += speedPxPerSec * dt;
-
-      if (thumbsWrap.scrollLeft >= loopPoint) {
-        thumbsWrap.scrollLeft -= loopPoint;
-      }
-    }
-
-    requestAnimationFrame(tick);
-  };
-
-  requestAnimationFrame(tick);
-
-  const pause = () => {
-    paused = true;
-  };
-  const resume = () => {
-    paused = false;
-    lastTime = 0;
-  };
-
-  thumbsWrap.addEventListener("mouseenter", pause);
-  thumbsWrap.addEventListener("mouseleave", resume);
-
-  thumbsWrap.addEventListener("pointerdown", pause, { passive: true });
-  thumbsWrap.addEventListener(
-    "pointerup",
-    () => setTimeout(resume, 250),
-    { passive: true }
-  );
-  thumbsWrap.addEventListener(
-    "pointercancel",
-    () => setTimeout(resume, 250),
-    { passive: true }
-  );
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) pause();
-    else resume();
+    isDown = false;
   });
 });
+
 
 /* Blog Posts Drag List */
 document.addEventListener("DOMContentLoaded", () => {
@@ -924,9 +986,9 @@ document.addEventListener("DOMContentLoaded", () => {
     wrap.innerHTML = payload.items
       .map((it) => {
         const rx = it.requires_prescription
-          ? `<span class="badge rounded-pill bg-warning-subtle text-warning-emphasis ms-2">Prescription</span>`
+          ? `<span class="badge rounded-pill bg-warning-subtle text-warning-emphasis">Prescription</span>`
           : it.requires_consultation
-          ? `<span class="badge rounded-pill bg-info-subtle text-info-emphasis ms-2">Consultation</span>`
+          ? `<span class="badge rounded-pill bg-info-subtle text-info-emphasis">Consultation</span>`
           : ``;
 
         const stock = typeof it.stock === "number" && it.stock > 0 ? it.stock : 999999;
@@ -947,13 +1009,12 @@ document.addEventListener("DOMContentLoaded", () => {
                   <div class="text-caption-sm text-muted">${money(it.unit_price)} each</div>
                 </div>
 
-                <button class="icon-button icon-button--gradient-border"
+                <button class="icon-button text-danger opacity-75"
                         type="button"
                         aria-label="Remove item"
                         data-action="remove"
-                        data-product="${it.id}"
-                        style="width:40px;height:40px;">
-                  <i class="fa-solid fa-trash"></i>
+                        data-product="${it.id}">
+                  <i class="fa-solid fa-trash-can"></i>
                 </button>
               </div>
 
@@ -1098,7 +1159,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!wrap) return;
 
     wrap.addEventListener("click", async (e) => {
-      const btn = e.target.closest("[data-action]");
+      const btn = e.target.closest('button[data-action]'); // ✅ buttons only
       if (!btn) return;
 
       const action = btn.dataset.action;

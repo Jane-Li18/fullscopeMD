@@ -1,0 +1,135 @@
+{% load static %}
+
+<div class="section-stars" aria-hidden="true">
+  <span class="section-star"></span>
+  <span class="section-star"></span>
+  <span class="section-star"></span>
+  <span class="section-star"></span>
+  <span class="section-star"></span>
+</div>
+
+<style>
+/* =========================================================
+   Reusable Stars Overlay (global)
+   Requires the parent section to have: position-relative
+========================================================= */
+
+.section-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.section-star {
+  position: absolute;
+  opacity: 0.65;
+  animation: hero-spin 18s linear infinite;
+  background-image: url("/static/images/components/star.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color: var(--primary-accent);
+  -webkit-mask-image: url("/static/images/components/star.png");
+  mask-image: url("/static/images/components/star.png");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  transform: translate(-50%, -50%);
+}
+
+/* Fixed star positions, but varying sizes */
+.section-star:nth-child(1) {
+  top: 10%;
+  left: 15%;
+  width: 58px;
+  height: 58px;
+  transform: translate(-50%, -50%) rotate(-10deg);
+}
+
+.section-star:nth-child(2) {
+  top: 20%;
+  left: 85%;
+  width: 38px;
+  height: 38px;
+  transform: translate(-50%, -50%) rotate(20deg);
+}
+
+.section-star:nth-child(3) {
+  top: 45%;
+  left: 25%;
+  width: 48px;
+  height: 48px;
+  transform: translate(-50%, -50%) rotate(-25deg);
+}
+
+.section-star:nth-child(4) {
+  top: 65%;
+  left: 80%;
+  width: 32px;
+  height: 32px;
+  transform: translate(-50%, -50%) rotate(8deg);
+}
+
+.section-star:nth-child(5) {
+  top: 88%;
+  left: 45%;
+  width: 52px;
+  height: 52px;
+  transform: translate(-50%, -50%) rotate(-15deg);
+}
+
+@media (max-width: 1199.98px) {
+  .section-star {
+    opacity: 0.55;
+  }
+  .section-star:nth-child(1) {
+    width: 46px;
+    height: 46px;
+  }
+  .section-star:nth-child(2) {
+    width: 30px;
+    height: 30px;
+  }
+  .section-star:nth-child(3) {
+    width: 38px;
+    height: 38px;
+  }
+  .section-star:nth-child(4) {
+    width: 26px;
+    height: 26px;
+  }
+  .section-star:nth-child(5) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .section-star {
+    opacity: 0.5;
+  }
+  .section-star:nth-child(1) {
+    width: 36px;
+    height: 36px;
+  }
+  .section-star:nth-child(2) {
+    width: 24px;
+    height: 24px;
+  }
+  .section-star:nth-child(3) {
+    width: 30px;
+    height: 30px;
+  }
+  .section-star:nth-child(4) {
+    width: 20px;
+    height: 20px;
+  }
+  .section-star:nth-child(5) {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+</style>

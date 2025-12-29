@@ -1,38 +1,85 @@
 {% load static %}
 
-<section class="intro-section d-flex align-items-center min-vh-100 bg-muted">
-    <div class="container">
-        <div class="row align-items-center">
-            
-            <!-- IMAGE (right on desktop, hidden on smaller screens) -->
-            <div class="col-lg-4 mb-4 mb-lg-0 d-none d-lg-flex justify-content-center justify-content-lg-end">
-                <img src="{% static 'images/bg1.png' %}"
-                     alt="Doctor"
-                     class="img-fluid w-100 h-auto fade-in-up fade-in delay-1 fade-blocked scroll-animate">
-            </div>
+<section class="intro-split-section bg-muted">
+  <div class="container py-4 py-lg-5">
+    <div class="row align-items-center">
 
-            <!-- TEXT -->
-            <div class="col-lg-8 text-center text-lg-start px-4">
-                <h2 class="mb-3 fade-in-up fade-in delay-1 fade-blocked scroll-animate">
-                    Care That Listens, Guides, and Supports You
-                </h2>
+      <div class="col-lg-5 mb-4 mb-lg-0">
+        <div class="intro-split-media fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+          <div class="intro-split-media__frame">
+            <img
+              src="{% static 'images/home/doctor1.jpg' %}"
+              alt="Clinic care"
+              class="intro-split-media__img"
+            >
+          </div>
 
-                <p class="mb-4 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
-                    Your health deserves attention, clarity, and real medical expertise.
-                    Our licensed providers take the time to understand your concerns, create a personalized
-                    treatment plan, and support you through every step with structured follow-ups and convenient
-                    medication delivery. The goal is simple: make high-quality telemedicine accessible, safe,
-                    and centered on your wellbeing.
-                </p>
+          <div class="intro-split-media__deco" aria-hidden="true">
+            <svg viewBox="0 0 217 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M2 2H215V618H170C133.427 618 99.5833 606.313 72 586.471V588.927C99.6969 608.5 133.505 620 170 620H215H217V618V2V0H215H2H0V2V450C0 487.378 12.0629 521.938 32.508 550H34.9905C14.2616 522.06 2 487.462 2 450V2Z"
+                    fill="var(--primary-accent)" />
+              <path d="M57.8488 560.9L53.5269 569.179L56.9986 577.849L48.7195 573.527L40.0494 576.999L44.3713 568.72L40.8996 560.05L49.1787 564.371L57.8488 560.9Z"
+                    fill="var(--primary-accent)" />
+            </svg>
+          </div>
 
-                <div class="d-flex justify-content-center justify-content-lg-start fade-in-up fade-in delay-3 fade-blocked scroll-animate">
-                    <a href="{% url 'about' %}" class="btn btn-primary d-inline-flex align-items-center gap-2">
-                        About Us
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
+          <div class="intro-split-media__cta">
+            <a class="popup-youtube" href="https://www.youtube.com/watch?v=o8OgzQdA70c" aria-label="Watch overview video">
+              <div class="word-rotate-box">
+                <span class="text__char" style="--char-rotate:0deg;">M</span>
+                <span class="text__char" style="--char-rotate:15deg;">o</span>
+                <span class="text__char" style="--char-rotate:30deg;">r</span>
+                <span class="text__char" style="--char-rotate:45deg;">e</span>
+                <span class="text__char" style="--char-rotate:60deg;">&nbsp;</span>
+                <span class="text__char" style="--char-rotate:75deg;">C</span>
+                <span class="text__char" style="--char-rotate:90deg;">o</span>
+                <span class="text__char" style="--char-rotate:105deg;">l</span>
+                <span class="text__char" style="--char-rotate:120deg;">l</span>
+                <span class="text__char" style="--char-rotate:135deg;">e</span>
+                <span class="text__char" style="--char-rotate:150deg;">c</span>
+                <span class="text__char" style="--char-rotate:165deg;">t</span>
+                <span class="text__char" style="--char-rotate:180deg;">i</span>
+                <span class="text__char" style="--char-rotate:195deg;">o</span>
+                <span class="text__char" style="--char-rotate:210deg;">n</span>
+                <span class="text__char" style="--char-rotate:225deg;">&nbsp;</span>
+                <span class="text__char" style="--char-rotate:240deg;">E</span>
+                <span class="text__char" style="--char-rotate:255deg;">x</span>
+                <span class="text__char" style="--char-rotate:270deg;">p</span>
+                <span class="text__char" style="--char-rotate:285deg;">l</span>
+                <span class="text__char" style="--char-rotate:300deg;">o</span>
+                <span class="text__char" style="--char-rotate:315deg;">r</span>
+                <span class="text__char" style="--char-rotate:330deg;">e</span>
+
+                <div class="center-icon">
+                  <i class="fa-solid fa-play"></i>
                 </div>
-            </div>
+              </div>
+            </a>
+          </div>
 
         </div>
+      </div>
+
+      <div class="col-lg-7">
+        <div class="intro-split-content text-center text-lg-start px-2 px-lg-4">
+          <h1 class="mb-3 fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+            Care That Listens, Guides, and Supports You
+          </h1>
+
+          <p class="mb-4 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+            Your health deserves clear guidance and reliable medical expertise. Our licensed providers take time to understand your concerns, develop an individualized treatment plan, and provide structured follow-up care. Where appropriate, medications may be arranged for convenient delivery, subject to clinical review and approval. Our focus is to make telemedicine accessible, safe, and centered on patient wellbeing.
+          </p>
+
+          <div class="d-flex flex-wrap justify-content-center justify-content-lg-start align-items-center gap-3 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+            <a href="{% url 'about' %}" class="btn btn-primary d-inline-flex align-items-center gap-2">
+              About Us
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </div>
 </section>

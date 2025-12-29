@@ -1,0 +1,249 @@
+{% load static %}
+<section id="book-appointment"
+         class="booking-section position-relative overflow-hidden py-4 py-md-5">
+  <div class="position-absolute top-0 start-0 w-100 h-100 z-0">
+    <iframe
+      class="w-100 h-100 border-0"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=Sheridan%2C%20Wyoming&z=13&output=embed"
+      style="filter:saturate(1.05) contrast(1.02);">
+    </iframe>
+    <div class="position-absolute top-0 start-0 w-100 h-100"
+         style="background:linear-gradient(to bottom, rgba(255,255,255,.55), rgba(255,255,255,.08));">
+    </div>
+  </div>
+
+  <div class="container position-relative z-1 py-3 py-md-4">
+    <div class="row align-items-start justify-content-between g-3 g-xl-4">
+
+      <div class="col-12 col-lg-5 col-xl-4 d-flex justify-content-start">
+        <div class="bg-white rounded-4 shadow-brand border-brand p-3 p-md-4"
+             style="max-width:380px;">
+          <h5 class="offcanvas-title d-flex align-items-center brand-title mb-3"
+              id="fsmdMapCardTitle">
+            <img src="{% static 'images/favicon.ico' %}"
+                 alt="Full Scope MD logo"
+                 class="logo-icon-sm me-2">
+            <span class="text-primary-accent">Full</span>
+            <span class="text-secondary-accent">Scope</span>
+            <span class="text-tertiary-accent">MD</span>
+          </h5>
+
+          <div class="d-flex align-items-start gap-2 mb-2">
+            <span class="rounded-circle d-inline-flex align-items-center justify-content-center bg-muted"
+                  style="width:32px;height:32px;">
+              <i class="fa-solid fa-location-dot text-primary-accent"></i>
+            </span>
+            <div>
+              <div class="text-caption-sm text-uppercase fw-semibold text-secondary-accent mb-1">
+                Address
+              </div>
+              <p class="mb-0 text-body-sm text-dark">
+                Sheridan, Wyoming
+              </p>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start gap-2 mb-2">
+            <span class="rounded-circle d-inline-flex align-items-center justify-content-center bg-muted"
+                  style="width:32px;height:32px;">
+              <i class="fa-solid fa-phone text-primary-accent"></i>
+            </span>
+            <div>
+              <div class="text-caption-sm text-uppercase fw-semibold text-secondary-accent mb-1">
+                Phone Number
+              </div>
+              <p class="mb-0 text-body-sm text-dark">
+                +1 (307) 218-7845
+              </p>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start gap-2 mb-2">
+            <span class="rounded-circle d-inline-flex align-items-center justify-content-center bg-muted"
+                  style="width:32px;height:32px;">
+              <i class="fa-solid fa-envelope text-primary-accent"></i>
+            </span>
+            <div>
+              <div class="text-caption-sm text-uppercase fw-semibold text-secondary-accent mb-1">
+                Email
+              </div>
+              <p class="mb-0 text-body-sm text-dark">
+                <a href="mailto:support@fullscopemd.com" class="text-decoration-none">
+                  support@fullscopemd.com
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start gap-2">
+            <span class="rounded-circle d-inline-flex align-items-center justify-content-center bg-muted"
+                  style="width:32px;height:32px;">
+              <i class="fa-regular fa-clock text-primary-accent"></i>
+            </span>
+            <div>
+              <div class="text-caption-sm text-uppercase fw-semibold text-secondary-accent mb-1">
+                Business Hours
+              </div>
+              <p class="mb-0 text-body-sm text-dark">
+                Mon – Sun<br>
+                8:00 AM – 5:00 PM EST
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-7 col-xl-6">
+        <div class="rounded-4 shadow-brand text-white position-relative p-4 p-md-4 p-xl-5"
+             style="background-color:var(--primary-accent);">
+          <div class="position-absolute top-0 end-0 pt-3 pe-3 d-none d-md-block"
+               style="opacity:.06;font-size:4.2rem;">
+            <i class="fa-regular fa-calendar"></i>
+          </div>
+
+          <h2 class="mb-3 text-white">Book Your Appointment</h2>
+
+          <form action="#" method="post">
+            {% csrf_token %}
+
+            <div class="mb-2">
+              <label class="form-label text-white mb-1">Your Name</label>
+              <div class="booking-field-line d-flex align-items-center">
+                <span class="me-2">
+                  <i class="fa-regular fa-user text-tertiary-accent"></i>
+                </span>
+                <input
+                  type="text"
+                  name="name"
+                  autocomplete="name"
+                  class="flex-grow-1 bg-transparent border-0"
+                  style="color:#fff;"
+                  placeholder="Enter your full name">
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label text-white mb-1">Your Email</label>
+              <div class="booking-field-line d-flex align-items-center">
+                <span class="me-2">
+                  <i class="fa-regular fa-envelope text-tertiary-accent"></i>
+                </span>
+                <input
+                  type="email"
+                  name="email"
+                  autocomplete="email"
+                  class="flex-grow-1 bg-transparent border-0"
+                  style="color:#fff;"
+                  placeholder="Enter your email address">
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label text-white mb-1">Phone Number</label>
+              <div class="booking-field-line d-flex align-items-center">
+                <span class="me-2">
+                  <i class="fa-solid fa-phone text-tertiary-accent"></i>
+                </span>
+                <input
+                  type="tel"
+                  name="phone"
+                  autocomplete="tel"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                  class="flex-grow-1 bg-transparent border-0"
+                  style="color:#fff;"
+                  placeholder="Enter your phone number">
+              </div>
+            </div>
+
+            <div class="row g-3 mb-2">
+              <div class="col-12 col-md-6">
+                <label class="form-label text-white mb-1">Date</label>
+                <div class="booking-field-line d-flex align-items-center">
+                  <span class="me-2">
+                    <i class="fa-regular fa-calendar text-tertiary-accent"></i>
+                  </span>
+                  <input
+                    type="date"
+                    name="date"
+                    class="flex-grow-1 bg-transparent border-0"
+                    style="color:#fff;">
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label text-white mb-1">Time</label>
+                <div class="booking-field-line d-flex align-items-center">
+                  <span class="me-2">
+                    <i class="fa-regular fa-clock text-tertiary-accent"></i>
+                  </span>
+                  <input
+                    type="time"
+                    name="time"
+                    class="flex-grow-1 bg-transparent border-0"
+                    style="color:#fff;">
+                </div>
+              </div>
+            </div>
+
+            <p class="text-small text-white mb-2">
+              Select the services you’re interested in:
+            </p>
+            <div class="row g-2 mb-3">
+              <div class="col-12 col-md-6">
+                <div class="form-check mb-1">
+                  <input class="form-check-input" type="checkbox" name="services[]" value="Skin Allergy Testing" id="service-skin">
+                  <label class="form-check-label text-white" for="service-skin">
+                    Skin Allergy Testing
+                  </label>
+                </div>
+                <div class="form-check mb-1">
+                  <input class="form-check-input" type="checkbox" name="services[]" value="Laser Treatments" id="service-laser">
+                  <label class="form-check-label text-white" for="service-laser">
+                    Laser Treatments
+                  </label>
+                </div>
+                <div class="form-check mb-1">
+                  <input class="form-check-input" type="checkbox" name="services[]" value="Hair Fall Treatments" id="service-hair">
+                  <label class="form-check-label text-white" for="service-hair">
+                    Hair Fall Treatments
+                  </label>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="form-check mb-1">
+                  <input class="form-check-input" type="checkbox" name="services[]" value="Plastic Surgery" id="service-plastic">
+                  <label class="form-check-label text-white" for="service-plastic">
+                    Plastic Surgery
+                  </label>
+                </div>
+                <div class="form-check mb-1">
+                  <input class="form-check-input" type="checkbox" name="services[]" value="Acne Scar Treatment" id="service-acne">
+                  <label class="form-check-label text-white" for="service-acne">
+                    Acne Scar Treatment
+                  </label>
+                </div>
+                <div class="form-check mb-1">
+                  <input class="form-check-input" type="checkbox" name="services[]" value="Pedicure" id="service-pedicure">
+                  <label class="form-check-label text-white" for="service-pedicure">
+                    Pedicure
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit"
+                    class="btn w-100 mt-3 py-3 hover-lift"
+                    style="background-color:#fff;border-radius:999px;color:var(--primary-accent);box-shadow:var(--shadow-elevated);">
+              <i class="fa-regular fa-calendar me-2"></i>
+              Book An appointment
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

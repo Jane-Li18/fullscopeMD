@@ -1,318 +1,96 @@
 {% load static %}
 
-<section class="feedback-section d-flex align-items-end min-vh-100 overflow-hidden">
-  <div class="container-fluid py-5 px-3 px-lg-3 px-xxl-4">
+<section class="feedback-section d-flex align-items-center overflow-hidden">
+  <div class="container-fluid py-4 py-lg-5">
     <div class="feedback-shell">
 
-      <div class="feedback-thumbs mb-4 fade-in fade-in-up scroll-animate">
-        <button class="feedback-thumb is-active" type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="0" aria-label="Slide 1">
-          <img src="{% static 'images/feedback/feedback1.png' %}" alt="Patient 1">
-        </button>
-        <button class="feedback-thumb" type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="1" aria-label="Slide 2">
-          <img src="{% static 'images/feedback/feedback2.png' %}" alt="Patient 2">
-        </button>
-        <button class="feedback-thumb" type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="2" aria-label="Slide 3">
-          <img src="{% static 'images/feedback/feedback3.png' %}" alt="Patient 3">
-        </button>
-        <button class="feedback-thumb" type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="3" aria-label="Slide 4">
-          <img src="{% static 'images/feedback/feedback4.png' %}" alt="Patient 4">
-        </button>
-        <button class="feedback-thumb" type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="4" aria-label="Slide 5">
-          <img src="{% static 'images/feedback/feedback5.png' %}" alt="Patient 5">
-        </button>
-        <button class="feedback-thumb" type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="5" aria-label="Slide 6">
-          <img src="{% static 'images/feedback/feedback6.png' %}" alt="Patient 6">
-        </button>
-        <button class="feedback-thumb" type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="6" aria-label="Slide 7">
-          <img src="{% static 'images/feedback/feedback7.png' %}" alt="Patient 7">
-        </button>
-      </div>
-
       <div class="text-center mb-4 fade-in fade-in-up scroll-animate delay-1">
-        <h2 class="feedback-title mb-2">What Our Patient Say</h2>
-        <p class="feedback-subtitle mb-0 mx-auto">
-          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+        <h1 class="mb-2">What Our Patients Say</h1>
+        <p class="mb-0 mx-auto">
+          Hear from people who have experienced our services.
         </p>
       </div>
 
-      <div id="feedbackCarousel" class="carousel slide fade-in fade-in-up scroll-animate delay-2" data-bs-ride="false" data-bs-touch="true" data-bs-interval="false">
+      <div id="feedbackCarousel"
+          class="carousel slide fade-in fade-in-up scroll-animate delay-2"
+          data-bs-ride="carousel"
+          data-bs-touch="true"
+          data-bs-interval="6000">
+
         <div class="carousel-inner">
+          {% for feedback in feedbacks %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <div class="row align-items-center justify-content-center g-4 g-lg-5 feedback-row">
 
-          <div class="carousel-item active">
-            <div class="row align-items-center g-4 g-lg-3">
-              <div class="col-12 col-lg-6 order-2 order-lg-1">
-                <div class="feedback-quote-inner">
-                  <div class="feedback-quote-wrap">
-                    <div class="feedback-quote-mark" aria-hidden="true">“</div>
-                    <p class="feedback-quote mb-4">
-                      It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                      The point of using Lorem Ipsum is that it has a making it look like readable English.
-                    </p>
-                    <div class="fw-bold feedback-name">Emily Johnson</div>
-                    <div class="feedback-role">Postgraduate Student</div>
+                <div class="col-12 col-lg-6 order-2 order-lg-1">
+                  <div class="feedback-quote-inner">
+                    <div class="feedback-quote-wrap">
+                      <div class="feedback-quote-mark" aria-hidden="true">
+                        <i class="fa-solid fa-quote-left"></i>
+                      </div>
+                      <p class="feedback-quote mb-4">
+                        {{ feedback.testimonial }}
+                      </p>
 
-                    <div class="carousel-indicators feedback-indicators position-static justify-content-start mt-4 mb-0">
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                      <div class="fw-bold feedback-name">
+                        {{ feedback.first_name }} {{ feedback.last_name }}
+                      </div>
+
+                      <div class="feedback-role">
+                        Patient
+                        {% if feedback.product %}
+                          · <span class="feedback-product">{{ feedback.product.name }}</span>
+                        {% endif %}
+                      </div>
+
+                      <div class="feedback-date text-muted small mt-1">
+                        {{ feedback.created_at|date:"F j, Y" }}
+                        at
+                        {{ feedback.created_at|time:"g:i A" }}
+                      </div>
+
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="col-12 col-lg-6 order-1 order-lg-2">
-                <div class="feedback-img-wrap">
-                  <img class="feedback-img" src="{% static 'images/feedback/feedback1.png' %}" alt="Patient portrait 1">
-                  <div class="feedback-badge">
-                    <div class="feedback-badge-stars">
-                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="feedback-badge-label">Best Treatment</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="row align-items-center g-4 g-lg-3">
-              <div class="col-12 col-lg-6 order-2 order-lg-1">
-                <div class="feedback-quote-inner">
-                  <div class="feedback-quote-wrap">
-                    <div class="feedback-quote-mark" aria-hidden="true">“</div>
-                    <p class="feedback-quote mb-4">
-                      The experience was smooth and supportive from start to finish. Everything felt clear, guided, and easy to follow.
-                    </p>
-                    <div class="fw-bold feedback-name">Sophia Lee</div>
-                    <div class="feedback-role">Client</div>
-
-                    <div class="carousel-indicators feedback-indicators position-static justify-content-start mt-4 mb-0">
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="0" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="1" class="active" aria-current="true" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                <div class="col-12 col-lg-6 order-1 order-lg-2 d-flex justify-content-center">
+                  <div class="feedback-img-wrap">
+                    <img class="feedback-img"
+                         src="{{ feedback.image.url }}"
+                         alt="{{ feedback.first_name }} {{ feedback.last_name }} Portrait">
+                    <div class="feedback-badge">
+                      <div class="feedback-badge-stars">
+                        {% for i in star_range %}
+                          {% if i <= feedback.star_rating %}
+                            <i class="fa-solid fa-star"></i>
+                          {% else %}
+                            <i class="fa-regular fa-star"></i>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                      <div class="feedback-badge-label">Best Treatment</div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="col-12 col-lg-6 order-1 order-lg-2">
-                <div class="feedback-img-wrap">
-                  <img class="feedback-img" src="{% static 'images/feedback/feedback2.png' %}" alt="Patient portrait 2">
-                  <div class="feedback-badge">
-                    <div class="feedback-badge-stars">
-                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="feedback-badge-label">Best Treatment</div>
-                  </div>
-                </div>
               </div>
             </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="row align-items-center g-4 g-lg-3">
-              <div class="col-12 col-lg-6 order-2 order-lg-1">
-                <div class="feedback-quote-inner">
-                  <div class="feedback-quote-wrap">
-                    <div class="feedback-quote-mark" aria-hidden="true">“</div>
-                    <p class="feedback-quote mb-4">
-                      I felt listened to and supported. The plan was personalized and the follow-ups made a big difference.
-                    </p>
-                    <div class="fw-bold feedback-name">Ava Martinez</div>
-                    <div class="feedback-role">Client</div>
-
-                    <div class="carousel-indicators feedback-indicators position-static justify-content-start mt-4 mb-0">
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="0" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="2" class="active" aria-current="true" aria-label="Slide 3"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-12 col-lg-6 order-1 order-lg-2">
-                <div class="feedback-img-wrap">
-                  <img class="feedback-img" src="{% static 'images/feedback/feedback3.png' %}" alt="Patient portrait 3">
-                  <div class="feedback-badge">
-                    <div class="feedback-badge-stars">
-                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="feedback-badge-label">Best Treatment</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="row align-items-center g-4 g-lg-3">
-              <div class="col-12 col-lg-6 order-2 order-lg-1">
-                <div class="feedback-quote-inner">
-                  <div class="feedback-quote-wrap">
-                    <div class="feedback-quote-mark" aria-hidden="true">“</div>
-                    <p class="feedback-quote mb-4">
-                      Fast response time and clear steps. The platform was simple and the care team was very professional.
-                    </p>
-                    <div class="fw-bold feedback-name">Noah Kim</div>
-                    <div class="feedback-role">Client</div>
-
-                    <div class="carousel-indicators feedback-indicators position-static justify-content-start mt-4 mb-0">
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="0" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="3" class="active" aria-current="true" aria-label="Slide 4"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-12 col-lg-6 order-1 order-lg-2">
-                <div class="feedback-img-wrap">
-                  <img class="feedback-img" src="{% static 'images/feedback/feedback4.png' %}" alt="Patient portrait 4">
-                  <div class="feedback-badge">
-                    <div class="feedback-badge-stars">
-                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="feedback-badge-label">Best Treatment</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="row align-items-center g-4 g-lg-3">
-              <div class="col-12 col-lg-6 order-2 order-lg-1">
-                <div class="feedback-quote-inner">
-                  <div class="feedback-quote-wrap">
-                    <div class="feedback-quote-mark" aria-hidden="true">“</div>
-                    <p class="feedback-quote mb-4">
-                      I loved how transparent everything was. Pricing, steps, and expectations were communicated clearly.
-                    </p>
-                    <div class="fw-bold feedback-name">Mia Patel</div>
-                    <div class="feedback-role">Client</div>
-
-                    <div class="carousel-indicators feedback-indicators position-static justify-content-start mt-4 mb-0">
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="0" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="4" class="active" aria-current="true" aria-label="Slide 5"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-12 col-lg-6 order-1 order-lg-2">
-                <div class="feedback-img-wrap">
-                  <img class="feedback-img" src="{% static 'images/feedback/feedback5.png' %}" alt="Patient portrait 5">
-                  <div class="feedback-badge">
-                    <div class="feedback-badge-stars">
-                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="feedback-badge-label">Best Treatment</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="row align-items-center g-4 g-lg-3">
-              <div class="col-12 col-lg-6 order-2 order-lg-1">
-                <div class="feedback-quote-inner">
-                  <div class="feedback-quote-wrap">
-                    <div class="feedback-quote-mark" aria-hidden="true">“</div>
-                    <p class="feedback-quote mb-4">
-                      The provider was attentive and explained everything in a way that made me feel confident about my care.
-                    </p>
-                    <div class="fw-bold feedback-name">Lucas Rivera</div>
-                    <div class="feedback-role">Client</div>
-
-                    <div class="carousel-indicators feedback-indicators position-static justify-content-start mt-4 mb-0">
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="0" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="5" class="active" aria-current="true" aria-label="Slide 6"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-12 col-lg-6 order-1 order-lg-2">
-                <div class="feedback-img-wrap">
-                  <img class="feedback-img" src="{% static 'images/feedback/feedback6.png' %}" alt="Patient portrait 6">
-                  <div class="feedback-badge">
-                    <div class="feedback-badge-stars">
-                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="feedback-badge-label">Best Treatment</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="row align-items-center g-4 g-lg-3">
-              <div class="col-12 col-lg-6 order-2 order-lg-1">
-                <div class="feedback-quote-inner">
-                  <div class="feedback-quote-wrap">
-                    <div class="feedback-quote-mark" aria-hidden="true">“</div>
-                    <p class="feedback-quote mb-4">
-                      Booking was easy, communication was consistent, and the results have been amazing. Highly recommended.
-                    </p>
-                    <div class="fw-bold feedback-name">Olivia Chen</div>
-                    <div class="feedback-role">Client</div>
-
-                    <div class="carousel-indicators feedback-indicators position-static justify-content-start mt-4 mb-0">
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="0" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                      <button type="button" data-bs-target="#feedbackCarousel" data-bs-slide-to="6" class="active" aria-current="true" aria-label="Slide 7"></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-12 col-lg-6 order-1 order-lg-2">
-                <div class="feedback-img-wrap">
-                  <img class="feedback-img" src="{% static 'images/feedback/feedback7.png' %}" alt="Patient portrait 7">
-                  <div class="feedback-badge">
-                    <div class="feedback-badge-stars">
-                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="feedback-badge-label">Best Treatment</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          {% endfor %}
         </div>
+
+        {# ✅ Dynamic indicators centered at the bottom #}
+        <div class="carousel-indicators feedback-indicators">
+          {% for feedback in feedbacks %}
+            <button type="button"
+                    data-bs-target="#feedbackCarousel"
+                    data-bs-slide-to="{{ forloop.counter0 }}"
+                    class="{% if forloop.first %}active{% endif %}"
+                    {% if forloop.first %}aria-current="true"{% endif %}
+                    aria-label="Slide {{ forloop.counter }}">
+            </button>
+          {% endfor %}
+        </div>
+
       </div>
 
     </div>

@@ -1,302 +1,328 @@
-{% extends "base.html" %}
+{% extends "page_base.html" %}
 {% load static %}
 
 {% block title %}Privacy Policy{% endblock %}
+{% block page_title %}Privacy Policy{% endblock %}
+{% block page_breadcrumb %}Privacy Policy{% endblock %}
 
-{% block content %}
+{% block page_style %}
+background-image:
+  linear-gradient(120deg, rgba(0,0,0,.6), rgba(0,0,0,.4)),
+  url('{% static "images/bg_page.png" %}');
+{% endblock %}
 
-<section id="top" class="privacy-section py-5">
+{% block page_content %}
+
+<section id="top" class="py-3 py-lg-4">
   <div class="container">
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 col-lg-11 col-xl-10">
 
-    <!-- Header (same as Terms design) -->
-    <div class="row justify-content-center mb-4">
-      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
-        <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
-          <i class="fa-solid fa-user-shield icon-solid icon-sm"></i>
-          <small class="mb-0 text-white">Privacy Policy</small>
-        </span>
+        <!-- Header (matches Terms/Refund layout) -->
+        <div class="row justify-content-center mb-4">
+          <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
+            <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
+              <i class="fa-solid fa-user-shield icon-solid icon-sm"></i>
+              <small class="mb-0 text-white">Privacy Policy</small>
+            </span>
 
-        <h1 class="mt-3 mb-2">PRIVACY POLICY</h1>
-        <p class="mb-0">Last Updated: December 5, 2025</p>
-      </div>
-    </div>
+            <p class="mt-3 mb-2 text-caption-sm text-muted">Last Updated: December 5, 2025</p>
 
-    <!-- Wrapper (same as Terms: no bg-muted wrapper, white card only) -->
-    <div class="fade-in-up fade-in delay-2 fade-blocked">
-      <div class="row g-4 justify-content-center">
-        <div class="col-12 col-lg-10">
-          <div class="p-4 p-lg-5 bg-white rounded-4">
+            <p class="mb-0 text-body-sm text-muted mx-auto" style="max-width: 72ch;">
+              This Privacy Policy explains how we collect, use, disclose, and protect information when you use FullScopeMD Services.
+            </p>
+          </div>
+        </div>
 
-            <!-- Quick note -->
-            <div class="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-start align-items-md-center fade-in-up fade-in delay-3 fade-blocked">
-              <div>
-                <h2 class="mb-1">Please read carefully</h2>
-                <p class="mb-0">
-                  This Policy explains how we collect, use, share, and protect information when you use FullScopeMD Services.
-                </p>
+        <div class="divider my-4"></div>
+
+        <div class="row g-4 fade-in-up fade-in delay-1 fade-blocked">
+          <!-- Sticky "On this page" -->
+          <div class="col-12 col-lg-4">
+            <div class="position-sticky" style="top: 96px;">
+              <div class="bg-muted rounded-4 border p-3">
+                <div class="fw-semibold mb-2">On this page</div>
+                <nav class="d-grid gap-1 small">
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-1">1. Introduction</a>
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-2">2. Relationship to HIPAA Notice</a>
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-3">3. Information We Collect</a>
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-4">4. How We Use Information</a>
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-5">5. How We Share Information</a>
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-6">6. Cookies &amp; Analytics</a>
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-7">7. Your Privacy Rights</a>
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-8">8. Data Security</a>
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-9">9. Data Retention</a>
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-10">10. Children’s Privacy</a>
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-11">11. Third-Party Links</a>
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-12">12. Policy Changes</a>
+                  <a class="text-body-sm hover-underline-accent" href="#privacy-13">13. Contact Information</a>
+                </nav>
               </div>
 
-              <a href="{% url 'contact' %}" class="btn btn-outline-primary px-4">
-                Contact Support
-                <i class="fa-solid fa-arrow-right ms-2"></i>
-              </a>
+              <div class="mt-3 d-grid gap-2">
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
+                  Contact Us
+                  <i class="fa-solid fa-arrow-right ms-2"></i>
+                </a>
+              </div>
             </div>
+          </div>
 
-            <div class="divider my-4"></div>
-
-            <!-- Policy body -->
+          <!-- Content -->
+          <div class="col-12 col-lg-8 fade-in-up fade-in delay-1 fade-blocked">
             <div class="d-grid gap-4">
 
-              <div class="fade-in-up fade-in delay-4 fade-blocked">
+              <div id="privacy-1" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">1. Introduction</h3>
                 <p class="mb-0">
-                  FullScopeMD (“FullScopeMD,” “we,” “us,” or “our”) is committed to protecting your privacy and safeguarding your
-                  personal information. This Privacy Policy explains how we collect, use, disclose, and protect information when you
-                  use our websites, applications, telehealth platforms, and related services (“Services”). By accessing or using the
-                  Services, you agree to this Privacy Policy. If you do not agree, you must discontinue use of the Services.
+                  FullScopeMD (“FullScopeMD,” “we,” “us,” or “our”) is committed to protecting your privacy and safeguarding your personal information.
+                  This Privacy Policy explains how we collect, use, disclose, and protect information when you use our websites, applications, telehealth platforms,
+                  and related services (“Services”). By accessing or using the Services, you agree to this Privacy Policy. If you do not agree, you must discontinue use of the Services.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-5 fade-blocked">
+              <div id="privacy-2" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">2. Relationship to Our HIPAA Notice of Privacy Practices</h3>
                 <p class="mb-0">
-                  When FullScopeMD provides clinical services, certain information qualifies as Protected Health Information (“PHI”)
-                  under HIPAA. Our HIPAA Notice of Privacy Practices (“HIPAA NPP”) explains how PHI may be used or disclosed for
-                  treatment, payment, and healthcare operations. The HIPAA NPP governs PHI in the event of any conflict with this
-                  Privacy Policy. This Privacy Policy applies broadly to all personal information collected through the Services,
-                  including information that is not classified as PHI.
+                  When FullScopeMD provides clinical services, certain information qualifies as Protected Health Information (“PHI”) under HIPAA.
+                  Our HIPAA Notice of Privacy Practices (“HIPAA NPP”) explains how PHI may be used or disclosed for treatment, payment, and healthcare operations.
+                  The HIPAA NPP governs PHI in the event of any conflict with this Privacy Policy. This Privacy Policy applies broadly to all personal information collected
+                  through the Services, including information that is not classified as PHI.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-6 fade-blocked">
+              <div id="privacy-3" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">3. Information We Collect</h3>
 
                 <div class="d-grid gap-3">
-                  <div>
+
+                  <div class="p-3 bg-muted border rounded-4">
                     <div class="fw-semibold mb-2">A. Personal Information</div>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Name</li>
-                      <li class="text-body-sm">Date of birth</li>
-                      <li class="text-body-sm">Email address</li>
-                      <li class="text-body-sm">Phone number</li>
-                      <li class="text-body-sm">Mailing address</li>
-                      <li class="text-body-sm">Account login credentials</li>
-                      <li class="text-body-sm">Identity verification information</li>
-                      <li class="text-body-sm">Payment information (handled by secure third-party processors)</li>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Name</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Date of birth</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Email address</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Phone number</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Mailing address</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Account login credentials</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Identity verification information</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Payment information (handled by secure third-party processors)</span></li>
                     </ul>
                   </div>
 
-                  <div>
+                  <div class="p-3 bg-muted border rounded-4">
                     <div class="fw-semibold mb-2">B. Protected Health Information (PHI)</div>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Medical history and health conditions</li>
-                      <li class="text-body-sm">Symptoms, diagnoses, and treatment plans</li>
-                      <li class="text-body-sm">Medication history and prescriptions</li>
-                      <li class="text-body-sm">Lab orders and results</li>
-                      <li class="text-body-sm">Images, documents, or forms you upload</li>
-                      <li class="text-body-sm">Notes and messages exchanged with clinicians</li>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Medical history and health conditions</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Symptoms, diagnoses, and treatment plans</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Medication history and prescriptions</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Lab orders and results</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Images, documents, or forms you upload</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Notes and messages exchanged with clinicians</span></li>
                     </ul>
                   </div>
 
-                  <div>
+                  <div class="p-3 bg-muted border rounded-4">
                     <div class="fw-semibold mb-2">C. Technical and Device Information</div>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">IP address</li>
-                      <li class="text-body-sm">Browser type</li>
-                      <li class="text-body-sm">Device identifiers</li>
-                      <li class="text-body-sm">Operating system</li>
-                      <li class="text-body-sm">Pages or screens viewed</li>
-                      <li class="text-body-sm">Time and duration of visits</li>
-                      <li class="text-body-sm">App usage metrics</li>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">IP address</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Browser type</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Device identifiers</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Operating system</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Pages or screens viewed</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Time and duration of visits</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">App usage metrics</span></li>
                     </ul>
                   </div>
 
-                  <div>
+                  <div class="p-3 bg-muted border rounded-4">
                     <div class="fw-semibold mb-2">D. Cookies and Tracking Technologies</div>
                     <p class="mb-2 text-body-sm">We may use cookies, web beacons, and analytics tools to:</p>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Maintain session security</li>
-                      <li class="text-body-sm">Improve performance</li>
-                      <li class="text-body-sm">Analyze usage patterns</li>
-                      <li class="text-body-sm">Personalize user experience</li>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Maintain session security</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Improve performance</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Analyze usage patterns</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Personalize user experience</span></li>
                     </ul>
-                    <p class="mt-2 mb-0 text-body-sm">
-                      You may manage cookie preferences through your browser settings.
-                    </p>
+                    <p class="mt-2 mb-0 text-body-sm">You may manage cookie preferences through your browser settings.</p>
                   </div>
 
-                  <div>
+                  <div class="p-3 bg-muted border rounded-4">
                     <div class="fw-semibold mb-2">E. Information from Third Parties</div>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Pharmacies</li>
-                      <li class="text-body-sm">Labs</li>
-                      <li class="text-body-sm">Healthcare providers</li>
-                      <li class="text-body-sm">Payment processors</li>
-                      <li class="text-body-sm">Referral or marketing partners</li>
-                      <li class="text-body-sm">Identity verification services</li>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Pharmacies</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Labs</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Healthcare providers</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Payment processors</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Referral or marketing partners</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Identity verification services</span></li>
                     </ul>
                   </div>
+
                 </div>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="privacy-4" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">4. How We Use Your Information</h3>
 
                 <div class="d-grid gap-3">
-                  <div>
-                    <div class="fw-semibold">A. For Treatment and Clinical Services</div>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Conducting telehealth visits</li>
-                      <li class="text-body-sm">Reviewing clinical history</li>
-                      <li class="text-body-sm">Coordinating care with clinicians, pharmacies, or labs</li>
-                      <li class="text-body-sm">Issuing prescriptions (when appropriate)</li>
+
+                  <div class="p-3 bg-muted border rounded-4">
+                    <div class="fw-semibold mb-2">A. For Treatment and Clinical Services</div>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Conducting telehealth visits</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Reviewing clinical history</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Coordinating care with clinicians, pharmacies, or labs</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Issuing prescriptions (when appropriate)</span></li>
                     </ul>
                   </div>
 
-                  <div>
-                    <div class="fw-semibold">B. For Payment and Billing</div>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Processing payments</li>
-                      <li class="text-body-sm">Managing subscriptions or auto-renewals</li>
-                      <li class="text-body-sm">Maintaining financial and accounting records</li>
+                  <div class="p-3 bg-muted border rounded-4">
+                    <div class="fw-semibold mb-2">B. For Payment and Billing</div>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Processing payments</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Managing subscriptions or auto-renewals</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Maintaining financial and accounting records</span></li>
                     </ul>
                   </div>
 
-                  <div>
-                    <div class="fw-semibold">C. For Healthcare Operations</div>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Quality review and improvement</li>
-                      <li class="text-body-sm">Customer support</li>
-                      <li class="text-body-sm">Platform maintenance</li>
-                      <li class="text-body-sm">System security and fraud prevention</li>
-                      <li class="text-body-sm">Compliance, auditing, and reporting</li>
+                  <div class="p-3 bg-muted border rounded-4">
+                    <div class="fw-semibold mb-2">C. For Healthcare Operations</div>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Quality review and improvement</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Customer support</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Platform maintenance</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">System security and fraud prevention</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Compliance, auditing, and reporting</span></li>
                     </ul>
                   </div>
 
-                  <div>
-                    <div class="fw-semibold">D. For Service-Related Communications</div>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Appointment reminders</li>
-                      <li class="text-body-sm">Prescription updates</li>
-                      <li class="text-body-sm">Order confirmations and tracking</li>
-                      <li class="text-body-sm">Identity verification</li>
-                      <li class="text-body-sm">Account security alerts</li>
+                  <div class="p-3 bg-muted border rounded-4">
+                    <div class="fw-semibold mb-2">D. For Service-Related Communications</div>
+                    <ul class="list-unstyled mb-2 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Appointment reminders</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Prescription updates</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Order confirmations and tracking</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Identity verification</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Account security alerts</span></li>
                     </ul>
-                    <p class="mt-2 mb-0 text-body-sm">
-                      These communications are essential and cannot be opted out of.
-                    </p>
+                    <div class="text-body-sm mb-0">These communications are essential and cannot be opted out of.</div>
                   </div>
 
-                  <div>
-                    <div class="fw-semibold">E. For Marketing Communications (With Explicit Consent Only)</div>
+                  <div class="p-3 bg-muted border rounded-4">
+                    <div class="fw-semibold mb-2">E. For Marketing Communications (With Explicit Consent Only)</div>
                     <p class="mb-2 text-body-sm">If you choose to opt in, we may send:</p>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Promotions and discounts</li>
-                      <li class="text-body-sm">Newsletters</li>
-                      <li class="text-body-sm">Health program updates</li>
-                      <li class="text-body-sm">Product or service announcements</li>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Promotions and discounts</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Newsletters</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Health program updates</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Product or service announcements</span></li>
                     </ul>
-                    <p class="mt-2 mb-0 text-body-sm">
-                      You may opt out at any time via the unsubscribe link or by replying STOP to SMS.
-                    </p>
+                    <p class="mt-2 mb-0 text-body-sm">You may opt out at any time via the unsubscribe link or by replying STOP to SMS.</p>
                   </div>
 
-                  <div>
-                    <div class="fw-semibold">F. For Legal, Security, or Regulatory Purposes</div>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Complying with laws and regulations</li>
-                      <li class="text-body-sm">Responding to subpoenas or court orders</li>
-                      <li class="text-body-sm">Investigating security incidents or fraud</li>
-                      <li class="text-body-sm">Protecting the rights, safety, and property of users and FullScopeMD</li>
+                  <div class="p-3 bg-muted border rounded-4">
+                    <div class="fw-semibold mb-2">F. For Legal, Security, or Regulatory Purposes</div>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Complying with laws and regulations</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Responding to subpoenas or court orders</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Investigating security incidents or fraud</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Protecting the rights, safety, and property of users and FullScopeMD</span></li>
                     </ul>
                   </div>
+
                 </div>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="privacy-5" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">5. How We Share Your Information</h3>
+
                 <div class="d-grid gap-3">
-                  <div>
-                    <div class="fw-semibold">A. With Healthcare Providers</div>
-                    <p class="mb-0">We share PHI with independent licensed clinicians who provide your care.</p>
+                  <div class="p-3 bg-muted border rounded-4">
+                    <div class="fw-semibold mb-1">A. With Healthcare Providers</div>
+                    <div class="text-body-sm mb-0">We share PHI with independent licensed clinicians who provide your care.</div>
                   </div>
-                  <div>
-                    <div class="fw-semibold">B. With Pharmacies and Labs</div>
-                    <p class="mb-2">We share necessary information to:</p>
-                    <ul class="mb-0 d-grid gap-2">
-                      <li class="text-body-sm">Transmit prescriptions</li>
-                      <li class="text-body-sm">Coordinate medication dispensing</li>
-                      <li class="text-body-sm">Process lab orders and receive results</li>
+
+                  <div class="p-3 bg-muted border rounded-4">
+                    <div class="fw-semibold mb-1">B. With Pharmacies and Labs</div>
+                    <div class="text-body-sm mb-2">We share necessary information to:</div>
+                    <ul class="list-unstyled mb-0 d-grid gap-2">
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Transmit prescriptions</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Coordinate medication dispensing</span></li>
+                      <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Process lab orders and receive results</span></li>
                     </ul>
                   </div>
-                  <div>
-                    <div class="fw-semibold">C. With Service Providers and Business Associates</div>
-                    <p class="mb-0">
-                      We may share information with trusted third parties who help us operate the Services (telehealth platforms,
-                      hosting/cloud services, SMS/email vendors, support platforms, identity verification tools, analytics providers).
-                      Where PHI is involved, these entities sign a Business Associate Agreement (BAA) as required by HIPAA.
-                    </p>
+
+                  <div class="p-3 bg-muted border rounded-4">
+                    <div class="fw-semibold mb-1">C. With Service Providers and Business Associates</div>
+                    <div class="text-body-sm mb-0">
+                      We may share information with trusted third parties who help us operate the Services, including telehealth platforms,
+                      data hosting and cloud services, SMS and email communication vendors, customer support platforms, identity verification tools,
+                      and analytics providers. Where PHI is involved, these entities sign a Business Associate Agreement (BAA) as required by HIPAA.
+                    </div>
                   </div>
-                  <div>
-                    <div class="fw-semibold">D. With Legal or Regulatory Authorities</div>
-                    <p class="mb-0">We may disclose information when required by law or to protect health and safety.</p>
+
+                  <div class="p-3 bg-muted border rounded-4">
+                    <div class="fw-semibold mb-1">D. With Legal or Regulatory Authorities</div>
+                    <div class="text-body-sm mb-0">We may disclose information when required by law or to protect health and safety.</div>
                   </div>
-                  <div>
-                    <div class="fw-semibold">E. With Your Authorization</div>
-                    <p class="mb-0">
-                      We may share information with third parties when you provide written consent. We do NOT sell your PHI or personal information.
-                    </p>
+
+                  <div class="p-3 bg-muted border rounded-4">
+                    <div class="fw-semibold mb-1">E. With Your Authorization</div>
+                    <div class="text-body-sm mb-0">
+                      We may share information with third parties when you provide written consent. We do not sell your PHI or personal information.
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="privacy-6" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">6. Cookies, Analytics, and Tracking Technologies</h3>
                 <p class="mb-0">
-                  We may use analytics tools to understand usage and enhance performance. These tools may collect usage data, but we do not permit analytics
-                  vendors to access PHI unless they are under a BAA. You may opt out of certain analytics features by adjusting browser or device settings.
+                  We may use analytics tools to understand usage and enhance performance. These tools may collect usage data, but we do not permit analytics vendors
+                  to access PHI unless they are under a BAA. You may opt out of certain analytics features by adjusting browser or device settings.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="privacy-7" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">7. Your Privacy Rights</h3>
                 <p class="mb-2">Depending on your location and applicable laws, you may have the right to:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Access your information</li>
-                  <li class="text-body-sm">Request correction of inaccurate information</li>
-                  <li class="text-body-sm">Request deletion of certain information</li>
-                  <li class="text-body-sm">Request restrictions on certain uses or disclosures</li>
-                  <li class="text-body-sm">Obtain a copy of your medical records (HIPAA)</li>
-                  <li class="text-body-sm">Request an accounting of PHI disclosures (HIPAA)</li>
-                  <li class="text-body-sm">Opt out of marketing communications</li>
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Access your information</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Request correction of inaccurate information</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Request deletion of certain information</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Request restrictions on certain uses or disclosures</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Obtain a copy of your medical records (HIPAA)</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Request an accounting of PHI disclosures (HIPAA)</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Opt out of marketing communications</span></li>
                 </ul>
                 <p class="mt-2 mb-0">To exercise your rights, contact us using the information below.</p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="privacy-8" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">8. Data Security</h3>
                 <p class="mb-2">We use administrative, technical, and physical safeguards to protect your information, including:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Encryption of data in transit and at rest</li>
-                  <li class="text-body-sm">Access controls and authentication measures</li>
-                  <li class="text-body-sm">Secure servers and firewalls</li>
-                  <li class="text-body-sm">Regular risk assessments and monitoring</li>
-                  <li class="text-body-sm">HIPAA-compliant data storage solutions</li>
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Encryption of data in transit and at rest</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Access controls and authentication measures</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Secure servers and firewalls</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Regular risk assessments and monitoring</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">HIPAA-compliant data storage solutions</span></li>
                 </ul>
                 <p class="mt-2 mb-0 text-body-sm">
                   While no system is completely secure, we take reasonable measures to protect personal information and PHI.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="privacy-9" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">9. Data Retention</h3>
                 <p class="mb-0">
-                  We retain information as required to provide services, maintain medical records under state and federal law, meet legal and reporting obligations,
+                  We retain information as required to provide services, maintain medical records under state and federal law, meet legal, regulatory, and reporting obligations,
                   resolve disputes, and support business operations. Medical records are retained according to state-specific retention laws.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="privacy-10" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">10. Children’s Privacy</h3>
                 <p class="mb-0">
                   FullScopeMD does not knowingly collect information from children under 18 without parental or guardian authorization.
@@ -304,7 +330,7 @@
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="privacy-11" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">11. Third-Party Links</h3>
                 <p class="mb-0">
                   Our Services may contain links to third-party websites or services. We are not responsible for the privacy practices or content of third-party sites.
@@ -312,7 +338,7 @@
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="privacy-12" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">12. Changes to This Privacy Policy</h3>
                 <p class="mb-0">
                   We may update this Privacy Policy from time to time. When updates occur, the “Last Updated” date will be revised.
@@ -320,7 +346,7 @@
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
+              <div id="privacy-13" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">13. Contact Information</h3>
 
                 <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
@@ -330,7 +356,10 @@
                       Email:
                       <a class="hover-underline-accent text-break" href="mailto:support@fullscopemd.com">support@fullscopemd.com</a>
                     </div>
-                    <div class="text-body-sm">Phone: <span class="text-secondary-text">[XXX-XXX-XXXX]</span></div>
+                    <div class="text-body-sm">
+                      Phone:
+                      <a class="hover-underline-accent" href="tel:+13072187845">+1 (307) 218-7845</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -341,15 +370,13 @@
 
             <div class="d-flex flex-column flex-sm-row gap-2 justify-content-between align-items-start align-items-sm-center">
               <small class="text-caption-sm mb-0">© {% now "Y" %} FullScopeMD. All rights reserved.</small>
-              <a class="text-body-sm hover-underline-accent" href="#top">Back to top</a>
             </div>
-
           </div>
         </div>
+
       </div>
     </div>
-
   </div>
 </section>
 
-{% endblock content %}
+{% endblock page_content %}

@@ -1,202 +1,251 @@
-{% extends "base.html" %}
+{% extends "page_base.html" %}
 {% load static %}
 
 {% block title %}Refund Policy{% endblock %}
+{% block page_title %}Refund Policy{% endblock %}
+{% block page_breadcrumb %}Refund Policy{% endblock %}
 
-{% block content %}
+{% block page_style %}
+background-image:
+  linear-gradient(120deg, rgba(0,0,0,.6), rgba(0,0,0,.4)),
+  url('{% static "images/bg_page.png" %}');
+{% endblock %}
 
-<section id="top" class="refund-section py-5">
+{% block page_content %}
+
+<section id="top" class="py-3 py-lg-4">
   <div class="container">
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 col-lg-11 col-xl-10">
 
-    <!-- Header (same branding as Terms/Privacy) -->
-    <div class="row justify-content-center mb-4">
-      <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
-        <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
-          <i class="fa-solid fa-receipt icon-solid icon-sm"></i>
-          <small class="mb-0 text-white">Refund Policy</small>
-        </span>
+        <div class="row justify-content-center mb-4">
+          <div class="col-12 col-lg-10 text-center fade-in-up fade-in delay-1 fade-blocked">
+            <span class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-accent-gradient-animated shadow-brand">
+              <i class="fa-solid fa-receipt icon-solid icon-sm"></i>
+              <small class="mb-0 text-white">Refund Policy</small>
+            </span>
 
-        <h1 class="mt-3 mb-2">REFUND POLICY</h1>
-        <p class="mb-0">Last Updated: December 5, 2025</p>
-      </div>
-    </div>
+            <p class="mt-3 mb-2 text-caption-sm text-muted">Last Updated: December 5, 2025</p>
 
-    <!-- Wrapper (same as Terms: white card only) -->
-    <div class="fade-in-up fade-in delay-2 fade-blocked">
-      <div class="row g-4 justify-content-center">
-        <div class="col-12 col-lg-10">
-          <div class="p-4 p-lg-5 bg-white rounded-4">
+            <p class="mb-0 text-body-sm text-muted mx-auto" style="max-width: 72ch;">
+              This Refund Policy explains when charges may or may not be refunded for FullScopeMD services and purchases.
+            </p>
+          </div>
+        </div>
 
-            <!-- Quick note -->
-            <div class="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-start align-items-md-center fade-in-up fade-in delay-3 fade-blocked">
-              <div>
-                <h2 class="mb-1">Please read carefully</h2>
-                <p class="mb-0">
-                  This Refund Policy explains when charges may or may not be refunded for FullScopeMD services and purchases.
-                </p>
+        <div class="divider my-4"></div>
+
+        <div class="row g-4 fade-in-up fade-in delay-1 fade-blocked">
+          <div class="col-12 col-lg-4">
+            <div class="position-sticky" style="top: 96px;">
+              <div class="bg-muted rounded-4 border p-3">
+                <div class="fw-semibold mb-2">On this page</div>
+                <nav class="d-grid gap-1 small">
+                  <a class="text-body-sm hover-underline-accent" href="#refund-1">1. Overview</a>
+                  <a class="text-body-sm hover-underline-accent" href="#refund-2">2. Payment Collection &amp; Clinical Review</a>
+                  <a class="text-body-sm hover-underline-accent" href="#refund-3">3. Clinical Denial</a>
+                  <a class="text-body-sm hover-underline-accent" href="#refund-4">4. Telehealth Services</a>
+                  <a class="text-body-sm hover-underline-accent" href="#refund-5">5. Cancellation Eligibility</a>
+                  <a class="text-body-sm hover-underline-accent" href="#refund-6">6. Non-Refundable After Fulfillment</a>
+                  <a class="text-body-sm hover-underline-accent" href="#refund-7">7. Delivered Medications</a>
+                  <a class="text-body-sm hover-underline-accent" href="#refund-8">8. No Refunds for Results</a>
+                  <a class="text-body-sm hover-underline-accent" href="#refund-9">9. Shipping Issues</a>
+                  <a class="text-body-sm hover-underline-accent" href="#refund-10">10. Billing Errors</a>
+                  <a class="text-body-sm hover-underline-accent" href="#refund-11">11. Promotions</a>
+                  <a class="text-body-sm hover-underline-accent" href="#refund-12">12. Acceptance</a>
+                  <a class="text-body-sm hover-underline-accent" href="#refund-13">13. Contact Information</a>
+                </nav>
               </div>
 
-              <a href="{% url 'contact' %}" class="btn btn-outline-primary px-4">
-                Contact Support
-                <i class="fa-solid fa-arrow-right ms-2"></i>
-              </a>
+              <div class="mt-3 d-grid gap-2">
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
+                  Contact Us
+                  <i class="fa-solid fa-arrow-right ms-2"></i>
+                </a>
+              </div>
             </div>
+          </div>
 
-            <div class="divider my-4"></div>
-
-            <!-- Policy body -->
+          <div class="col-12 col-lg-8 fade-in-up fade-in delay-1 fade-blocked">
             <div class="d-grid gap-4">
 
-              <div class="fade-in-up fade-in delay-4 fade-blocked">
+              <div id="refund-1" style="scroll-margin-top: 110px;">
                 <h3 class="mb-2">1. Overview</h3>
+                <p class="mb-2">
+                  FullScopeMD provides telehealth consultations, treatment programs, and prescription services through licensed U.S. healthcare providers. We are committed to transparency regarding billing, refunds, and patient expectations.
+                </p>
                 <p class="mb-0">
-                  FullScopeMD provides telehealth consultations, treatment programs, and prescription services. We strive to deliver
-                  high-quality care and clear expectations regarding billing and refunds. This Refund Policy explains when charges
-                  may or may not be refunded. By using the Services or completing a purchase, you agree to this Refund Policy.
+                  This Refund Policy explains when charges may or may not be refunded. By using FullScopeMD services or completing a purchase, you agree to this Refund Policy, which forms part of our Terms &amp; Conditions.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-5 fade-blocked">
-                <h3 class="mb-2">2. Telehealth Consultations (Non-Refundable Once Rendered)</h3>
+              <div id="refund-2" style="scroll-margin-top: 110px;">
+                <h3 class="mb-2">2. Payment Collection &amp; Clinical Review</h3>
                 <p class="mb-2">
-                  All telehealth consultations, evaluations, chart reviews, and medical services are <span class="fw-semibold">NON-REFUNDABLE</span>
-                  once a licensed clinician has:
+                  Payment is collected at checkout to authorize services and initiate the clinical review process. Our payment processor does not support holding or escrowing funds prior to consultation.
                 </p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Reviewed your clinical intake or medical history, OR</li>
-                  <li class="text-body-sm">Initiated or completed a consultation, OR</li>
-                  <li class="text-body-sm">Provided medical advice, assessment, or treatment determination.</li>
+                <p class="mb-0">
+                  Payment submission does not guarantee clinical approval or prescription issuance. All treatment decisions are made solely by licensed medical providers based on clinical appropriateness and patient safety.
+                </p>
+              </div>
+
+              <div id="refund-3" style="scroll-margin-top: 110px;">
+                <h3 class="mb-2">3. Clinical Denial (Full Refund Eligibility)</h3>
+                <p class="mb-2">
+                  If a licensed provider determines that a patient is not clinically eligible for treatment before a prescription is issued and before any medication preparation or fulfillment begins:
+                </p>
+                <ul class="list-unstyled mb-3 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">The order will be canceled</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">A <span class="fw-semibold">full refund</span> will be issued to the original payment method</span></li>
                 </ul>
-                <div class="mt-3 p-3 p-md-4 bg-muted border-brand rounded-4">
+                <p class="mb-0 text-body-sm">
+                  FullScopeMD does not charge separate fees for consultations or shipping. Patients who are clinically denied prior to prescription issuance are eligible for a full refund.
+                </p>
+              </div>
+
+              <div id="refund-4" style="scroll-margin-top: 110px;">
+                <h3 class="mb-2">4. Telehealth Services (Non-Refundable Once Rendered and Approved)</h3>
+                <p class="mb-2">
+                  Once a licensed provider has reviewed the patient’s intake, approved treatment, and issued a prescription, the associated telehealth services are considered rendered and are <span class="fw-semibold">non-refundable</span>.
+                </p>
+                <p class="mb-2">This includes:</p>
+                <ul class="list-unstyled mb-3 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Clinical intake review</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Medical evaluation</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Treatment determination</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Prescription issuance</span></li>
+                </ul>
+
+                <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
                   <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 align-items-start">
                     <span class="icon-button shadow-sm-brand flex-shrink-0">
                       <i class="fa-solid fa-circle-xmark icon-gradient icon-md"></i>
                     </span>
-                    <div>
+                    <div class="flex-grow-1">
                       <div class="fw-semibold">Important</div>
                       <div class="text-body-sm mb-0">
-                        Once clinical services are rendered, refunds cannot be issued under any circumstance.
+                        Refunds cannot be issued once treatment has been approved and clinical services have been completed.
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="fade-in-up fade-in delay-6 fade-blocked">
-                <h3 class="mb-2">3. Medication Orders — Eligibility for Cancellation</h3>
+              <div id="refund-5" style="scroll-margin-top: 110px;">
+                <h3 class="mb-2">5. Medication Orders Eligibility for Cancellation</h3>
                 <p class="mb-2">
-                  A medication order may be canceled and refunded <span class="fw-semibold">ONLY IF ALL</span> of the following are true:
+                  A medication order may be canceled and refunded <span class="fw-semibold">only if all</span> of the following conditions are met:
                 </p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">A prescription has <span class="fw-semibold">NOT</span> yet been issued by the clinician, AND</li>
-                  <li class="text-body-sm">The pharmacy has <span class="fw-semibold">NOT</span> begun fulfilling, compounding, preparing, or packaging the medication, AND</li>
-                  <li class="text-body-sm">A tracking number has <span class="fw-semibold">NOT</span> been generated, AND</li>
-                  <li class="text-body-sm">The order has <span class="fw-semibold">NOT</span> been handed to the shipping courier.</li>
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">A prescription has <span class="fw-semibold">not</span> been issued by the clinician</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">The pharmacy has <span class="fw-semibold">not</span> begun fulfilling, compounding, preparing, or packaging the medication</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">A tracking number has <span class="fw-semibold">not</span> been generated</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">The order has <span class="fw-semibold">not</span> been handed to the shipping courier</span></li>
                 </ul>
-                <p class="mt-3 mb-0">
-                  If these conditions are met, the order may be eligible for cancellation and refund upon request.
-                </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
-                <h3 class="mb-2">4. Medication Orders — Non-Refundable Once Fulfilled or Shipped</h3>
+              <div id="refund-6" style="scroll-margin-top: 110px;">
+                <h3 class="mb-2">6. Medication Orders Non-Refundable Once Fulfilled or Shipped</h3>
                 <p class="mb-2">
-                  Medication orders become <span class="fw-semibold">FINAL and NON-REFUNDABLE</span> once <span class="fw-semibold">ANY</span> of the following occur:
+                  Medication orders become <span class="fw-semibold">final and non-refundable</span> once <span class="fw-semibold">any</span> of the following occur:
                 </p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">A clinician issues a prescription, OR</li>
-                  <li class="text-body-sm">The pharmacy begins preparation, mixing, or compounding, OR</li>
-                  <li class="text-body-sm">A tracking number is generated, OR</li>
-                  <li class="text-body-sm">The package is handed to the courier for shipment.</li>
+                <ul class="list-unstyled mb-3 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">A clinician issues a prescription</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">The pharmacy begins preparation, mixing, or compounding</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">A tracking number is generated</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">The package is handed to the courier for shipment</span></li>
                 </ul>
-                <p class="mt-3 mb-0">
+                <p class="mb-0">
                   Federal and state pharmacy regulations prohibit returning, reselling, or reusing prescription medications once prepared or dispensed.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
-                <h3 class="mb-2">5. Delivered Medications (Final Sale)</h3>
+              <div id="refund-7" style="scroll-margin-top: 110px;">
+                <h3 class="mb-2">7. Delivered Medications (Final Sale)</h3>
                 <p class="mb-2">
-                  All medications are <span class="fw-semibold">FINAL SALE</span> once delivered to the patient’s provided address.
+                  All medications are <span class="fw-semibold">final sale</span> once delivered to the patient’s provided address.
                 </p>
                 <p class="mb-2">No refunds, returns, replacements, or exchanges will be issued for:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Delivered medications</li>
-                  <li class="text-body-sm">Unopened or sealed medications</li>
-                  <li class="text-body-sm">Medications refused, abandoned, or returned by the carrier</li>
+                <ul class="list-unstyled mb-3 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Delivered medications</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Unopened or sealed medications</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Medications refused, abandoned, or returned by the carrier</span></li>
                 </ul>
-                <p class="mt-3 mb-0">
-                  This policy exists to comply with safety, handling, and pharmacy regulations.
-                </p>
-              </div>
-
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
-                <h3 class="mb-2">6. No Refunds for Lack of Results or Treatment Response</h3>
-                <p class="mb-2">FullScopeMD does <span class="fw-semibold">NOT</span> issue refunds based on:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Dissatisfaction with results</li>
-                  <li class="text-body-sm">Perceived lack of effectiveness</li>
-                  <li class="text-body-sm">Variation in expected outcomes</li>
-                  <li class="text-body-sm">Slower progress than anticipated</li>
-                </ul>
-                <p class="mt-3 mb-2">Individual response to medication varies significantly based on:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Body chemistry and metabolism</li>
-                  <li class="text-body-sm">Dosage adherence</li>
-                  <li class="text-body-sm">Diet, lifestyle, and exercise</li>
-                  <li class="text-body-sm">Medical conditions and hormone levels</li>
-                  <li class="text-body-sm">Genetics and absorption differences</li>
-                </ul>
-                <p class="mt-3 mb-0">
-                  Because outcomes cannot be guaranteed and compounded medications are batch-prepared according to strict standards—no refunds are provided for treatment results.
-                </p>
-              </div>
-
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
-                <h3 class="mb-2">7. Shipping Issues (Lost, Damaged, or Delayed Packages)</h3>
-                <p class="mb-2">
-                  If a package is lost, damaged, or delayed, we will work with the pharmacy and shipping carrier to determine the appropriate resolution.
-                  Depending on circumstances, a replacement may be issued.
-                </p>
-                <p class="mb-2">
-                  Refunds cannot be issued for medications already prepared, shipped, or delivered.
-                </p>
                 <p class="mb-0">
-                  FullScopeMD is not responsible for delivery issues caused by incorrect shipping information provided by the patient.
+                  This policy exists to comply with medication safety, handling, and pharmacy regulations.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
-                <h3 class="mb-2">8. Billing Errors or Duplicate Charges</h3>
+              <div id="refund-8" style="scroll-margin-top: 110px;">
+                <h3 class="mb-2">8. No Refunds for Lack of Results or Treatment Response</h3>
+                <p class="mb-2">FullScopeMD does <span class="fw-semibold">not</span> issue refunds based on:</p>
+                <ul class="list-unstyled mb-3 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Dissatisfaction with results</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Perceived lack of effectiveness</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Variation in expected outcomes</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Slower progress than anticipated</span></li>
+                </ul>
+
+                <p class="mb-2">Individual response to medication varies based on factors including:</p>
+                <ul class="list-unstyled mb-3 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Body chemistry and metabolism</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Dosage adherence</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Diet, lifestyle, and exercise</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Medical conditions and hormone levels</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Genetics and absorption differences</span></li>
+                </ul>
+
+                <p class="mb-0">
+                  Because outcomes cannot be guaranteed, refunds are not provided based on treatment results.
+                </p>
+              </div>
+
+              <div id="refund-9" style="scroll-margin-top: 110px;">
+                <h3 class="mb-2">9. Shipping Issues (Lost, Damaged, or Delayed Packages)</h3>
+                <p class="mb-2">
+                  If a package is lost, damaged, or delayed, FullScopeMD will work with the pharmacy and shipping carrier to determine the appropriate resolution. In some cases, a replacement may be issued.
+                </p>
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Refunds cannot be issued for medications that have already been prepared, shipped, or delivered.</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">FullScopeMD is not responsible for delivery issues caused by incorrect or incomplete shipping information provided by the patient.</span></li>
+                </ul>
+              </div>
+
+              <div id="refund-10" style="scroll-margin-top: 110px;">
+                <h3 class="mb-2">10. Billing Errors or Duplicate Charges</h3>
                 <p class="mb-2">If you believe you were incorrectly charged:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Contact us at <a class="hover-underline-accent" href="mailto:support@fullscopemd.com">support@fullscopemd.com</a>.</li>
-                  <li class="text-body-sm">Verified duplicate or erroneous charges will be refunded promptly.</li>
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start">
+                    <i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i>
+                    <span class="text-body-sm">
+                      Please contact us at
+                      <a class="hover-underline-accent text-break" href="mailto:support@fullscopemd.com">support@fullscopemd.com</a>.
+                    </span>
+                  </li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Verified duplicate or erroneous charges will be refunded promptly.</span></li>
                 </ul>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
-                <h3 class="mb-2">9. Promotions, Discounts, and Coupons</h3>
+              <div id="refund-11" style="scroll-margin-top: 110px;">
+                <h3 class="mb-2">11. Promotions, Discounts, and Coupons</h3>
                 <p class="mb-2">Promotional codes and discounts:</p>
-                <ul class="mb-0 d-grid gap-2">
-                  <li class="text-body-sm">Cannot be applied retroactively</li>
-                  <li class="text-body-sm">Cannot be exchanged for cash value</li>
-                  <li class="text-body-sm">Do not guarantee clinical eligibility</li>
-                  <li class="text-body-sm">Do not override refund restrictions</li>
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Cannot be applied retroactively</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Cannot be exchanged for cash value</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Do not guarantee clinical eligibility</span></li>
+                  <li class="d-flex gap-2 align-items-start"><i class="fa-solid fa-circle text-primary-accent mt-2" style="font-size:.35rem;"></i><span class="text-body-sm">Do not override refund restrictions outlined in this policy</span></li>
                 </ul>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
-                <h3 class="mb-2">10. Acceptance of This Policy</h3>
+              <div id="refund-12" style="scroll-margin-top: 110px;">
+                <h3 class="mb-2">12. Acceptance of This Policy</h3>
                 <p class="mb-0">
-                  By receiving telehealth services or completing a purchase through FullScopeMD, you acknowledge and agree to this Refund Policy.
-                  This Policy forms part of the FullScopeMD Terms &amp; Conditions and applies to all transactions.
+                  By receiving telehealth services or completing a purchase through FullScopeMD, you acknowledge and agree to this Refund Policy. This Policy applies to all transactions and forms part of the FullScopeMD Terms &amp; Conditions.
                 </p>
               </div>
 
-              <div class="fade-in-up fade-in delay-7 fade-blocked">
-                <h3 class="mb-2">11. Contact Information</h3>
-
+              <div id="refund-13" style="scroll-margin-top: 110px;">
+                <h3 class="mb-2">13. Contact Information</h3>
                 <div class="p-3 p-md-4 bg-muted border-brand rounded-4">
                   <div class="d-grid gap-2">
                     <div class="fw-semibold">FullScopeMD – Billing &amp; Support</div>
@@ -204,7 +253,10 @@
                       Email:
                       <a class="hover-underline-accent text-break" href="mailto:support@fullscopemd.com">support@fullscopemd.com</a>
                     </div>
-                    <div class="text-body-sm">Phone: <span class="text-secondary-text">[XXX-XXX-XXXX]</span></div>
+                    <div class="text-body-sm">
+                      Phone:
+                      <a class="hover-underline-accent" href="tel:+13072187845">+1 (307) 218-7845</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -215,15 +267,13 @@
 
             <div class="d-flex flex-column flex-sm-row gap-2 justify-content-between align-items-start align-items-sm-center">
               <small class="text-caption-sm mb-0">© {% now "Y" %} FullScopeMD. All rights reserved.</small>
-              <a class="text-body-sm hover-underline-accent" href="#top">Back to top</a>
             </div>
-
           </div>
         </div>
+
       </div>
     </div>
-
   </div>
 </section>
 
-{% endblock content %}
+{% endblock page_content %}

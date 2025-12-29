@@ -1,9 +1,10 @@
 {% load static %}
 
-<section class="faq-section d-flex align-items-center min-vh-100">
-    <div class="container py-5 py-lg-6">
-        <div class="row align-items-center g-4 g-lg-5">
+<section class="faq-section d-flex align-items-center position-relative overflow-hidden">
+    <div class="container py-4 py-lg-5">
+        <div class="row align-items-center">
 
+            {% include "components/stars.html" %}
             <!-- LEFT: Text + Accordion -->
             <div class="col-lg-6 order-2 order-lg-1">
                 <div class="faq-card fade-in-up fade-in delay-1 fade-blocked scroll-animate">
@@ -12,19 +13,18 @@
                     <p class="faq-kicker mb-2 text-uppercase text-small">
                         Frequently Asked Questions
                     </p>
-                    <h2 class="mb-2">Find clear answers about your care.</h2>
+                    <h1 class="mb-2">Got Questions? <br>Find Answers Here!</h1>
                     <p class="mb-4">
-                        Get quick answers to the most common questions about becoming a patient,
-                        your providers, pricing, and what happens if you experience side effects.
+                        Explore common questions about eligibility, providers, pricing, and steps if you experience side effects or don't see expected results.
                     </p>
 
                     <!-- Accordion -->
-                    <div class="accordion faq-accordion" id="faqAccordion">
+                    <div class="accordion accordion-flush" id="faqAccordion">
 
                         <!-- Q1 -->
-                        <div class="accordion-item">
+                        <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                             <h3 class="accordion-header" id="faqHeadingOne">
-                                <button class="accordion-button" type="button"
+                                <button class="accordion-button px-3 px-md-4 py-3 fw-semibold" type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#faqCollapseOne"
                                         aria-expanded="true"
@@ -36,25 +36,21 @@
                                  class="accordion-collapse collapse show"
                                  aria-labelledby="faqHeadingOne"
                                  data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
+                                <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
                                     <p class="mb-2">
-                                        Eligibility depends on your state of residence, your health history,
-                                        and the type of care you’re looking for.
+                                        Eligibility depends on your state of residence, your medical history, and the type of care you are seeking.
                                     </p>
                                     <p class="mb-0">
-                                        Once you complete your intake form, a U.S. licensed provider will
-                                        personally review your details to see if our GLP-1 weight loss program,
-                                        peptide therapy, skin treatments, hair-loss care, or primary care
-                                        services are a good and safe fit for you.
+                                        After you complete your intake form, a licensed U.S. provider will review your information to determine if our programs, such as GLP-1 weight loss, peptide therapy, skin treatments, hair-loss care, or primary care, are a safe and appropriate fit for you.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Q2 -->
-                        <div class="accordion-item">
+                        <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                             <h3 class="accordion-header" id="faqHeadingTwo">
-                                <button class="accordion-button collapsed" type="button"
+                                <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#faqCollapseTwo"
                                         aria-expanded="false"
@@ -66,79 +62,77 @@
                                  class="accordion-collapse collapse"
                                  aria-labelledby="faqHeadingTwo"
                                  data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
+                                <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
                                     <p class="mb-2">
-                                        Your care is handled by U.S. licensed clinicians, including physicians,
-                                        nurse practitioners, and physician assistants who are fully authorized
-                                        to treat patients in your state.
+                                        Your care is provided by licensed U.S. clinicians, including physicians, nurse practitioners, and physician assistants who are fully authorized to treat patients in your state.
                                     </p>
                                     <p class="mb-0">
-                                        Each treatment plan, prescription, and dose adjustment is reviewed by a
-                                        licensed provider to make sure you’re receiving safe, attentive,
-                                        high-quality care every step of the way.
+                                        All treatment plans, prescriptions, and dosage adjustments are reviewed by a licensed provider to ensure that you receive safe and high-quality care.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Q3 -->
-                        <div class="accordion-item">
+                        <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                             <h3 class="accordion-header" id="faqHeadingThree">
-                                <button class="accordion-button collapsed" type="button"
+                                <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#faqCollapseThree"
                                         aria-expanded="false"
                                         aria-controls="faqCollapseThree">
-                                    Do you accept insurance? How much will this cost?
+                                    Do you accept insurance? What are the costs associated with your services?
                                 </button>
                             </h3>
                             <div id="faqCollapseThree"
                                  class="accordion-collapse collapse"
                                  aria-labelledby="faqHeadingThree"
                                  data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
+                                <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
                                     <p class="mb-2">
-                                        FullScopeMD operates on a straightforward cash-pay model so you always
-                                        know exactly what you’re paying for.
+                                        FullScopeMD operates under a cash-pay model, providing clear and transparent pricing.
                                     </p>
                                     <p class="mb-0">
-                                        Your visit, follow-up messaging, and treatment plan are included in one
-                                        clear price. Medication costs may vary by program, and many patients
-                                        choose to use their FSA or HSA cards if eligible.
+                                        The price for your visit, follow-up communications, and treatment plan is provided upfront. Medication costs may vary based on the program, and you may be able to use your FSA or HSA cards if eligible.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Q4 -->
-                        <div class="accordion-item">
+                        <div class="accordion-item rounded-4 overflow-hidden mb-3 border">
                             <h3 class="accordion-header" id="faqHeadingFour">
-                                <button class="accordion-button collapsed" type="button"
+                                <button class="accordion-button collapsed px-3 px-md-4 py-3 fw-semibold" type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#faqCollapseFour"
                                         aria-expanded="false"
                                         aria-controls="faqCollapseFour">
-                                    What if I experience side effects or don’t see results?
+                                    What should I do if I experience side effects or do not see the desired results?
                                 </button>
                             </h3>
                             <div id="faqCollapseFour"
                                  class="accordion-collapse collapse"
                                  aria-labelledby="faqHeadingFour"
                                  data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
+                                <div class="accordion-body px-3 px-md-4 pb-4 pt-2">
                                     <p class="mb-2">
-                                        Your care doesn’t end after your first appointment. If you have concerns,
-                                        side effects, or feel your progress has slowed, reach out to our team.
+                                        Your care continues even after your first appointment. If you experience any side effects or if your progress seems slower than expected, please contact our team.
                                     </p>
                                     <p class="mb-0">
-                                        We can arrange a follow-up visit, adjust your dosage, or explore
-                                        alternative treatments as needed. If an in-person evaluation is ever
-                                        recommended, we’ll guide you on what to do next.
+                                        We can arrange follow-up visits, adjust your treatment, or explore alternative therapies. If an in-person evaluation is necessary, we will guide you on the next steps.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
+                    </div>
+
+                    <!-- Call to Action: View More FAQ -->
+                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-start align-items-center gap-3 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+                        <a href="{% url 'faqs' %}" class="btn btn-primary d-inline-flex align-items-center gap-2">
+                            View More FAQs
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
                     </div>
 
                 </div>
@@ -147,9 +141,9 @@
             <!-- RIGHT: Image (desktop only) -->
             <div class="col-lg-5 offset-lg-1 order-1 order-lg-2 d-none d-lg-block">
                 <div class="faq-media-card shadow-brand fade-in-right fade-in delay-2 fade-blocked scroll-animate">
-                    <img src="{% static 'images/faq/faq.png' %}"
-                        alt="Patient speaking with provider"
-                        class="faq-media-img img-fluid">
+                    <img src="{% static 'images/home/faq.jpg' %}"
+                         alt="Patient speaking with provider"
+                         class="faq-media-img img-fluid">
                 </div>
             </div>
         </div>
