@@ -15,11 +15,11 @@
   </div>
 
   <div class="container position-relative z-1 py-3 py-md-4">
-    <div class="row align-items-start justify-content-between g-3 g-xl-4">
+    <div class="row align-items-start g-2 g-xl-2 justify-content-center">
 
-      <div class="col-12 col-lg-5 col-xl-4 d-flex justify-content-start">
-        <div class="bg-white rounded-4 shadow-brand border-brand p-3 p-md-4"
-             style="max-width:380px;">
+      <div class="col-12 col-lg-5 col-xl-5 d-flex justify-content-lg-end justify-content-center">
+        <div class="bg-white rounded-4 shadow-brand border-brand p-3 p-md-4 w-100"
+             style="max-width:460px;">
           <h5 class="offcanvas-title d-flex align-items-center brand-title mb-3"
               id="fsmdMapCardTitle">
             <img src="{% static 'images/favicon.ico' %}"
@@ -45,7 +45,7 @@
             </div>
           </div>
 
-          <div class="d-flex align-items-start gap-2 mb-2">
+          {% comment %} <div class="d-flex align-items-start gap-2 mb-2">
             <span class="rounded-circle d-inline-flex align-items-center justify-content-center bg-muted"
                   style="width:32px;height:32px;">
               <i class="fa-solid fa-phone text-primary-accent"></i>
@@ -58,9 +58,9 @@
                 +1 (307) 218-7845
               </p>
             </div>
-          </div>
+          </div> {% endcomment %}
 
-          <div class="d-flex align-items-start gap-2 mb-2">
+          {% comment %} <div class="d-flex align-items-start gap-2 mb-2">
             <span class="rounded-circle d-inline-flex align-items-center justify-content-center bg-muted"
                   style="width:32px;height:32px;">
               <i class="fa-solid fa-envelope text-primary-accent"></i>
@@ -75,7 +75,7 @@
                 </a>
               </p>
             </div>
-          </div>
+          </div> {% endcomment %}
 
           <div class="d-flex align-items-start gap-2">
             <span class="rounded-circle d-inline-flex align-items-center justify-content-center bg-muted"
@@ -109,7 +109,6 @@
             {% csrf_token %}
 
             <div class="mb-2">
-              <label class="form-label text-white mb-1">Your Name</label>
               <div class="booking-field-line d-flex align-items-center">
                 <span class="me-2">
                   <i class="fa-regular fa-user text-tertiary-accent"></i>
@@ -125,7 +124,6 @@
             </div>
 
             <div class="mb-2">
-              <label class="form-label text-white mb-1">Your Email</label>
               <div class="booking-field-line d-flex align-items-center">
                 <span class="me-2">
                   <i class="fa-regular fa-envelope text-tertiary-accent"></i>
@@ -141,7 +139,6 @@
             </div>
 
             <div class="mb-2">
-              <label class="form-label text-white mb-1">Phone Number</label>
               <div class="booking-field-line d-flex align-items-center">
                 <span class="me-2">
                   <i class="fa-solid fa-phone text-tertiary-accent"></i>
@@ -188,7 +185,7 @@
               </div>
             </div>
 
-            <p class="text-small text-white mb-2">
+            {% comment %} <p class="text-small text-white mb-2">
               Select the services you’re interested in:
             </p>
             <div class="row g-2 mb-3">
@@ -232,7 +229,7 @@
                   </label>
                 </div>
               </div>
-            </div>
+            </div> {% endcomment %}
 
             <button type="submit"
                     class="btn w-100 mt-3 py-3 hover-lift"

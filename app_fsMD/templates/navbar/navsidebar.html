@@ -1,4 +1,3 @@
-{# templates/navbar/navsidebar.html #}
 {% load static %}
 
 <style>
@@ -17,10 +16,100 @@
     display: none;
     gap: .5rem;
     flex-direction: column;
-    align-items: center;}@media (min-width:992px){#fsmdSideRail{display:flex}}#fsmdSideRail .icon-button{background:var(--primary-bg);border-color:var(--secondary-border)}#fsmdSideRail .icon-button:hover,#fsmdSideRail .icon-button:focus-visible{border-color:rgba(var(--primary-accent-rgb),.55);box-shadow:var(--shadow-elevated)}#fsmdSidebarPanel.offcanvas-fsmd{--bs-offcanvas-bg:var(--primary-bg);--bs-offcanvas-color:var(--primary-text);border-right:1px solid var(--secondary-border);box-shadow:var(--shadow-elevated)}#fsmdSidebarPanel .offcanvas-header{padding:1rem 1.25rem;border-bottom:1px solid var(--secondary-border)}#fsmdSidebarPanel .offcanvas-title{font-family:var(--font-family-base);font-weight:700;letter-spacing:.02em}#fsmdSidebarPanel .btn-close{opacity:.75}#fsmdSidebarPanel .btn-close:hover{opacity:1}#fsmdSidebarPanel .offcanvas-body{padding:1rem 1.25rem;background:var(--primary-bg);scrollbar-width:thin;scrollbar-color:rgba(var(--primary-accent-rgb),.65) transparent}#fsmdSidebarPanel .offcanvas-body section{border-radius:var(--radius-lg);border:1px solid var(--secondary-border);background:var(--primary-bg)}#fsmdSidebarPanel .offcanvas-body section.bg-muted{background:var(--secondary-bg)!important;border-color:var(--secondary-border)}#fsmdSidebarPanel .offcanvas-body a{color:var(--primary-text);text-decoration:none;border-radius:var(--radius-md);transition:background-color var(--transition-fast),color var(--transition-fast),transform var(--transition-fast)}#fsmdSidebarPanel .offcanvas-body a:hover{background:var(--hover-tint);color:var(--primary-accent);transform:translateX(2px)}#fsmdSidebarPanel .offcanvas-body a:focus-visible{outline:0;box-shadow:var(--focus-ring)}#fsmdSidebarPanel .icon-gradient{background:linear-gradient(-150deg,var(--tertiary-accent),var(--primary-accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600}#fsmdSidebarPanel .badge.bg-accent-gradient-animated{color:var(--tertiary-text)}#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar{width:6px}#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-track{background:transparent}#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--tertiary-accent),var(--primary-accent));border-radius:var(--radius-pill)}#fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,var(--primary-accent),var(--secondary-accent))}
+    align-items: center;
+  }
+  @media (min-width:992px){
+    #fsmdSideRail{display:flex}
+  }
+  #fsmdSideRail .icon-button{
+    background:var(--primary-bg);
+    border-color:var(--secondary-border)
+  }
+  #fsmdSideRail .icon-button:hover,
+  #fsmdSideRail .icon-button:focus-visible{
+    border-color:rgba(var(--primary-accent-rgb),.55);
+    box-shadow:var(--shadow-elevated)
+  }
+  #fsmdSidebarPanel.offcanvas-fsmd{
+    --bs-offcanvas-bg:var(--primary-bg);
+    --bs-offcanvas-color:var(--primary-text);
+    border-right:1px solid var(--secondary-border);
+    box-shadow:var(--shadow-elevated)
+  }
+  #fsmdSidebarPanel .offcanvas-header{
+    padding:1rem 1.25rem;
+    border-bottom:1px solid var(--secondary-border)
+  }
+  #fsmdSidebarPanel .offcanvas-title{
+    font-family:var(--font-family-base);
+    font-weight:700;
+    letter-spacing:.02em
+  }
+  #fsmdSidebarPanel .btn-close{opacity:.75}
+  #fsmdSidebarPanel .btn-close:hover{opacity:1}
+  #fsmdSidebarPanel .offcanvas-body{
+    padding:1.5rem 1.5rem 1.75rem;
+    background:var(--primary-bg);
+    scrollbar-width:thin;
+    scrollbar-color:rgba(var(--primary-accent-rgb),.65) transparent
+  }
+  #fsmdSidebarPanel .offcanvas-body a{
+    color:var(--primary-text);
+    text-decoration:none;
+    border-radius:var(--radius-md);
+    transition:background-color var(--transition-fast),
+               color var(--transition-fast),
+               transform var(--transition-fast)
+  }
+  #fsmdSidebarPanel .offcanvas-body a:hover{
+    color:var(--primary-accent);
+  }
+  #fsmdSidebarPanel .offcanvas-body a:focus-visible{
+    outline:0;
+    box-shadow:var(--focus-ring)
+  }
+  #fsmdSidebarPanel .icon-gradient{
+    background:linear-gradient(-150deg,var(--tertiary-accent),var(--primary-accent));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    font-weight:600
+  }
+  #fsmdSidebarPanel .badge.bg-accent-gradient-animated{
+    color:var(--tertiary-text)
+  }
+  #fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar{width:6px}
+  #fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-track{background:transparent}
+  #fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-thumb{
+    background:linear-gradient(180deg,var(--tertiary-accent),var(--primary-accent));
+    border-radius:var(--radius-pill)
+  }
+  #fsmdSidebarPanel .offcanvas-body::-webkit-scrollbar-thumb:hover{
+    background:linear-gradient(180deg,var(--primary-accent),var(--secondary-accent))
+  }
+  #fsmdSidebarPanel .newsletter-input{
+    border:0!important;
+    border-bottom:2px solid var(--primary-accent)!important;
+    border-radius:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    padding-left:0!important;
+    padding-right:2.5rem!important;
+  }
+  #fsmdSidebarPanel .newsletter-input::placeholder{
+    color:var(--secondary-text);
+  }
+  #fsmdSidebarPanel .newsletter-input:focus{
+    border:0!important;
+    border-bottom:2px solid var(--primary-accent)!important;
+    outline:0!important;
+    box-shadow:none!important;
+    background:transparent!important;
+  }
+  #fsmdSidebarPanel .newsletter-submit i{
+    color:var(--primary-accent);
+  }
 </style>
 
-{# Desktop: slim icon rail (does not push content) #}
 <div id="fsmdSideRail"
      class="fade-in fade-in-left delay-2 fade-blocked"
      aria-label="Quick sidebar">
@@ -55,9 +144,8 @@
   </a>
 </div>
 
-{# Mobile: floating open button only #}
 <div class="position-fixed d-lg-none fade-in fade-in-up delay-2 fade-blocked"
-     style="left: 1rem; bottom: 1rem; z-index: 1045;">
+     style="left: 1rem; bottom: 1rem; z-index: 1040;">
   <button class="icon-button shadow-brand"
           type="button"
           data-bs-toggle="offcanvas"
@@ -68,7 +156,6 @@
   </button>
 </div>
 
-{# Full sidebar panel (offcanvas overlay - does not affect layout) #}
 <aside class="offcanvas offcanvas-start offcanvas-fsmd"
        tabindex="-1"
        id="fsmdSidebarPanel"
@@ -89,124 +176,98 @@
             aria-label="Close"></button>
   </div>
 
-  <div class="offcanvas-body d-flex flex-column gap-3">
+  <div class="offcanvas-body d-flex flex-column gap-4">
 
-    <section class="bg-muted border-brand rounded-3 p-3 fade-in fade-in-up delay-2 fade-blocked">
-      <div class="d-flex align-items-center justify-content-between mb-2">
-        <div class="text-small text-uppercase" style="letter-spacing:.08em;">Navigation Bar</div>
-        <span class="badge rounded-pill bg-accent-gradient-animated">Side Menu</span>
-      </div>
-
-      <ul class="mb-0">
-        <li class="fade-in fade-in-up delay-2 fade-blocked">
-          <a class="d-flex align-items-center gap-2 py-1"
-             href="{{ facebook_url|default:'#' }}"
-             target="_blank" rel="noopener">
-            <i class="fa-brands fa-facebook icon-sm icon-gradient"></i><span>Facebook</span>
-          </a>
-        </li>
-        <li class="fade-in fade-in-up delay-3 fade-blocked">
-          <a class="d-flex align-items-center gap-2 py-1"
-             href="{{ instagram_url|default:'#' }}"
-             target="_blank" rel="noopener">
-            <i class="fa-brands fa-instagram icon-sm icon-gradient"></i><span>Instagram</span>
-          </a>
-        </li>
-        <li class="mb-0 fade-in fade-in-up delay-4 fade-blocked">
-          <a class="d-flex align-items-center gap-2 py-1"
-             href="{{ tiktok_url|default:'#' }}"
-             target="_blank" rel="noopener">
-            <i class="fa-brands fa-tiktok icon-sm icon-gradient"></i><span>Tiktok</span>
-          </a>
-        </li>
-      </ul>
-    </section>
-
-    <section class="border-brand rounded-3 p-3 fade-in fade-in-up delay-3 fade-blocked">
-      <h6 class="mb-2">
+    <div class="fade-in fade-in-up delay-1 fade-blocked">
+      {% comment %} <h6 class="mb-2 d-flex align-items-center">
         <i class="fa-solid fa-shield-heart me-2 icon-gradient"></i>
         Clinician-led Telemedicine
-      </h6>
+      </h6> {% endcomment %}
       <p class="mb-0 text-body-sm">
-        FullScopeMD is a modern, clinician led telemedicine platform providing accessible care across weight management,
-        hair loss, peptide therapy, wellness, and primary care support. Care is delivered safely, securely, and
-        conveniently online.
+        FullScopeMD is a modern, clinician led telemedicine platform providing accessible care across
+        weight management, hair loss, peptide therapy, wellness, and primary care support. Care is
+        delivered safely, securely, and conveniently online.
       </p>
-    </section>
+    </div>
 
-    <section class="border-brand rounded-3 p-3 shadow-sm-brand fade-in fade-in-up delay-4 fade-blocked">
-      <h6 class="mb-2">
-        <i class="fa-solid fa-headset me-2 icon-gradient"></i>
-        Contact Us
-      </h6>
+    <div class="fade-in fade-in-up delay-2 fade-blocked">
+      <h6 class="mb-3">Contact Us</h6>
 
-      <div class="d-grid gap-2">
-        <a class="d-flex align-items-center gap-2 fade-in fade-in-up delay-2 fade-blocked"
-           href="mailto:{{ contact_email|default:'support@fullscopemd.com' }}">
-          <i class="fa-regular fa-envelope icon-sm"></i>
-          <span>{{ contact_email|default:"support@fullscopemd.com" }}</span>
-        </a>
+      <ul class="list-unstyled mb-0">
+        <li class="d-flex align-items-start gap-2 mb-2">
+          <span class="mt-1">
+            <i class="fa-solid fa-check text-primary-accent"></i>
+          </span>
+          <div class="small">
+            <a href="mailto:{{ contact_email|default:'support@fullscopemd.com' }}"
+               class="d-inline-flex align-items-center gap-1">
+              <i class="fa-regular fa-envelope icon-sm"></i>
+              <span>{{ contact_email|default:"support@fullscopemd.com" }}</span>
+            </a>
+          </div>
+        </li>
 
-        <a class="d-flex align-items-center gap-2 fade-in fade-in-up delay-3 fade-blocked"
-           href="tel:{{ contact_phone|default:'+1 (307) 218-7845' }}">
-          <i class="fa-solid fa-phone icon-sm"></i>
-          <span>{{ contact_phone_display|default:"+1 (307) 218-7845" }}</span>
-        </a>
-      </div>
+        <li class="d-flex align-items-start gap-2">
+          <span class="mt-1">
+            <i class="fa-solid fa-check text-primary-accent"></i>
+          </span>
+          <div class="small">
+            <a href="tel:{{ contact_phone|default:'+13072187845' }}"
+               class="d-inline-flex align-items-center gap-1">
+              <i class="fa-solid fa-phone icon-sm"></i>
+              <span>{{ contact_phone_display|default:"+1 (307) 218-7845" }}</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
 
-      <hr class="my-3">
+    <div class="fade-in fade-in-up delay-3 fade-blocked">
+      <h6 class="mb-3">Newsletter</h6>
 
-      {# Newsletter: button under textbox #}
-      <form class="d-grid gap-2 fade-in fade-in-up delay-4 fade-blocked"
-            method="post"
-            action="{{ ghl_newsletter_action|default:'#' }}">
+      <form method="post"
+            action="{{ ghl_newsletter_action|default:'#' }}"
+            class="mb-2">
         {% csrf_token %}
 
-        <label class="form-label mb-0" for="sidebarNewsletterEmail">
-          Newsletter <span class="text-small">(enter email then submit)</span>
-        </label>
-
-        <div class="input-group">
-          <span class="input-group-text" aria-hidden="true">
-            <i class="fa-regular fa-paper-plane"></i>
-          </span>
+        <div class="position-relative">
           <input id="sidebarNewsletterEmail"
                  name="email"
                  type="email"
-                 class="form-control"
-                 placeholder="johndoe@gmail.com"
+                 class="form-control newsletter-input"
+                 placeholder="Your Email Address"
                  autocomplete="email"
                  required>
-        </div>
 
-        <button class="btn btn-primary w-100" type="submit">Submit</button>
-
-        <div class="form-text">
-          We’ll only send clinically relevant updates and service announcements.
+          <button type="submit"
+                  class="btn newsletter-submit border-0 bg-transparent p-0 position-absolute end-0 top-50 translate-middle-y">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
         </div>
       </form>
-    </section>
 
-    <section class="mt-auto border-brand rounded-3 p-3 fade-in fade-in-up delay-5 fade-blocked">
-      <h6 class="mb-2">
-        <i class="fa-solid fa-share-nodes me-2 icon-gradient"></i>
-        Follow Us
-      </h6>
+      <div class="form-text small">
+        We’ll only send clinically relevant updates and service announcements.
+      </div>
+    </div>
 
-      <div class="d-flex align-items-center gap-2">
-        <a class="icon-button fade-in fade-in-up delay-2 fade-blocked"
+    <div class="mt-auto pt-2 fade-in fade-in-up delay-4 fade-blocked">
+      <h6 class="mb-3">Follow Us</h6>
+
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <a class="icon-button rounded-circle fade-in fade-in-up delay-2 fade-blocked"
            href="{{ facebook_url|default:'#' }}"
            target="_blank" rel="noopener"
            aria-label="Facebook">
           <i class="fa-brands fa-facebook"></i>
         </a>
-        <a class="icon-button fade-in fade-in-up delay-3 fade-blocked"
+        <a class="icon-button rounded-circle fade-in fade-in-up delay-3 fade-blocked"
            href="{{ instagram_url|default:'#' }}"
            target="_blank" rel="noopener"
            aria-label="Instagram">
           <i class="fa-brands fa-instagram"></i>
         </a>
-        <a class="icon-button fade-in fade-in-up delay-4 fade-blocked"
+        <a class="icon-button rounded-circle fade-in fade-in-up delay-4 fade-blocked"
            href="{{ tiktok_url|default:'#' }}"
            target="_blank" rel="noopener"
            aria-label="TikTok">
@@ -214,10 +275,10 @@
         </a>
       </div>
 
-      <small class="d-block mt-3 text-caption-sm fade-in fade-in-up delay-5 fade-blocked">
+      <small class="d-block text-caption-sm fade-in fade-in-up delay-5 fade-blocked text-center">
         © {% now "Y" %} FullScopeMD. All rights reserved.
       </small>
-    </section>
+    </div>
 
   </div>
 </aside>

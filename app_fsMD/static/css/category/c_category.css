@@ -25,12 +25,6 @@
   box-shadow:var(--focus-ring),var(--shadow-elevated);
   border-color:rgba(var(--primary-accent-rgb),.65)
 }
-.product-filter-btn.active{
-  border-color:rgba(var(--primary-accent-rgb),.65);
-  background-color:var(--hover-tint);
-  color:var(--primary-accent);
-  box-shadow:var(--focus-ring)
-}
 
 .product-card{
   background-color:var(--primary-bg);
@@ -155,3 +149,22 @@
 .stock-status{font-size:var(--font-size-caption)}
 .stock-in{color:var(--primary-accent)}
 .stock-out{color:rgba(220,53,69,.85)}
+
+
+/* Cart: divider only when multiple items */
+#cartContent.cart-has-multiple > .cart-item:not(:last-child){
+  border-bottom:1px solid var(--secondary-border);
+  padding-bottom:.85rem;
+  margin-bottom:.85rem;
+}
+
+/* Cart: reuse existing title marquee but make it slower in cart */
+#cartContent .title-marquee{min-width:0;max-width:100%;}
+#cartContent .title-marquee-track{gap:1.25rem;}
+#cartContent .title-marquee.is-marquee .title-marquee-track{
+  animation-duration:18s; /* slow */
+}
+
+/* Keep header row stable (title won't push trash icon) */
+#cartContent .cart-meta{min-width:0;}
+#cartContent .cart-remove{flex:0 0 auto;}

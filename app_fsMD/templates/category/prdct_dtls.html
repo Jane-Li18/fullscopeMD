@@ -4,10 +4,74 @@
 
 {% block title %}{{ product.name }}{% endblock %}
 
+{% block extra_head %}
+{% if request and product %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ product.name|escapejs }}",
+  "description": "{{ product.short_details|default:product.long_details|striptags|truncatechars:160|escapejs }}",
+  "image": [
+    "{{ request.scheme }}://{{ request.get_host }}{{ product.main_image.url }}"
+  ],
+  "sku": "{{ product.id }}",
+  "brand": { "@type": "Brand", "name": "FullScopeMD" },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ request.build_absolute_uri|escapejs }}",
+    "priceCurrency": "USD",
+    "price": "{{ product.final_price }}",
+    "availability": "{% if product.quantity|default:0 > 0 %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'home' %}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Programs & Services",
+      "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'prgrms_srvcs' %}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ product.category.name|escapejs }}",
+      "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'prgrm_dtls' product.category.slug %}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "{{ product.name|escapejs }}",
+      "item": "{{ request.build_absolute_uri|escapejs }}"
+    }
+  ]
+}
+</script>
+{% endif %}
+{% endblock extra_head %}
+
 {% block content %}
 
 <section class="py-5">
   <div class="container py-2 py-lg-4">
+
+    <div class="mb-3 fade-in-up fade-in delay-1 fade-blocked scroll-animate">
+      <a href="{% url 'prgrm_dtls' product.category.slug %}" class="text-body-sm text-primary-accent fw-semibold">
+        <i class="fa-solid fa-arrow-left me-2"></i>Back to {{ product.category.name }}
+      </a>
+    </div>
 
     <div class="row g-4 align-items-start">
       <div class="col-12 col-lg-5">
@@ -17,12 +81,12 @@
           </div>
 
           {% if product.images.all %}
-            <div class="d-flex gap-2 mt-3 overflow-auto">
+            <div class="d-flex gap-2 mt-3 overflow-auto" aria-label="Product image gallery">
               {% for img in product.images.all %}
                 {% if img.is_active %}
                   <button type="button" class="p-0 border-0 bg-transparent product-thumb-btn"
-                          data-full="{{ img.image.url }}" aria-label="View image {{ forloop.counter }}">
-                    <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}" class="product-mini-thumb border rounded-3">
+                          data-full="{{ img.image.url }}" aria-label="View image {{ forloop.counter }} for {{ product.name }}">
+                    <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}" class="product-mini-thumb border rounded-3" loading="lazy">
                   </button>
                 {% endif %}
               {% endfor %}
@@ -32,14 +96,17 @@
       </div>
 
       <div class="col-12 col-lg-7">
-        <div class="bg-white border rounded-4 shadow-sm p-4 p-lg-5 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+        <div class="bg-white border rounded-4 shadow-sm p-4 p-lg-5 fade-in-up fade-in delay-1 fade-blocked scroll-animate">
 
           <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-                <span class="badge rounded-pill bg-primary-accent">
-                  {{ product.category.get_kind_display }} • FullScopeMD
-                </span>
-                <span class="badge rounded-pill bg-muted border-brand text-primary-accent">Telemedicine</span>
-            <span class="badge rounded-pill bg-light text-muted border">{{ product.category.name }}</span>
+            <span class="badge rounded-pill bg-primary-accent">
+              {{ product.category.get_kind_display }} • FullScopeMD
+            </span>
+            <span class="badge rounded-pill bg-muted border-brand text-primary-accent">Telemedicine</span>
+            <a class="badge rounded-pill bg-light text-muted border text-decoration-none"
+               href="{% url 'prgrm_dtls' product.category.slug %}">
+              {{ product.category.name }}
+            </a>
             {% if product.requires_prescription %}
               <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis">Prescription</span>
             {% endif %}
@@ -80,49 +147,49 @@
 
               <div class="d-flex flex-column gap-2">
                 <div class="d-flex align-items-center gap-2">
-                <label for="qtyInput" class="text-body-sm mb-0">Qty</label>
+                  <label for="qtyInput" class="text-body-sm mb-0">Qty</label>
 
-                <div class="input-group input-group-sm qty-stepper flex-grow-1 flex-sm-grow-0">
+                  <div class="input-group input-group-sm qty-stepper flex-grow-1 flex-sm-grow-0">
                     <button class="btn btn-outline-secondary" type="button" id="qtyMinus" aria-label="Decrease quantity">
-                    <i class="fa-solid fa-minus"></i>
+                      <i class="fa-solid fa-minus"></i>
                     </button>
 
                     <input
-                    id="qtyInput"
-                    type="number"
-                    class="form-control text-center"
-                    value="1"
-                    min="1"
-                    {% if product.quantity > 0 %}
+                      id="qtyInput"
+                      type="number"
+                      class="form-control text-center"
+                      value="1"
+                      min="1"
+                      {% if product.quantity > 0 %}
                         max="{{ product.quantity }}"
                         data-max="{{ product.quantity }}"
-                    {% else %}
+                      {% else %}
                         max="1"
                         data-max="1"
-                    {% endif %}
-                    inputmode="numeric"
-                    autocomplete="off"
+                      {% endif %}
+                      inputmode="numeric"
+                      autocomplete="off"
                     />
 
                     <button class="btn btn-outline-secondary" type="button" id="qtyPlus" aria-label="Increase quantity">
-                    <i class="fa-solid fa-plus"></i>
+                      <i class="fa-solid fa-plus"></i>
                     </button>
-                </div>
+                  </div>
                 </div>
 
                 <div class="text-body-sm">
                   Total: <span class="fw-semibold">$<span id="totalPrice">{{ product.final_price }}</span></span>
                 </div>
 
-<button type="button"
-        class="btn btn-primary btn-sm js-add-to-cart"
-        {% if product.quantity == 0 %}disabled{% endif %}
-        data-product="{{ product.id }}"
-        data-qty-input="#qtyInput"
-        data-cart-add-url="{% url 'cart_add' %}"
-        data-cart-summary-url="{% url 'cart_summary' %}">
-  <i class="fa-solid fa-cart-plus me-2"></i>Add to cart
-</button>
+                <button type="button"
+                        class="btn btn-primary btn-sm js-add-to-cart"
+                        {% if product.quantity == 0 %}disabled{% endif %}
+                        data-product="{{ product.id }}"
+                        data-qty-input="#qtyInput"
+                        data-cart-add-url="{% url 'cart_add' %}"
+                        data-cart-summary-url="{% url 'cart_summary' %}">
+                  <i class="fa-solid fa-cart-plus me-2"></i>Add to cart
+                </button>
 
                 <div class="d-flex flex-wrap gap-2">
                   <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-sm">Contact Us</a>
@@ -137,10 +204,9 @@
       </div>
     </div>
 
-{% include 'category/rltd_prdct.html' %}
+    {% include 'category/rltd_prdct.html' %}
 
   </div>
-  
 </section>
 
 {% endblock content %}

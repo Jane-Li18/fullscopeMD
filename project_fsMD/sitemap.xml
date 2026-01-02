@@ -1,0 +1,2 @@
+from django.contrib.sitemaps.views import sitemap
+from app_fsMD.sitemaps import StaticViewSitemap, CategorySitemap, ProductSitemap, BlogSitemap

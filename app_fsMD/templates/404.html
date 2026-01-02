@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}404 — Page Not Found{% endblock %}
+{% block sidebar %}{% endblock sidebar %}
+
+{% block content %}
+<section
+  class="min-vh-100 d-flex align-items-center py-5 py-lg-6"
+  style="
+    background-image: url('{% static 'images/bg.png' %}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  "
+>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="p-4 p-lg-5 ">
+
+          <div class="d-flex align-items-center gap-2 mb-3 flex-nowrap">
+            <div class="d-inline-flex align-items-center gap-2 px-2 px-sm-3 py-2 rounded-pill bg-accent-gradient-animated flex-shrink-0">
+              <i class="fa-solid fa-circle-exclamation icon-solid" aria-hidden="true"></i>
+              <span class="fw-semibold">Error 404</span>
+            </div>
+
+            <button
+              class="btn btn-secondary px-3 ms-auto flex-shrink-0"
+              type="button"
+              onclick="history.back()"
+              aria-label="Go back"
+              title="Go back"
+            >
+              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <h1 class="mb-2">Page not found</h1>
+          <p class="mb-4">
+            The page you’re looking for may have been moved, renamed, or no longer exists.
+          </p>
+
+          <div class="d-grid gap-2 d-sm-flex">
+            <a class="btn btn-primary" href="{% url 'home' %}">Go to homepage</a>
+            <a class="btn btn-outline-primary" href="{% url 'contact' %}">Contact support</a>
+          </div>
+
+          <div class="divider my-4"></div>
+
+          <div class="d-flex gap-3 align-items-start">
+            <span class="icon-button icon-button--gradient-border flex-shrink-0" aria-hidden="true">
+              <i class="fa-solid fa-link"></i>
+            </span>
+
+            <div class="min-w-0 w-100">
+              <h3 class="mb-1">Requested URL</h3>
+              <p class="mb-2">
+                Double-check the address, or use the buttons above to get back on track.
+              </p>
+
+              <div class="p-3 rounded-4 bg-muted border-brand">
+                <div class="text-body-sm mb-1 fw-semibold text-primary-accent">Path</div>
+                <div class="text-body-sm mb-0 text-break">
+                  {% if request %}{{ request.path }}{% else %}{{ request_path }}{% endif %}
+                </div>
+              </div>
+
+              <small class="d-block mt-3">
+                Tip: If you bookmarked this page, it might be outdated.
+              </small>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

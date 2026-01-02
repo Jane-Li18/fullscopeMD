@@ -2,24 +2,22 @@ from django.db import models
 from decimal import Decimal
 from django.core.validators import MinValueValidator
 from django.utils.text import slugify
-from django.utils import timezone 
+from django.utils import timezone
+from .utils.images import convert_imagefield_to_webp
 
 
 def category_image_upload_to(instance, filename: str) -> str:
-    # If slug isn't set yet, fallback to slugified name
     safe_slug = instance.slug or slugify(instance.name)
     return f"categories/{safe_slug}/{filename}"
 
 
 def product_main_image_upload_to(instance, filename: str) -> str:
-    # If slug isn't set yet, fallback to slugified name
     safe_slug = instance.slug or slugify(instance.name)
     return f"products/{safe_slug}/main/{filename}"
 
 
 def product_sub_image_upload_to(instance, filename: str) -> str:
     safe_slug = instance.product.slug or slugify(instance.product.name)
-    # put sub images directly under the product folder (outside /main)
     return f"products/{safe_slug}/{filename}"
 
 
@@ -37,13 +35,12 @@ class Category(models.Model):
         default=Kind.PROGRAM,
     )
 
-    # ✅ mini-description (one-liner)
     tagline = models.CharField(max_length=160, blank=True)
 
     short_description = models.TextField(blank=True)
     long_description = models.TextField(blank=True)
 
-    image = models.ImageField(upload_to=category_image_upload_to, blank=True, null=True)
+    image = models.ImageField(upload_to=category_image_upload_to, blank=True, null=True, max_length=255)
     sort_order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
@@ -53,6 +50,10 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+
+        if not getattr(self, "_skip_webp", False):
+            convert_imagefield_to_webp(self, "image", quality=82, max_px=2400)
+
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -91,18 +92,16 @@ class Product(models.Model):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=220, unique=True, blank=True)
 
-    # Content sections
-    short_details = models.TextField(blank=True)  # Top section (short)
-    long_details = models.TextField(blank=True)   # Bottom section (long/clinical)
+    short_details = models.TextField(blank=True)
+    long_details = models.TextField(blank=True)
 
-    # Main product image (fallback to default image if not uploaded)
     main_image = models.ImageField(
         upload_to=product_main_image_upload_to,
-        default="products/no_image_available.png",  # put this file in MEDIA_ROOT/products/
+        default="products/no_image_available.png",
         blank=True,
+        max_length=255,
     )
 
-    # Commerce fields
     price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
@@ -136,6 +135,10 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+
+        if not getattr(self, "_skip_webp", False):
+            convert_imagefield_to_webp(self, "main_image", quality=82, max_px=2400)
+
         super().save(*args, **kwargs)
 
     def clean(self):
@@ -162,15 +165,12 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    """
-    Optional sub images (gallery)
-    """
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
         related_name="images",
     )
-    image = models.ImageField(upload_to=product_sub_image_upload_to)
+    image = models.ImageField(upload_to=product_sub_image_upload_to, max_length=255)
     alt_text = models.CharField(max_length=200, blank=True)
     sort_order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
@@ -179,14 +179,19 @@ class ProductImage(models.Model):
     class Meta:
         ordering = ["sort_order", "id"]
 
+    def save(self, *args, **kwargs):
+        if not getattr(self, "_skip_webp", False):
+            convert_imagefield_to_webp(self, "image", quality=82, max_px=2400)
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.product.name} - Image #{self.id}"
+
 
 class Feedback(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
-    # ✅ New: link to Product (optional)
     product = models.ForeignKey(
         Product,
         on_delete=models.SET_NULL,
@@ -195,20 +200,25 @@ class Feedback(models.Model):
         related_name="feedbacks",
     )
     testimonial = models.TextField()
-    image = models.ImageField(upload_to='feedback_images/')
+    image = models.ImageField(upload_to="feedback_images/", max_length=255)
     star_rating = models.PositiveIntegerField(default=5)
     is_active = models.BooleanField(default=True)
 
-    # ✅ New fields:
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
 
     class Meta:
         verbose_name = "Feedback"
         verbose_name_plural = "Feedbacks"
+
+    def save(self, *args, **kwargs):
+        if not getattr(self, "_skip_webp", False):
+            convert_imagefield_to_webp(self, "image", quality=82, max_px=1600)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 def blog_image_upload_to(instance, filename: str) -> str:
     safe_slug = instance.slug or slugify(instance.title)
@@ -233,15 +243,12 @@ class BlogPost(models.Model):
         default=Topic.WEIGHT,
     )
 
-    # Chip / badge label (shown in cards)
     badge_label = models.CharField(max_length=80, blank=True)
 
-    # Short teaser for cards + previews
     excerpt = models.TextField(
         help_text="Short teaser used on homepage and blog listing."
     )
 
-    # Full article content (for a future detail page)
     body = models.TextField(
         help_text="Full blog content (HTML or Markdown)."
     )
@@ -249,6 +256,7 @@ class BlogPost(models.Model):
     main_image = models.ImageField(
         upload_to=blog_image_upload_to,
         help_text="Main hero image for this blog.",
+        max_length=255,
     )
 
     read_time_label = models.CharField(
@@ -259,12 +267,10 @@ class BlogPost(models.Model):
 
     published_at = models.DateField(default=timezone.now)
 
-    # Optional bullets for the feature panel on blogs page
     bullet_1 = models.CharField(max_length=200, blank=True)
     bullet_2 = models.CharField(max_length=200, blank=True)
     bullet_3 = models.CharField(max_length=200, blank=True)
 
-    # Where it appears
     is_featured_home = models.BooleanField(
         default=False,
         help_text="Show in the home 'Latest Health Blogs' section.",
@@ -274,7 +280,6 @@ class BlogPost(models.Model):
         help_text="Use as the main feature card on the Blogs & Updates page.",
     )
 
-    # Control visibility
     is_active = models.BooleanField(
         default=True,
         help_text="Uncheck to hide this post everywhere.",
@@ -296,6 +301,10 @@ class BlogPost(models.Model):
             self.slug = slugify(self.title)
         if not self.badge_label:
             self.badge_label = self.get_topic_display()
+
+        if not getattr(self, "_skip_webp", False):
+            convert_imagefield_to_webp(self, "main_image", quality=82, max_px=2400)
+
         super().save(*args, **kwargs)
 
     def __str__(self):

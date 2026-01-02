@@ -1,10 +1,10 @@
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-6n6pi6at(2(3+%c%#$2ee1u$#2rk2u+$bkqf=g937kzzy1#p%+'
-
-DEBUG = True
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-secret-key-change-me")
+DEBUG = os.environ.get("DJANGO_DEBUG", "1") == "1"
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -18,11 +18,11 @@ ALLOWED_HOSTS = [
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
-        "LOCATION": "/home/FullScopeMDDev/.django_cache",
-        "TIMEOUT": 300,  # default 5 minutes
-        "OPTIONS": {"MAX_ENTRIES": 2000},
+        "LOCATION": str(BASE_DIR / "django_cache"),
     }
 }
+
+SITE_ID = 1
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -33,6 +33,8 @@ INSTALLED_APPS = [
        'django.contrib.staticfiles',
        'django.contrib.humanize',
        'app_fsMD.apps.AppFsmdConfig',
+       'django.contrib.sites',
+       'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [
@@ -50,17 +52,17 @@ USE_THOUSAND_SEPARATOR = True
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'app_fsMD.context_processors.cart_context',
-                'app_fsMD.context_processors.nav_programs',
-                'app_fsMD.context_processors.marquee_context',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "app_fsMD.context_processors.cart_context",
+                "app_fsMD.context_processors.nav_programs",
+                "app_fsMD.context_processors.marquee_context",
             ],
         },
     },

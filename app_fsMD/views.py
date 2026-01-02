@@ -1,24 +1,42 @@
-from django.shortcuts import render, get_object_or_404
-from django.db.models import Count, Q
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
-from django.views.decorators.cache import never_cache
 from django.conf import settings
 from django.core.cache import cache
-from django.utils import timezone
-from django.shortcuts import redirect
+from django.db.models import Count, Prefetch, Q
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.db.models import Prefetch
-from .models import Category, Product, CategoryBullet, Feedback, BlogPost, NewsletterSubscription
+from django.utils.html import strip_tags
+from django.views.decorators.cache import never_cache
+from django.views.decorators.http import require_POST
+
 from .cart import Cart
+from .models import BlogPost, Category, CategoryBullet, Feedback, NewsletterSubscription, Product
 
 
-# =========================
-# CACHE SETTINGS
-# =========================
-TTL_NAV = 60 * 60          # 1 hour
-TTL_LIST = 5 * 60          # 5 minutes
-TTL_DETAIL = 10 * 60       # 10 minutes
+def _meta_text(*parts, fallback="", max_len=160) -> str:
+    txt = " ".join([p for p in parts if p]).strip() or fallback
+    txt = strip_tags(txt)
+    txt = " ".join(txt.split())
+    return txt[:max_len].rstrip()
+
+
+def robots_txt(request):
+    sitemap_url = request.build_absolute_uri("/sitemap.xml")
+    lines = [
+        "User-agent: *",
+        "Disallow: /cart/",
+        "Disallow: /cart/add/",
+        "Disallow: /cart/update/",
+        "Disallow: /cart/remove/",
+        "Disallow: /cart/summary/",
+        "Disallow: /newsletter/subscribe/",
+        f"Sitemap: {sitemap_url}",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
+TTL_NAV = 60 * 60
+TTL_LIST = 5 * 60
+TTL_DETAIL = 10 * 60
 
 
 def _site_cache_version() -> int:
@@ -31,10 +49,6 @@ def _ck(prefix: str, *parts) -> str:
 
 
 def cache_get(key: str, ttl: int, builder):
-    """
-    Small helper to reduce repeated cache boilerplate.
-    builder: callable that returns the value if not cached.
-    """
     data = cache.get(key)
     if data is None:
         data = builder()
@@ -42,12 +56,9 @@ def cache_get(key: str, ttl: int, builder):
     return data
 
 
-# =========================
-# DATA HELPERS
-# =========================
-
 def _active_category_bullets_qs():
     return CategoryBullet.objects.filter(is_active=True).order_by("sort_order", "id")
+
 
 def get_nav_programs():
     key = _ck("nav_programs")
@@ -60,6 +71,7 @@ def get_nav_programs():
             .order_by("sort_order", "name")
         ),
     )
+
 
 def get_core_program_categories():
     key = _ck("core_categories")
@@ -87,27 +99,15 @@ def get_home_products():
     )
 
 
-# =========================
-# PAGES
-# =========================
-
-def base(request):
-    # If you already have nav_programs in a context processor, you can remove this view entirely.
-    return render(request, "base.html", {"nav_programs": get_nav_programs()})
-
-
 def home(request):
     feedbacks = (
-        Feedback.objects
-        .filter(is_active=True)
-        .select_related('product')
-        .order_by('-created_at')
+        Feedback.objects.filter(is_active=True)
+        .select_related("product")
+        .order_by("-created_at")
     )
 
-    # Home blogs: only active + marked for home
     home_posts = (
-        BlogPost.objects
-        .filter(is_active=True, is_featured_home=True)
+        BlogPost.objects.filter(is_active=True, is_featured_home=True)
         .order_by("sort_order", "-published_at")[:5]
     )
     featured_post = home_posts[0] if home_posts else None
@@ -121,8 +121,6 @@ def home(request):
             "nav_programs": get_nav_programs(),
             "categories": get_core_program_categories(),
             "products": get_home_products(),
-
-            # ✅ for home/h_blg.html
             "home_posts": home_posts,
             "featured_post": featured_post,
         },
@@ -135,8 +133,7 @@ def contact(request):
 
 def about(request):
     feedbacks = (
-        Feedback.objects
-        .filter(is_active=True)
+        Feedback.objects.filter(is_active=True)
         .select_related("product")
         .order_by("-created_at")
     )
@@ -158,21 +155,15 @@ def faqs(request):
 
 def blgs_updts(request):
     nav_programs = get_nav_programs()
-
-    topic = request.GET.get("topic", "all")  # optional filter
-    slug = request.GET.get("slug")          # from home section click-through
+    topic = request.GET.get("topic", "all")
+    slug = request.GET.get("slug")
 
     posts = BlogPost.objects.filter(is_active=True)
-
     if topic != "all":
         posts = posts.filter(topic=topic)
-
     posts = posts.order_by("sort_order", "-published_at")
 
-    featured_post = None
-    if slug:
-        featured_post = BlogPost.objects.filter(slug=slug, is_active=True).first()
-
+    featured_post = BlogPost.objects.filter(slug=slug, is_active=True).first() if slug else None
     if not featured_post:
         featured_post = posts.filter(is_featured_page=True).first() or posts.first()
 
@@ -187,6 +178,7 @@ def blgs_updts(request):
         },
     )
 
+
 def newsletter_subscribe(request):
     if request.method == "POST":
         email = request.POST.get("email", "").strip().lower()
@@ -197,6 +189,7 @@ def newsletter_subscribe(request):
                 sub.unsubscribed_at = None
                 sub.save()
     return redirect(request.META.get("HTTP_REFERER", reverse("blgs_updts")))
+
 
 def terms_conditions(request):
     return render(request, "legal/terms_conditions.html", {"nav_programs": get_nav_programs()})
@@ -229,7 +222,6 @@ def accessibility_statement(request):
 def prgrm_dtls(request, slug):
     nav_programs = get_nav_programs()
 
-    # Cache category ID (more stable than caching model instance)
     cat_id_key = _ck("category_id", slug)
     category_id = cache_get(
         cat_id_key,
@@ -251,59 +243,85 @@ def prgrm_dtls(request, slug):
         ),
     )
 
+    canonical_url = request.build_absolute_uri(reverse("prgrm_dtls", kwargs={"slug": category.slug}))
+
+    meta_description = _meta_text(
+        category.tagline,
+        category.short_description,
+        fallback=f"Clinician-guided {category.name} telehealth with transparent pricing and nationwide delivery.",
+        max_len=160,
+    )
+
+    og_image = request.build_absolute_uri(category.image.url) if getattr(category, "image", None) else None
+
     return render(
         request,
         "category/prgrms_dtls.html",
-        {"nav_programs": nav_programs, "category": category, "products": products},
+        {
+            "nav_programs": nav_programs,
+            "category": category,
+            "products": products,
+            "meta_description": meta_description,
+            "canonical_url": canonical_url,
+            "og_title": f"{category.name} | FullScopeMD",
+            "og_description": meta_description,
+            "og_image": og_image,
+        },
     )
 
 
 def prdct_dtls(request, slug):
     nav_programs = get_nav_programs()
 
-    key = _ck("prdct_ids", slug)
-    product_id, related_ids = cache_get(
-        key,
-        TTL_DETAIL,
-        lambda: (
-            Product.objects.values_list("id", flat=True).get(
-                slug=slug, is_active=True, category__is_active=True
-            ),
-            list(
-                Product.objects.filter(
-                    is_active=True, category__is_active=True,
-                    category=Product.objects.get(slug=slug).category
-                )
-                .exclude(slug=slug)
-                .values_list("id", flat=True)
-                .order_by("name")[:12]
-            ),
-        ),
-    )
-
     product = get_object_or_404(
         Product.objects.select_related("category").prefetch_related("images"),
-        id=product_id,
+        slug=slug,
         is_active=True,
         category__is_active=True,
     )
 
-    related_products = list(
-        Product.objects.filter(id__in=related_ids, is_active=True, category__is_active=True)
-        .select_related("category")
-        .order_by("name")
+    related_key = _ck("related_products", product.category_id, product.id)
+    related_products = cache_get(
+        related_key,
+        TTL_LIST,
+        lambda: list(
+            Product.objects.filter(
+                is_active=True,
+                category__is_active=True,
+                category_id=product.category_id,
+            )
+            .exclude(id=product.id)
+            .select_related("category")
+            .order_by("name")[:12]
+        ),
     )
+
+    canonical_url = request.build_absolute_uri(reverse("prdct_dtls", kwargs={"slug": product.slug}))
+
+    meta_description = _meta_text(
+        product.short_details,
+        product.long_details,
+        fallback=f"Clinician-guided telehealth access for {product.name} with transparent pricing and nationwide delivery.",
+        max_len=160,
+    )
+
+    og_image = request.build_absolute_uri(product.main_image.url) if getattr(product, "main_image", None) else None
 
     return render(
         request,
         "category/prdct_dtls.html",
-        {"nav_programs": nav_programs, "product": product, "related_products": related_products},
+        {
+            "nav_programs": nav_programs,
+            "product": product,
+            "related_products": related_products,
+            "meta_description": meta_description,
+            "canonical_url": canonical_url,
+            "og_title": f"{product.name} | FullScopeMD",
+            "og_description": meta_description,
+            "og_image": og_image,
+        },
     )
 
-
-# =========================
-# CART (never cache)
-# =========================
 
 def _clamp_qty_to_stock(product: Product, qty: int) -> int:
     qty = max(1, int(qty))
@@ -318,7 +336,6 @@ def _cart_payload(cart: Cart):
     for i in cart.items():
         p = i["product"]
         stock = max(0, int(getattr(p, "quantity", 0) or 0)) or 999999
-
         items.append(
             {
                 "id": p.id,
@@ -332,8 +349,12 @@ def _cart_payload(cart: Cart):
                 "stock": stock,
             }
         )
-
-    return {"ok": True, "items": items, "total_qty": cart.total_qty(), "total_price": str(cart.total_price())}
+    return {
+        "ok": True,
+        "items": items,
+        "total_qty": cart.total_qty(),
+        "total_price": str(cart.total_price()),
+    }
 
 
 @never_cache
@@ -342,18 +363,11 @@ def cart_add(request):
     product_id = int(request.POST.get("product_id"))
     qty = int(request.POST.get("qty", 1))
 
-    product = get_object_or_404(
-        Product,
-        id=product_id,
-        is_active=True,
-        category__is_active=True,
-    )
-
+    product = get_object_or_404(Product, id=product_id, is_active=True, category__is_active=True)
     if int(getattr(product, "quantity", 0) or 0) <= 0:
         return JsonResponse({"ok": False, "error": "Out of stock"}, status=400)
 
     qty = _clamp_qty_to_stock(product, qty)
-
     cart = Cart(request)
     cart.add(product_id=product.id, qty=qty, replace=False)
     return JsonResponse(_cart_payload(cart))
@@ -365,18 +379,11 @@ def cart_update(request):
     product_id = int(request.POST.get("product_id"))
     qty = int(request.POST.get("qty", 1))
 
-    product = get_object_or_404(
-        Product,
-        id=product_id,
-        is_active=True,
-        category__is_active=True,
-    )
-
+    product = get_object_or_404(Product, id=product_id, is_active=True, category__is_active=True)
     if int(getattr(product, "quantity", 0) or 0) <= 0:
         return JsonResponse({"ok": False, "error": "Out of stock"}, status=400)
 
     qty = _clamp_qty_to_stock(product, qty)
-
     cart = Cart(request)
     cart.set(product_id=product.id, qty=qty)
     return JsonResponse(_cart_payload(cart))
@@ -400,13 +407,18 @@ def cart_summary(request):
 @never_cache
 def cart_page(request):
     cart = Cart(request)
-    return render(request, "shop/cart_page.html", {
-        "nav_programs": get_nav_programs(),
-        "cart_items": cart.items(),
-        "cart_total": cart.total_price(),
-        "cart_qty": cart.total_qty(),
-        "ghl_checkout_url": getattr(settings, "GHL_CHECKOUT_URL", ""),
-    })
+    return render(
+        request,
+        "shop/cart_page.html",
+        {
+            "nav_programs": get_nav_programs(),
+            "cart_items": cart.items(),
+            "cart_total": cart.total_price(),
+            "cart_qty": cart.total_qty(),
+            "ghl_checkout_url": getattr(settings, "GHL_CHECKOUT_URL", ""),
+            "meta_robots": "noindex,nofollow",
+        },
+    )
 
 
 def prgrms_srvcs(request):
@@ -425,7 +437,6 @@ def prgrms_srvcs(request):
 
     programs = [c for c in categories if c.kind == Category.Kind.PROGRAM]
     services = [c for c in categories if c.kind == Category.Kind.SERVICE]
-
     program_slides = [programs[i:i + 3] for i in range(0, len(programs), 3)]
 
     products_key = _ck("prgrms_srvcs_products")
@@ -439,13 +450,41 @@ def prgrms_srvcs(request):
         ),
     )
 
-    return render(request, "category/prgrms_srvcs.html", {
-        "nav_programs": nav_programs,
-        "categories": categories,
-        "products": products,
-        "program_slides": program_slides,
-        "services": services,
-        "active_categories": categories,
-    })
+    canonical_url = request.build_absolute_uri(reverse("prgrms_srvcs"))
 
+    meta_description = _meta_text(
+        fallback="Explore FullScopeMD programs and services across weight management, peptides, dermatology, hair loss, wellness therapy, and primary care — with clinician-guided telehealth and nationwide delivery.",
+        max_len=160,
+    )
 
+    return render(
+        request,
+        "category/prgrms_srvcs.html",
+        {
+            "nav_programs": nav_programs,
+            "categories": categories,
+            "products": products,
+            "program_slides": program_slides,
+            "services": services,
+            "active_categories": categories,
+            "meta_description": meta_description,
+            "canonical_url": canonical_url,
+            "og_title": "Programs & Services | FullScopeMD",
+            "og_description": meta_description,
+        },
+    )
+
+def test_404(request):
+    return render(request, "404.html", status=404)
+
+def error_404(request, exception=None):
+    context = {
+        "seo_title": "404 — Page not found",
+        "meta_description": "The requested page could not be found.",
+        "meta_robots": "noindex,nofollow",
+        "meta_googlebot": "noindex,nofollow",
+        # optional, if you use these elsewhere
+        "og_title": "404 — Page not found",
+        "og_description": "The requested page could not be found.",
+    }
+    return render(request, "404.html", context=context, status=404)

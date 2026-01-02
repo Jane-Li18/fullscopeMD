@@ -158,7 +158,7 @@
 
 /* gradient border icon buttons */
 .icon-button--gradient-border {
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   background:
     linear-gradient(var(--primary-bg), var(--primary-bg)) padding-box,
     linear-gradient(90deg, var(--tertiary-accent), var(--primary-accent), var(--secondary-accent), var(--tertiary-accent)) border-box;

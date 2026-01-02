@@ -438,7 +438,7 @@ button{
   width:2.75rem;
   height:2.75rem;
   border-radius:50%;
-  z-index:1050;
+  z-index:1040;
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -462,6 +462,11 @@ button{
 
 .scroll-top-btn:hover{
   background-color:var(--secondary-accent)
+}
+
+.scroll-top-btn.show:hover{
+  transform: translateY(-2px);
+  background-color:var(--secondary-accent);
 }
 
 .scroll-top-btn i{

@@ -1,4 +1,3 @@
-{# templates/base.html #}
 {% load static %}
 {% load humanize %}
 
@@ -7,11 +6,87 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>FullScopeMD | {% block title %}{% endblock title %}</title>
+
+    <meta name="description" content="{% firstof meta_description 'Comprehensive, clinician-guided telehealth across weight management, peptides, dermatology, hair loss, primary care, and prescription services — with transparent pricing and nationwide medication delivery.' %}">
+    <meta name="robots" content="{% firstof meta_robots 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' %}">
+    <meta name="googlebot" content="{% firstof meta_googlebot meta_robots 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' %}">
+    <meta name="author" content="FullScopeMD">
+    <meta name="application-name" content="FullScopeMD">
+    <meta name="theme-color" content="{% firstof theme_color '#1A6BE4' %}">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    {% if canonical_url %}
+      <link rel="canonical" href="{{ canonical_url }}">
+      <link rel="alternate" href="{{ canonical_url }}" hreflang="en-us">
+      <link rel="alternate" href="{{ canonical_url }}" hreflang="x-default">
+    {% elif request %}
+      <link rel="canonical" href="{{ request.build_absolute_uri }}">
+      <link rel="alternate" href="{{ request.build_absolute_uri }}" hreflang="en-us">
+      <link rel="alternate" href="{{ request.build_absolute_uri }}" hreflang="x-default">
+    {% endif %}
+
+    <meta property="og:site_name" content="FullScopeMD">
+    <meta property="og:type" content="{% firstof og_type 'website' %}">
+    <meta property="og:title" content="{% firstof og_title seo_title 'FullScopeMD' %}">
+    <meta property="og:description" content="{% firstof og_description meta_description 'Comprehensive, clinician-guided telehealth across weight management, peptides, dermatology, hair loss, primary care, and prescription services — with transparent pricing and nationwide medication delivery.' %}">
+    <meta property="og:url" content="{% if og_url %}{{ og_url }}{% elif request %}{{ request.build_absolute_uri }}{% endif %}">
+    <meta property="og:image" content="{% if og_image %}{{ og_image }}{% elif request %}{{ request.scheme }}://{{ request.get_host }}{% static 'images/og/default-1200x630.jpg' %}{% endif %}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{% firstof og_image_alt seo_title 'FullScopeMD' %}">
+    <meta property="og:locale" content="en_US">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% firstof twitter_title og_title seo_title 'FullScopeMD' %}">
+    <meta name="twitter:description" content="{% firstof twitter_description og_description meta_description 'Comprehensive, clinician-guided telehealth across weight management, peptides, dermatology, hair loss, primary care, and prescription services — with transparent pricing and nationwide medication delivery.' %}">
+    <meta name="twitter:image" content="{% if twitter_image %}{{ twitter_image }}{% elif og_image %}{{ og_image }}{% elif request %}{{ request.scheme }}://{{ request.get_host }}{% static 'images/og/default-1200x630.jpg' %}{% endif %}">
+    <meta name="twitter:image:alt" content="{% firstof twitter_image_alt og_image_alt seo_title 'FullScopeMD' %}">
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MedicalOrganization",
+        "name": "FullScopeMD",
+        "legalName": "Decena Medical Ventures LLC",
+        "alternateName": "FullScopeMD",
+        "url": "{% if request %}{{ request.scheme }}://{{ request.get_host }}{% endif %}",
+        "description": "Comprehensive, accessible, outcome-driven online medical care across the United States through full-scope telemedicine services, licensed provider consultations, and seamless medication fulfillment supported by structured follow-up and patient guidance.",
+        "areaServed": { "@type": "Country", "name": "United States" },
+        "logo": "{% if request %}{{ request.scheme }}://{{ request.get_host }}{% static 'images/og/default-1200x630.jpg' %}{% endif %}",
+        "image": "{% if request %}{{ request.scheme }}://{{ request.get_host }}{% static 'images/og/default-1200x630.jpg' %}{% endif %}"
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "FullScopeMD",
+        "url": "{% if request %}{{ request.scheme }}://{{ request.get_host }}{% endif %}"
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "{% firstof seo_title og_title 'FullScopeMD' %}",
+        "description": "{% firstof meta_description 'Comprehensive, clinician-guided telehealth across weight management, peptides, dermatology, hair loss, primary care, and prescription services — with transparent pricing and nationwide medication delivery.' %}",
+        "url": "{% if request %}{{ request.build_absolute_uri }}{% endif %}",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "FullScopeMD",
+          "url": "{% if request %}{{ request.scheme }}://{{ request.get_host }}{% endif %}"
+        }
+      }
+    </script>
 
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
     <link rel="apple-touch-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,69 +130,8 @@
     <main class="site-main pb-lg-6">
       {% block content %}{% endblock %}
     </main>
-
-    <div class="offcanvas offcanvas-end"
-         tabindex="-1"
-         id="cartOffcanvas"
-         aria-labelledby="cartOffcanvasLabel">
-      <div class="offcanvas-header border-bottom">
-        <div class="d-flex align-items-center gap-2">
-          <span class="icon-button bg-primary-accent">
-            <i class="fa-solid fa-lock icon-sm" aria-hidden="true"></i>
-          </span>
-          <div>
-            <h5 class="mb-0" id="cartOffcanvasLabel">Secure Cart</h5>
-            <div class="text-caption-sm text-muted">Review items before checkout.</div>
-          </div>
-        </div>
-
-        <button type="button"
-                class="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
-      </div>
-
-      <div class="offcanvas-body d-flex flex-column">
-        <div class="rounded-4 border bg-muted p-3 mb-3">
-          <div class="d-flex gap-2 align-items-start">
-            <i class="fa-solid fa-circle-info text-primary-accent mt-1" aria-hidden="true"></i>
-            <div class="text-body-sm">
-              Items marked
-              <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis">Prescription</span>
-              require clinician review and may require consent.
-              <a href="{% url 'telehealth_consent' %}" class="ms-1">View Consent</a>
-            </div>
-          </div>
-        </div>
-
-        <div id="cartContent" class="d-grid gap-3 flex-grow-1">
-          <div class="cart-empty-state">
-            <div class="icon-button icon-button--gradient-border mx-auto mb-2" style="width:54px;height:54px;">
-              <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
-            </div>
-            <div class="fw-semibold">Your cart is empty</div>
-            <div class="text-body-sm text-muted">Add an item to get started.</div>
-          </div>
-        </div>
-
-        <div class="border-top pt-3 mt-3">
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="fw-semibold">Total</div>
-            <div class="fw-semibold">$<span id="cartTotal">0.00</span></div>
-          </div>
-
-          <a href="{% url 'cart_page' %}" class="btn btn-primary w-100 mt-3">
-            <i class="fa-solid fa-shield-heart me-2" aria-hidden="true"></i>
-            Proceed to Checkout
-          </a>
-
-          <div class="text-caption-sm text-muted mt-2">
-            Prices and availability are confirmed at checkout.
-          </div>
-        </div>
-      </div>
-    </div>
-
+    
+    {% include "shop/sidecart.html" %}
     {% include "footer.html" %}
 
     <div id="cartRoutes"
@@ -135,7 +149,6 @@
             crossorigin="anonymous"></script>
 
     <script src="{% static 'js/script.js' %}"></script>
-
 
     {% block extra_scripts %}{% endblock extra_scripts %}
   </body>

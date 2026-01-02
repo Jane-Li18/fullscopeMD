@@ -1,10 +1,10 @@
 {% load static %}
 
-<section class="feature-programs-section d-flex align-items-center py-4 py-lg-5">
-  <div class="container">
-    <div class="row mb-4 mb-lg-5 fade-in-up fade-in delay-1 fade-blocked scroll-animate">
-      <div class="col-12 text-center">
-        <h1 class="mb-3">Explore Our Core Programs</h1>
+<section class="feature-programs-section d-flex align-items-center py-4 py-lg-5 px-0">
+  <div class="container-fluid px-0">
+    <div class="row mb-4 mb-lg-5 fade-in-up fade-in delay-1 fade-blocked scroll-animate mx-0">
+      <div class="col-12 text-center px-3 px-md-4 px-lg-5">
+        <h1 class="mb-3">Explore Our Core Services</h1>
         <p class="mb-0">
           Evidence-based medical care designed around your health goals, delivered with clarity,
           clinical expertise, and ongoing support.
@@ -12,9 +12,9 @@
       </div>
     </div>
 
-    <div class="row justify-content-center">
-      <div class="col-12 col-lg-10">
-        <div class="program-row d-flex flex-nowrap gap-3 justify-content-center">
+    <div class="row justify-content-center mx-0">
+      <div class="col-12 px-0">
+        <div class="program-row d-flex flex-nowrap justify-content-start">
           {% if categories %}
             {% for category in categories %}
               <div class="program-item {% if forloop.first %}active{% endif %} fade-in-up fade-in fade-blocked scroll-animate">
@@ -44,7 +44,7 @@
 
                     <div class="program-panel-body d-flex flex-column">
                       <div class="flex-grow-1 d-flex flex-column justify-content-center overflow-auto">
-                        <div class="mb-3">
+                        <div class="mb-1">
                           <h3 class="mb-2">{{ category.name }}</h3>
 
                           {% if category.tagline %}
@@ -52,15 +52,15 @@
                           {% endif %}
 
                           {% if category.short_description %}
-                            <p class="mb-3">{{ category.short_description|linebreaksbr }}</p>
+                            <p class="mb-1">{{ category.short_description|linebreaksbr }}</p>
                           {% else %}
-                            <p class="mb-3">
+                            <p class="mb-1">
                               Explore our {{ category.name }} program with provider-guided care and ongoing support.
                             </p>
                           {% endif %}
 
                           {% if category.bullets.all %}
-                            <ul class="program-bullets mb-3">
+                            <ul class="program-bullets mb-1">
                               {% for b in category.bullets.all %}
                                 <li>{{ b.text }}</li>
                               {% endfor %}
@@ -102,12 +102,3 @@
     </div>
   </div>
 </section>
-
-
-{# OPTIONAL: move this into your main CSS file #}
-<style>
-  /* If your panel layout uses grid/columns, this prevents “empty image space” when no image exists */
-  .program-panel-inner.no-side-image {
-    grid-template-columns: 1fr !important;
-  }
-</style>

@@ -11,12 +11,43 @@ background-image:
   url('{% static "images/bg_page.png" %}');
 {% endblock %}
 
+{% block extra_head %}
+{% if request %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Programs & Services | FullScopeMD",
+  "description": "Explore clinician-guided telehealth programs and services across weight management, peptides, dermatology, hair loss, wellness therapy, and primary care—transparent pricing and nationwide delivery.",
+  "url": "{{ request.build_absolute_uri|escapejs }}",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "FullScopeMD",
+    "url": "{{ request.scheme }}://{{ request.get_host }}"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {% for c in categories %}
+      {
+        "@type": "ListItem",
+        "position": {{ forloop.counter }},
+        "name": "{{ c.name|escapejs }}",
+        "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'prgrm_dtls' c.slug %}"
+      }{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+}
+</script>
+{% endif %}
+{% endblock extra_head %}
+
 {% block page_content %}
 
 <section class="py-5">
   <div class="container py-2 py-lg-4">
 
-    <!-- Header card (your original content) -->
     <div class="row justify-content-center mb-4">
       <div class="col-12 col-lg-10">
         <div class="p-4 p-lg-5 bg-white fade-in-up fade-in delay-1 fade-blocked scroll-animate">
@@ -37,9 +68,19 @@ background-image:
               </div>
 
               <h2 class="mb-2" style="font-size: var(--font-size-h2);">All Programs &amp; Services</h2>
+
               <p class="mb-0 text-body-sm">
-                Browse our full catalog of telemedicine programs and services, and explore clinical products that support your care plan.
+                Browse our full catalog of telemedicine programs and services, and explore products that support your care plan. Each category page includes a clinical overview and the available options within that program.
               </p>
+
+              <div class="d-flex flex-wrap gap-2 mt-3">
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
+                  Book Appointment <i class="fa-solid fa-calendar-check ms-2 icon-solid"></i>
+                </a>
+                <a href="{% url 'blgs_updts' %}" class="btn btn-outline-primary btn-sm">Blog</a>
+                <a href="{% url 'privacy_policy' %}" class="btn btn-outline-primary btn-sm">Privacy Policy</a>
+                <a href="{% url 'telehealth_consent' %}" class="btn btn-outline-primary btn-sm">Telehealth Consent</a>
+              </div>
             </div>
 
           </div>
@@ -47,11 +88,10 @@ background-image:
       </div>
     </div>
 
-    <!-- PROGRAMS -->
     <div class="row justify-content-center mb-4">
       <div class="col-12 col-lg-10">
 
-        <div class="d-flex align-items-center justify-content-between flex-nowrap gap-2 mb-2 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+        <div class="d-flex align-items-center justify-content-between flex-nowrap gap-2 mb-2 fade-in-up fade-in delay-1 fade-blocked scroll-animate">
           <h2 class="mb-0" style="font-size: var(--font-size-h3);">
             <i class="fa-solid fa-layer-group text-primary-accent me-2"></i>
             Programs
@@ -70,9 +110,8 @@ background-image:
         </div>
 
         {% if program_slides %}
-          <div class="position-relative px-0 px-lg-5 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+          <div class="position-relative px-0 px-lg-5 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
 
-            {# desktop arrows (overlay, do NOT affect centering) #}
             <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn d-none d-lg-inline-flex
                            position-absolute top-50 start-0 translate-middle-y"
                     type="button"
@@ -118,6 +157,8 @@ background-image:
 
                             {% if c.short_description %}
                               <p class="mb-3 text-body-sm fsmd-card-desc">{{ c.short_description|striptags }}</p>
+                            {% elif c.tagline %}
+                              <p class="mb-3 text-body-sm fsmd-card-desc">{{ c.tagline|striptags }}</p>
                             {% else %}
                               <p class="mb-3 text-body-sm fsmd-card-desc">Program overview coming soon.</p>
                             {% endif %}
@@ -151,7 +192,7 @@ background-image:
 
           </div>
         {% else %}
-          <div class="bg-white rounded-4 border-brand shadow-sm-brand p-4 text-center fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+          <div class="bg-white rounded-4 border-brand shadow-sm-brand p-4 text-center fade-in-up fade-in delay-2 fade-blocked scroll-animate">
             <h3 class="mb-2" style="font-size: var(--font-size-h3);">No programs available right now.</h3>
             <p class="mb-0 text-body-sm">Please check back soon for updates.</p>
           </div>
@@ -159,11 +200,10 @@ background-image:
       </div>
     </div>
 
-    <!-- SERVICES -->
     <div class="row justify-content-center mt-4">
       <div class="col-12 col-lg-10">
 
-        <div class="d-flex align-items-center justify-content-between flex-nowrap gap-2 mb-2 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
+        <div class="d-flex align-items-center justify-content-between flex-nowrap gap-2 mb-2 fade-in-up fade-in delay-1 fade-blocked scroll-animate">
           <h2 class="mb-0" style="font-size: var(--font-size-h3);">
             <i class="fa-solid fa-briefcase-medical text-primary-accent me-2"></i>
             Services
@@ -182,7 +222,7 @@ background-image:
         </div>
 
         {% if services %}
-          <div class="position-relative px-0 px-lg-5 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+          <div class="position-relative px-0 px-lg-5 fade-in-up fade-in delay-2 fade-blocked scroll-animate">
 
             <button class="icon-button bg-primary-accent border-0 shadow-brand fsmd-nav-btn d-none d-lg-inline-flex
                            position-absolute top-50 start-0 translate-middle-y"
@@ -228,6 +268,8 @@ background-image:
 
                           {% if c.short_description %}
                             <p class="mb-3 text-body-sm fsmd-card-desc">{{ c.short_description|striptags }}</p>
+                          {% elif c.tagline %}
+                            <p class="mb-3 text-body-sm fsmd-card-desc">{{ c.tagline|striptags }}</p>
                           {% else %}
                             <p class="mb-3 text-body-sm fsmd-card-desc">Service overview coming soon.</p>
                           {% endif %}
@@ -260,7 +302,7 @@ background-image:
 
           </div>
         {% else %}
-          <div class="bg-white rounded-4 border-brand shadow-sm-brand p-4 text-center fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+          <div class="bg-white rounded-4 border-brand shadow-sm-brand p-4 text-center fade-in-up fade-in delay-2 fade-blocked scroll-animate">
             <h3 class="mb-2" style="font-size: var(--font-size-h3);">No services listed yet.</h3>
             <p class="mb-0 text-body-sm">We’ll add more service options soon.</p>
           </div>
@@ -268,7 +310,7 @@ background-image:
       </div>
     </div>
 
-    <div class="mt-5 fade-in-up fade-in delay-4 fade-blocked scroll-animate">
+    <div class="mt-5 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
       {% include "home/h_prdcts.html" %}
     </div>
 
@@ -287,7 +329,6 @@ background-image:
         $el.trigger("destroy.owl.carousel");
         $el.removeClass("owl-loaded owl-hidden");
 
-        // unwrap Owl structure back to original children
         $el.find(".owl-stage-outer").children().unwrap();
         $el.find(".owl-stage").children().unwrap();
       }
@@ -296,13 +337,11 @@ background-image:
         var $el = $("#" + carouselId);
         if (!$el.length) return;
 
-        // IMPORTANT: prevent double-init (common cause of peeking / wrong widths)
         destroyIfInitialized($el);
 
         var $arrows = $('[data-slider="' + key + '"][data-dir]');
         var baseCount = $el.children(".fsmd-slide").length;
 
-        // avoid binding arrows multiple times
         $arrows.off("click.fsmd");
 
         function setArrowsEnabled(enabled) {
@@ -370,7 +409,6 @@ background-image:
           onResized: function(){ setArrowsEnabled(baseCount > 1); }
         });
 
-        // keep your arrows exactly (just namespaced click)
         $arrows.on("click.fsmd", function () {
           if (this.disabled) return;
           var dir = $(this).data("dir");

@@ -11,10 +11,29 @@ background-image:
   url('{% static "images/bg_page.png" %}');
 {% endblock %}
 
+{% block extra_head %}
+  {% if request and category %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "{{ category.name|escapejs }}",
+    "description": "{{ category.tagline|default:category.short_description|default:'Clinician-guided telehealth program with transparent pricing and nationwide delivery.'|striptags|truncatechars:160|escapejs }}",
+    "url": "{{ request.build_absolute_uri|escapejs }}",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "FullScopeMD",
+      "url": "{{ request.scheme }}://{{ request.get_host }}"
+    }
+  }
+  </script>
+  {% endif %}
+{% endblock extra_head %}
+
 {% block page_content %}
 
 <section class="py-5">
-  <div class="container py-2 py-lg-4">
+  <div class="container">
 
     <div class="row justify-content-center mb-4">
       <div class="col-12 col-lg-12">
@@ -23,7 +42,7 @@ background-image:
 
             <div class="flex-shrink-0">
               <div class="rounded-4 d-inline-flex align-items-center justify-content-center bg-muted border-brand"
-                   style="width:56px;height:56px;">
+                  style="width:56px;height:56px;">
                 <i class="fa-solid fa-layer-group fs-4 text-primary-accent"></i>
               </div>
             </div>
@@ -36,7 +55,11 @@ background-image:
                 <span class="badge rounded-pill bg-muted border-brand text-primary-accent">Telemedicine</span>
               </div>
 
-              <h2 class="mb-2" style="font-size: var(--font-size-h2);">{{ category.name }}</h2>
+              <h1 class="mb-2" style="font-size: var(--font-size-h2);">{{ category.name }}</h1>
+
+              {% if category.tagline %}
+                <p class="mb-2 text-body-sm fw-semibold">{{ category.tagline|linebreaksbr }}</p>
+              {% endif %}
 
               {% if category.short_description %}
                 <p class="mb-0 text-body-sm">{{ category.short_description|linebreaksbr }}</p>
@@ -45,20 +68,33 @@ background-image:
               {% endif %}
 
               {% if category.long_description %}
-                <p class="mt-3 text-body-sm">
+                <div class="mt-3 text-body-sm">
                   {{ category.long_description|linebreaksbr }}
-                </p>
+                </div>
               {% endif %}
 
               <div class="d-flex flex-wrap gap-2 mt-3">
                 <a href="#appointment" class="btn btn-primary btn-sm">
                   Appointment <i class="fa-solid fa-arrow-right ms-2 icon-solid"></i>
                 </a>
+                <a href="{% url 'prgrms_srvcs' %}" class="btn btn-outline-primary btn-sm">All Programs & Services</a>
                 <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-sm">Contact Us</a>
                 <a href="{% url 'blgs_updts' %}" class="btn btn-outline-primary btn-sm">Blog</a>
                 <a href="{% url 'privacy_policy' %}" class="btn btn-outline-primary btn-sm">Privacy Policy</a>
                 <a href="{% url 'telehealth_consent' %}" class="btn btn-outline-primary btn-sm">Telehealth Consent</a>
               </div>
+
+              <div class="mt-4 pt-3 border-top">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                  <h2 class="mb-0" style="font-size: var(--font-size-h3);">
+                    Available options in {{ category.name }}
+                  </h2>
+                  <div class="text-body-sm text-muted">
+                    {% if products %}{{ products|length }}{% else %}0{% endif %} items
+                  </div>
+                </div>
+              </div>
+
             </div>
 
           </div>
@@ -68,29 +104,35 @@ background-image:
 
     {% include "home/h_prdcts.html" with show_header=False categories=None products=products %}
 
-    {% if category.long_description %}
-      <div class="row justify-content-center mt-5">
-        <div class="col-12 col-lg-10">
-          <div class="p-4 p-lg-5 bg-muted rounded-4 border-brand shadow-sm-brand fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <div class="p-4 p-lg-5 bg-muted rounded-4 border-brand shadow-sm-brand fade-in-up fade-in delay-1 fade-blocked scroll-animate">
 
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <i class="fa-solid fa-shield-heart text-primary-accent"></i>
-              <h2 class="mb-0" style="font-size: var(--font-size-h3);">Clinical overview</h2>
-            </div>
-
-            <div class="text-body-sm">{{ category.long_description|linebreaksbr }}</div>
-
-            <div class="d-flex flex-wrap gap-2 mt-3">
-              <a href="#appointment" class="btn btn-primary btn-sm">Appointment</a>
-              <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-sm">Contact Us</a>
-              <a href="{% url 'terms_conditions' %}" class="btn btn-outline-primary btn-sm">Terms</a>
-              <a href="{% url 'privacy_policy' %}" class="btn btn-outline-primary btn-sm">Privacy</a>
-            </div>
-
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="fa-solid fa-shield-heart text-primary-accent"></i>
+            <h2 class="mb-0" style="font-size: var(--font-size-h3);">What to expect</h2>
           </div>
+
+          <div class="text-body-sm">
+            {% if category.long_description %}
+              {{ category.long_description|linebreaksbr }}
+            {% elif category.short_description %}
+              {{ category.short_description|linebreaksbr }}
+            {% else %}
+              Clinician-guided evaluation, transparent pricing, and structured follow-up to support safe outcomes.
+            {% endif %}
+          </div>
+
+          <div class="d-flex flex-wrap gap-2 mt-3">
+            <a href="#appointment" class="btn btn-primary btn-sm">Appointment</a>
+            <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-sm">Contact Us</a>
+            <a href="{% url 'terms_conditions' %}" class="btn btn-outline-primary btn-sm">Terms</a>
+            <a href="{% url 'privacy_policy' %}" class="btn btn-outline-primary btn-sm">Privacy</a>
+          </div>
+
         </div>
       </div>
-    {% endif %}
+    </div>
 
   </div>
 </section>

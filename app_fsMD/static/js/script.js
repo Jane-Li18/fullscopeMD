@@ -909,6 +909,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* Cart */
+/* Cart */
 (function () {
   const d = document;
 
@@ -969,6 +970,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // ✅ Cart marquee: ONLY when overflowing, and moves LEFT -> RIGHT (reverse)
+  function applyCartTitleMarquee(wrap) {
+    if (!wrap) return;
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    wrap.querySelectorAll(".js-cart-title").forEach((el) => {
+      const track = el.querySelector(".title-marquee-track");
+      const first = el.querySelector(".title-marquee-item");
+      if (!track || !first) return;
+
+      // reset
+      el.classList.remove("is-marquee");
+      track.style.animationDuration = "";
+      track.style.animationDirection = "";
+
+      if (prefersReduced) return;
+
+      const needs = first.scrollWidth > el.clientWidth + 2;
+      if (!needs) return;
+
+      // enable duplicate + animation
+      el.classList.add("is-marquee");
+
+      // after dup becomes visible, compute duration (slow) and reverse direction
+      requestAnimationFrame(() => {
+        const halfDistance = track.scrollWidth / 2; // because your keyframes go 0 -> -50%
+        const pxPerSec = 26; // slower = smaller number
+        let dur = halfDistance / pxPerSec;
+        dur = Math.min(45, Math.max(18, dur));
+
+        track.style.animationDuration = `${dur}s`;
+        track.style.animationDirection = "alternate";
+        track.style.animationIterationCount = "infinite";
+        track.style.animationTimingFunction = "linear";
+      });
+    });
+  }
+
   function renderCart(payload) {
     const wrap = d.getElementById("cartContent");
     const totalEl = d.getElementById("cartTotal");
@@ -983,73 +1023,92 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // ✅ borders/dividers look better without grid gap when multiple
+    wrap.classList.remove("gap-0", "gap-1", "gap-2", "gap-3", "gap-4", "gap-5");
+    wrap.classList.add(payload.items.length > 1 ? "gap-0" : "gap-3");
+
     wrap.innerHTML = payload.items
-      .map((it) => {
-        const rx = it.requires_prescription
-          ? `<span class="badge rounded-pill bg-warning-subtle text-warning-emphasis">Prescription</span>`
-          : it.requires_consultation
-          ? `<span class="badge rounded-pill bg-info-subtle text-info-emphasis">Consultation</span>`
-          : ``;
+      .map((it, idx, arr) => {
+        const rx =
+          it.requires_prescription
+            ? `<span class="badge rounded-pill bg-warning-subtle text-warning-emphasis">Prescription</span>`
+            : it.requires_consultation
+            ? `<span class="badge rounded-pill bg-info-subtle text-info-emphasis">Consultation</span>`
+            : ``;
+
+        const hasDivider = arr.length > 1 && idx < arr.length - 1;
 
         const stock = typeof it.stock === "number" && it.stock > 0 ? it.stock : 999999;
         const decDisabled = it.qty <= 1 ? "disabled" : "";
         const incDisabled = it.qty >= stock ? "disabled" : "";
 
         return `
-        <div class="bg-white border rounded-4 shadow-sm p-3">
-          <div class="d-flex gap-3 align-items-start">
-            <div class="ratio ratio-1x1 rounded-3 overflow-hidden bg-muted border flex-shrink-0" style="width:64px;">
-              ${it.image ? `<img src="${it.image}" class="w-100 h-100 object-fit-cover" alt="">` : ``}
-            </div>
-
-            <div class="flex-grow-1">
-              <div class="d-flex align-items-start justify-content-between gap-2">
-                <div>
-                  <div class="fw-semibold">${it.name}${rx}</div>
-                  <div class="text-caption-sm text-muted">${money(it.unit_price)} each</div>
-                </div>
-
-                <button class="icon-button text-danger opacity-75"
-                        type="button"
-                        aria-label="Remove item"
-                        data-action="remove"
-                        data-product="${it.id}">
-                  <i class="fa-solid fa-trash-can"></i>
-                </button>
+        <div class="${hasDivider ? "border-bottom pb-3 mb-3" : ""}">
+          <div class="bg-white rounded-4 p-3">
+            <div class="d-flex gap-3 align-items-start">
+              <div class="ratio ratio-1x1 rounded-3 overflow-hidden bg-muted flex-shrink-0" style="width:64px;">
+                ${it.image ? `<img src="${it.image}" class="w-100 h-100 object-fit-cover" alt="">` : ``}
               </div>
 
-              <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
-                <div class="input-group input-group-sm" style="max-width:160px;">
-                  <button class="btn btn-outline-secondary"
-                          type="button"
-                          data-action="dec"
-                          data-product="${it.id}"
-                          ${decDisabled}
-                          aria-label="Decrease quantity">
-                    <i class="fa-solid fa-minus"></i>
-                  </button>
+              <div class="flex-grow-1 min-w-0">
+                <div class="d-flex align-items-start justify-content-between gap-2">
+                  <div class="min-w-0 flex-grow-1">
+                    <!-- ✅ Title line: marquee only if long, stays one line -->
+                    <div class="title-marquee js-cart-title min-w-0">
+                      <div class="title-marquee-track">
+                        <span class="title-marquee-item fw-semibold">${it.name}</span>
+                        <span class="title-marquee-item title-marquee-item-dup fw-semibold" aria-hidden="true">${it.name}</span>
+                      </div>
+                    </div>
 
-                  <input class="form-control text-center"
-                         type="number"
-                         min="1"
-                         max="${stock}"
-                         value="${it.qty}"
-                         inputmode="numeric"
-                         autocomplete="off"
-                         data-action="qty"
-                         data-product="${it.id}">
+                    <!-- ✅ Prescription/Consultation UNDER the title (only if exists) -->
+                    ${rx ? `<div class="mt-1">${rx}</div>` : ``}
 
-                  <button class="btn btn-outline-secondary"
+                    <div class="text-caption-sm text-muted mt-1">${money(it.unit_price)} each</div>
+                  </div>
+
+                  <button class="icon-button text-danger opacity-75 flex-shrink-0"
                           type="button"
-                          data-action="inc"
-                          data-product="${it.id}"
-                          ${incDisabled}
-                          aria-label="Increase quantity">
-                    <i class="fa-solid fa-plus"></i>
+                          aria-label="Remove item"
+                          data-action="remove"
+                          data-product="${it.id}">
+                    <i class="fa-solid fa-trash-can"></i>
                   </button>
                 </div>
 
-                <div class="fw-semibold">${money(it.line_total)}</div>
+                <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
+                  <div class="input-group input-group-sm flex-shrink-0" style="max-width:160px;">
+                    <button class="btn btn-outline-secondary"
+                            type="button"
+                            data-action="dec"
+                            data-product="${it.id}"
+                            ${decDisabled}
+                            aria-label="Decrease quantity">
+                      <i class="fa-solid fa-minus"></i>
+                    </button>
+
+                    <input class="form-control text-center"
+                           type="number"
+                           min="1"
+                           max="${stock}"
+                           value="${it.qty}"
+                           inputmode="numeric"
+                           autocomplete="off"
+                           data-action="qty"
+                           data-product="${it.id}">
+
+                    <button class="btn btn-outline-secondary"
+                            type="button"
+                            data-action="inc"
+                            data-product="${it.id}"
+                            ${incDisabled}
+                            aria-label="Increase quantity">
+                      <i class="fa-solid fa-plus"></i>
+                    </button>
+                  </div>
+
+                  <div class="fw-semibold flex-shrink-0">${money(it.line_total)}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -1057,6 +1116,9 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       })
       .join("");
+
+    // ✅ activate marquee after DOM is injected
+    applyCartTitleMarquee(wrap);
   }
 
   async function getJSON(url) {
@@ -1159,7 +1221,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!wrap) return;
 
     wrap.addEventListener("click", async (e) => {
-      const btn = e.target.closest('button[data-action]'); // ✅ buttons only
+      const btn = e.target.closest('button[data-action]');
       if (!btn) return;
 
       const action = btn.dataset.action;
@@ -1208,8 +1270,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await postAction(routes.update, { product_id: productId, qty: q });
       if (data && data.ok) renderCart(data);
     });
+
+    // ✅ keep marquee correct on resize
+    let t;
+    window.addEventListener("resize", () => {
+      clearTimeout(t);
+      t = setTimeout(() => applyCartTitleMarquee(d.getElementById("cartContent")), 120);
+    });
   });
 })();
+
 
 /* Sidebar Panel Animations */
 document.addEventListener("DOMContentLoaded", () => {

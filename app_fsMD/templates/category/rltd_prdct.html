@@ -1,10 +1,10 @@
 {% if related_products %}
   <div class="row mt-5">
     <div class="col-12">
-      <div class="d-flex align-items-center justify-content-between mb-3 fade-in-up fade-in delay-3 fade-blocked scroll-animate">
+      <div class="d-flex align-items-center justify-content-between mb-3 fade-in-up fade-in delay-1 fade-blocked scroll-animate">
         <h2 class="h4 mb-0">Related in {{ product.category.name }}</h2>
         <a href="{% url 'prgrm_dtls' product.category.slug %}" class="btn btn-outline-primary btn-sm">
-          View all <i class="fa-solid fa-arrow-right ms-2"></i>
+          View all in {{ product.category.name }} <i class="fa-solid fa-arrow-right ms-2"></i>
         </a>
       </div>
 
